@@ -10,7 +10,7 @@ Light-weight powerline for vim.
 2. Download Airline and AirlineTheme:
    * https://github.com/vim-airline/vim-airline
    * https://github.com/vim-airline/vim-airline-themes
-   Just git clone the repos above into ~/.vim/plugged, if no such directory, create it.
+   * Just git clone the repos above into ~/.vim/plugged, if no such directory, create it.
 3. Copy the configs in vimrc to your ~/.vimrc
 
 ## Q

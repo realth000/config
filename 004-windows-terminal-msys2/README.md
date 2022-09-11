@@ -20,9 +20,9 @@ In the file settings.json.
 
 ### Windows Terminal
 1. Download from Microsoft Store.
-2. Open the settings and import the content in settings.json.
+2. Open settings and import the content in settings.json.
 #### Warning
 * There may be some invalid configs since software install path differs.
 * The only important config is ``D:\Program\msys64\msys2_shell.cmd -msys -defterm -no-start`` defterm and no-start args.
-* Without importings the configs in settings.json, keymap in Windows Terminal also need udpate tp sync with linux terminals.
+* Without importings configs in settings.json, keymap in Windows Terminal also need update to sync with linux terminals.
 
