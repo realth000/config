@@ -2,6 +2,20 @@ local wezterm = require 'wezterm'
 local mux = wezterm.mux
 local act = wezterm.action
 
+-- customize color scheme
+local customized_color_scheme = wezterm.color.get_builtin_schemes()['Alabaster']
+-- customize oh-my-zsh suggestions plugin suggest text color to optimize ctrl + F.
+customized_color_scheme.brights[1] = "#595f5f"
+  -- color_scheme = "midnight-in-mojave", -- ctrl + f
+  -- color_scheme = "Alabaster", -- ok
+  -- color_scheme = "CLRS", -- good
+  -- color_scheme = "Doom Peacock", -- ctrl + f
+  -- color_scheme = "Galizur", -- good
+  -- color_scheme = "GoogleDark (Gogh)", -- cursor
+  -- color_scheme = "Material", -- ok half ctrl + f
+  -- color_scheme = "MaterialDark", -- as above
+  -- color_scheme = "Solarized Darcula", -- ctrl + f
+ 
 wezterm.on('gui-startup', function(cmd)
   -- allow `wezterm start -- something` to affect what we spawn
   -- in our initial window. If they didn't specify it, use a default empty SpawnCommand.
@@ -34,7 +48,7 @@ return {
       },
       {
         -- family = 'Noto Sans Mono CJK SC',
-        family = 'Microsoft YaHei',
+        family = 'Sarasa Mono SC',
         weight = 'Bold',
         harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
       },
@@ -53,13 +67,27 @@ return {
     inactive_titlebar_bg = '#333333',
   },
   tab_max_width=560,
-  window_background_opacity=0.9,
+  window_background_opacity=0.95,
   text_background_opacity = 1.0,
 
   -- color config
+  color_schemes = {
+    ['abc'] = customized_color_scheme,
+  },
+  color_scheme = 'abc',
   colors = {
     foreground = '#f0d0d0',
     background = '#1e2223',
+    cursor_bg = '#f1ffff',
+    -- cursor_bg = 'transparent',
+    -- cursor_bg = '#1e2223',
+    cursor_fg = '#1e2223',
+    cursor_border = '#f1ffff',
+    selection_bg = '#2255cc',
+    selection_fg = '#f1ffff',
+    
+    -- cursor_fg = '#f1ffff',
+    -- cursor_border = '#52ad70',
     -- ansi = {
     --   'black',
     --   'maroon',
@@ -80,6 +108,7 @@ return {
     --   'aqua',
     --   'white',
     -- },
+    
 
     -- Arbitrary colors of the palette in the range from 16 to 255
 
@@ -115,25 +144,14 @@ return {
     -- quick_select_match_fg = { Color = '#ffffff' },
     
   },
-  --  color_scheme = "midnight-in-mojave",
-  --  color_scheme = "Alabaster",
-  --  color_scheme = "Chester",
-  --  color_scheme = "CLRS",
-  --  color_scheme = "Doom Peacock",
-  --  color_scheme = "Galizur",
-  --  color_scheme = "GoogleDark (Gogh)",
-  --  color_scheme = "Material",
-  --  color_scheme = "MaterialDark",
-  --  color_scheme = "midnight-in-mojave",
-  color_scheme = "Solarized Darcula",
-    
+   
   -- font config
   -- Test ligature
   -- --- +++ -> <- >= <= != /= && !! ... .. ~> => >> ?.
   font = wezterm.font_with_fallback {
     {
       family = 'FiraCode NFM',
-      weight = 'DemiBold',
+      weight = 'Medium',
       -- family = 'JetBrainsMonoNL NFM',
       -- weight = 'Bold',
       -- italic = true,
@@ -141,8 +159,8 @@ return {
     },
     {
       -- family = 'Noto Sans Mono CJK SC',
-      family = 'Microsoft YaHei',
-      weight = 'Bold',
+      family = 'Sarasa Mono SC',
+      weight = 'DemiBold',
       harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
     },
   },
@@ -172,6 +190,22 @@ return {
     { key = '4', mods = 'CTRL', action = act.PaneSelect { alphabet = '1234567890' }, },
     { key = '5', mods = 'CTRL', action = act.PaneSelect { alphabet = '1234567890' }, },
     { key = '0', mods = 'CTRL', action = act.PaneSelect { mode = 'SwapWithActive' }, },
+    { key = 'UpArrow', mods = 'CTRL|SHIFT', action = act.ScrollByLine(-1), },
+    { key = 'DownArrow', mods = 'CTRL|SHIFT', action = act.ScrollByLine(1), },
+    { key = ',', mods = 'CTRL', action = act.ActivateKeyTable {
+        name = 'resize_pane',
+        -- ont_shot = false,
+	timeout_milliseconds = 1000,
+        },
+    }, 
+  },
+
+  key_tables = {
+    resize_pane = {
+      { key = 'h', action = act.AdjustPaneSize { 'Left', 5}, }, 
+      { key = 'j', action = act.AdjustPaneSize { 'Down', 5}, }, 
+      { key = 'k', action = act.AdjustPaneSize { 'Up', 5}, }, 
+      { key = 'l', action = act.AdjustPaneSize { 'Right', 5}, }, 
+    },
   },
 }
-
