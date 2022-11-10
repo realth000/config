@@ -1,0 +1,195 @@
+{
+    "workbench.iconTheme": "Monokai Pro (Filter Spectrum) Icons",
+    // "code-runner.runInTerminal": true,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook",
+        "*.ui": "default"
+    },
+    "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}${separator}${appName}",
+    "workbench.startupEditor": "newUntitledFile",
+    "explorer.confirmDelete": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    // "editor.fontFamily": "'JetBrainsMono NFM'",
+    "editor.fontFamily": "'FiraCode NFM'",
+    "editor.fontWeight": "500",
+    // "editor.fontFamily": "Microsoft YaHei Mono",
+    "editor.fontSize": 17,
+    // "editor.background": "#000000",
+    "editor.codeLensFontFamily": "'JetBrainsMono NFM'",
+    // "editor.tokenColorCustomizations": {
+    //     "comments": "#00a400", // 注释
+    //     "keywords": "#45c6d6", // 关键字
+    //     "variables": "#55aaff", // 变量名 函数的参数名 
+    //     "strings": "#ffaa00", // 字符串
+    //     "functions": "#ffbb00", // 自定义及内置的函数名称 如：print
+    //     "numbers": "#e891ef", // 数字
+    //     "types": "#d0ff45", //类定义颜色
+    //     "textMateRules": [
+    //         {
+    //             "scope": "entity.name.type", //函数和类的名称颜色
+    //             "settings": {
+    //                 "foreground": "#cc6633",
+    //             }
+    //         },
+    //         {
+    //             "scope": "entity.name.function",
+    //             "settings": {
+    //                 "foreground": "#b4cfda",
+    //                 // "fontStyle": "bold"
+    //             }
+    //         },
+    //         {
+    //             "scope": "string.quoted.single",
+    //             "settings": {
+    //                 "foreground": "#b4cfda",
+    //                 // "background": "#094444"
+    //             }
+    //         },
+    //         {
+    //             "scope": "string.quoted.single",
+    //             "settings": {
+    //                 "foreground": "#ffaa00",
+    //                 // "background": "#094444"
+    //             }
+    //         },
+    //         {
+    //             "scope": "string.quoted.triple",
+    //             "settings": {
+    //                 "foreground": "#ffaa00",
+    //                 // "background": "#094444"
+    //             }
+    //         },
+    //         {
+    //             "scope": "storage.type",
+    //             "settings": {
+    //                 "foreground": "#9cc71c",
+    //             }
+    //         }
+    //     ]
+    // },
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "name": "Keyword Italic",
+                "scope": [
+                    "keyword.control",
+                    // "storage.type",
+                    // "storage.modifier",
+                ],
+                "settings": {
+                    "fontStyle": "italic"
+                }
+            },
+            {
+                "name": "Function Bold",
+                "scope": [
+                    "entity.name.class",
+                    "entity.name.function",
+                ],
+                "settings": {
+                    "fontStyle": "bold"
+                }
+            }
+        ]
+    },
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "code-runner.executorMap": {
+        "cpp": "cd $dir && g++  $fileName  -o $fileNameWithoutExt.exe && ./$fileNameWithoutExt.exe",
+        "c": "cd $dir && g++  $fileName  -o $fileNameWithoutExt.exe && ./$fileNameWithoutExt.exe",
+        "java": "cd $dir && javac -encoding utf-8 $fileName && java $fileNameWithoutExt"
+    },
+    "code-runner.ignoreSelection": true,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "code-runner.saveAllFilesBeforeRun": true,
+    "terminal.integrated.fontSize": 16,
+    "scm.inputFontSize": 20,
+    "editor.fontLigatures": true,
+    "go.toolsManagement.autoUpdate": true,
+    "oneDarkPro.bold": true,
+    "oneDarkPro.vivid": true,
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": false
+    },
+    "editor.minimap.showSlider": "always",
+    "cmake.configureOnOpen": true,
+    "cSpell.userWords": [
+        "exponet",
+        "gopls",
+        "Hmackey",
+        "javac",
+        "KEYCHECKER",
+        "KYLINWALICENSETOOL"
+    ],
+    "[cpp]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    },
+    "clangd.path": "/home/lth/.config/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/15.0.3/clangd_15.0.3/bin/clangd",
+    "vim.useCtrlKeys": true,
+    "vim.mouseSelectionGoesIntoVisualMode": false,
+    "vim.statusBarColorControl": true,
+    "vim.statusBarColors.normal": "#252525",
+    "vim.statusBarColors.insert": "#202020",
+    "vim.autoindent": true,
+    "vim.statusBarColors.searchinprogressmode": "#353535",
+    "vim.statusBarColors.commandlineinprogress": "#353535",
+    "vim.hlsearch": true,
+    "vim.vimrc.enable": true,
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#252525",
+        "statusBar.noFolderBackground": "#252525",
+        "statusBar.debuggingBackground": "#252525"
+    },
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.smartcase": true,
+    "editor.lineNumbers": "relative",
+    "editor.cursorSurroundingLines": 5,
+    "terminal.intergrated.env.linux": {},
+    "terminal.integrated.automationProfile.linux": {
+        "QT_DIR": "/usr/lib/x86_64-linux-gnu/cmake/Qt5",
+        "Qt5_DIR": "/usr/lib/x86_64-linux-gnu/cmake/Qt5",
+        "Qt5Core_DIR": "/usr/lib/x86_64-linux-gnu/cmake/Qt5Core",
+        "Qt5Gui_DIR": "/usr/lib/x86_64-linux-gnu/cmake/Qt5Gui",
+        "Qt5Widgets_DIR": "/usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets"
+    },
+    "clangd.fallbackFlags": [
+        "-I/usr/include/x86_64-linux-gnu/qt5",
+        "-I/usr/include/x86_64-linux-gnu/qt5/QtCore",
+        "-I/usr/include/x86_64-linux-gnu/qt5/QtGui",
+        "-I/usr/include/x86_64-linux-gnu/qt5/QtWidgets",
+        "-I/usr/include/x86_64-linux-gnu/qt5/QtDBus"
+    ],
+    "editor.renderWhitespace": "all",
+    "editor.formatOnSave": true,
+    "go.useLanguageServer": true,
+    "[go]": {
+        "editor.snippetSuggestions": "none",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        }
+    },
+    "gopls": {
+        "usePlaceholders": true, // add parameter placeholders when completing a function
+        "completionDocumentation": true // for documentation in completion items
+    },
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    "window.restoreWindows": "none",
+    "workbench.colorTheme": "One Dark Pro Monokai Darker",
+}
