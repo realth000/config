@@ -6,8 +6,8 @@ call plug#end()
 
 " Common settings
 set nu
+set rnu
 set hls
-set cursorline
 set noshowmode
 set laststatus=2
 set showtabline=2
