@@ -27,7 +27,31 @@ wezterm.on('gui-startup', function(cmd)
   mux.spawn_window(cmd)
 end)
 
+--[[
+
+local launch_msys2 = {
+  label = "MSYS2",
+  args = {"D:/Program/msys64/msys2_shell.cmd", "-defterm", "-here", "-no-start", "-msys"},
+  cwd = "D:/msys64/home/" .. os.getenv('USERNAME'),
+  domain = {DomainName="local"},
+}
+-- https://github.com/wez/wezterm/issues/2090
+-- https://github.com/wez/wezterm/discussions/2093
+-- https://wezfurlong.org/wezterm/config/launch.html
+
+--]]
+
+-- On Windows, uncomment this.
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+  -- We are running on Windows; maybe we emit different
+  -- key assignments here?
+  msys2_work_dir = "d://Program/msys64/"
+end
+
 return {
+  -- On Windows, set msys2 shell path and uncomment this.
+  -- default_prog = { "D:/Program/msys64/msys2_shell.cmd", "-defterm", "-where", msys2_work_dir, "-no-start", "-msys" },
+
   -- appearance
   window_frame = {
     -- The font used in the tab bar.

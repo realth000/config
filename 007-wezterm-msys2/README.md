@@ -8,8 +8,15 @@ Same experience on Windows and Linux, with powerful zsh and more plugins!
 * Install ZSH and other plugins in MSYS2 (Steps in 004-windows-terminal-msys2).
 
 ## Windows
-1. Copy ``wezterm.lua`` beside wezterm.
+1. Copy ``.wezterm.lua`` beside wezterm, rename to ``wezterm.lua``.
+
 2. Configure the msys2 path in ``wezterm.lua``.
+
+   - Set msys2 path at this line:
+
+     ``` lua
+     default_prog = { "D:/Program/msys64/msys2_shell.cmd", "-defterm", "-where", msys2_work_dir, "-no-start", "-msys" },
+     ```
 
 Links:
 * https://wezfurlong.org/wezterm/config/launch.html
