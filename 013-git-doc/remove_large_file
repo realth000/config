@@ -1,0 +1,17 @@
+git verify-pack -v .git/objects/pack/pack-8eaeb...9e.idx | sort -k 3 -n | tail -3
+git rev-list --objects --all | grep 8fb3f4d0
+
+
+git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch "misaka_nessenger_server/MisakaNessengerServer.aar";git rm --cached --ignore-unmatch "misaka_nessenger/android/app/libs/MisakaNessengerServer.aar"; ' --prune-empty --tag-name-filter cat -- --all
+git push origin --force --all
+git push origin --force --tags
+git for-each-ref --format='delete %(refname)' refs/original | git update-ref --stdin
+git reflog expire --expire=now --all
+git gc --prune=now
+git count-objects -v
+
+
+3eff8ee6cd7cee21a06d9869d539d9564d7e1040 feat(*): Send files and show send progress
+0ea3711e767f76f77795356873f0d404aa8e12cf feat(*): Init server and bind to platforms
+
+git filter-branch --index-filter 'git rm --cached --ignore-unmatch  misaka_nessenger/android/app/libs/MisakaNessengerServer.aar' -- 0ea3711e767f76f77795356873f0d404aa8e12cf..
