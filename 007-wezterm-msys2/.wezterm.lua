@@ -64,16 +64,16 @@ return {
     -- TAB BAR FONT!!
     font = wezterm.font_with_fallback {
       {
-        family = 'FiraCode NFM',
-        weight = 'Medium',
-        -- family = 'JetBrainsMono NFM',
-        -- weight = 'Bold',
+        -- family = 'FiraCode NFM',
+        -- weight = 'Medium',
+        family = 'JetBrainsMono NFM',
+        weight = 'DemiBold',
         harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
       },
       {
         -- family = 'Noto Sans Mono CJK SC',
-        -- family = 'Sarasa Mono SC',
-        family = 'Source Han Sans CN',
+        family = 'Sarasa Mono SC',
+        -- family = 'Source Han Sans CN',
         weight = 'DemiBold',
         harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
       },
@@ -175,18 +175,18 @@ return {
   -- --- +++ -> <- >= <= != /= && !! ... .. ~> => >> ?.
   font = wezterm.font_with_fallback {
     {
-      family = 'FiraCode NFM',
-      weight = 'Medium',
-      -- family = 'JetBrainsMono NFM',
-      -- weight = 'Bold',
+      -- family = 'FiraCode NFM',
+      -- weight = 'Medium',
+      family = 'JetBrainsMono NFM',
+      weight = 'DemiBold',
       -- italic = true,
       harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
     },
     {
       -- family = 'Noto Sans Mono CJK SC',
-      -- family = 'Sarasa Mono SC',
-      family = 'Source Han Sans CN',
-      weight = 'Regular',
+      family = 'Sarasa Mono SC',
+      -- family = 'Source Han Sans CN',
+      weight = 'DemiBold',
       harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
     },
   },
