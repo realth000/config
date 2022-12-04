@@ -66,8 +66,10 @@ return {
       {
         -- family = 'FiraCode NFM',
         -- weight = 'Medium',
-        family = 'JetBrainsMono NFM',
-        weight = 'DemiBold',
+        -- family = 'JetBrainsMono NFM',
+        -- weight = 'DemiBold',
+	family = 'Iosevka0828 NF',
+	weight = 'DemiBold',
         harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
       },
       {
@@ -177,7 +179,9 @@ return {
     {
       -- family = 'FiraCode NFM',
       -- weight = 'Medium',
-      family = 'JetBrainsMono NFM',
+      -- family = 'JetBrainsMono NFM',
+      -- weight = 'DemiBold',
+      family = 'Iosevka0828 NF',
       weight = 'DemiBold',
       -- italic = true,
       harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
