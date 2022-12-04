@@ -1,14 +1,14 @@
-[buildPlans.iosevka-slab-ss08-0828]
-family = "Iosevka SLAB SS08 0828"
+[buildPlans.iosevka0828]
+family = "Iosevka0828"
 spacing = "normal"
 serifs = "slab"
 no-cv-ss = true
 export-glyph-names = false
 
-  [buildPlans.iosevka-slab-ss08-0828.variants]
+  [buildPlans.iosevka0828.variants]
   inherits = "ss08"
 
-    [buildPlans.iosevka-slab-ss08-0828.variants.design]
+    [buildPlans.iosevka0828.variants.design]
     capital-g = "toothed-serifed-hooked"
     capital-i = "serifed"
     capital-m = "hanging"
@@ -51,5 +51,17 @@ export-glyph-names = false
     punctuation-dot = "square"
     lig-neq = "slightly-slanted"
 
-  [buildPlans.iosevka-slab-ss08-0828.ligations]
+  [buildPlans.iosevka0828.ligations]
   inherits = "php"
+
+[buildPlans.iosevka0828.slopes.upright]
+angle = 0
+shape = "upright"
+menu = "upright"
+css = "normal"
+
+[buildPlans.iosevka0828.slopes.italic]
+angle = 9.4
+shape = "italic"
+menu = "italic"
+css = "italic"
