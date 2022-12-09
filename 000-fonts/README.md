@@ -10,7 +10,12 @@ Iosevka custom fonts with slab serifs.
   * run `npm run build -- ttf::iosevka0828` for TTF fonts.
 ## Patch fonts to Nerd Fonts
 * Use font patcher from [nerd fonts](https://github.com/ryanoasis/nerd-fonts/):
-  - Run `for f in `find iosevka-slab-ss08-0828-all -type f`; do ./nerd-fonts/font-patcher $f --complete --quiet --windows --outputdir ./new; done`
+
+  ``` bash
+  for f in `find iosevka0828 -type f`; do ./nerd-fonts/font-patcher $f --complete --quiet --windows --mono --makegroups --outputdir ./iosevka0828NFM; done
+  ```
+
+  
 ## Iosevka1204
 Iosevka custom fonts with sans serifs and little tails.
 * See how Iosevka1204 looks like:
@@ -21,5 +26,10 @@ Iosevka custom fonts with sans serifs and little tails.
   * run `npm run build -- ttf::iosevka1204` for TTF fonts.
 ## Patch fonts to Nerd Fonts
 * Use font patcher from [nerd fonts](https://github.com/ryanoasis/nerd-fonts/):
-  - Run `for f in `find iosevka1204 -type f`; do ./nerd-fonts/font-patcher $f --complete --quiet --windows --outputdir ./new; done`
+
+  ``` bash
+  for f in `find iosevka1204 -type f`; do ./nerd-fonts/font-patcher $f --complete --quiet --windows --mono --makegroups --outputdir ./iosevka1204NFM; done
+  ```
+
+  
 
