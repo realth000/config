@@ -45,7 +45,8 @@ local launch_msys2 = {
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
   -- We are running on Windows; maybe we emit different
   -- key assignments here?
-  msys2_work_dir = "d://Program/msys64/"
+  -- msys2_work_dir = "d://Program/msys64/"
+  msys2_work_dir = io.popen("cd"):read()
 end
 
 return {
