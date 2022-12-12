@@ -136,7 +136,7 @@
   --bg-color: #4e4e4e;
   --item-hover-bg-color: #2d2d2d; /*2d2d2d*/
   --item-hover-text-color: #ffa633;/*ffa633*/
-  --select-text-bg-color: #1e7ba1; /*选中文字的背景色 #7FDBFF*/
+  --select-text-bg-color: #633930; /*选中文字的背景色 #7FDBFF*/
 }
 
 :root {

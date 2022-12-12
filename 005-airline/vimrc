@@ -1,28 +1,32 @@
-" Instrall plugin
 call plug#begin()
+
+Plug 'arrufat/vala.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'preservim/nerdtree'
+
 call plug#end()
-
-" Common settings
-set nu
-set rnu
-set hls
-set noshowmode
-set laststatus=2
-set showtabline=2
-set incsearch
-set ruler
-
-" Enable backspace in Windows Terminal + MSYS2
-set backspace=indent,eol,start
 
 " Enable Airline tab bar
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#whitespace#enabled = 0
 
 " Set Airline theme
 let g:airline_theme='qwq'
+
+" self add
+set hls
+set nu
+set rnu
+" set cursorline
+set incsearch
+set ruler
+
+set clipboard=unnamed
+
+map <F3> :NERDTreeMirror<CR>
+map <F3> :NERDTreeToggle<CR>
 
