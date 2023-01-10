@@ -94,6 +94,11 @@ _G.packer_plugins = {
     path = "/home/lth/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
+  ["github-nvim-theme"] = {
+    loaded = true,
+    path = "/home/lth/.local/share/nvim/site/pack/packer/start/github-nvim-theme",
+    url = "https://github.com/projekt0n/github-nvim-theme"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/home/lth/.local/share/nvim/site/pack/packer/start/lualine.nvim",

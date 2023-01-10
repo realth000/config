@@ -6,6 +6,12 @@ return require('packer').startup(function()
     'navarasu/onedark.nvim'
   }
   require('plugins_config.onedark')
+
+  use {
+    'projekt0n/github-nvim-theme'
+  }
+  require('plugins_config.github-nvim-theme')
+
   -- nvim-tree
   use {
     'kyazdani42/nvim-tree.lua',
