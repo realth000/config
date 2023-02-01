@@ -98,6 +98,12 @@ return {
   tab_max_width=560,
   window_background_opacity=0.95,
   text_background_opacity = 1.0,
+  window_padding = {
+    left = 2,
+    right = 2,
+    top = 0,
+    bottom = 0,
+  },
 
   -- color config
   color_schemes = {
