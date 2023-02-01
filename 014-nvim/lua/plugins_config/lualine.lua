@@ -3,12 +3,16 @@ require('lualine').setup {
     icons_enabled = true,
     -- powerline_dark solarized_dark moonfly jellybeans
     theme = 'solarized_dark',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = {
-      statusline = {},
-      winbar = {},
-    },
+    -- component_separators = { left = '', right = ''},
+    -- section_separators = { left = '', right = ''},
+    component_separators = { left = '/', right = '/'},
+    section_separators = { left = '', right = ''},
+    -- section_separators = { left = '', right = '' },
+    -- component_separators = { left = '', right = '' }
+--     disabled_filetypes = {
+--       statusline = {},
+--       winbar = {},
+--     },
     ignore_focus = {},
     always_divide_middle = true,
     globalstatus = false,

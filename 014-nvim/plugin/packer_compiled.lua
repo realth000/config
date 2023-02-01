@@ -99,6 +99,11 @@ _G.packer_plugins = {
     path = "/home/lth/.local/share/nvim/site/pack/packer/start/github-nvim-theme",
     url = "https://github.com/projekt0n/github-nvim-theme"
   },
+  ["gruvbox.nvim"] = {
+    loaded = true,
+    path = "/home/lth/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
+    url = "https://github.com/ellisonleao/gruvbox.nvim"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/home/lth/.local/share/nvim/site/pack/packer/start/lualine.nvim",
@@ -133,11 +138,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/lth/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
-  },
-  ["onedark.nvim"] = {
-    loaded = true,
-    path = "/home/lth/.local/share/nvim/site/pack/packer/start/onedark.nvim",
-    url = "https://github.com/navarasu/onedark.nvim"
   },
   ["packer.nvim"] = {
     loaded = true,
