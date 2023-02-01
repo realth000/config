@@ -1,20 +1,22 @@
 return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
-  -- Color scheme
-  -- use { 
-  --   'navarasu/onedark.nvim'
-  -- }
-  -- require('plugins_config.onedark')
-  use {
-    'ellisonleao/gruvbox.nvim'
-  }
-  require('plugins_config.gruvbox')
 
-  use {
-    'projekt0n/github-nvim-theme'
+  -- Color scheme
+  use { 
+    'navarasu/onedark.nvim'
   }
-  require('plugins_config.github-nvim-theme')
+  require('plugins_config.onedark')
+
+  -- use {
+  --   'ellisonleao/gruvbox.nvim'
+  -- }
+  -- require('plugins_config.gruvbox')
+
+  -- use {
+  --   'projekt0n/github-nvim-theme'
+  -- }
+  -- require('plugins_config.github-nvim-theme')
 
   -- nvim-tree
   use {

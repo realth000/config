@@ -1,4 +1,9 @@
 -- setup must be called before loading the colorscheme
+
+-- Setup colorscheme
+vim.o.background = 'dark'
+vim.cmd("colorscheme gruvbox")
+
 -- Default options:
 require("gruvbox").setup({
   undercurl = true,

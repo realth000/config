@@ -1,4 +1,8 @@
 -- Plugin onedark.
+
+-- Setup colorscheme.
+vim.cmd('colorscheme onedark')
+
 -- Lua
 require('onedark').setup  {
     -- Main options --
