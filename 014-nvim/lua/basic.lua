@@ -31,5 +31,8 @@ end
 vim.keymap.set('n', '<F3>', '<Cmd>NvimTreeToggle<CR>')
 
 -- Auto formatting when save file.
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
+-- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
+
+-- Format and save command.
+vim.cmd [[command FW :lua vim.lsp.buf.formatting_sync(); vim.cmd('w')]]
 
