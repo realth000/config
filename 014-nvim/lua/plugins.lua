@@ -63,4 +63,17 @@ return require('packer').startup(function()
   }
   require('plugins_config.mason')
   require('plugins_config.lspconfig')
+
+  -- Auto complete brackts
+  use {
+    'windwp/nvim-autopairs',
+    config = function() require('nvim-autopairs').setup(); end
+  }
+
+  -- telescope
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
+  require('plugins_config.telescope')
 end)
