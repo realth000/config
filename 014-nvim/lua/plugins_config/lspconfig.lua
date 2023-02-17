@@ -142,6 +142,7 @@ require('lspconfig')['cmake'].setup{
 }
 require('lspconfig')['dartls'].setup{
     on_attach = on_attach,
+    flags = lsp_flags,
     single_file_support = true,
 }
 
