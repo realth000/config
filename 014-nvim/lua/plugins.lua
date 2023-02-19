@@ -60,6 +60,7 @@ return require('packer').startup(function()
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
     'hrsh7th/nvim-cmp',
+    'hrsh7th/vim-vsnip', -- Fix dart snippet only
   }
   require('plugins_config.mason')
   require('plugins_config.lspconfig')
