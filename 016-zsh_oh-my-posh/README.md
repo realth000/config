@@ -48,3 +48,24 @@ Adjust the Oh My Posh init line in ~/.zshrc by adding the --config flag with the
 eval "$(oh-my-posh init zsh --config ~/.poshthemes/jandedobbeleer.omp.json)"
 ```
 
+Compare to powerlevel10k, oh-my-posh themes may need more ``transient_propmt`` config in json:
+
+``` json
+{
+    "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+    "blocks": {
+        ...
+    },
+    "transient_prompt": {
+        "background": "transparent",
+        "foreground": "#ffffff",
+        "template": "{{ .Shell }}> "
+    }
+}
+```
+
+## Symbols
+
+273f: ✿
+3744: ❄
+
