@@ -22,22 +22,11 @@
         },
         {
           "background": "#242424",
-          "foreground": "#FFBB00",
-          "powerline_symbol": "\ue0c4",
-          "properties": {
-            "time_format": "15:04:05"
-          },
-          "style": "powerline",
-          "template": "{{ .CurrentDate | date .Format }} ",
-          "type": "time"
-        },
-        {
-          "background": "#242424",
           "foreground": "#33DD2D",
           "powerline_symbol": "\ue0b0",
           "properties": {
             "folder_separator_icon": "/",
-            "style": "folder"
+            "style": "full"
           },
           "style": "powerline",
           "template": "\ue5ff {{ .Path }} ",
@@ -65,6 +54,17 @@
           "type": "dotnet"
         },
         {
+          "background": "#242424",
+          "foreground": "#FFBB00",
+          "powerline_symbol": "\ue0c4",
+          "properties": {
+            "time_format": "15:04:05"
+          },
+          "style": "powerline",
+          "template": "\uf017 {{ .CurrentDate | date .Format }} ",
+          "type": "time"
+        },
+        {
           "background": "#8800dd",
           "foreground": "#ffffff",
           "powerline_symbol": "\ue0c4",
@@ -73,7 +73,7 @@
             "threshold": 1
           },
           "style": "powerline",
-          "template": " <#fefefe>\ufbab</> {{ .FormattedMs }} ",
+          "template": " <#fefefe>\uf253</> {{ .FormattedMs }} ",
           "type": "executiontime"
         },
         {
