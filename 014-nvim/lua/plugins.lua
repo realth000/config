@@ -88,10 +88,11 @@ return require('packer').startup(function()
   }
   require('plugins_config.telescope')
 
-  -- git blame
+  -- GitSigns
   use {
-    'f-person/git-blame.nvim'
+    'lewis6991/gitsigns.nvim',
+    -- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
   }
-  require('plugins_config.gitblame')
+  require('plugins_config.gitsigns')
 
 end)
