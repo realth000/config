@@ -3,10 +3,10 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
   -- Color scheme
-  use { 
-    'navarasu/onedark.nvim'
-  }
-  require('plugins_config.onedark')
+  -- use { 
+  --   'navarasu/onedark.nvim'
+  -- }
+  -- require('plugins_config.onedark')
 
   -- use {
   --   'ellisonleao/gruvbox.nvim'
@@ -17,6 +17,16 @@ return require('packer').startup(function()
   --   'projekt0n/github-nvim-theme'
   -- }
   -- require('plugins_config.github-nvim-theme')
+  
+  -- use {
+  --   'folke/tokyonight.nvim'
+  -- }
+  -- require('plugins_config.tokyonight')
+  
+  use {
+    'EdenEast/nightfox.nvim'
+  }
+  require('plugins_config.nightfox')
 
   -- nvim-tree
   use {
