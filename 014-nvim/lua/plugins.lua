@@ -87,4 +87,11 @@ return require('packer').startup(function()
     requires = { {'nvim-lua/plenary.nvim'} }
   }
   require('plugins_config.telescope')
+
+  -- git blame
+  use {
+    'f-person/git-blame.nvim'
+  }
+  require('plugins_config.gitblame')
+
 end)
