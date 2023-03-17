@@ -153,4 +153,8 @@ require('lspconfig')['bashls'].setup{
 	on_attach = on_attach,
 	single_file_support = true,
 }
+require('lspconfig')['vala_ls'].setup{
+	on_attach = on_attach,
+	single_file_support = true,
+}
 

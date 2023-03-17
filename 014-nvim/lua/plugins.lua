@@ -95,4 +95,8 @@ return require('packer').startup(function()
   }
   require('plugins_config.gitsigns')
 
+  use {
+    'vala-lang/vala.vim',
+  }
+
 end)
