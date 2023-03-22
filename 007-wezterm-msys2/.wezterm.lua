@@ -27,32 +27,7 @@ wezterm.on('gui-startup', function(cmd)
   mux.spawn_window(cmd)
 end)
 
---[[
-
-local launch_msys2 = {
-  label = "MSYS2",
-  args = {"D:/Program/msys64/msys2_shell.cmd", "-defterm", "-here", "-no-start", "-msys"},
-  cwd = "D:/msys64/home/" .. os.getenv('USERNAME'),
-  domain = {DomainName="local"},
-}
--- https://github.com/wez/wezterm/issues/2090
--- https://github.com/wez/wezterm/discussions/2093
--- https://wezfurlong.org/wezterm/config/launch.html
-
---]]
-
--- On Windows, uncomment this.
-if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
-  -- We are running on Windows; maybe we emit different
-  -- key assignments here?
-  -- msys2_work_dir = "d://Program/msys64/"
-  msys2_work_dir = io.popen("cd"):read()
-end
-
 return {
-  -- On Windows, set msys2 shell path and uncomment this.
-  -- default_prog = { "D:/Program/msys64/msys2_shell.cmd", "-defterm", "-where", msys2_work_dir, "-no-start", "-msys" },
-
   -- appearance
   window_frame = {
     -- The font used in the tab bar.
@@ -68,9 +43,8 @@ return {
         -- family = 'FiraCode NFM',
         -- weight = 'Medium',
         -- family = 'JetBrainsMono NFM',
-        -- weight = 'DemiBold',
-        -- family = 'Iosevka0828 NF',
-        family = 'Iosevka1204 NF',
+        -- weight = 'Bold',
+        family = 'Iosevka1204Extended NF',
         weight = 'DemiBold',
         harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
       },
@@ -85,7 +59,7 @@ return {
 
     -- The size of the font in the tab bar.
     -- Default to 10. on Windows but 12.0 on other systems
-    font_size = 12.0,
+    -- font_size = 14.0,
 
     -- The overall background color of the tab bar when
     -- the window is focused
@@ -95,14 +69,17 @@ return {
     -- the window is not focused
     inactive_titlebar_bg = '#333333',
   },
+  -- font_size = 14.0,
   tab_max_width=560,
   window_background_opacity=0.95,
   text_background_opacity = 1.0,
+  show_new_tab_button_in_tab_bar = true,
+  cursor_thickness = "200%",
   window_padding = {
     left = 2,
     right = 2,
-    top = 0,
-    bottom = 0,
+    top = 2,
+    bottom = 2,
   },
 
   -- color config
@@ -177,7 +154,6 @@ return {
     -- quick_select_label_fg = { Color = '#ffffff' },
     -- quick_select_match_bg = { AnsiColor = 'Navy' },
     -- quick_select_match_fg = { Color = '#ffffff' },
-    
   },
    
   -- font config
@@ -188,10 +164,9 @@ return {
       -- family = 'FiraCode NFM',
       -- weight = 'Medium',
       -- family = 'JetBrainsMono NFM',
-      -- weight = 'DemiBold',
-      -- family = 'Iosevka0828 NF',
-      family = 'Iosevka1204 NF',
-      weight = 'DemiBold',
+      -- weight = 'Bold',
+      family = 'Iosevka1204Extended NF',
+      weight = 600,
       -- italic = true,
       harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
     },
@@ -199,6 +174,7 @@ return {
       -- family = 'Noto Sans Mono CJK SC',
       family = 'Sarasa Mono SC',
       -- family = 'Source Han Sans CN',
+	  -- 测试中文
       weight = 'DemiBold',
       harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
     },
