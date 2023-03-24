@@ -12,7 +12,6 @@
 # Set primary screen.
 exec --no-startup-id xrandr --output HDMI-2 --primary
 exec --no-startup-id xrandr --output eDP-1 --right-of HDMI-2 --auto
-
 # Set system theme to dark mode.
 exec --no-startup-id /usr/libexec/gsd-xsettings
 
@@ -61,7 +60,7 @@ bindsym $mod+Shift+q kill
 #bindsym $mod+d exec --no-startup-id dmenu_run
 
 # gaps
-gaps inner 5
+gaps inner 10
 gaps outer 5
 
 # # Add rofi key bindings.
@@ -69,11 +68,12 @@ bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-4/launcher.sh
 bindsym $mod+p exec --no-startup-id ~/.config/rofi/powermenu/type-2/powermenu.sh
 
 # polybar
+exec_always --no-startup-id exec /usr/bin/xfce4-panel
 #set $polybar_theme "material"
 #set $polybar_theme "hack"
-set $polybar_theme forest
+##set $polybar_theme forest
 #set $polybar_theme cuts
-exec_always --no-startup-id exec bash ~/.config/polybar/launch.sh --$polybar_theme
+##exec_always --no-startup-id exec bash ~/.config/polybar/launch.sh --$polybar_theme
 #exec --no-startup-id ~/.config/polybar/launch.sh --$polybar_theme
 #exec_always --no-startup-id exec bash ~/.config/polybar/$polybar_theme/scripts/pywal.sh /data/Storage/Picture/pic/lock/001.png
 
@@ -85,7 +85,7 @@ exec --no-startup-id feh --bg-fill /data/Storage/Picture/pic/lock/001.png
 
 # border
 #exec_always --no-startup-id exec xborder --config ~/.config/xborder/xborder.json
-exec_always --no-startup-id exec bash ~/.config/xborder/xborder.sh
+#exec_always --no-startup-id exec bash ~/.config/xborder/xborder.sh
 
 # Window border width
 #default_border pixel 0
