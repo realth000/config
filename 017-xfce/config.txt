@@ -1,0 +1,110 @@
+/configver 2
+/panels [<1>]
+/panels/dark-mode true
+/panels/panel-1/background-style uint32 0
+/panels/panel-1/disable-struts false
+/panels/panel-1/enter-opacity uint32 80
+/panels/panel-1/icon-size uint32 0
+/panels/panel-1/leave-opacity uint32 80
+/panels/panel-1/length uint32 100
+/panels/panel-1/length-adjust true
+/panels/panel-1/mode uint32 0
+/panels/panel-1/nrows uint32 1
+/panels/panel-1/plugin-ids [<18>, <26>, <32>, <30>, <6>, <13>, <10>, <42>, <41>, <11>, <43>, <33>, <2>, <7>, <8>, <1>, <3>, <4>, <25>, <16>, <14>, <9>, <44>, <5>, <17>]
+/panels/panel-1/position 'p=8;x=96;y=1055'
+/panels/panel-1/position-locked true
+/panels/panel-1/size uint32 40
+/panels/panel-1/span-monitors false
+/plugins/clipman/settings/show-qr-code true
+/plugins/plugin-1 'separator'
+/plugins/plugin-10 'launcher'
+/plugins/plugin-10/items [<'16752141261.desktop'>]
+/plugins/plugin-11 'launcher'
+/plugins/plugin-11/items [<'16770608641.desktop'>]
+/plugins/plugin-13 'launcher'
+/plugins/plugin-13/items [<'16790168901.desktop'>]
+/plugins/plugin-14 'battery'
+/plugins/plugin-16 'systemload'
+/plugins/plugin-16/cpu/label ' '
+/plugins/plugin-16/memory/label ''
+/plugins/plugin-16/network/enabled false
+/plugins/plugin-16/network/label ' '
+/plugins/plugin-16/swap/label ''
+/plugins/plugin-16/timeout uint32 1000
+/plugins/plugin-16/uptime/enabled false
+/plugins/plugin-17 'weather'
+/plugins/plugin-17/cache-max-age 172800
+/plugins/plugin-17/forecast/days 3
+/plugins/plugin-17/forecast/layout 1
+/plugins/plugin-17/labels/label0 3
+/plugins/plugin-17/location/latitude '40.190632'
+/plugins/plugin-17/location/longitude '116.412144'
+/plugins/plugin-17/location/name '北京市, 中国'
+/plugins/plugin-17/msl 40
+/plugins/plugin-17/offset '+08:00'
+/plugins/plugin-17/power-saving true
+/plugins/plugin-17/round true
+/plugins/plugin-17/scrollbox/animate true
+/plugins/plugin-17/scrollbox/color 'rgba(0,0,0,0)'
+/plugins/plugin-17/scrollbox/lines 1
+/plugins/plugin-17/scrollbox/show true
+/plugins/plugin-17/scrollbox/use-color false
+/plugins/plugin-17/single-row true
+/plugins/plugin-17/theme-dir '/usr/share/xfce4/weather/icons/liquid-dark'
+/plugins/plugin-17/timezone 'Asia/Shanghai'
+/plugins/plugin-17/tooltip-style 0
+/plugins/plugin-17/units/altitude 0
+/plugins/plugin-17/units/apparent-temperature 0
+/plugins/plugin-17/units/precipitation 0
+/plugins/plugin-17/units/pressure 0
+/plugins/plugin-17/units/temperature 0
+/plugins/plugin-17/units/windspeed 0
+/plugins/plugin-18 'whiskermenu'
+/plugins/plugin-2 'docklike'
+/plugins/plugin-25 'separator'
+/plugins/plugin-26 'separator'
+/plugins/plugin-26/expand false
+/plugins/plugin-26/style uint32 1
+/plugins/plugin-3 'pulseaudio'
+/plugins/plugin-3/enable-keyboard-shortcuts true
+/plugins/plugin-3/mpris-players 'audacious;cantata;edge.instance1064336;edge.instance13494;edge.instance178414;edge.instance24270;edge.instance250553;edge.instance380020;edge.instance414151;edge.instance427232;edge.instance447074;edge.instance50654;edge.instance753495;edge.instance786187;edge.instance792270;edge.instance832514;edge.instance8680;edge.instance927805;edge.instance998740;firefox.instance112504;firefox.instance114432;firefox.instance12121;firefox.instance12768;firefox.instance15644;firefox.instance17596;firefox.instance17887;firefox.instance1841;firefox.instance1926;firefox.instance21633;firefox.instance21715;firefox.instance2493;firefox.instance31308;firefox.instance32742;firefox.instance33972;firefox.instance40037;firefox.instance42416;firefox.instance6123;firefox.instance6278;firefox.instance702840;firefox.instance80592;firefox.instance9405;firefox.instance98492;harmonoid;musicpod;spotify'
+/plugins/plugin-30 'launcher'
+/plugins/plugin-30/items [<'16739585383.desktop'>]
+/plugins/plugin-32 'launcher'
+/plugins/plugin-32/items [<'16739586295.desktop'>]
+/plugins/plugin-33 'separator'
+/plugins/plugin-4 'systray'
+/plugins/plugin-4/hidden-items [<'MPax'>, <'flareget'>, <'kylin-video'>, <'flameshot'>, <'steam'>, <'nm-applet'>, <'TelegramDesktop'>, <'ulauncher'>, <'chrome_status_icon_1'>, <'115.sh'>]
+/plugins/plugin-4/hidden-legacy-items [<'任务管理器'>, <'uget-gtk'>]
+/plugins/plugin-4/hide-new-items true
+/plugins/plugin-4/icon-size 25
+/plugins/plugin-4/known-items [<'chrome_status_icon_1'>, <'kylin-video'>, <'flareget'>, <'flameshot'>, <'115.sh'>, <'steam'>, <'MPax'>, <'Fcitx'>, <'nm-applet'>, <'TelegramDesktop'>, <'ulauncher'>]
+/plugins/plugin-4/known-legacy-items [<'uget-gtk'>, <'任务管理器'>, <'网络'>, <'thunar'>, <'ulauncher'>, <'xfce4-power-manager'>, <'networkmanager applet'>, <'pamac-tray'>]
+/plugins/plugin-4/menu-is-primary false
+/plugins/plugin-4/single-row true
+/plugins/plugin-4/square-icons true
+/plugins/plugin-4/symbolic-icons true
+/plugins/plugin-41 'launcher'
+/plugins/plugin-41/disable-tooltips false
+/plugins/plugin-41/items [<'167395964411.desktop'>]
+/plugins/plugin-41/show-label false
+/plugins/plugin-42 'launcher'
+/plugins/plugin-42/items [<'167395964812.desktop'>]
+/plugins/plugin-43 'launcher'
+/plugins/plugin-43/items [<'167395966113.desktop'>]
+/plugins/plugin-44 'separator'
+/plugins/plugin-5 'clock'
+/plugins/plugin-5/digital-format '%T'
+/plugins/plugin-5/mode uint32 2
+/plugins/plugin-5/show-seconds false
+/plugins/plugin-5/tooltip-format '%x'
+/plugins/plugin-6 'launcher'
+/plugins/plugin-6/items [<'16740466071.desktop'>]
+/plugins/plugin-7 'separator'
+/plugins/plugin-7/expand true
+/plugins/plugin-7/style uint32 0
+/plugins/plugin-8 'pager'
+/plugins/plugin-8/miniature-view false
+/plugins/plugin-8/numbering false
+/plugins/plugin-8/rows uint32 1
+/plugins/plugin-9 'netload'
