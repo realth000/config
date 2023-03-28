@@ -28,6 +28,9 @@ wezterm.on('gui-startup', function(cmd)
 end)
 
 return {
+  -- NOT check update
+  check_for_updates = false,
+
   -- appearance
   window_frame = {
     -- The font used in the tab bar.
