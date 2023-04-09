@@ -6,71 +6,12 @@
     "passthrough": false,
     "gtk-layer-shell": true,
     "height": 50,
-    "modules-left": [ "clock", "temperature", "cpu", "memory", "disk", "network" ],
+    "modules-left": ["clock","custom/weather","wlr/workspaces"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["wlr/workspaces", "custom/launch_wofi", "pulseaudio#speaker", "pulseaudio#microphone", "custom/updates", "custom/lock_screen", "custom/power_btn", "tray"],
+    "modules-right": ["network", "bluetooth", "temperature","custom/power_profile","battery","backlight","pulseaudio","pulseaudio#microphone","tray"],
     "hyprland/window": {
-        "format": "{}",
-        "max-length": 80
+        "format": "{}"
     },
-
-    "custom/launch_wofi": {
-        "format": "",
-        "on-click": "pkill wofi; wofi -n",
-        "tooltip": false
-    },
-
-    "custom/lock_screen": {
-        "format": "",
-        "on-click": "sh -c '(sleep 0.5s; swaylock)' & disown",
-        "tooltip": false
-    },
-
-    "custom/light_dark": {
-        "format": "󰐾",
-        "on-click": "~/.config/waybar/scripts/baraction light",
-        "tooltip": false
-    },
-
-    "custom/power_btn": {
-        "format": " ",
-        "on-click": "sh -c '(sleep 0.5s; wlogout --protocol layer-shell)' & disown",
-        "tooltip": false
-    },
-
-    "cpu": {
-        "interval": 5,
-        "format": " {usage}%",
-        "max-length": 10,
-        "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
-    },
-
-    "disk": {
-        "interval": 30,
-        "format": " {percentage_used}%",
-        "path": "/",
-        "tooltip": true,
-        "tooltip-format": "HDD - {used} used out of {total} on {path} ({percentage_used}%)",
-        "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
-    },
-
-    "memory": {
-        "interval": 30,
-        "format": " {}%",
-        "max-length": 10,
-        "tooltip": true,
-        "tooltip-format": "Memory - {used:0.1f}GB used",
-        "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
-    },
-
-    "custom/updates": {
-        "format": "{}",
-        "exec": "~/.config/waybar/scripts/update-sys",
-        "on-click": "~/.config/waybar/scripts/update-sys update",
-        "interval": 300,
-        "tooltip": true
-    },
-
 
     "wlr/workspaces": {
         "disable-scroll": true,
@@ -89,7 +30,7 @@
             "10": []
         }
     },
-
+    
     "custom/power_profile":{
         //shows the current power profile and switches to next on click
         "exec": "asusctl profile -p | sed s:'Active profile is'::",
@@ -114,10 +55,8 @@
     },
 
     "clock": {
-        "format": "{:  %m-%d %a  %H:%M:%S}",
-		"locale":"C",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-		"interval": 1
+        "format": "{: %I:%M %p   %a, %b %e}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
 
     "backlight": {
@@ -142,12 +81,11 @@
         "format-icons": ["", "", "", "", "", "", "", "", "", "", ""]
     },
 
-    "pulseaudio#speaker": {
+    "pulseaudio": {
         "format": "{icon} {volume}%",
         "tooltip": false,
         "format-muted": " Muted",
         "on-click": "pamixer -t",
-        "on-click-right": "pavucontrol",
         "on-scroll-up": "pamixer -i 5",
         "on-scroll-down": "pamixer -d 5",
         "scroll-step": 5,
@@ -158,7 +96,7 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", " "]
+            "default": ["", "", ""]
         }
     },
 
@@ -167,28 +105,26 @@
         "format-source": " {volume}%",
         "format-source-muted": " Muted",
         "on-click": "pamixer --default-source -t",
-        "on-click-right": "pavucontrol",
         "on-scroll-up": "pamixer --default-source -i 5",
         "on-scroll-down": "pamixer --default-source -d 5",
         "scroll-step": 5
     },
     
     "temperature": {
-        "thermal-zone": 0,
-        "format": " {temperatureC}°C",
+        "thermal-zone": 1,
+        "format": "{temperatureF}°F ",
         "critical-threshold": 80,
-        "format-critical": " {temperatureC}°C"
+        "format-critical": "{temperatureC}°C "
     },
 
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "  {signalStrength}%",
-        "format-ethernet": " {bandwidthDownBytes} {bandwidthUpBytes} ",
-        "tooltip-format": "{essid} - {ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{essid} - {ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}:{essid} {ipaddr}/{cidr}",
-        "interval": 2
+        "format-alt": "{ifname}:{essid} {ipaddr}/{cidr}"
     },
 
     "bluetooth": {
