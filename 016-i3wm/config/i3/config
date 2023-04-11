@@ -78,7 +78,7 @@ exec_always --no-startup-id exec /usr/bin/xfce4-panel
 #exec_always --no-startup-id exec bash ~/.config/polybar/$polybar_theme/scripts/pywal.sh /data/Storage/Picture/pic/lock/001.png
 
 # picom
-exec_always --no-startup-id exec picom --config ~/.config/picom/picom1.conf
+exec_always --no-startup-id exec picom --config ~/.config/picom/picom1.conf --experimental-backends
 
 # feh - wallpaper
 exec --no-startup-id feh --bg-fill /data/Storage/Picture/pic/lock/001.png
