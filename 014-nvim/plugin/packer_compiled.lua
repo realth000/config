@@ -160,6 +160,11 @@ _G.packer_plugins = {
     path = "/home/lth/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
+  ["vala.vim"] = {
+    loaded = true,
+    path = "/home/lth/.local/share/nvim/site/pack/packer/start/vala.vim",
+    url = "https://github.com/vala-lang/vala.vim"
+  },
   ["vim-vsnip"] = {
     loaded = true,
     path = "/home/lth/.local/share/nvim/site/pack/packer/start/vim-vsnip",
