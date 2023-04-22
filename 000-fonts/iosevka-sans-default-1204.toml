@@ -3,7 +3,7 @@ family = "Iosevka1204"
 spacing = "normal"
 serifs = "sans"
 no-cv-ss = true
-export-glyph-names = false
+export-glyph-names = true
 
 [buildPlans.iosevka1204.variants.design]
 capital-a = "straight-top-serifed"
@@ -80,6 +80,8 @@ six = "open-contour"
 seven = "bend-serifless"
 eight = "two-circles"
 nine = "open-contour"
+diacritic-dot = "square"
+punctuation-dot = "square"
 tilde = "low"
 asterisk = "turn-hex-low"
 underscore = "high"
@@ -90,20 +92,15 @@ number-sign = "upright"
 ampersand = "et-toothless-corner"
 at = "fourfold"
 dollar = "interrupted"
-cent = "through"
 percent = "rings-continuous-slash"
 bar = "force-upright"
-lig-ltgteq = "slanted"
 ascii-single-quote = "straight"
 ascii-grave = "straight"
 question = "corner"
-punctuation-dot = "square"
-diacritic-dot = "square"
+cent = "through"
+lig-ltgteq = "slanted"
 lig-neq = "more-slanted"
 lig-equal-chain = "without-notch"
-
-  [buildPlans.iosevka1204.ligations]
-  inherits = "clike"
 
 [buildPlans.iosevka1204.slopes.upright]
 angle = 0
