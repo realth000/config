@@ -28,7 +28,13 @@ Iosevka custom fonts with sans serifs and little tails.
 * Use font patcher from [nerd fonts](https://github.com/ryanoasis/nerd-fonts/):
 
   ``` bash
-  for f in `find iosevka1204 -type f`; do ./nerd-fonts/font-patcher $f --complete --quiet --windows --mono --makegroups --outputdir ./iosevka1204NFM; done
+  # Old double width style.
+  #for f in `find iosevka1204 -type f`; do ./nerd-fonts/font-patcher $f --complete --quiet --windows --mono --makegroups --outputdir ./iosevka1204NFM; done
+
+  #for f in `find iosevka1204 -type f`; do ./fontpathcer/font-patcher $f --complete --quiet --windows --mono --careful --outputdir ./iosevka1204NFM; done
+
+  # Single width style.
+  for f in `find iosevka1204 -type f`; do ./fontpathcer/font-patcher $f --complete --quiet --windows --outputdir ./iosevka1204NFM; done
   ```
 
   
