@@ -8,7 +8,7 @@
     "height": 50,
     "modules-left": [ "clock", "temperature", "cpu", "memory", "disk", "network" ],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["wlr/workspaces", "custom/launch_wofi", "pulseaudio#speaker", "pulseaudio#microphone", "custom/updates", "custom/lock_screen", "custom/power_btn", "tray"],
+    "modules-right": ["wlr/workspaces", "custom/launch_wofi", "mpris", "pulseaudio#speaker", "pulseaudio#microphone", "custom/updates", "custom/lock_screen", "custom/power_btn", "tray"],
     "hyprland/window": {
         "format": "{}",
         "max-length": 80
@@ -40,14 +40,14 @@
 
     "cpu": {
         "interval": 5,
-        "format": " {usage}%",
+        "format": "  {usage}%",
         "max-length": 10,
         "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
     },
 
     "disk": {
         "interval": 30,
-        "format": " {percentage_used}%",
+        "format": "  {percentage_used}%",
         "path": "/",
         "tooltip": true,
         "tooltip-format": "HDD - {used} used out of {total} on {path} ({percentage_used}%)",
@@ -56,7 +56,7 @@
 
     "memory": {
         "interval": 30,
-        "format": " {}%",
+        "format": "  {}%",
         "max-length": 10,
         "tooltip": true,
         "tooltip-format": "Memory - {used:0.1f}GB used",
@@ -94,7 +94,7 @@
         //shows the current power profile and switches to next on click
         "exec": "asusctl profile -p | sed s:'Active profile is'::",
         "interval": 30,
-        "format": "󰈐{}", 
+        "format": "󰈐 {}", 
         "on-click": "asusctl profile -n; pkill -SIGRTMIN+8 waybar",
         "signal": 8
     },
@@ -114,7 +114,7 @@
     },
 
     "clock": {
-        "format": "{:  %m-%d %a  %H:%M:%S}",
+        "format": "{:   %m-%d %a   %H:%M:%S}",
 		"locale":"C",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
 		"interval": 1
@@ -136,12 +136,24 @@
             "critical": 20
         },
         "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
+        "format-charging": "  {capacity}%",
+        "format-plugged": "  {capacity}%",
         "format-alt": "{time} {icon}",
         "format-icons": ["", "", "", "", "", "", "", "", "", "", ""]
     },
-
+	"mpris": {
+		"format": "DEFAULT: {player_icon} {dynamic}",
+		"format-paused": "DEFAULT: {status_icon} <i>{dynamic}</i>",
+		"player-icons": {
+			"default": "▶",
+			"mpv": "🎵"
+		},
+		"status-icons": {
+			"paused": "⏸"
+		},
+		// "ignored-players": ["firefox"]
+	},
+	
     "pulseaudio#speaker": {
         "format": "{icon} {volume}%",
         "tooltip": false,
@@ -183,7 +195,7 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "  {signalStrength}%",
-        "format-ethernet": " {bandwidthDownBytes} {bandwidthUpBytes} ",
+        "format-ethernet": "  {bandwidthDownBytes} {bandwidthUpBytes} ",
         "tooltip-format": "{essid} - {ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
