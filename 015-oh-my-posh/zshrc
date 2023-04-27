@@ -16,6 +16,9 @@ export ZSH="$HOME/.oh-my-zsh"
 export PUB_HOSTED_URL=https://pub.flutter-io.cn
 export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
 
+# Fix kitty ssh
+export TERM=xterm-256color
+
 # Clang include environment
 # https://clang.llvm.org/docs/CommandGuide/clang.html#envvar-C_INCLUDE_PATH,OBJC_INCLUDE_PATH,CPLUS_INCLUDE_PATH,OBJCPLUS_INCLUDE_PATH
 #export C_INCLUDE_PATH="${C_INCLUDE_PATH:+${C_INCLUDE_PATH}:}/usr/include/glib-2.0:/usr/include/glib-2.0/glib:/usr/lib/x86_64-linux-gnu/glib-2.0/include"
