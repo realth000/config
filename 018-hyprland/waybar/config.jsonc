@@ -8,7 +8,7 @@
     "height": 50,
     "modules-left": [ "clock", "temperature", "cpu", "memory", "disk", "network" ],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["wlr/workspaces", "custom/launch_wofi", "mpris", "pulseaudio#speaker", "pulseaudio#microphone", "custom/updates", "custom/lock_screen", "custom/power_btn", "tray"],
+    "modules-right": ["wlr/workspaces", "custom/launch_wofi", "pulseaudio#speaker", "pulseaudio#microphone", "custom/updates", "custom/lock_screen", "custom/power_btn", "tray"],
     "hyprland/window": {
         "format": "{}",
         "max-length": 80
