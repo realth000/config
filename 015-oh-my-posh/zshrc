@@ -43,7 +43,7 @@ CUSTOM_USE_OH_MY_POSH=true
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 
-if [[ ! ${CUSTOM_USE_OH_MY_POSH} ]];then
+if [[ ${CUSTOM_USE_OH_MY_POSH} != true ]];then
   ZSH_THEME="powerlevel10k/powerlevel10k"
 fi
 
@@ -142,7 +142,7 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-if [[ ${CUSTOM_USE_OH_MY_POSH} ]];then
+if [[ ${CUSTOM_USE_OH_MY_POSH} == true ]];then
 	#CUSTOM_OMP_THEME="amro"
 	#CUSTOM_OMP_THEME="amro_self"
 	#CUSTOM_OMP_THEME="atomic"
