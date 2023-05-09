@@ -4,7 +4,7 @@ set -e
 
 TIME=$(date +%Y%m%d%H%M%S%3N)
 DIR="${HOME}/Pictures/"
-OUTPUT="${DIR}/screnshot_${TIME}"
+OUTPUT="${DIR}/screenshot_${TIME}"
 
 if [ ! -d "${DIR}" ];then
 	mkdir "${DIR}"
