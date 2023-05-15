@@ -29,6 +29,9 @@ end)
 
 local config = {}
 
+config.front_end = "OpenGL"
+config.enable_wayland = false
+
 ------------------------ Tab bar style ------------------------
 
 -- The filled in variant of the < symbol
@@ -148,8 +151,7 @@ config.window_frame = {
       -- weight = 'Medium',
       -- family = 'JetBrainsMono NFM',
       -- weight = 'Bold',
-      family = 'Iosevka1204 NF',
-      stretch = 'Expanded',
+      family = 'Iosevka1204Extended NFM',
       weight = 'DemiBold',
       harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
     },
@@ -175,8 +177,8 @@ config.window_frame = {
 
 config.font_size = 13.0
 config.show_new_tab_button_in_tab_bar = false
-config.window_background_opacity = 0.92
-config.text_background_opacity = 0.92
+config.window_background_opacity = 0.52
+config.text_background_opacity = 0.52
 config.cursor_thickness = "200%"
 config.window_padding = {
   left = 2,
@@ -339,9 +341,8 @@ config.font = wezterm.font_with_fallback {
     -- weight = 'Medium',
     -- family = 'JetBrainsMono NFM',
     -- weight = 'Bold',
-    family = 'Iosevka1204 NF',
-    weight = 'DemiBold',
-    stretch = 'Expanded',
+    family = 'Iosevka1204Extended NFM',
+    weight = 600,
     -- italic = true,
     harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
   },
