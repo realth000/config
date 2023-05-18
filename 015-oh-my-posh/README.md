@@ -86,6 +86,12 @@ Compare to powerlevel10k, oh-my-posh themes may need more ``transient_propmt`` c
 }
 ```
 
+To disable update hints:
+
+``` shell
+oh-my-posh disable notice
+```
+
 ## Symbols
 
 273f: ✿
