@@ -15,9 +15,12 @@ vim.opt.smarttab = true
 vim.opt.smartcase = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4 -- vim.opt.list = true
+vim.opt.shiftwidth = 4
+-- vim.opt.list = true
 vim.opt.listchars = 'tab:-->'
 -- ↵    ↲  
+-- Gruvbox colorscheme need this.
+vim.o.background = 'dark'
 
 -- Neovide settings.
 if vim.g.neovide then
@@ -39,7 +42,3 @@ vim.keymap.set('n', '<F3>', '<Cmd>NvimTreeToggle<CR>')
 -- Format and save command.
 vim.cmd [[command FW :lua vim.lsp.buf.formatting_sync(); vim.cmd('w')]]
 
---vim.api.nvim_set_keymap("n", "<leader>i", ":lua vim.diagnostic.open_float(nil, {focus=false, scope='cursor'})<CR>", default_opts)
---vim.keymap.set('n', '<leader>i', ':lua vim.diagnostic.open_float(nil, {focus=true, scope="cursor"})<CR>')
-vim.keymap.set('n', '<leader>i', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
---lua vim.diagnostic.open_float(nil, {focus=false,scope="cursor"})

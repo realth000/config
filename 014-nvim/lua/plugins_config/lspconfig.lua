@@ -123,6 +123,10 @@ require('lspconfig')['rust_analyzer'].setup{
     }
 }
 require('lspconfig')['clangd'].setup{
+	cmd = {
+	  "clangd",
+	  "--clang-tidy",
+	},
     on_attach = on_attach,
     flags = lsp_flags,
     filetypes = {

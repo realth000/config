@@ -1,5 +1,5 @@
 require('basic')
 require('packer')
 require('plugins')
--- require('lsp')
+require('post')
 
