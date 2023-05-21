@@ -28,7 +28,7 @@ linter:
     avoid_dynamic_calls: true
     avoid_empty_else: true
     avoid_print: true
-    avoid_relative_lib_imports: false
+    avoid_relative_lib_imports: true
     avoid_returning_null_for_future: true
     avoid_slow_async_io: true
     avoid_type_to_string: true
@@ -50,7 +50,7 @@ linter:
     no_adjacent_strings_in_list: true
     no_duplicate_case_values: true
     no_logic_in_create_state: true
-    prefer_relative_imports: true
+    prefer_relative_imports: false
     prefer_void_to_null: true
     test_types_in_equals: true
     throw_in_finally: true
