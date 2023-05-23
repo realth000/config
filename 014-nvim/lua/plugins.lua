@@ -28,6 +28,9 @@ return require('packer').startup(function()
   }
   require('plugins_config.nightfox')
 
+  use { "catppuccin/nvim", as = "catppuccin" }
+  require('plugins_config.catppuccin')
+
   -- nvim-tree
   use {
     'kyazdani42/nvim-tree.lua',
