@@ -1,14 +1,16 @@
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    -- powerline_dark solarized_dark moonfly jellybeans
-    theme = 'solarized_dark',
+	-- See https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
+	-- palenight moonfly code_dark gruvbox_material horizon material nightfly onedark
+    -- powerline_dark solarized_dark jellybeans everforest gruvbox_dark iceberg_dark modus-vivendi wombat papercolor_dark
+    theme = 'palenight',
     -- component_separators = { left = '', right = ''},
     -- section_separators = { left = '', right = ''},
-    component_separators = { left = '/', right = '/'},
-    section_separators = { left = '', right = ''},
-    -- section_separators = { left = '', right = '' },
-    -- component_separators = { left = '', right = '' },
+    -- component_separators = { left = '/', right = '/'},
+    -- section_separators = { left = '', right = ''},
+    section_separators = { left = '', right = '' },
+    component_separators = { left = '', right = '' },
 --     disabled_filetypes = {
 --       statusline = {},
 --       winbar = {},
@@ -38,8 +40,22 @@ require('lualine').setup {
     lualine_y = {},
     lualine_z = {}
   },
-  tabline = {},
-  winbar = {},
+  tabline = {
+    -- lualine_a = {'buffers'},
+    -- lualine_b = {'branch'},
+    -- lualine_c = {'filename'},
+    -- lualine_x = {},
+    -- lualine_y = {},
+    -- lualine_z = {'tabs'}
+  },
+  winbar = {
+    -- lualine_a = {},
+    -- lualine_b = {},
+    -- lualine_c = {'filename'},
+    -- lualine_x = {},
+    -- lualine_y = {},
+    -- lualine_z = {}
+  },
   inactive_winbar = {},
   extensions = {}
 }
