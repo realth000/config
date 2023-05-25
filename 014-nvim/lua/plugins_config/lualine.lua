@@ -2,7 +2,7 @@ require('lualine').setup {
   options = {
     icons_enabled = true,
 	-- See https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
-	-- palenight moonfly code_dark gruvbox_material horizon material nightfly onedark
+	-- palenight moonfly codedark gruvbox_material horizon material nightfly onedark
     -- powerline_dark solarized_dark jellybeans everforest gruvbox_dark iceberg_dark modus-vivendi wombat papercolor_dark
     theme = 'palenight',
     -- component_separators = { left = '', right = ''},
