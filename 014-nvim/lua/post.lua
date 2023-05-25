@@ -1,5 +1,6 @@
 
 -- Setup colorscheme
+-- vim.cmd("colorscheme github_dark")
 -- vim.cmd("colorscheme gruvbox")
 -- vim.cmd("colorscheme nightfox")
 -- vim.cmd("colorscheme nordfox")
