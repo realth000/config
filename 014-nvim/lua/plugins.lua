@@ -77,12 +77,13 @@ return require('packer').startup(function()
   }
   require('plugins_config.mason')
   require('plugins_config.lspconfig')
+  require('plugins_config.nvim-cmp')
 
   -- Auto complete brackts
   use {
     'windwp/nvim-autopairs',
-    config = function() require('nvim-autopairs').setup(); end
   }
+  require('plugins_config.nvim-autopairs')
 
   -- telescope
   use {

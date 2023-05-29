@@ -109,6 +109,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 require('lspconfig')['pyright'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
+	capabilities = capabilities,
 }
 -- require('lspconfig')['tsserver'].setup{
 --     on_attach = on_attach,
@@ -120,7 +121,8 @@ require('lspconfig')['rust_analyzer'].setup{
     -- Server-specific settings...
     settings = {
       ["rust-analyzer"] = {}
-    }
+    },
+	capabilities = capabilities,
 }
 require('lspconfig')['clangd'].setup{
 	cmd = {
@@ -134,31 +136,38 @@ require('lspconfig')['clangd'].setup{
       "cpp",
     },
     single_file_support = true,
+	capabilities = capabilities,
 }
 require('lspconfig')['gopls'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
     single_file_support = true,
+	capabilities = capabilities,
 }
 require('lspconfig')['cmake'].setup{
     on_attach = on_attach,
     single_file_support = true,
+	capabilities = capabilities,
 }
 -- require('lspconfig')['dartls'].setup{
 -- 	on_attach = on_attach,
 --     flags = lsp_flags,
 -- 	single_file_support = true,
+-- capabilities = capabilities,
 -- }
 require('lspconfig')['marksman'].setup{
     on_attach = on_attach,
     single_file_support = true,
+	capabilities = capabilities,
 }
 require('lspconfig')['bashls'].setup{
 	on_attach = on_attach,
 	single_file_support = true,
+	capabilities = capabilities,
 }
 require('lspconfig')['vala_ls'].setup{
 	on_attach = on_attach,
 	single_file_support = true,
+    capabilities = capabilities,
 }
 

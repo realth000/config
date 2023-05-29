@@ -43,9 +43,6 @@ require('github-theme').setup({
   groups = {},
 })
 
--- setup must be called before loading
--- vim.cmd('colorscheme github_dark')
-
 -- -- Example config in Lua
 -- require("github-theme").setup({
 --   -- theme_style = "dark",
