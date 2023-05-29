@@ -125,7 +125,12 @@ require('lspconfig')['rust_analyzer'].setup{
     flags = lsp_flags,
     -- Server-specific settings...
     settings = {
-      ["rust-analyzer"] = {}
+      ["rust-analyzer"] = {
+	    completion = {
+		  addCallParenthesis = true,
+		  addCallArgumentSnippets = false,
+		},
+	  },
     },
 	capabilities = capabilities,
 }
