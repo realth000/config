@@ -177,8 +177,8 @@ config.window_frame = {
 
 config.font_size = 13.0
 config.show_new_tab_button_in_tab_bar = false
-config.window_background_opacity = 0.52
-config.text_background_opacity = 0.52
+config.window_background_opacity = 0.92
+config.text_background_opacity = 0.92
 config.cursor_thickness = "200%"
 config.window_padding = {
   left = 2,
@@ -191,15 +191,26 @@ config.color_schemes = {
 }
 config.color_scheme = 'abc'
 config.colors = {
-  foreground = '#f0d0d0',
-  background = '#1e2223',
+  -- Old style
+  -- foreground = '#f0d0d0',
+  -- background = '#1e2223',
+  -- cursor_bg = '#f1ffff',
+  -- -- cursor_bg = 'transparent',
+  -- -- cursor_bg = '#1e2223',
+  -- cursor_fg = '#1e2223',
+  -- cursor_border = '#f1ffff',
+  -- selection_bg = '#2255cc',
+  -- selection_fg = '#f1ffff',
+
+  -- Catppuccin mocha style
+  foreground = '#cdd6f4',
+  background = '#1e1e2e',
   cursor_bg = '#f1ffff',
-  -- cursor_bg = 'transparent',
-  -- cursor_bg = '#1e2223',
-  cursor_fg = '#1e2223',
-  cursor_border = '#f1ffff',
-  selection_bg = '#2255cc',
-  selection_fg = '#f1ffff',
+  cursor_bg = 'cdd6f4',
+  cursor_fg = '#1e1e2e',
+  cursor_border = '#cdd6f4',
+  selection_bg = '#f5e0dc',
+  selection_fg = '#1e1e2e',
 
   -- cursor_fg = '#f1ffff',
   -- cursor_border = '#52ad70',
@@ -342,7 +353,7 @@ config.font = wezterm.font_with_fallback {
     -- family = 'JetBrainsMono NFM',
     -- weight = 'Bold',
     family = 'Iosevka1204Extended NFM',
-    weight = 600,
+    weight = 'DemiBold',
     -- italic = true,
     harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
   },
@@ -379,6 +390,7 @@ config.keys = {
   { key = '3', mods = 'CTRL', action = act.PaneSelect { alphabet = '1234567890' }, },
   { key = '4', mods = 'CTRL', action = act.PaneSelect { alphabet = '1234567890' }, },
   { key = '5', mods = 'CTRL', action = act.PaneSelect { alphabet = '1234567890' }, },
+  { key = '6', mods = 'CTRL', action = act.PaneSelect { alphabet = '1234567890' }, },
   { key = '0', mods = 'CTRL', action = act.PaneSelect { mode = 'SwapWithActive' }, },
   { key = 'UpArrow', mods = 'CTRL|SHIFT', action = act.ScrollByLine(-1), },
   { key = 'DownArrow', mods = 'CTRL|SHIFT', action = act.ScrollByLine(1), },
