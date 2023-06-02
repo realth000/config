@@ -3,9 +3,9 @@ local mux = wezterm.mux
 local act = wezterm.action
 
 -- customize color scheme
-local customized_color_scheme = wezterm.color.get_builtin_schemes()['Alabaster']
+local custom_alabaster = wezterm.color.get_builtin_schemes()['Alabaster']
 -- customize oh-my-zsh suggestions plugin suggest text color to optimize ctrl + F.
-customized_color_scheme.brights[1] = "#595f5f"
+custom_alabaster.brights[1] = "#595f5f"
 -- color_scheme = "midnight-in-mojave", -- ctrl + f
 -- color_scheme = "Alabaster", -- ok
 -- color_scheme = "CLRS", -- good
@@ -15,6 +15,24 @@ customized_color_scheme.brights[1] = "#595f5f"
 -- color_scheme = "Material", -- ok half ctrl + f
 -- color_scheme = "MaterialDark", -- as above
 -- color_scheme = "Solarized Darcula", -- ctrl + f
+
+local custom_catppuccin_mocha = wezterm.color.get_builtin_schemes()['Alabaster']
+custom_catppuccin_mocha.ansi[1]    = "#45475a"
+custom_catppuccin_mocha.brights[1] = "#585b70"
+custom_catppuccin_mocha.ansi[2]    = "#f38ba8"
+custom_catppuccin_mocha.brights[2] = "#f38ba8"
+custom_catppuccin_mocha.ansi[3]    = "#a6e3a1"
+custom_catppuccin_mocha.brights[4] = "#a6e3a1"
+custom_catppuccin_mocha.ansi[4]    = "#f9e2af"
+custom_catppuccin_mocha.brights[4] = "#f9e2af"
+custom_catppuccin_mocha.ansi[5]    = "#89b4fa"
+custom_catppuccin_mocha.brights[5] = "#89b4fa"
+custom_catppuccin_mocha.ansi[6]    = "#f5c2e7"
+custom_catppuccin_mocha.brights[6] = "#f5c2e7"
+custom_catppuccin_mocha.ansi[7]    = "#94e2d5"
+custom_catppuccin_mocha.brights[7] = "#94e2d5"
+custom_catppuccin_mocha.ansi[8]    = "#bac2de"
+custom_catppuccin_mocha.brights[8] = "#bac2de"
 
 wezterm.on('gui-startup', function(cmd)
   -- allow `wezterm start -- something` to affect what we spawn
@@ -187,9 +205,10 @@ config.window_padding = {
   bottom = 2,
 }
 config.color_schemes = {
-  ['abc'] = customized_color_scheme,
+  ['custom_alabaster'] = custom_alabaster,
+  ['custom_catppuccin_mocha'] = custom_catppuccin_mocha,
 }
-config.color_scheme = 'abc'
+config.color_scheme = 'custom_alabaster'
 config.colors = {
   -- Old style
   -- foreground = '#f0d0d0',
