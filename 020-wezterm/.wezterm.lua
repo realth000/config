@@ -412,7 +412,9 @@ config.keys = {
   { key = '6', mods = 'CTRL', action = act.PaneSelect { alphabet = '1234567890' }, },
   { key = '0', mods = 'CTRL', action = act.PaneSelect { mode = 'SwapWithActive' }, },
   { key = 'UpArrow', mods = 'CTRL|SHIFT', action = act.ScrollByLine(-1), },
+  { key = 'k', mods = 'CTRL|SHIFT', action = act.ScrollByLine(-1), },
   { key = 'DownArrow', mods = 'CTRL|SHIFT', action = act.ScrollByLine(1), },
+  { key = 'j', mods = 'CTRL|SHIFT', action = act.ScrollByLine(1), },
   { key = ',', mods = 'CTRL', action = act.ActivateKeyTable {
       name = 'resize_pane',
       -- ont_shot = false,
