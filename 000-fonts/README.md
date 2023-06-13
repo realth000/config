@@ -41,7 +41,7 @@ Iosevka custom fonts with sans serifs and little tails.
 
   # Best option.
   # Mono (narrow icons), Group, use "Iosevka1204Extended NFM" as name.
-  for f in `find iosevka1204 -type f`; do ./fontpathcer/font-patcher $f --complete --quiet --windows --mono --makegroups --outputdir ./iosevka1204NF_mono_groups; done
+  for f in `find iosevka1204 -type f`; do ./fontpathcer/font-patcher $f --complete --quiet --mono --makegroups --outputdir ./iosevka1204NF_mono_groups; done
   ```
 
   
