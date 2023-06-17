@@ -48,7 +48,7 @@ end)
 local config = {}
 
 config.front_end = "OpenGL"
-config.enable_wayland = false
+---config.enable_wayland = false
 
 ------------------------ Tab bar style ------------------------
 
