@@ -372,7 +372,7 @@ config.font = wezterm.font_with_fallback {
     -- family = 'JetBrainsMono NFM',
     -- weight = 'Bold',
     family = 'Iosevka1204 Nerd Font Mono',
-    weight = 'DemiBold',
+    -- weight = 'DemiBold',
     -- italic = true,
     harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
   },
