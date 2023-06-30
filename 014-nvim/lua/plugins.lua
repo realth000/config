@@ -103,4 +103,10 @@ return require('packer').startup(function()
     'vala-lang/vala.vim',
   }
 
+  -- Terminal
+  use {
+     'numToStr/FTerm.nvim'
+  }
+  require('plugins_config.fterm')
+
 end)
