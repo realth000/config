@@ -1,10 +1,18 @@
 # Dart lint rules
 
-1. Install [lint]([lint | Dart Package (pub.dev)](https://pub.dev/packages/lint)) to project:
+1. Add `surf_lint_rules` as dependency to your `pubspec.yaml`:
 
-   ``` yaml
-   dev_dependencies:
-     lint: ^1.0.0
-   ```
+``` bash
+flutter pub add surt_lint_rules
+```
 
-2. Import lint rules in [analysis_options.yaml](./analysis_options.yaml).
+2. add `include` in analysis_options.yaml:
+
+``` yaml
+include:
+  package:surf_lint_rules/analysis_options.yaml
+
+analyzer:
+  exclude:
+    - lib/**.g.dart
+```
