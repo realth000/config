@@ -130,6 +130,20 @@ require('lspconfig')['rust_analyzer'].setup{
 		  addCallParenthesis = true,
 		  addCallArgumentSnippets = false,
 		},
+        imports = {
+            granularity = {
+                group = "module",
+            },
+            prefix = "self",
+        },
+        cargo = {
+            buildScripts = {
+                enable = true,
+            },
+        },
+        procMacro = {
+            enable = true
+        },
 	  },
     },
 	capabilities = capabilities,

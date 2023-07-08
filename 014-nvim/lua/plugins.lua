@@ -78,6 +78,10 @@ return require('packer').startup(function()
   require('plugins_config.mason')
   require('plugins_config.lspconfig')
   require('plugins_config.nvim-cmp')
+  use {
+      'simrat39/rust-tools.nvim'
+  }
+  require('plugins_config.rust-tools')
 
   -- Auto complete brackts
   use {
