@@ -15,4 +15,5 @@ include:
 analyzer:
   exclude:
     - lib/**.g.dart
+    - lib/**.freezed.dart
 ```
