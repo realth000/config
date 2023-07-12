@@ -11,7 +11,8 @@
 
 # Set primary screen.
 exec --no-startup-id xrandr --output HDMI-2 --primary
-exec --no-startup-id xrandr --output eDP-1 --right-of HDMI-2 --auto
+exec --no-startup-id xrandr --output eDP-1 --left-of HDMI-2 --auto
+
 # Set system theme to dark mode.
 exec --no-startup-id /usr/libexec/gsd-xsettings
 
@@ -23,7 +24,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Iosevka1204Extended NF 10
+font pango:Iosevka1204Extended NFM 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -89,8 +90,8 @@ exec --no-startup-id feh --bg-fill /data/Storage/Picture/pic/lock/001.png
 #exec_always --no-startup-id exec bash ~/.config/xborder/xborder.sh
 
 # Window border width
-#default_border pixel 0
-default_border none
+default_border pixel 0
+#default_border none
 
 #smart_borders on
 
