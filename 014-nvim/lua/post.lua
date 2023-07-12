@@ -12,4 +12,6 @@
 -- vim.cmd("colorscheme tokyonight-night")
 -- vim.cmd("colorscheme tokyonight-storm")
 -- vim.cmd('colorscheme onedark')
-vim.cmd('colorscheme catppuccin')
+-- vim.cmd('colorscheme catppuccin')
+vim.cmd('colorscheme hardhacker')
+vim.cmd('colorscheme hardhacker-darker')

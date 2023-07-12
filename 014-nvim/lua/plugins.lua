@@ -31,6 +31,8 @@ return require('packer').startup(function()
   use { "catppuccin/nvim", as = "catppuccin" }
   require('plugins_config.catppuccin')
 
+  use {'hardhackerlabs/theme-vim',  as = 'hardhacker'}
+
   -- nvim-tree
   use {
     'kyazdani42/nvim-tree.lua',
