@@ -44,6 +44,31 @@ local lsp_flags = {
 }
 
 ------------------------------------
+-- UI Customize
+vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
+vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
+
+local border = {
+  { "╭", "FloatBorder" },
+  { "─", "FloatBorder" },
+  { "╮", "FloatBorder" },
+  { "│", "FloatBorder" },
+  { "╯", "FloatBorder" },
+  { "─", "FloatBorder" },
+  { "╰", "FloatBorder" },
+  { "│", "FloatBorder" },
+}
+
+
+-- To instead override globally
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or border
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+
+------------------------------------
 -- From https://github.com/hrsh7th/nvim-cmp/
 -- Set up nvim-cmp.
 local cmp = require'cmp'
@@ -154,13 +179,13 @@ require('lspconfig')['clangd'].setup{
 	  "--clang-tidy",
 	  "--function-arg-placeholders=false", -- Disable clangd completion function parameters.
 	},
-    on_attach = on_attach,
-    flags = lsp_flags,
-    filetypes = {
-      "c",
-      "cpp",
-    },
-    single_file_support = true,
+  on_attach = on_attach,
+  flags = lsp_flags,
+  filetypes = {
+    "c",
+    "cpp",
+  },
+  single_file_support = true,
 	capabilities = capabilities,
 }
 require('lspconfig')['gopls'].setup{
@@ -195,4 +220,3 @@ require('lspconfig')['vala_ls'].setup{
 	single_file_support = true,
     capabilities = capabilities,
 }
-

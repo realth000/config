@@ -84,6 +84,9 @@ return require('packer').startup(function()
       'simrat39/rust-tools.nvim'
   }
   require('plugins_config.rust-tools')
+  use {
+    "onsails/lspkind.nvim"
+  }
 
   -- Auto complete brackts
   use {
