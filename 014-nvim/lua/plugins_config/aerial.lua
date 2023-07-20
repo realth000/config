@@ -6,7 +6,8 @@ vim.keymap.set('n', '<leader>a', '<cmd>AerialToggle!<CR>')
 require("aerial").setup({
   -- Priority list of preferred backends for aerial.
   -- This can be a filetype map (see :help aerial-filetype-map)
-  backends = { "treesitter", "lsp", "markdown", "man" },
+  -- "treesitter", "lsp", "markdown", "man"
+  backends = { "treesitter", "lsp", "markdown"},
 
   layout = {
     -- These control the width of the aerial window.
@@ -351,8 +352,8 @@ require("aerial").setup({
     update_delay = 300,
   },
 
-  man = {
-    -- How long to wait (in ms) after a buffer change before updating
-    update_delay = 300,
-  },
+  -- man = {
+  --   -- How long to wait (in ms) after a buffer change before updating
+  --   update_delay = 300,
+  -- },
 })
