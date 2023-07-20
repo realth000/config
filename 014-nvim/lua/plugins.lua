@@ -115,4 +115,10 @@ return require('packer').startup(function()
   }
   require('plugins_config.fterm')
 
+  -- Symbol outline
+  use {
+    'stevearc/aerial.nvim',
+  }
+  require('plugins_config.aerial')
+
 end)

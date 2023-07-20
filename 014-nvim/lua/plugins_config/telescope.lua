@@ -5,6 +5,11 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
+require('telescope').load_extension('aerial')
+
+local extensions = require('telescope').extensions
+vim.keymap.set('n', '<leader>fs', extensions.aerial.aerial, {})
+
 require('telescope').setup{
   defaults = {
     -- Default configuration for telescope goes here:
@@ -35,5 +40,13 @@ require('telescope').setup{
     --   extension_config_key = value,
     -- }
     -- please take a look at the readme of the extension you want to configure
+    aerial = {
+      -- Display symbols as <root>.<parent>.<symbol>
+      show_nesting = {
+        ['_'] = false, -- This key will be the default
+        json = true,   -- You can set the option for specific filetypes
+        yaml = true,
+      }
+    }
   }
 }
