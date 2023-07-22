@@ -80,14 +80,29 @@ return require('packer').startup(function()
   require('plugins_config.mason')
   require('plugins_config.lspconfig')
   require('plugins_config.nvim-cmp')
+
   -- rust-tools takes over some rust lsp configs.
   use {
       'simrat39/rust-tools.nvim'
   }
   require('plugins_config.rust-tools')
+
   use {
     "onsails/lspkind.nvim"
   }
+
+  -- Disable `cmd` to force load, or should use popui.nvim instead.
+  use {
+    "weilbith/nvim-code-action-menu",
+	--cmd = 'CodeActionMenu',
+  }
+  require('plugins_config.nvim-code-action-menu')
+
+  -- Use popui.nvim to enable floating window for all actions in lsp except CodeAction.
+  use {
+      "hood/popui.nvim"
+  }
+  require('plugins_config.popui')
 
   -- Auto complete brackts
   use {
