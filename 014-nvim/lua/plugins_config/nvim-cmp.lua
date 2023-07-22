@@ -2,7 +2,14 @@ local cmp = require'cmp'
 local lspkind = require('lspkind')
 
 -- Following code originaly from nvim-cmp/lua/cmp/config/window.lua
+-- Floating window (triggered by lsp shortcuts) color
+--
+-- Set border to rounded to keep border style same with lsp completion window and telescope windows.
+-- Set FloatBorder color to Comment to keep same color with lsp completion window color.
 local window_opt = {
+	border = "rounded", -- single, rounded
+    -- winhighlight = opts.winhighlight or 'Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None',
+    winhighlight = 'Normal:Normal,FloatBorder:Comment,CursorLine:Visual,Search:None',
     scrollbar = false,
 }
 

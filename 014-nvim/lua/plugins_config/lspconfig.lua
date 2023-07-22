@@ -43,6 +43,35 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 
+local float_window_border = {
+	{ "╭", "FloatBorder" },
+	{ "─", "FloatBorder" },
+	{ "╮", "FloatBorder" },
+	{ "│", "FloatBorder" },
+	{ "╯", "FloatBorder" },
+	{ "─", "FloatBorder" },
+	{ "╰", "FloatBorder" },
+	{ "│", "FloatBorder" },
+}
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover, {
+    border = float_window_border
+  }
+)
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+  vim.lsp.handlers.signature_help, {
+    border = float_window_border
+  }
+)
+
+vim.diagnostic.config{
+  float= {
+	  border = float_window_border
+  }
+}
+
 ------------------------------------------------
 -- Set up lsp servers.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
