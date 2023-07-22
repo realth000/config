@@ -80,6 +80,7 @@ return require('packer').startup(function()
   require('plugins_config.mason')
   require('plugins_config.lspconfig')
   require('plugins_config.nvim-cmp')
+  -- rust-tools takes over some rust lsp configs.
   use {
       'simrat39/rust-tools.nvim'
   }

@@ -130,7 +130,25 @@ require('rust-tools').setup({
         checkOnSave = {
           command = "clippy",
         },
-      },
+		completion = {
+			addCallParenthesis = true,
+			addCallArgumentSnippets = false,
+		},
+        imports = {
+            granularity = {
+                group = "module",
+            },
+            prefix = "self",
+        },
+        cargo = {
+            buildScripts = {
+                enable = true,
+            },
+        },
+        procMacro = {
+            enable = true
+        },
+	  },
     },
   },
 })
