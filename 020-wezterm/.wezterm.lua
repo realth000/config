@@ -368,10 +368,13 @@ config.colors = {
 config.font = wezterm.font_with_fallback {
   {
     -- family = 'FiraCode NFM',
-    -- weight = 'Medium',
     -- family = 'JetBrainsMono NFM',
-    -- weight = 'Bold',
     family = 'Iosevka1204 Nerd Font Mono',
+    -- family = 'CaskaydiaCove Nerd Font Mono',
+    -- family = 'Hack Nerd Font Mono',
+    -- family = 'IBM Plex Mono',
+    -- weight = 'Medium',
+    -- weight = 'Bold',
     -- weight = 'DemiBold',
     -- italic = true,
     harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
