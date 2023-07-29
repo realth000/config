@@ -2,9 +2,11 @@
 
 ## Iosevka0828
 
-Iosevka custom fonts with slab serifs.
+Iosevka custom font with slab serifs.
 
 ![overview](./iosevka-slab-ss08-0828.png)
+
+Note: **Iosevka0828 has ligature for `!=`**
 
 ### Build
 
@@ -16,7 +18,7 @@ Iosevka custom fonts with slab serifs.
    * run `npm run build -- contents::iosevka0828` for TTF and Web fonts.
    * run `npm run build -- ttf::iosevka0828` for TTF fonts.
 
-## Patch fonts to Nerd Fonts
+### Patching Nerd Fonts
 
 * Use font patcher from [nerd fonts](https://github.com/ryanoasis/nerd-fonts/):
 
@@ -27,13 +29,15 @@ Iosevka custom fonts with slab serifs.
 
 ### Compatibility
 
-Compatibility with Iosevka 25.1.1
+Compatible with Iosevka 25.1.1
 
 ## Iosevka1204
 
-Iosevka custom fonts with sans serifs and little tails.
+Iosevka custom font with sans and little serif tails.
 
 ![overview](./iosevka-sans-default-1204.png)
+
+Note: **Iosevka1204 has ligature for `!=`**
 
 * See how Iosevka1204 looks like:
   * Import config file iosevka-sans-default-1204.toml on [Iosevka Customizer](https://typeof.net/Iosevka/customizer).
@@ -43,11 +47,15 @@ Iosevka custom fonts with sans serifs and little tails.
    * run `npm run build -- contents::iosevka1204` for TTF and Web fonts.
    * run `npm run build -- ttf::iosevka1204` for TTF fonts.
 
-## Patch fonts to Nerd Fonts
+### Patching Nerd Fonts
 
 * Use font patcher from [nerd fonts](https://github.com/ryanoasis/nerd-fonts/):
 
   ``` bash
   # CAUTION: CPU usage 100%
-  for f in `find iosevka1204 -type f`; do ./fontpatcher/font-patcher $f --complete --quiet --mono --makegroups --outputdir ./iosevka1204NF_mono_groups; done
+  for f in `find iosevka1204_20230730 -type f`; do ./fontpatcher/font-patcher $f --complete --quiet --mono --makegroups --outputdir ./iosevka1204NF_mono_groups_v3 &; done; wait
   ```
+
+### Compatibility
+
+Compatible with Iosevka 25.1.1
