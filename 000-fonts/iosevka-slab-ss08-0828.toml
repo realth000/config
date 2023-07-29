@@ -1,3 +1,4 @@
+# Compatibility with Iosevka 25.1.1
 [buildPlans.iosevka0828]
 family = "Iosevka0828"
 spacing = "normal"
@@ -59,7 +60,6 @@ export-glyph-names = true
     x = "straight-serifed"
     y = "straight-serifed"
     z = "straight-bottom-serifed-with-crossbar"
-    cyrl-capital-u = "straight-turn"
     zero = "slashed"
     one = "base"
     two = "curly-neck"

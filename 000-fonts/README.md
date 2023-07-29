@@ -12,9 +12,13 @@ Iosevka custom fonts with slab serifs.
 * Use font patcher from [nerd fonts](https://github.com/ryanoasis/nerd-fonts/):
 
   ``` bash
-  for f in `find iosevka0828 -type f`; do ./nerd-fonts/font-patcher $f --complete --quiet --windows --mono --makegroups --outputdir ./iosevka0828NFM; done
+  # CAUTION: CPU usage 100%
+  for f in `find iosevka0828_20230729 -type f`; do ./fontpatcher/font-patcher $f --complete --quiet --mono --makegroups --outputdir ./iosevka0828NF_mono_groups_v3 &; done; wait
   ```
 
+### Compatibility
+
+Compatibility with Iosevka 25.1.1
   
 ## Iosevka1204
 Iosevka custom fonts with sans serifs and little tails.
@@ -28,20 +32,8 @@ Iosevka custom fonts with sans serifs and little tails.
 * Use font patcher from [nerd fonts](https://github.com/ryanoasis/nerd-fonts/):
 
   ``` bash
-  # Old double width style.
-  #for f in `find iosevka1204 -type f`; do ./nerd-fonts/font-patcher $f --complete --quiet --windows --mono --makegroups --outputdir ./iosevka1204NFM; done
-
-  #for f in `find iosevka1204 -type f`; do ./fontpathcer/font-patcher $f --complete --quiet --windows --mono --careful --outputdir ./iosevka1204NFM; done
-
-  # Single width style (bad font width)
-  #for f in `find iosevka1204 -type f`; do ./fontpathcer/font-patcher $f --complete --quiet --windows --outputdir ./iosevka1204NFM; done
-
-  # Group, use "Iosevka1204Extended NF" as name.
-  #for f in `find iosevka1204 -type f`; do ./fontpathcer/font-patcher $f --complete --quiet --windows --makegroups --outputdir ./iosevka1204NF_groups; done
-
-  # Best option.
-  # Mono (narrow icons), Group, use "Iosevka1204Extended NFM" as name.
-  for f in `find iosevka1204 -type f`; do ./fontpathcer/font-patcher $f --complete --quiet --mono --makegroups --outputdir ./iosevka1204NF_mono_groups; done
+  # CAUTION: CPU usage 100%
+  for f in `find iosevka1204 -type f`; do ./fontpatcher/font-patcher $f --complete --quiet --mono --makegroups --outputdir ./iosevka1204NF_mono_groups; done
   ```
 
   
