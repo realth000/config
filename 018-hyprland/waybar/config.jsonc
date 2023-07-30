@@ -8,41 +8,41 @@
     "height": 50,
     "modules-left": [ "clock", "temperature", "cpu", "memory", "disk", "network" ],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["wlr/workspaces", "custom/launch_wofi", "pulseaudio#speaker", "pulseaudio#microphone", "custom/updates", "custom/lock_screen", "custom/power_btn", "tray"],
+    "modules-right": ["hyprland/workspaces", "custom/launch_wofi", "pulseaudio#speaker", "pulseaudio#microphone", "custom/updates", "custom/lock_screen", "custom/power_btn", "tray"],
     "hyprland/window": {
         "format": "{}",
-        "max-length": 80
+        "max-length": 80,
     },
 
     "custom/launch_wofi": {
         "format": "",
         "on-click": "pkill wofi; wofi -n",
-        "tooltip": false
+        "tooltip": false,
     },
 
     "custom/lock_screen": {
         "format": "",
         "on-click": "sh -c '(sleep 0.5s; swaylock)' & disown",
-        "tooltip": false
+        "tooltip": false,
     },
 
     "custom/light_dark": {
         "format": "󰐾",
         "on-click": "~/.config/waybar/scripts/baraction light",
-        "tooltip": false
+        "tooltip": false,
     },
 
     "custom/power_btn": {
         "format": " ",
         "on-click": "sh -c '(sleep 0.5s; wlogout --protocol layer-shell)' & disown",
-        "tooltip": false
+        "tooltip": false,
     },
 
     "cpu": {
         "interval": 5,
         "format": "  {usage}%",
         "max-length": 10,
-        "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
+        "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'",
     },
 
     "disk": {
@@ -51,7 +51,7 @@
         "path": "/",
         "tooltip": true,
         "tooltip-format": "HDD - {used} used out of {total} on {path} ({percentage_used}%)",
-        "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
+        "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'",
     },
 
     "memory": {
@@ -60,7 +60,7 @@
         "max-length": 10,
         "tooltip": true,
         "tooltip-format": "Memory - {used:0.1f}GB used",
-        "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
+        "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'",
     },
 
     "custom/updates": {
@@ -68,26 +68,25 @@
         "exec": "~/.config/waybar/scripts/update-sys",
         "on-click": "~/.config/waybar/scripts/update-sys update",
         "interval": 300,
-        "tooltip": true
+        "tooltip": true,
     },
 
 
-    "wlr/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "on-click": "activate",
-        "persistent_workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-            "5": [],
-            "6": [],
-            "7": [],
-            "8": [],
-            "9": [],
-            "10": []
-        }
+    "hyprland/workspaces": {
+		"all-outputs": true,
+		"format":"{icon}",
+        "format-icons": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9", // 
+            "10": "10",
+        },
     },
 
     "custom/power_profile":{
@@ -96,7 +95,7 @@
         "interval": 30,
         "format": "󰈐 {}", 
         "on-click": "asusctl profile -n; pkill -SIGRTMIN+8 waybar",
-        "signal": 8
+        "signal": 8,
     },
 
    "custom/weather" : {
@@ -105,19 +104,19 @@
         "format" : "{}",
         "interval" : 30,
         "exec" : "~/.config/waybar/scripts/waybar-wttr.py",
-        "return-type" : "json"
+        "return-type" : "json",
     },
 
     "tray": {
         "icon-size": 18,
-        "spacing": 10
+        "spacing": 10,
     },
 
     "clock": {
         "format": "{:   %m-%d %a   %H:%M:%S}",
 		"locale":"C",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-		"interval": 1
+		"interval": 1,
     },
 
     "backlight": {
@@ -126,30 +125,30 @@
         "format-icons": ["", "", ""],
         "on-scroll-up": "brightnessctl set 1%+",
         "on-scroll-down": "brightnessctl set 1%-",
-        "min-length": 6
+        "min-length": 6,
     },
 
     "battery": {
         "states": {
             "good": 95,
             "warning": 30,
-            "critical": 20
+            "critical": 20,
         },
         "format": "{icon} {capacity}%",
         "format-charging": "  {capacity}%",
         "format-plugged": "  {capacity}%",
         "format-alt": "{time} {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", "", "", ""]
+        "format-icons": ["", "", "", "", "", "", "", "", "", "", ""],
     },
 	"mpris": {
 		"format": "DEFAULT: {player_icon} {dynamic}",
 		"format-paused": "DEFAULT: {status_icon} <i>{dynamic}</i>",
 		"player-icons": {
 			"default": "▶",
-			"mpv": "🎵"
+			"mpv": "🎵",
 		},
 		"status-icons": {
-			"paused": "⏸"
+			"paused": "⏸",
 		},
 		// "ignored-players": ["firefox"]
 	},
@@ -170,8 +169,8 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", " "]
-        }
+            "default": ["", "", " "],
+        },
     },
 
     "pulseaudio#microphone": {
@@ -182,14 +181,14 @@
         "on-click-right": "pavucontrol",
         "on-scroll-up": "pamixer --default-source -i 5",
         "on-scroll-down": "pamixer --default-source -d 5",
-        "scroll-step": 5
+        "scroll-step": 5,
     },
     
     "temperature": {
         "thermal-zone": 0,
         "format": " {temperatureC}°C",
         "critical-threshold": 80,
-        "format-critical": " {temperatureC}°C"
+        "format-critical": " {temperatureC}°C",
     },
 
     "network": {
@@ -200,7 +199,7 @@
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}:{essid} {ipaddr}/{cidr}",
-        "interval": 2
+        "interval": 2,
     },
 
     "bluetooth": {
@@ -209,6 +208,6 @@
 	    "format-connected": " {num_connections}",
 	    "tooltip-format": "{device_alias}",
 	    "tooltip-format-connected": " {device_enumerate}",
-	    "tooltip-format-enumerate-connected": "{device_alias}"
+	    "tooltip-format-enumerate-connected": "{device_alias}",
     }
 }
