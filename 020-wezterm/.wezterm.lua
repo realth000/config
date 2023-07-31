@@ -4,6 +4,9 @@ local act = wezterm.action
 
 -- customize color scheme
 local custom_alabaster = wezterm.color.get_builtin_schemes()['Alabaster']
+local catppuccin_mocha = wezterm.color.get_builtin_schemes()['Catppuccin Mocha']
+local hardhacker = wezterm.color.get_builtin_schemes()['hardhacker']
+
 -- customize oh-my-zsh suggestions plugin suggest text color to optimize ctrl + F.
 custom_alabaster.brights[1] = "#595f5f"
 -- color_scheme = "midnight-in-mojave", -- ctrl + f
@@ -207,6 +210,8 @@ config.window_padding = {
 config.color_schemes = {
   ['custom_alabaster'] = custom_alabaster,
   ['custom_catppuccin_mocha'] = custom_catppuccin_mocha,
+  ['catppuccin_mocha'] = catppuccin_mocha,
+  ['hardhacker'] = hardhacker,
 }
 config.color_scheme = 'custom_alabaster'
 config.colors = {
@@ -369,13 +374,14 @@ config.font = wezterm.font_with_fallback {
   {
     -- family = 'FiraCode NFM',
     -- family = 'JetBrainsMono NFM',
+    -- family = 'Iosevka0828 Nerd Font Mono Extended',
     family = 'Iosevka1204 Nerd Font Mono',
     -- family = 'CaskaydiaCove Nerd Font Mono',
     -- family = 'Hack Nerd Font Mono',
     -- family = 'IBM Plex Mono',
     -- weight = 'Medium',
     -- weight = 'Bold',
-    -- weight = 'DemiBold',
+    weight = 'DemiBold',
     -- italic = true,
     harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
   },
