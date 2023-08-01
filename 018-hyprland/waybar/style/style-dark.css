@@ -1,8 +1,7 @@
 * {
     border: none;
     border-radius: 0;
-    /* font-family: "JetBrainsMono Nerd Font"; */
-    font-family: "Iosevka1204Extended NF";
+    font-family: "JetBrainsMono Nerd Font";
     font-weight: bold;
     font-size: 16px;
     min-height: 0;
@@ -71,6 +70,7 @@ tooltip label{
 #bluetooth,
 #tray,
 #temperature,
+#mpris,
 #workspaces,
 #pulseaudio.speaker,
 #pulseaudio.microphone,
@@ -141,4 +141,9 @@ tooltip label{
 #battery {
     color: #a6e3a1;
     border-left: 0px;
+}
+
+#mpris {
+	font-weight: 600;
+	font-size: 16px;
 }

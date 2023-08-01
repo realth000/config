@@ -8,7 +8,7 @@
     "height": 50,
     "modules-left": [ "clock", "temperature", "cpu", "memory", "disk", "network" ],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["hyprland/workspaces", "custom/launch_wofi", "pulseaudio#speaker", "pulseaudio#microphone", "custom/updates", "custom/lock_screen", "custom/power_btn", "tray"],
+    "modules-right": ["hyprland/workspaces", "custom/launch_wofi", "mpris", "pulseaudio#speaker", "pulseaudio#microphone", "custom/lock_screen", "custom/power_btn", "tray"],
     "hyprland/window": {
         "format": "{}",
         "max-length": 80,
@@ -141,16 +141,20 @@
         "format-icons": ["", "", "", "", "", "", "", "", "", "", ""],
     },
 	"mpris": {
-		"format": "DEFAULT: {player_icon} {dynamic}",
-		"format-paused": "DEFAULT: {status_icon} <i>{dynamic}</i>",
+		// "format": "[{status_icon}] {artist} - {title} {position}/{length}",
+		// "format-paused": "[{status_icon}] {artist} - {title} {position}/{length}",
+		"format": "[{status_icon}] {title}",
+		"format-paused": "[{status_icon}] {title}",
+		"artist-len": 15,
+		"title-len": 25,
 		"player-icons": {
 			"default": "▶",
-			"mpv": "🎵",
 		},
 		"status-icons": {
+			"playing": "▶",
 			"paused": "⏸",
 		},
-		// "ignored-players": ["firefox"]
+        "interval" : 2,
 	},
 	
     "pulseaudio#speaker": {
