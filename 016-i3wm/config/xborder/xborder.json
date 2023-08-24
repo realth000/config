@@ -1,6 +1,6 @@
 {
-    "border-rgba": "0xff644447",
-    "border-radius": 0,
+    "border-rgba": "0x125575ff",
+    "border-radius": 13,
     "border-width": 2,
     "border-mode": "outside",
     "disable-version-warning": false,
