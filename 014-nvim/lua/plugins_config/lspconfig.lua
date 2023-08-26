@@ -119,7 +119,7 @@ require('lspconfig')['clangd'].setup{
 	  "clangd",
 	  "--clang-tidy",
 	  "--function-arg-placeholders=false", -- Disable clangd completion function parameters.
-	  "--fallback-style=LLVM", -- Set default format style to LLVM if no .clang-format found.
+	  "--fallback-style=Google", -- Set default format style to Google if no .clang-format found.
 	},
   on_attach = on_attach,
   flags = lsp_flags,
