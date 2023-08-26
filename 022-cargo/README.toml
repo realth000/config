@@ -1,0 +1,10 @@
+## Use mold as linker
+
+put the following config into "${project_root}/.cargo/config.toml"
+
+``` toml
+[target.x86_64-unknown-linux-gnu]
+linker = "/usr/bin/clang"
+rustflags = [ "-C", "link-arg=--ld-path=/usr/bin/mold" ]
+```
+
