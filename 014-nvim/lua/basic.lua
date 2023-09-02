@@ -5,8 +5,7 @@ vim.opt.incsearch = true
 vim.opt.ruler = true
 -- Always use system clipboard,
 -- see Clipboard integration in https://neovim.io/doc/user/provider.html
--- Need to install clipboard tool.
-vim.opt.clipboard = "unnamedplus"
+-- Need to install clipboard tool. vim.opt.clipboard = "unnamedplus"
 vim.opt.mouse = ''
 vim.opt.autoindent = true
 -- vim.opt.cursorline = true
@@ -41,3 +40,9 @@ vim.keymap.set('n', '<F3>', '<Cmd>NvimTreeToggle<CR>')
 
 -- Format and save command.
 vim.cmd [[command FW :lua vim.lsp.buf.format(); vim.cmd('w')]]
+
+-- Cursor style
+
+-- vim.opt.guicursor="n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
+vim.opt.guicursor="n-v-c-sm:block,ci-ve:ver25,r-cr-o:hor20,i:block-blinkwait100-blinkon400-blinkoff400"
+
