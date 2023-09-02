@@ -10,7 +10,7 @@ vim.opt.mouse = ''
 vim.opt.autoindent = true
 -- vim.opt.cursorline = true
 -- Ctrl + D/U scroll 10 lines each time
-vim.opt.scroll=10
+vim.opt.scroll = 10
 vim.opt.scrolloff = 5
 vim.opt.smarttab = true
 vim.opt.smartcase = true
@@ -46,5 +46,17 @@ vim.cmd [[command FW :lua vim.lsp.buf.format(); vim.cmd('w')]]
 -- Cursor style
 
 -- vim.opt.guicursor="n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
-vim.opt.guicursor="n-v-c-sm:block,ci-ve:ver25,r-cr-o:hor20,i:block-blinkwait100-blinkon400-blinkoff400"
+vim.opt.guicursor = "n-v-c-sm:block,ci-ve:ver25,r-cr-o:hor20,i:block-blinkwait100-blinkon400-blinkoff400"
 
+-- Restore scroll config after window resize
+--
+-- Events refer from:
+-- https://stackoverflow.com/a/76897741
+--
+-- Autocmd usage refer from:
+-- https://github.com/lewis6991/gitsigns.nvim/blob/d927caa075df63bf301d92f874efb72fd22fd3b4/lua/gitsigns.lua#L130
+vim.api.nvim_create_autocmd({ 'VimResized', 'WinEnter' }, {
+	callback = function()
+		vim.cmd [[set scroll=10]]
+	end,
+})
