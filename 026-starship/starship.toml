@@ -1,0 +1,94 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """\
+$os\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$time\
+$cmd_duration\
+\n$character"""
+
+[os]
+format = "[ $symbol ](bg:#282c34 fg:#3a86ff)[](bg:#242424 fg:#282c34)"
+disabled = false
+
+# Symbols from https://github.com/JanDeDobbeleer/oh-my-posh/blob/669521c8f7a30c107cce506ab64894abd3be00bc/src/segments/os.go#L30C31-L30C31
+[os.symbols]
+#alma = "\uF31D"
+#almalinux9 = "\uF31D"
+Alpine = "\uF300"
+#aosc = "\uF301"
+Arch = "\uF303"
+CentOS = "\uF304"
+#coreos = "\uF305"
+Debian = "\uF306"
+#devuan = "\uF307"
+#raspbian = "\uF315"
+#elementary = "\uF309"
+Fedora = "\uF30a"
+Gentoo = "\uF30d"
+#mageia = "\uF310"
+Manjaro = "\uF312"
+Mint = "\uF30e"
+NixOS = "\uF313"
+openSUSE = "\uF314"
+#opensuse-tumbleweed = "\uF314"
+Redhat = "\uF316"
+#rocky = "\uF32B"
+#sabayon = "\uF317"
+#slackware = "\uF319"
+Ubuntu = "\uF31b"
+Android = "\uf17b"
+Windows = "\uE62a"
+#darwin = "\uF179"
+Macos = "\uF179"
+Linux = "\uF17c"
+
+[directory]
+format = "[ $path](bg:#242424 fg:#33dd2d)[](bg:#242424 fg:#242424)"
+
+[git_branch]
+symbol = ""
+format = '[ $symbol $branch ](bg:#242424 fg:#3a86ff)'
+
+[git_commit]
+only_detached = true
+commit_hash_length = 7
+format = "[ $hash ](bg:#242424 fg:#3a86ff)"
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+
+[git_status]
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕${count}"
+up_to_date = ""
+untracked = "?${count}"
+stashed = "\\$${count}"
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "-${count}"
+typechanged = ""
+style = "red bold"
+format = '[$all_status$ahead_behind ](bg:#242424 fg:#3a86ff)'
+
+[time]
+disabled = false
+format = "[ $time ](bg:#242424 fg:#ffbb00)[](#242424)"
+
+[cmd_duration]
+min_time = 1000
+show_milliseconds = true
+format = "[](bg:#8800dd fg:#242424)[  $duration ](bg:#8800dd fg:#ffffff)[](bg:#242424 fg:#8800dd)"
+
+[character] # 此模块名称为 'character'
+success_symbol = '[✿](bold #3a86ff)'
+error_symbol = '[✿](bold #e01849)'
+
+[package]
+disabled = true
