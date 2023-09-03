@@ -139,4 +139,10 @@ return require('packer').startup(function()
 		'stevearc/aerial.nvim',
 	}
 	require('plugins_config.aerial')
+
+	-- Copilot
+	use {
+		"zbirenbaum/copilot.lua"
+	}
+	require("plugins_config.copilot")
 end)
