@@ -50,6 +50,13 @@ end)
 
 local config = {}
 
+-- Windows with MSYS2
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+	msys2_work_dir = 'd://Program/msys64/'
+	config.default_prog = { 'D:/Program/msys64/msys2_shell.cmd', '-defterm', '-where', msys2_work_dir, '-no-start',
+		'-msys' }
+end
+
 config.front_end = "OpenGL"
 -- Disable wayland to avoid cursor blink always stuck on wayland
 config.enable_wayland = false
