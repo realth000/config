@@ -6,6 +6,7 @@ vim.opt.ruler = true
 -- Always use system clipboard,
 -- see Clipboard integration in https://neovim.io/doc/user/provider.html
 -- Need to install clipboard tool. vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = "unnamedplus"
 vim.opt.mouse = ''
 vim.opt.autoindent = true
 -- vim.opt.cursorline = true
