@@ -51,13 +51,13 @@ Linux = "\uF17c"
 format = "[ $path](bg:#242424 fg:#33dd2d)[](bg:#242424 fg:#242424)"
 
 [git_branch]
-symbol = ""
+symbol = ""
 format = '[ $symbol $branch ](bg:#242424 fg:#3a86ff)'
 
 [git_commit]
-only_detached = true
+only_detached = false
 commit_hash_length = 7
-format = "[ $hash ](bg:#242424 fg:#3a86ff)"
+format = "[󰜘 $hash ](bg:#242424 fg:#3a86ff)"
 
 [git_state]
 format = '[\($state( $progress_current of $progress_total)\)]($style) '
