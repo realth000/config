@@ -181,9 +181,10 @@ require('lspconfig')['lua_ls'].setup {
 				},
 				-- Make the server aware of Neovim runtime files
 				workspace = {
-					library = { vim.env.VIMRUNTIME }
+					library = { vim.env.VIMRUNTIME },
 					-- or pull in all of 'runtimepath'. NOTE: this is a lot slower
 					-- library = vim.api.nvim_get_runtime_file("", true)
+					checkThirdParty = false,
 				}
 			})
 
