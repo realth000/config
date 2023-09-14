@@ -1,24 +1,31 @@
-"" Source your .vimrc
-"source ~/.vimrc
-
-"" -- Suggested options --
-" Show a few lines of context around the cursor. Note that this makes the
-" text scroll if you mouse-click near the start or end of the window.
-" Ctrl + D/U scroll 10 lines each time
-set scroll=10
 set scrolloff=5
-set nu
-set rnu
-set hls
-set incsearch
-set ruler
+set scroll=10
 
 " Do incremental searching.
 set incsearch
+set nu
+set rnu
+set ruler
+set hls
+set clipboard+=unnamed
+" IdealVim icon in status bar, bottom right conor.
+" enabled/gray/disabled
+set ideastatusicon=gray
+
+" Keymap compatible with neovim lsp-config
+" vim.diagnostic.open_float
+map <space>e <Action>(ShowErrorDescription)
+" vim.lsp.buf.rename
+map <space>rn <Action>(RenameElement)
+" <Cmd>CodeActionMenu<CR>
+map <space>ca <Action>(ShowIntentionActions)
+" vim.diagnostic.goto_prev
+map [d <Action>(GotoPreviousError)
+" vim.diagnostic.goto_next
+map ]d <Action>(GotoNextError)
 
 " Don't use Ex mode, use Q for formatting.
 map Q gq
-set clipboard+=unnamed
 
 
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
@@ -33,4 +40,3 @@ set clipboard+=unnamed
 
 
 " Find more examples here: https://jb.gg/share-ideavimrc
-" set clipboard+=ideaput
