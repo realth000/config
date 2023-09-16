@@ -23,6 +23,8 @@ map <space>ca <Action>(ShowIntentionActions)
 map [d <Action>(GotoPreviousError)
 " vim.diagnostic.goto_next
 map ]d <Action>(GotoNextError)
+" vim.keymap.set('n', '<A-i>', '<CMD>lua require("FTerm").toggle()<CR>')
+map <A-i> <Action>(ActivateTerminalToolWindow)
 
 " Don't use Ex mode, use Q for formatting.
 map Q gq
