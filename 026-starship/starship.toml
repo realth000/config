@@ -2,6 +2,7 @@
 
 format = """\
 $os\
+$hostname\
 $directory\
 $git_branch\
 $git_commit\
@@ -13,6 +14,11 @@ $cmd_duration\
 
 [os]
 format = "[ $symbol ](bg:#282c34 fg:#3a86ff)[](bg:#242424 fg:#282c34)"
+disabled = false
+
+[hostname]
+ssh_only = true
+ssh_symbol = "󱘖 "
 disabled = false
 
 # Symbols from https://github.com/JanDeDobbeleer/oh-my-posh/blob/669521c8f7a30c107cce506ab64894abd3be00bc/src/segments/os.go#L30C31-L30C31
