@@ -151,4 +151,10 @@ return require('packer').startup(function()
         "lukas-reineke/indent-blankline.nvim"
     }
     require('plugins_config.indent-blankline')
+
+    -- Rainbow brackts
+    use {
+        "HiPhish/rainbow-delimiters.nvim"
+    }
+    require('plugins_config.rainbow-delimiters')
 end)
