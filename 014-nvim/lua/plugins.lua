@@ -140,11 +140,11 @@ return require('packer').startup(function()
 	}
 	require('plugins_config.aerial')
 
-	-- Copilot
-	use {
-		"zbirenbaum/copilot.lua"
-	}
-	require("plugins_config.copilot")
+	-- -- Copilot
+	-- use {
+	-- 	"zbirenbaum/copilot.lua"
+	-- }
+	-- require("plugins_config.copilot")
 
     -- Blankline indent color
     use {
