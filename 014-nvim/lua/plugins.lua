@@ -145,4 +145,10 @@ return require('packer').startup(function()
 		"zbirenbaum/copilot.lua"
 	}
 	require("plugins_config.copilot")
+
+    -- Blankline indent color
+    use {
+        "lukas-reineke/indent-blankline.nvim"
+    }
+    require('plugins_config.indent-blankline')
 end)
