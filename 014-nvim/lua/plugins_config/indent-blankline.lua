@@ -7,11 +7,10 @@ vim.opt.termguicolors = true
 -- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
 -- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 
--- 2b3c2b 253a4b 303345 1f3735 483f25
 vim.cmd [[highlight IndentBlankline1 guifg=#483f25 gui=nocombine]]
 vim.cmd [[highlight IndentBlankline2 guifg=#2b3c2b gui=nocombine]]
 vim.cmd [[highlight IndentBlankline3 guifg=#253a4b gui=nocombine]]
-vim.cmd [[highlight IndentBlankline4 guifg=#303345 gui=nocombine]]
+vim.cmd [[highlight IndentBlankline4 guifg=#30435a gui=nocombine]]
 vim.cmd [[highlight IndentBlankline5 guifg=#1f3735 gui=nocombine]]
 
 
