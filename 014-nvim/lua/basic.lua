@@ -41,6 +41,8 @@ vim.keymap.set('n', '<F3>', '<Cmd>NvimTreeToggle<CR>')
 
 -- Format and save command.
 vim.cmd [[command FW :lua vim.lsp.buf.format(); vim.cmd('w')]]
+vim.cmd [[command SI :lua vim.cmd("IndentBlanklineEnable"); vim.cmd("set list")]]
+vim.cmd [[command NI :lua vim.cmd("IndentBlanklineDisable"); vim.cmd("set nolist")]]
 
 -- Cursor style
 
