@@ -1,4 +1,7 @@
-require 'FTerm'.setup({
+local status, plugin = pcall(require, 'FTerm')
+if (not status) then return end
+
+plugin.setup({
 	border     = 'double',
 	dimensions = {
 		height = 0.9,

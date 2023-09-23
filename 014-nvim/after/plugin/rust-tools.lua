@@ -1,3 +1,6 @@
+local status, plugin = pcall(require, 'rust-tools')
+if (not status) then return end
+
 -- The following on_attach comes from lspconfig.lua.
 -- Use this to ensure when pressing Shift + K, man command is not called (otherwise will stuck).
 -- Beside this config also gives compatibility to rust-tools with configs in lspconfig.
@@ -29,14 +32,14 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
 	vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 
-	local signs = { Error = "⨯", Warn = "⚠", Hint = "󰌶", Info = "󰌶" }
+	local signs = { Error = '⨯', Warn = '⚠', Hint = '󰌶', Info = '󰌶' }
 	for type, icon in pairs(signs) do
-		local hl = "DiagnosticSign" .. type
+		local hl = 'DiagnosticSign' .. type
 		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 	end
 end
 
-require('rust-tools').setup({
+plugin.setup({
 	tools = {
 		runnables = {
 			use_telescope = true,
@@ -45,8 +48,8 @@ require('rust-tools').setup({
 		-- inlay_hints = {
 		--   auto = true,
 		--   show_parameter_hints = false,
-		--   parameter_hints_prefix = "",
-		--   other_hints_prefix = "",
+		--   parameter_hints_prefix = '',
+		--   other_hints_prefix = '',
 		-- },
 
 		-- These apply to the default RustSetInlayHints command
@@ -63,12 +66,12 @@ require('rust-tools').setup({
 			show_parameter_hints = true,
 
 			-- prefix for parameter hints
-			-- default: "<-"
-			parameter_hints_prefix = "<- ",
+			-- default: '<-'
+			parameter_hints_prefix = '<- ',
 
 			-- prefix for all the other hints (type, chaining)
-			-- default: "=>"
-			other_hints_prefix = "=> ",
+			-- default: '=>'
+			other_hints_prefix = '=> ',
 
 			-- whether to align to the length of the longest line in the file
 			max_len_align = false,
@@ -83,7 +86,7 @@ require('rust-tools').setup({
 			right_align_padding = 7,
 
 			-- The color of the hints
-			highlight = "Comment",
+			highlight = 'Comment',
 		},
 
 		-- options same as lsp hover / vim.lsp.util.open_floating_preview()
@@ -91,14 +94,14 @@ require('rust-tools').setup({
 			-- the border that is used for the hover window
 			-- see vim.api.nvim_open_win()
 			border = {
-				{ "╭", "FloatBorder" },
-				{ "─", "FloatBorder" },
-				{ "╮", "FloatBorder" },
-				{ "│", "FloatBorder" },
-				{ "╯", "FloatBorder" },
-				{ "─", "FloatBorder" },
-				{ "╰", "FloatBorder" },
-				{ "│", "FloatBorder" },
+				{ '╭', 'FloatBorder' },
+				{ '─', 'FloatBorder' },
+				{ '╮', 'FloatBorder' },
+				{ '│', 'FloatBorder' },
+				{ '╯', 'FloatBorder' },
+				{ '─', 'FloatBorder' },
+				{ '╰', 'FloatBorder' },
+				{ '│', 'FloatBorder' },
 			},
 
 			-- Maximal width of the hover window. Nil means no max.
@@ -126,10 +129,10 @@ require('rust-tools').setup({
 		settings = {
 			-- to enable rust-analyzer settings visit:
 			-- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-			["rust-analyzer"] = {
+			['rust-analyzer'] = {
 				-- enable clippy on save
 				checkOnSave = {
-					command = "clippy",
+					command = 'clippy',
 				},
 				completion = {
 					addCallParenthesis = true,
@@ -137,9 +140,9 @@ require('rust-tools').setup({
 				},
 				imports = {
 					granularity = {
-						group = "module",
+						group = 'module',
 					},
-					prefix = "self",
+					prefix = 'self',
 				},
 				cargo = {
 					buildScripts = {

@@ -1,3 +1,6 @@
+local status, plugin = pcall(require, 'indent_blankline')
+if (not status) then return end
+
 vim.opt.termguicolors = true
 
 -- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
@@ -18,17 +21,17 @@ vim.cmd [[highlight IndentBlankline5 guifg=#1f3735 gui=nocombine]]
 -- vim.cmd [[highlight IndentBlanklineBackgroundIndent2 guibg=#1a1a1a gui=nocombine]]
 
 vim.opt.list = true
-vim.opt.listchars:append "space:⋅"
--- vim.opt.listchars:append "eol:↴"
+vim.opt.listchars:append 'space:⋅'
+-- vim.opt.listchars:append 'eol:↴'
 
-require("indent_blankline").setup {
-    show_end_of_line = true,
-    space_char_blankline = " ",
-    char_highlight_list = {
-        "IndentBlankline1",
-        "IndentBlankline2",
-        "IndentBlankline3",
-        "IndentBlankline4",
-        "IndentBlankline5",
-    },
+plugin.setup {
+	show_end_of_line = true,
+	space_char_blankline = ' ',
+	char_highlight_list = {
+		'IndentBlankline1',
+		'IndentBlankline2',
+		'IndentBlankline3',
+		'IndentBlankline4',
+		'IndentBlankline5',
+	},
 }

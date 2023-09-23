@@ -1,5 +1,8 @@
-local cmp = require 'cmp'
-local lspkind = require('lspkind')
+local cmp_status, cmp = pcall(require, 'cmp')
+if (not cmp_status) then return end
+
+local lspkind_status, lspkind = pcall(require, 'lspkind')
+if (not lspkind_status) then return end
 
 -- Following code originaly from nvim-cmp/lua/cmp/config/window.lua
 -- Floating window (triggered by lsp shortcuts) color
@@ -7,7 +10,7 @@ local lspkind = require('lspkind')
 -- Set border to rounded to keep border style same with lsp completion window and telescope windows.
 -- Set FloatBorder color to Comment to keep same color with lsp completion window color.
 local window_opt = {
-	border = "rounded", -- single, rounded
+	border = 'rounded', -- single, rounded
 	-- winhighlight = opts.winhighlight or 'Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None',
 	winhighlight = 'Normal:Normal,FloatBorder:Comment,CursorLine:Visual,Search:None',
 	scrollbar = false,
@@ -18,7 +21,7 @@ cmp.setup({
 	formatting = {
 		format = lspkind.cmp_format({
 			mode = 'symbol_text', -- show only symbol annotations, options: 'text', 'text_symbol', 'symbol_text', 'symbol'
-			maxwidth = 50,   -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+			maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
 			ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 
 			-- The function below will be called before any actual modifications from lspkind
@@ -31,10 +34,10 @@ cmp.setup({
 	snippet = {
 		-- REQUIRED - you must specify a snippet engine
 		expand = function(args)
-			vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+			vim.fn['vsnip#anonymous'](args.body) -- For `vsnip` users.
 			-- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
 			-- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-			-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+			-- vim.fn['UltiSnips#Anon'](args.body) -- For `ultisnips` users.
 		end,
 	},
 	window = {

@@ -1,3 +1,11 @@
+local lsp_status, plugin = pcall(require, 'lsp-config')
+if (not lsp_status) then return end
+
+local cmp_status, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+if (not cmp_status) then return end
+
+local capabilities = cmp_nvim_lsp.default_capabilities()
+
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
@@ -32,9 +40,9 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
 	vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 
-	local signs = { Error = "⨯", Warn = "⚠", Hint = "󰌶", Info = "󰌶" }
+	local signs = { Error = '⨯', Warn = '⚠', Hint = '󰌶', Info = '󰌶' }
 	for type, icon in pairs(signs) do
-		local hl = "DiagnosticSign" .. type
+		local hl = 'DiagnosticSign' .. type
 		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 	end
 end
@@ -45,23 +53,23 @@ local lsp_flags = {
 }
 
 local float_window_border = {
-	{ "╭", "FloatBorder" },
-	{ "─", "FloatBorder" },
-	{ "╮", "FloatBorder" },
-	{ "│", "FloatBorder" },
-	{ "╯", "FloatBorder" },
-	{ "─", "FloatBorder" },
-	{ "╰", "FloatBorder" },
-	{ "│", "FloatBorder" },
+	{ '╭', 'FloatBorder' },
+	{ '─', 'FloatBorder' },
+	{ '╮', 'FloatBorder' },
+	{ '│', 'FloatBorder' },
+	{ '╯', 'FloatBorder' },
+	{ '─', 'FloatBorder' },
+	{ '╰', 'FloatBorder' },
+	{ '│', 'FloatBorder' },
 }
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
 	vim.lsp.handlers.hover, {
 		border = float_window_border
 	}
 )
 
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
 	vim.lsp.handlers.signature_help, {
 		border = float_window_border
 	}
@@ -75,32 +83,31 @@ vim.diagnostic.config {
 
 ------------------------------------------------
 -- Set up lsp servers.
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-require('lspconfig')['pyright'].setup {
+plugin['pyright'].setup {
 	on_attach = on_attach,
 	flags = lsp_flags,
 	capabilities = capabilities,
 }
-require('lspconfig')['tsserver'].setup {
+plugin['tsserver'].setup {
 	on_attach = on_attach,
 	flags = lsp_flags,
 }
-require('lspconfig')['rust_analyzer'].setup {
+plugin['rust_analyzer'].setup {
 	on_attach = on_attach,
 	flags = lsp_flags,
 	-- Server-specific settings...
 	settings = {
-		["rust-analyzer"] = {
+		['rust-analyzer'] = {
 			completion = {
 				addCallParenthesis = true,
 				addCallArgumentSnippets = false,
 			},
 			imports = {
 				granularity = {
-					group = "module",
+					group = 'module',
 				},
-				prefix = "self",
+				prefix = 'self',
 			},
 			cargo = {
 				buildScripts = {
@@ -114,95 +121,76 @@ require('lspconfig')['rust_analyzer'].setup {
 	},
 	capabilities = capabilities,
 }
-require('lspconfig')['clangd'].setup {
+plugin['clangd'].setup {
 	cmd = {
-		"clangd",
-		"--clang-tidy",
-		"--function-arg-placeholders=false", -- Disable clangd completion function parameters.
-		"--fallback-style=Google",     -- Set default format style to Google if no .clang-format found.
+		'clangd',
+		'--clang-tidy',
+		'--function-arg-placeholders=false', -- Disable clangd completion function parameters.
+		'--fallback-style=Google',     -- Set default format style to Google if no .clang-format found.
 	},
 	on_attach = on_attach,
 	flags = lsp_flags,
 	filetypes = {
-		"c",
-		"cpp",
+		'c',
+		'cpp',
 	},
 	single_file_support = true,
 	capabilities = capabilities,
 }
-require('lspconfig')['gopls'].setup {
+plugin['gopls'].setup {
 	on_attach = on_attach,
 	flags = lsp_flags,
 	single_file_support = true,
 	capabilities = capabilities,
 }
-require('lspconfig')['cmake'].setup {
+plugin['cmake'].setup {
 	on_attach = on_attach,
 	single_file_support = true,
 	capabilities = capabilities,
 }
--- require('lspconfig')['dartls'].setup{
+-- plugin['dartls'].setup{
 -- 	on_attach = on_attach,
 --     flags = lsp_flags,
 -- 	single_file_support = true,
 -- capabilities = capabilities,
 -- }
-require('lspconfig')['marksman'].setup {
+plugin['marksman'].setup {
 	on_attach = on_attach,
 	single_file_support = true,
 	capabilities = capabilities,
 }
-require('lspconfig')['bashls'].setup {
+plugin['bashls'].setup {
 	on_attach = on_attach,
 	single_file_support = true,
 	capabilities = capabilities,
 }
-require('lspconfig')['vala_ls'].setup {
+plugin['vala_ls'].setup {
 	on_attach = on_attach,
 	single_file_support = true,
 	capabilities = capabilities,
 }
-require('lspconfig')['zls'].setup {
+plugin['zls'].setup {
 	on_attach = on_attach,
 	single_file_support = true,
 	capabilities = capabilities,
 }
-require('lspconfig')['lua_ls'].setup {
+plugin['lua_ls'].setup {
 	on_attach = on_attach,
 	single_file_support = true,
 	capabilities = capabilities,
-	on_init = function(client)
-		local path = client.workspace_folders[1].name
-		if not vim.loop.fs_stat(path .. '/.luarc.json') and not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
-			client.config.settings = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-				runtime = {
-					-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-					version = 'LuaJIT'
-				},
-				-- Make the server aware of Neovim runtime files
-				workspace = {
-					library = { vim.env.VIMRUNTIME },
-					-- or pull in all of 'runtimepath'. NOTE: this is a lot slower
-					-- library = vim.api.nvim_get_runtime_file("", true)
-					checkThirdParty = false,
-				}
-			})
-
-			client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
-		end
-		return true
-	end,
 	settings = {
 		Lua = {
 			diagnostics = {
 				-- Get the language server to recognize the `vim` global
 				globals = {
 					'vim',
+					'require',
 				},
 			},
 			workspace = {
 				-- Make the server aware of Neovim runtime files
-				library = vim.api.nvim_get_runtime_file("", true),
+				library = vim.api.nvim_get_runtime_file('', true),
+				checkThirdParty = false,
 			},
 			-- Do not send telemetry data containing a randomized but unique identifier
 			telemetry = {

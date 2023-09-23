@@ -1,25 +1,28 @@
-require("catppuccin").setup({
-	flavour = "mocha", -- latte, frappe, macchiato, mocha
+local status, plugin = pcall(require, 'catppuccin')
+if (not status) then return end
+
+plugin.setup({
+	flavour = 'mocha', -- latte, frappe, macchiato, mocha
 	background = {  -- :h background
-		light = "latte",
-		dark = "mocha",
+		light = 'latte',
+		dark = 'mocha',
 	},
 	transparent_background = false,
 	show_end_of_buffer = false, -- show the '~' characters after the end of buffers
 	term_colors = false,
 	dim_inactive = {
 		enabled = true,
-		shade = "dark",
+		shade = 'dark',
 		percentage = 0.15,
 	},
 	no_italic = false, -- Force no italic
 	no_bold = false,   -- Force no bold
 	no_underline = false, -- Force no underline
 	styles = {
-		comments = { "italic" },
-		conditionals = { "italic" },
+		comments = { 'italic' },
+		conditionals = { 'italic' },
 		loops = {},
-		functions = { "bold" },
+		functions = { 'bold' },
 		keywords = {},
 		strings = {},
 		variables = {},

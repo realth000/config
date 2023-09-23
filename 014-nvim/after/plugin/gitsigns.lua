@@ -1,4 +1,7 @@
-require('gitsigns').setup {
+local status, plugin = pcall(require, 'git-signs')
+if (not status) then return end
+
+plugin.setup {
 	signs                        = {
 		add          = { text = '┃' },
 		change       = { text = '┃' },

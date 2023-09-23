@@ -1,4 +1,7 @@
-require('lualine').setup {
+local status, plugin = pcall(require, 'lualine')
+if (not status) then return end
+
+plugin.setup {
 	options = {
 		icons_enabled = true,
 		-- See https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
