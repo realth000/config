@@ -1,4 +1,4 @@
-local lsp_status, plugin = pcall(require, 'lsp-config')
+local lsp_status, plugin = pcall(require, 'lspconfig')
 if (not lsp_status) then return end
 
 local cmp_status, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
@@ -148,12 +148,12 @@ plugin['cmake'].setup {
 	single_file_support = true,
 	capabilities = capabilities,
 }
--- plugin['dartls'].setup{
--- 	on_attach = on_attach,
---     flags = lsp_flags,
--- 	single_file_support = true,
--- capabilities = capabilities,
--- }
+plugin['dartls'].setup{
+	on_attach = on_attach,
+	flags = lsp_flags,
+	single_file_support = true,
+	capabilities = capabilities,
+}
 plugin['marksman'].setup {
 	on_attach = on_attach,
 	single_file_support = true,
