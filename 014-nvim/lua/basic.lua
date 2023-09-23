@@ -18,8 +18,7 @@ vim.opt.smartcase = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
--- vim.opt.list = true
--- Gruvbox colorscheme need this.
+vim.opt.list = true
 vim.o.background = 'dark'
 
 -- Neovide settings.

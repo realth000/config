@@ -21,3 +21,7 @@ vim.cmd("colorscheme duskfox")
 -- vim.cmd('colorscheme catppuccin-mocha')
 -- vim.cmd('colorscheme hardhacker')
 -- vim.cmd('colorscheme hardhacker-darker')
+
+-- Set floating window background color to transparent after loading colorscheme
+vim.api.nvim_set_hl(0, 'NormalFloat', {bg='None'})
+
