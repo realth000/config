@@ -77,17 +77,6 @@ return require('packer').startup(function()
 		"onsails/lspkind.nvim"
 	}
 
-	-- Disable `cmd` to force load, or should use popui.nvim instead.
-	use {
-		"weilbith/nvim-code-action-menu",
-		--cmd = 'CodeActionMenu',
-	}
-
-	-- Use popui.nvim to enable floating window for all actions in lsp except CodeAction.
-	use {
-		"hood/popui.nvim"
-	}
-
 	-- Auto complete brackts
 	use {
 		'windwp/nvim-autopairs',
@@ -124,14 +113,19 @@ return require('packer').startup(function()
 	-- 	"zbirenbaum/copilot.lua"
 	-- }
 
-    -- Blankline indent color
-    use {
-        "lukas-reineke/indent-blankline.nvim",
-        commit = "9637670896b68805430e2f72cf5d16be5b97a22a",
-    }
+	-- Blankline indent color
+	use {
+		"lukas-reineke/indent-blankline.nvim",
+		commit = "9637670896b68805430e2f72cf5d16be5b97a22a",
+	}
 
-    -- Rainbow brackts
-    use {
-        "HiPhish/rainbow-delimiters.nvim"
-    }
+	-- Rainbow brackts
+	use {
+		"HiPhish/rainbow-delimiters.nvim"
+	}
+
+	use {
+		"folke/noice.nvim",
+		requires = { 'MunifTanjim/nui.nvim', 'rcarriga/nvim-notify' }
+	}
 end)
