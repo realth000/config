@@ -4,10 +4,10 @@ if (not status) then return end
 
 plugin.setup({
 	cmdline = {
-		enabled = true,   -- enables the Noice cmdline UI
+		enabled = true, -- enables the Noice cmdline UI
 		-- view = 'cmdline_popup', -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
 		view = 'cmdline',
-		opts = {},        -- global options for the cmdline. See section on views
+		opts = {}, -- global options for the cmdline. See section on views
 		---@type table<string, CmdlineFormat>
 		format = {
 			-- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
@@ -189,7 +189,7 @@ plugin.setup({
 		command_palette = true, -- position the cmdline and popupmenu together
 		long_message_to_split = true, -- long messages will be sent to a split
 		inc_rename = false,     -- enables an input dialog for inc-rename.nvim
-		lsp_doc_border = false,  -- add a border to hover docs and signature help
+		lsp_doc_border = false, -- add a border to hover docs and signature help
 	},
 	throttle = 1000 / 30,       -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
 	---@type NoiceConfigViews
@@ -210,4 +210,15 @@ plugin.setup({
 	status = {}, --- @see section on statusline components
 	---@type NoiceFormatOptions
 	format = {}, --- @see section on formatting
+})
+
+-- Setup notify
+
+local notify_status, notify = pcall(require, 'notify')
+if (not notify_status) then return end
+
+notify.setup({
+	render = "compact",
+	timeout = 2000,
+	stages = "static",
 })
