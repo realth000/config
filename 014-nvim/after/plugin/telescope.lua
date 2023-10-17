@@ -45,9 +45,10 @@ plugin.setup {
 	},
 	pickers = {
 		-- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#pickers
-		-- find_files = {
-		-- 	find_command = { 'rg',  '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case' },
-		-- },
+		find_files = {
+			-- 	find_command = { 'rg',  '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case' },
+			follow = true,
+		},
 	},
 	extensions = {
 		-- Your extension configuration goes here:
