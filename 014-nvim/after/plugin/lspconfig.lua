@@ -164,6 +164,11 @@ plugin['bashls'].setup {
 	single_file_support = true,
 	capabilities = capabilities,
 }
+plugin['hls'].setup {
+	on_attach = on_attach,
+	single_file_support = true,
+	capabilities = capabilities,
+}
 plugin['vala_ls'].setup {
 	on_attach = on_attach,
 	single_file_support = true,
