@@ -6,7 +6,7 @@
     // "passthrough": false,
     // "gtk-layer-shell": true,
     "height": 50,
-    "modules-left": [ "clock", "temperature", "cpu", "memory", "disk", "battery", "network" ],
+     "modules-left": [ "clock", "temperature", "cpu", "memory", "disk", "battery", "network" ],
     "modules-center": ["sway/window"],
     "modules-right": ["sway/workspaces", "custom/launch_wofi", "pulseaudio#speaker", "pulseaudio#microphone", "custom/lock_screen", "custom/power_btn", "tray"],
     "sway/window": {
@@ -105,7 +105,7 @@
     "clock": {
         "format": "{:  %m-%d %a  %H:%M:%S}",
 		"locale":"C",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        // "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
 		"interval": 1,
     },
 
@@ -186,7 +186,7 @@
     },
 
     "network": {
-        "interface": "en*", // (Optional) To force the use of this interface
+        "interface": "wlp*", // (Optional) To force the use of this interface
         "format-wifi": "  {signalStrength}%",
         "format-ethernet": "  {bandwidthDownBytes} {bandwidthUpBytes} ",
         "tooltip-format": "{essid} - {ifname} via {gwaddr} ",
