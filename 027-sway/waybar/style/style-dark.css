@@ -1,0 +1,149 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font";
+    font-weight: bold;
+    font-size: 16px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(21, 18, 27, 0);
+    color: #cdd6f4;
+}
+
+tooltip {
+    background: #1e1e2e;
+    opacity: 0.8;
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #11111b;
+}
+
+tooltip label{
+    color: #cdd6f4;
+}
+
+#workspaces button {
+    padding: 5px;
+    color: #a6adc8;
+    margin-right: 5px;
+}
+
+#workspaces button.active {
+    color: #6699ff;
+}
+
+#workspaces button.focused {
+    color: #a6adc8;
+    background: #eba0ac;
+    border-radius: 10px;
+}
+
+#workspaces button.urgent {
+    color: #11111b;
+    background: #a6e3a1;
+    border-radius: 10px;
+}
+
+#workspaces button:hover {
+    background: #11111b;
+    color: #cdd6f4;
+    border-radius: 10px;
+}
+
+#custom-launch_wofi,
+#custom-lock_screen,
+#custom-light_dark,
+#custom-power_btn,
+#custom-power_profile,
+#custom-weather,
+#window,
+#cpu,
+#disk,
+#custom-updates,
+#memory,
+#clock,
+#network,
+#battery,
+#bluetooth,
+#tray,
+#temperature,
+#mpris,
+#workspaces,
+#pulseaudio.speaker,
+#pulseaudio.microphone,
+#backlight {
+    background: #1e1e2e;
+    opacity: 0.8;
+    padding: 0px 10px;
+    margin: 3px 0px;
+    margin-top: 10px;
+    border: 0px;
+}
+
+/* Left side border*/
+#clock, #backlight, #custom-launch_wofi {
+    border-radius: 10px 0px 0px 10px;
+}
+
+/* Right side border*/
+#custom-power_btn, #network, #custom-light_dark, #custom-power_btn, #battery {
+    border-radius: 0px 10px 10px 0px;
+}
+
+/* Left and right side border*/
+#workspaces, #tray {
+	border-radius: 10px 10px 10px 10px;
+}
+
+#network, #workspaces {
+	margin-right: 10px;
+}
+
+#temperature.critical {
+    color: #e92d4d;
+}
+
+#custom-power_profile {
+    color: #a6e3a1;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#window {
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#tray {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#clock {
+    margin-left: 10px;
+}
+
+/*
+#custom-launch_wofi {
+    color: #89b4fa;
+}
+ */
+
+#pulseaudio.microphone {
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#battery {
+    color: #a6e3a1;
+    border-left: 0px;
+}
+
+#mpris {
+	font-weight: 600;
+	font-size: 16px;
+}
