@@ -68,12 +68,12 @@ return require('lazy').setup({
 	{ 'windwp/nvim-autopairs', },
 
 	-- telescope
-	{ 'nvim-telescope/telescope.nvim', },
-
-	-- Required by telescope
 	{
-		'nvim-lua/plenary.nvim',
-		lazy = true,
+		'nvim-telescope/telescope.nvim',
+		{
+			'nvim-lua/plenary.nvim',
+			lazy = true,
+		},
 	},
 
 	-- GitSigns
