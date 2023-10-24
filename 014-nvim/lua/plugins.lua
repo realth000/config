@@ -100,6 +100,5 @@ return require('lazy').setup({
 	{
 		"folke/noice.nvim",
 		{ 'MunifTanjim/nui.nvim', lazy = true, },
-		{ 'rcarriga/nvim-notify', lazy = true, },
 	},
 })

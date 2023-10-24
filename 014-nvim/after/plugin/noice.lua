@@ -217,8 +217,3 @@ plugin.setup({
 local notify_status, notify = pcall(require, 'notify')
 if (not notify_status) then return end
 
-notify.setup({
-	render = "compact",
-	timeout = 2000,
-	stages = "static",
-})
