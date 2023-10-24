@@ -1,37 +1,40 @@
-local status, plugin = pcall(require, 'indent_blankline')
+local status, plugin = pcall(require, 'ibl')
 if (not status) then return end
 
 vim.opt.termguicolors = true
 
--- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+local highlight = {
+	'Rainbow1',
+	'Rainbow2',
+	'Rainbow3',
+	'Rainbow4',
+	'Rainbow5',
+}
 
-vim.cmd [[highlight IndentBlankline1 guifg=#483f25 gui=nocombine]]
-vim.cmd [[highlight IndentBlankline2 guifg=#2b3c2b gui=nocombine]]
-vim.cmd [[highlight IndentBlankline3 guifg=#253a4b gui=nocombine]]
-vim.cmd [[highlight IndentBlankline4 guifg=#30435a gui=nocombine]]
-vim.cmd [[highlight IndentBlankline5 guifg=#1f3735 gui=nocombine]]
-
-
--- vim.cmd [[highlight IndentBlanklineBackgroundIndent1 guibg=#1f1f1f gui=nocombine]]
--- vim.cmd [[highlight IndentBlanklineBackgroundIndent2 guibg=#1a1a1a gui=nocombine]]
+local hooks_status, hooks = pcall(require, 'ibl.hooks')
+if (not hooks_status) then return end
+-- create the highlight groups in the highlight setup hook, so they are reset
+-- every time the colorscheme changes
+hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+	vim.api.nvim_set_hl(0, 'Rainbow1', { fg = '#483f25' })
+	vim.api.nvim_set_hl(0, 'Rainbow2', { fg = '#2b3c2b' })
+	vim.api.nvim_set_hl(0, 'Rainbow3', { fg = '#253a4b' })
+	vim.api.nvim_set_hl(0, 'Rainbow4', { fg = '#30435a' })
+	vim.api.nvim_set_hl(0, 'Rainbow5', { fg = '#1f3735' })
+end)
 
 vim.opt.list = true
 vim.opt.listchars:append 'space:⋅'
--- vim.opt.listchars:append 'eol:↴'
+vim.g.rainbow_delimiters = { highlight = highlight }
 
 plugin.setup {
-	show_end_of_line = true,
-	space_char_blankline = ' ',
-	char_highlight_list = {
-		'IndentBlankline1',
-		'IndentBlankline2',
-		'IndentBlankline3',
-		'IndentBlankline4',
-		'IndentBlankline5',
+	indent = {
+		highlight = highlight,
+		char = '▏',
+	},
+	scope = {
+		enabled = false,
 	},
 }
+
+hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
