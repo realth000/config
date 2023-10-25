@@ -33,49 +33,13 @@ if vim.g.neovide then
 	vim.g.neovide_remember_window_size = false
 end
 
-
--- ci|
-function my_function()
-	local cursor_row = vim.api.nvim_win_get_cursor(0)[1]
-	local cursor_col = vim.api.nvim_win_get_cursor(0)[2]
-	local start_pos = math.max(0, cursor_row - 1)
-	local end_pos = math.max(0, cursor_row)
-	local buffer_rows = vim.api.nvim_buf_get_lines(0, start_pos, end_pos, false)
-	local ret = ''
-	local delete_start_pos
-	local delete_end_pos
-
-	local buffer_text = ''
-	for _, v in ipairs(buffer_rows) do
-		buffer_text = buffer_text .. v
-	end
-
-	local find_pos = 1
-	while true do
-		local x, y = string.find(buffer_text, '|', find_pos, true)
-		if x == nil then break end
-		if x <= cursor_col then
-			delete_start_pos = y
-		end
-		if x > cursor_col and delete_end_pos == nil then
-			delete_end_pos = y
-		end
-
-		if delete_start_pos ~= nil and delete_end_pos ~= nil then
-			ret = buffer_text:sub(1, delete_start_pos) .. buffer_text:sub(delete_end_pos)
-			vim.api.nvim_buf_set_lines(0, cursor_row, cursor_row, true, {ret})
-			vim.cmd('delete')
-			vim.cmd('startinsert')
-			vim.api.nvim_win_set_cursor(0, {cursor_row, cursor_col - delete_start_pos + 1})
-			print(ret)
-			break
-		end
-		find_pos = y + 1
-	end
-end
-
 vim.keymap.set('n', '<F3>', '<Cmd>NvimTreeToggle<CR>')
-vim.keymap.set('n', 'ci|', my_function)
+
+-- Content change keymap for other characters.
+vim.keymap.set('n', 'di|', function() DeleteInsert('|') end)
+vim.keymap.set('n', 'da|', function() DeleteAppend('|') end)
+vim.keymap.set('n', 'ci|', function() ChangeInsert('|') end)
+vim.keymap.set('n', 'ca|', function() ChangeAppend('|') end)
 
 -- Auto formatting when save file.
 -- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
