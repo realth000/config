@@ -49,6 +49,9 @@ plugin.setup {
 			-- 	find_command = { 'rg',  '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case' },
 			follow = true,
 		},
+		colorscheme = {
+			enable_preview = true,
+		},
 	},
 	extensions = {
 		-- Your extension configuration goes here:
