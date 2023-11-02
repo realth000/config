@@ -31,6 +31,7 @@ return require('lazy').setup({
 			'hardhackerlabs/theme-vim',
 			name = 'hardhacker',
 		},
+		"loctvl842/monokai-pro.nvim",
 	},
 
 	-- nvim-tree

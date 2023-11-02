@@ -24,6 +24,13 @@ vim.api.nvim_set_hl(0, 'NormalFloat', {bg='None'})
 -- catppuccin-mocha
 -- hardhacker
 -- hardhacker-darker
+-- monokai-pro
+-- monokai-pro-classic
+-- monokai-pro-default
+-- monokai-pro-machine
+-- monokai-pro-octagon
+-- monokai-pro-ristretto
+-- monokai-pro-spectrum
 
 local colorscheme = os.getenv('NVIM_CUSTOM_COLORSCHEME')
 if (colorscheme) then
