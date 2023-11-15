@@ -9,9 +9,13 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+
 # Set primary screen.
-exec --no-startup-id xrandr --output HDMI-2 --primary
-exec --no-startup-id xrandr --output eDP-1 --left-of HDMI-2 --auto
+# xrandr does not work for sway
+# exec --no-startup-id xrandr --output HDMI-A-2 --primary
+# exec --no-startup-id xrandr --output eDP-1 --right-of HDMI-A-2 --auto
+output HDMI-A-2 pos 0 0 res 1920x1080 subpixel rgb
+output eDP-1 pos 1920 0 res 1920x1090 subpixel rgb
 
 exec hash dbus-update-activation-environment 2>/dev/null && \
     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
@@ -24,6 +28,9 @@ focus_follows_mouse no
 # Mod1=Alt Mod4=Ctrl
 set $mod Mod4
 #set $mod Mod1
+
+# bindsym $mod+y output "HDMI-A-2" enable ; output "eDP-1" enable
+# bindsym $mod+u output "HDMI-A-2" disable ; output "eDP-1" disable
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.

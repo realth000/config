@@ -10,8 +10,8 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 # Set primary screen.
-exec --no-startup-id xrandr --output HDMI-2 --primary
-exec --no-startup-id xrandr --output eDP-1 --left-of HDMI-2 --auto
+exec --no-startup-id xrandr --output eDP-1 --primary
+exec --no-startup-id xrandr --output HDMI-A-2 --left-of eDP-1 --auto
 
 # Set system theme to dark mode.
 exec --no-startup-id /usr/libexec/gsd-xsettings
@@ -80,14 +80,14 @@ exec_always --no-startup-id exec /usr/bin/xfce4-panel
 #exec_always --no-startup-id exec bash ~/.config/polybar/$polybar_theme/scripts/pywal.sh /data/Storage/Picture/pic/lock/001.png
 
 # picom
-exec_always --no-startup-id exec picom --config ~/.config/picom/picom.conf
+#exec_always --no-startup-id exec picom --config ~/.config/picom/picom.conf
 
 # feh - wallpaper
 exec --no-startup-id feh --bg-fill /data/Storage/Picture/pic/lock/001.png
 
 # border
 #exec_always --no-startup-id exec xborder --config ~/.config/xborder/xborder.json
-exec_always --no-startup-id exec bash ~/.config/xborder/xborder.sh
+#exec_always --no-startup-id exec bash ~/.config/xborder/xborder.sh
 
 # Window border width
 default_border pixel 0
@@ -237,3 +237,5 @@ exec_always fcitx5 -d --replace
 #bar {
 #        status_command i3status
 #}
+
+exec_always --no-startup-id numlockx on
