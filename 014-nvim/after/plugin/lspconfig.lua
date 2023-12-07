@@ -147,7 +147,7 @@ plugin['cmake'].setup {
 	single_file_support = true,
 	capabilities = capabilities,
 }
-plugin['dartls'].setup{
+plugin['dartls'].setup {
 	on_attach = on_attach,
 	flags = lsp_flags,
 	single_file_support = true,
@@ -202,4 +202,10 @@ plugin['lua_ls'].setup {
 			},
 		},
 	},
+}
+plugin['volar'].setup {
+	on_attach = on_attach,
+	single_file_support = true,
+	capabilities = capabilities,
+	filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
 }
