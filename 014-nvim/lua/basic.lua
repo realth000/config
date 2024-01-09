@@ -51,8 +51,8 @@ vim.cmd [[command NI :lua vim.cmd("IBLDisable"); vim.cmd("set nolist")]]
 
 -- Cursor style
 
-vim.opt.guicursor="n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
--- vim.opt.guicursor = "n-v-c-sm:block,ci-ve:ver25,r-cr-o:hor20,i:block-blinkwait100-blinkon400-blinkoff400"
+-- vim.opt.guicursor="n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
+vim.opt.guicursor = "n-v-c-sm:block,ci-ve:ver25,r-cr-o:hor20,i:block-blinkwait100-blinkon400-blinkoff400"
 
 -- Restore scroll config after window resize
 --
