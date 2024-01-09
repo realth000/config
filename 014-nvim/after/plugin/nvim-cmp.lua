@@ -18,6 +18,9 @@ local window_opt = {
 
 
 cmp.setup({
+	experimental = {
+		ghost_text = true,
+	},
 	formatting = {
 		format = lspkind.cmp_format({
 			mode = 'symbol_text', -- show only symbol annotations, options: 'text', 'text_symbol', 'symbol_text', 'symbol'
@@ -52,6 +55,7 @@ cmp.setup({
 		-- ['<C-Space>'] = cmp.mapping.complete(),
 		['<C-e>'] = cmp.mapping.abort(),
 		['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+		['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	}),
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
