@@ -57,7 +57,7 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 		'-msys' }
 end
 
-config.front_end = "OpenGL"
+-- config.front_end = "OpenGL"
 -- Disable wayland to avoid cursor blink always stuck on wayland
 config.enable_wayland = false
 
@@ -181,7 +181,8 @@ config.window_frame = {
 			-- family = 'JetBrainsMono NFM',
 			-- weight = 'Bold',
 			family = 'Iosevka1204 Nerd Font Mono',
-			weight = 'DemiBold',
+			weight = 'Medium',
+			-- weight = 'DemiBold',
 			harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
 		},
 		{
@@ -213,6 +214,8 @@ config.cursor_thickness = "200%"
 -- e.g. vim.opt.guicursor="n-v-c-sm:block,ci-ve:ver25,r-cr-o:hor20,i:block-blinkwait100-blinkon400-blinkoff400"
 -- Blink always stuck when wayland enabled.
 config.cursor_blink_rate = 500
+-- SteadyBlock BlinkingBlock SteadyUnderline BlinkingUnderline SteadyBar BlinkingBar
+config.default_cursor_style = 'BlinkingBlock'
 config.window_padding = {
 	left = 2,
 	right = 2,
@@ -391,9 +394,9 @@ config.font = wezterm.font_with_fallback {
 		-- family = 'CaskaydiaCove Nerd Font Mono',
 		-- family = 'Hack Nerd Font Mono',
 		-- family = 'IBM Plex Mono',
-		-- weight = 'Medium',
+		weight = 'Medium',
 		-- weight = 'Bold',
-		weight = 'DemiBold',
+		-- weight = 'DemiBold',
 		-- italic = true,
 		harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
 	},
