@@ -57,9 +57,9 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 		'-msys' }
 end
 
--- config.front_end = "OpenGL"
+config.front_end = "OpenGL"
 -- Disable wayland to avoid cursor blink always stuck on wayland
-config.enable_wayland = false
+config.enable_wayland = true
 
 ------------------------ Tab bar style ------------------------
 
