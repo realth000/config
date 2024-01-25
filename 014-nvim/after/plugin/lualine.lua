@@ -31,27 +31,28 @@ plugin.setup {
 		lualine_a = { 'mode' },
 		lualine_b = { 'branch', 'diff', 'diagnostics' },
 		lualine_c = {
-			'filename', {
-			'aerial',
+			'filename',
+			{
+				'aerial',
 
-			-- The separator to be used to separate symbols in status line.
-			sep = ' > ',
+				-- The separator to be used to separate symbols in status line.
+				sep = ' > ',
 
-			-- The number of symbols to render top-down. In order to render only 'N' last
-			-- symbols, negative numbers may be supplied. For instance, 'depth = -1' can
-			-- be used in order to render only current symbol.
-			depth = 4,
+				-- The number of symbols to render top-down. In order to render only 'N' last
+				-- symbols, negative numbers may be supplied. For instance, 'depth = -1' can
+				-- be used in order to render only current symbol.
+				depth = 4,
 
-			-- When 'dense' mode is on, icons are not rendered near their symbols. Only
-			-- a single icon that represents the kind of current symbol is rendered at
-			-- the beginning of status line.
-			dense = true,
+				-- When 'dense' mode is on, icons are not rendered near their symbols. Only
+				-- a single icon that represents the kind of current symbol is rendered at
+				-- the beginning of status line.
+				dense = true,
 
-			-- The separator to be used to separate symbols in dense mode.
-			dense_sep = '.',
+				-- The separator to be used to separate symbols in dense mode.
+				dense_sep = '.',
 
-			colored = false,
-		}
+				colored = false,
+			},
 		},
 		lualine_x = { 'encoding', 'fileformat', 'filetype' },
 		lualine_y = { 'progress' },
@@ -66,12 +67,12 @@ plugin.setup {
 		lualine_z = {}
 	},
 	tabline = {
-		-- lualine_a = {'buffers'},
+		-- lualine_a = { 'buffers' },
 		-- lualine_b = {'branch'},
-		-- lualine_c = {'filename'},
+		-- lualine_c = { 'filename' },
 		-- lualine_x = {},
 		-- lualine_y = {},
-		-- lualine_z = {'tabs'}
+		-- lualine_z = { 'tabs' }
 	},
 	winbar = {
 		-- lualine_a = {},
