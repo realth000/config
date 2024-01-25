@@ -125,7 +125,8 @@ plugin['clangd'].setup {
 		'clangd',
 		'--clang-tidy',
 		'--function-arg-placeholders=false', -- Disable clangd completion function parameters.
-		'--fallback-style=Google',     -- Set default format style to Google if no .clang-format found.
+		-- '--fallback-style=Google',     -- Set default format style to Google if no .clang-format found.
+		'--header-insertion=never',
 	},
 	on_attach = on_attach,
 	flags = lsp_flags,
