@@ -1,9 +1,7 @@
 -- Init lazy.nvim
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		'git',
-		'clone',
+	vim.fn.system({ 'git', 'clone',
 		'--filter=blob:none',
 		'https://github.com/folke/lazy.nvim.git',
 		'--branch=stable',
@@ -32,7 +30,7 @@ return require('lazy').setup({
 			name = 'hardhacker',
 		},
 		"loctvl842/monokai-pro.nvim",
-		{ 'kepano/flexoki-neovim', name = 'flexoki' },
+		{ 'kepano/flexoki-neovim',      name = 'flexoki' },
 		{ "bluz71/vim-nightfly-colors", name = "nightfly" },
 	},
 
@@ -45,6 +43,20 @@ return require('lazy').setup({
 		'nvim-lualine/lualine.nvim',
 		{ 'kyazdani42/nvim-web-devicons' },
 	},
+
+	-- -- tabline
+	-- {
+	-- 	'romgrk/barbar.nvim',
+	-- 	dependencies = {
+	-- 		'lewis6991/gitsigns.nvim',
+	-- 		'nvim-tree/nvim-web-devicons',
+	-- 	},
+	-- },
+	-- -- bufferline
+	-- {
+	-- 	'akinsho/bufferline.nvim',
+	-- 	dependencies = 'nvim-tree/nvim-web-devicons'
+	-- },
 
 
 	-- treesitter, hightlight
