@@ -32,6 +32,7 @@ return require('lazy').setup({
 		"loctvl842/monokai-pro.nvim",
 		{ 'kepano/flexoki-neovim',      name = 'flexoki' },
 		{ "bluz71/vim-nightfly-colors", name = "nightfly" },
+		'AlexvZyl/nordic.nvim',
 	},
 
 	-- nvim-tree
