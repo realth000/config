@@ -19,13 +19,13 @@ uptime="`uptime -p | sed -e 's/up //g'`"
 host=`hostname`
 
 # Options
-shutdown=''
-reboot=''
-lock=''
-suspend=''
-logout=''
-yes=''
-no=''
+shutdown='⏻' #
+reboot='' #
+lock='󰌾' #
+suspend='󰏤' #
+logout='󰗽' #
+yes='' #
+no='󰜺' #
 
 # Rofi CMD
 rofi_cmd() {
@@ -99,7 +99,8 @@ case ${chosen} in
 		if [[ -x '/usr/bin/betterlockscreen' ]]; then
 			betterlockscreen -l
 		elif [[ -x '/usr/bin/i3lock' ]]; then
-			i3lock
+			#i3lock -i /data/Storage/Picture/pic/lock/001.png
+			i3lock-fancy -g -p
 		elif [[ -x '/usr/bin/xfce4-screensaver-command' ]];then 
 			/usr/bin/xfce4-screensaver-command -l
 		fi
