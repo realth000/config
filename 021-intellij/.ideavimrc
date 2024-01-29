@@ -25,6 +25,10 @@ map [d <Action>(GotoPreviousError)
 map ]d <Action>(GotoNextError)
 " vim.keymap.set('n', '<A-i>', '<CMD>lua require("FTerm").toggle()<CR>')
 map <A-i> <Action>(ActivateTerminalToolWindow)
+" vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+map \\fg <Action>(FindInPath)
+" vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+map \ff <Action>(GotoFile)
 
 " Don't use Ex mode, use Q for formatting.
 map Q gq
