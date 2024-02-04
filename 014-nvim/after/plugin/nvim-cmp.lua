@@ -12,7 +12,7 @@ if (not lspkind_status) then return end
 local window_opt = {
 	border = 'rounded', -- single, rounded
 	-- winhighlight = opts.winhighlight or 'Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None',
-	winhighlight = 'Normal:Normal,FloatBorder:Comment,CursorLine:Visual,Search:None',
+	winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:Visual',
 	scrollbar = false,
 }
 
