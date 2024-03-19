@@ -1,18 +1,53 @@
 local status, plugin = pcall(require, 'lualine')
 if (not status) then return end
 
+-- All lualine theme map assosiated with nvim colorscheme
+local theme_map = {
+	-- Nightfly
+	["nightfly"] = "nightfly",
+
+	-- Gruvbox
+	["gruvbox"] = "gruvbox_dark",
+
+	-- Monokai pro
+	["monokai-pro"] = "monokai-pro",
+	["monokai-pro-classic"] = "monokai-pro",
+	["monokai-pro-default"] = "monokai-pro",
+	["monokai-pro-machine"] = "monokai-pro",
+	["monokai-pro-octagon"] = "monokai-pro",
+	["monokai-pro-ristretto"] = "monokai-pro",
+	["monokai-pro-spectrum"] = "monokai-pro",
+
+	-- Onedark
+	["onedark"] = "onedark",
+
+	-- Catppuccin
+	["catppuccin"] = "catppuccin",
+	["catppuccin-macchiato"] = "catppuccin",
+	["catppuccin-mocha"] = "catppuccin",
+}
+
+-- Fallback theme.
+local fallback_theme = "palenight"
+
+-- Currrent nvim colorscheme.
+local colorscheme = os.getenv('NVIM_CUSTOM_COLORSCHEME')
+
+-- Finally selected lualine theme.
+local theme = theme_map[colorscheme] or fallback_theme
+
 plugin.setup {
 	options = {
 		icons_enabled = true,
 		-- See https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
 		-- palenight moonfly codedark gruvbox-material horizon material nightfly onedark
 		-- powerline_dark solarized_dark jellybeans everforest gruvbox_dark iceberg_dark modus-vivendi wombat papercolor_dark
-		theme = 'palenight',
+		theme = theme,
 		-- component_separators = { left = '', right = ''},
 		-- section_separators = { left = '', right = ''},
 		-- component_separators = { left = '/', right = '/'},
-		-- section_separators = { left = '', right = ''},
-		section_separators = { left = '', right = '' },
+		section_separators = { left = '', right = '' },
+		-- section_separators = { left = '', right = '' },
 		component_separators = { left = '', right = '' },
 		--     disabled_filetypes = {
 		--       statusline = {},
