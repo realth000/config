@@ -40,7 +40,7 @@ if [ -f ../SPECS/"${SPEC}" ];then
 fi
 
 mv "${SPEC}" ../SPECS/
-rpmbuild -bp ../SPECS/"${SPEC}" --define "_builddir ${WORK_ROOT}"
+rpmbuild --nodeps -bp ../SPECS/"${SPEC}" --define "_builddir ${WORK_ROOT}"
 
 rm -rf "${RPMBUILD_SRC}"
 mv "${RPMBUILD_SRC_BACKUP}" "${RPMBUILD_SRC}"
