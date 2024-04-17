@@ -8,6 +8,7 @@ plugin.setup({
 		'cpp',
 		'dart',
 		'diff',
+		'doxygen',
 		'gitcommit',
 		'go',
 		'javascript',
