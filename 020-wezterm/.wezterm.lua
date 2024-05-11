@@ -3,12 +3,10 @@ local mux                          = wezterm.mux
 local act                          = wezterm.action
 
 -- customize color scheme
-local custom_alabaster             = wezterm.color.get_builtin_schemes()['Alabaster']
 local catppuccin_mocha             = wezterm.color.get_builtin_schemes()['Catppuccin Mocha']
 local hardhacker                   = wezterm.color.get_builtin_schemes()['hardhacker']
 
 -- customize oh-my-zsh suggestions plugin suggest text color to optimize ctrl + F.
-custom_alabaster.brights[1]        = "#595f5f"
 -- color_scheme = "midnight-in-mojave", -- ctrl + f
 -- color_scheme = "Alabaster", -- ok
 -- color_scheme = "CLRS", -- good
@@ -19,23 +17,31 @@ custom_alabaster.brights[1]        = "#595f5f"
 -- color_scheme = "MaterialDark", -- as above
 -- color_scheme = "Solarized Darcula", -- ctrl + f
 
-local custom_catppuccin_mocha      = wezterm.color.get_builtin_schemes()['Alabaster']
+local custom_catppuccin_mocha      = wezterm.color.get_builtin_schemes()['Catppuccin Mocha']
+-- black
 custom_catppuccin_mocha.ansi[1]    = "#45475a"
 custom_catppuccin_mocha.brights[1] = "#585b70"
-custom_catppuccin_mocha.ansi[2]    = "#f38ba8"
-custom_catppuccin_mocha.brights[2] = "#f38ba8"
-custom_catppuccin_mocha.ansi[3]    = "#a6e3a1"
-custom_catppuccin_mocha.brights[4] = "#a6e3a1"
-custom_catppuccin_mocha.ansi[4]    = "#f9e2af"
-custom_catppuccin_mocha.brights[4] = "#f9e2af"
-custom_catppuccin_mocha.ansi[5]    = "#89b4fa"
-custom_catppuccin_mocha.brights[5] = "#89b4fa"
-custom_catppuccin_mocha.ansi[6]    = "#f5c2e7"
-custom_catppuccin_mocha.brights[6] = "#f5c2e7"
-custom_catppuccin_mocha.ansi[7]    = "#94e2d5"
-custom_catppuccin_mocha.brights[7] = "#94e2d5"
+-- red
+custom_catppuccin_mocha.ansi[2]    = "#aa3731"
+custom_catppuccin_mocha.brights[2] = "#f05050"
+-- green
+custom_catppuccin_mocha.ansi[3]    = "#448c27"
+custom_catppuccin_mocha.brights[3] = "#60cb00"
+-- yellow
+custom_catppuccin_mocha.ansi[4]    = "#cb9000"
+custom_catppuccin_mocha.brights[4] = "#ffbc5d"
+-- blue
+custom_catppuccin_mocha.ansi[5]    = "#325cc0"
+custom_catppuccin_mocha.brights[5] = "#007acc"
+-- magenta
+custom_catppuccin_mocha.ansi[6]    = "#7a3e9d"
+custom_catppuccin_mocha.brights[6] = "#e64ce6"
+-- cyan
+custom_catppuccin_mocha.ansi[7]    = "#0083b2"
+custom_catppuccin_mocha.brights[7] = "#00aacb"
+-- white
 custom_catppuccin_mocha.ansi[8]    = "#bac2de"
-custom_catppuccin_mocha.brights[8] = "#bac2de"
+custom_catppuccin_mocha.brights[8] = "#a6adc8"
 
 wezterm.on('gui-startup', function(cmd)
 	-- allow `wezterm start -- something` to affect what we spawn
@@ -57,9 +63,9 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 		'-msys' }
 end
 
-config.front_end = "OpenGL"
+-- config.front_end = "OpenGL"
 -- Disable wayland to avoid cursor blink always stuck on wayland
-config.enable_wayland = true
+config.enable_wayland = false
 
 ------------------------ Tab bar style ------------------------
 
@@ -95,7 +101,6 @@ wezterm.on(
 	'format-tab-title',
 	function(tab, tabs, panes, config, hover, max_width)
 		local title = tab_title(tab)
-		-- local edge_background1 = '#0b0022'
 		local edge_background1 = 'transparent'
 		local edge_background2 = 'transparent'
 		local edge_background3 = 'transparent'
@@ -193,16 +198,6 @@ config.window_frame = {
 			harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
 		},
 	},
-
-	-- The size of the font in the tab bar.
-	-- Default to 10. on Windows but 12.0 on other systems
-	-- font_size = 14.0,
-
-	-- inactive_titlebar_bg = '#ff0000',
-	-- active_titlebar_bg = '#ff0000',
-	-- inactive_titlebar_fg = '#11111B',
-	-- active_titlebar_fg = '#ffffff',
-	--
 }
 
 config.font_size = 13.0
@@ -223,164 +218,19 @@ config.window_padding = {
 	bottom = 2,
 }
 config.color_schemes = {
-	['custom_alabaster'] = custom_alabaster,
 	['custom_catppuccin_mocha'] = custom_catppuccin_mocha,
 	['catppuccin_mocha'] = catppuccin_mocha,
 	['hardhacker'] = hardhacker,
 }
-config.color_scheme = 'custom_alabaster'
+config.color_scheme = 'custom_catppuccin_mocha'
 config.colors = {
-	-- Old style
-	-- foreground = '#f0d0d0',
-	-- background = '#1e2223',
-	-- cursor_bg = '#f1ffff',
-	-- -- cursor_bg = 'transparent',
-	-- -- cursor_bg = '#1e2223',
-	-- cursor_fg = '#1e2223',
-	-- cursor_border = '#f1ffff',
-	-- selection_bg = '#2255cc',
-	-- selection_fg = '#f1ffff',
-
-	-- Catppuccin mocha style
-	foreground = '#cdd6f4',
-	background = '#1e1e2e',
-	cursor_bg = '#f1ffff',
-	cursor_bg = 'cdd6f4',
-	cursor_fg = '#1e1e2e',
-	cursor_border = '#cdd6f4',
-	selection_bg = '#f5e0dc',
-	selection_fg = '#1e1e2e',
-
-	-- cursor_fg = '#f1ffff',
-	-- cursor_border = '#52ad70',
-	-- ansi = {
-	--   'black',
-	--   'maroon',
-	--   'green',
-	--   'olive',
-	--   'red',
-	--   'purple',
-	--   'teal',
-	--   'silver',
-	-- },
-	-- brights = {
-	--   'grey',
-	--   'red',
-	--   'lime',
-	--   'yellow',
-	--   'blue',
-	--   'fuchsia',
-	--   'aqua',
-	--   'white',
-	-- },
-
-
-	-- Arbitrary colors of the palette in the range from 16 to 255
-
-	-- indexed = { [136] = '#af8700' },
-
-	-- Since: 20220319-142410-0fcdea07
-	-- When the IME, a dead key or a leader key are being processed and are effectively
-	-- holding input pending the result of input composition, change the cursor
-	-- to this color to give a visual cue about the compose state.
-
-	-- compose_cursor = 'orange',
-
-	-- Colors for copy_mode and quick_select
-	-- available since: 20220807-113146-c2fee766
-	-- In copy_mode, the color of the active text is:
-	-- 1. copy_mode_active_highlight_* if additional text was selected using the mouse
-	-- 2. selection_* otherwise
-
-	-- copy_mode_active_highlight_bg = { Color = '#000000' },
-
-	-- use `AnsiColor` to specify one of the ansi color palette values
-	-- (index 0-15) using one of the names "Black", "Maroon", "Green",
-	--  "Olive", "Navy", "Purple", "Teal", "Silver", "Grey", "Red", "Lime",
-	-- "Yellow", "Blue", "Fuchsia", "Aqua" or "White".
-	--
-	-- copy_mode_active_highlight_fg = { AnsiColor = 'Black' },
-	-- copy_mode_inactive_highlight_bg = { Color = '#52ad70' },
-	-- copy_mode_inactive_highlight_fg = { AnsiColor = 'White' },
-
-	-- quick_select_label_bg = { Color = 'peru' },
-	-- quick_select_label_fg = { Color = '#ffffff' },
-	-- quick_select_match_bg = { AnsiColor = 'Navy' },
-	-- quick_select_match_fg = { Color = '#ffffff' },
+	-- selection_bg = '#f5e0dc',
+	-- selection_fg = '#1e1e2e',
 
 	-- Tab bar. These configs only apply when use_fancy_tab_bar set to false.
 	-- Retro Tab Bar appearance
 	tab_bar = {
-		-- The color of the strip that goes along the top of the window
-		-- (does not apply when fancy tab bar is in use)
-		-- background = '#0b0022',
 		background = 'transparent',
-
-		-- The active tab is the one that has focus in the window
-		active_tab = {
-			-- The color of the background area for the tab
-			bg_color = '#2b2042',
-			-- The color of the text for the tab
-			fg_color = '#c0c0c0',
-
-			-- Specify whether you want "Half", "Normal" or "Bold" intensity for the
-			-- label shown for this tab.
-			-- The default is "Normal"
-			intensity = 'Normal',
-
-			-- Specify whether you want "None", "Single" or "Double" underline for
-			-- label shown for this tab.
-			-- The default is "None"
-			underline = 'None',
-
-			-- Specify whether you want the text to be italic (true) or not (false)
-			-- for this tab.  The default is false.
-			italic = true,
-
-			-- Specify whether you want the text to be rendered with strikethrough (true)
-			-- or not for this tab.  The default is false.
-			strikethrough = false,
-		},
-
-		-- Inactive tabs are the tabs that do not have focus
-		inactive_tab = {
-			bg_color = '#1b1032',
-			fg_color = '#808080',
-
-			-- The same options that were listed under the `active_tab` section above
-			-- can also be used for `inactive_tab`.
-		},
-
-		-- You can configure some alternate styling when the mouse pointer
-		-- moves over inactive tabs
-		inactive_tab_hover = {
-			bg_color = '#3b3052',
-			fg_color = '#909090',
-			italic = true,
-
-			-- The same options that were listed under the `active_tab` section above
-			-- can also be used for `inactive_tab_hover`.
-		},
-
-		-- The new tab button that let you create new tabs
-		new_tab = {
-			bg_color = '#1b1032',
-			fg_color = '#808080',
-
-			-- The same options that were listed under the `active_tab` section above
-			-- can also be used for `new_tab`.
-		},
-
-		-- You can configure some alternate styling when the mouse pointer
-		-- moves over the new tab button
-		new_tab_hover = {
-			bg_color = '#3b3052',
-			fg_color = '#909090',
-			italic = true,
-
-			-- The same options that were listed under the `active_tab` section above
-			-- can also be used for `new_tab_hover`.
-		},
 	},
 }
 
@@ -394,9 +244,10 @@ config.font = wezterm.font_with_fallback {
 		-- family = 'CaskaydiaCove Nerd Font Mono',
 		-- family = 'Hack Nerd Font Mono',
 		-- family = 'IBM Plex Mono',
-		weight = 'Medium',
+		-- weight = 'SemiBold',
 		-- weight = 'Bold',
-		-- weight = 'DemiBold',
+		-- weight = 'Medium',
+		weight = 'DemiBold',
 		-- italic = true,
 		harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
 	},
