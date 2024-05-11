@@ -33,6 +33,7 @@ return require('lazy').setup({
 		{ 'kepano/flexoki-neovim',      name = 'flexoki' },
 		{ "bluz71/vim-nightfly-colors", name = "nightfly" },
 		'AlexvZyl/nordic.nvim',
+		'luisiacc/gruvbox-baby',
 	},
 
 	-- nvim-tree
@@ -116,5 +117,10 @@ return require('lazy').setup({
 	{
 		"folke/noice.nvim",
 		{ 'MunifTanjim/nui.nvim', lazy = true, },
+	},
+
+	-- Sync terminal background color
+	{
+		"typicode/bg.nvim",
 	},
 })
