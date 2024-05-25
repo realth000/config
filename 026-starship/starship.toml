@@ -13,7 +13,7 @@ $cmd_duration\
 \n$character"""
 
 [os]
-format = "[ $symbol ](bg:#282c34 fg:#3a86ff)[](bg:#242424 fg:#282c34)"
+format = "[  ](bg:#282c34 fg:#3a86ff)[ ](bg:#242424 fg:#282c34)"
 disabled = false
 
 [hostname]
@@ -54,7 +54,7 @@ Macos = "\uF179"
 Linux = "\uF17c"
 
 [directory]
-format = "[ $path](bg:#242424 fg:#33dd2d)[](bg:#242424 fg:#242424)"
+format = "[ $path ](bg:#242424 fg:#33dd2d)(bg:#242424 fg:#242424)"
 
 [git_branch]
 symbol = ""
