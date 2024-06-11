@@ -8,6 +8,7 @@ local theme_map = {
 
 	-- Gruvbox
 	["gruvbox"] = "gruvbox_dark",
+	["gruvbox-baby"] = "gruvbox_dark",
 
 	-- Monokai pro
 	["monokai-pro"] = "monokai-pro",
