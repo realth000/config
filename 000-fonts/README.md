@@ -53,11 +53,11 @@ Note: **Iosevka1204 has ligature for `!=`**
 
   ``` bash
   # CAUTION: CPU usage 100%
-  for f in `find Iosevka1204_20231220/TTF-Extend -type f`; do ./fontpatcher/font-patcher $f --complete --quiet --mono --makegroups --outputdir ./Iosevka1204NFM_20231220 &; done; wait
+  for f in `find Iosevka1204_20240613/TTF-Extend -type f`; do ./fontpatcher/font-patcher $f --complete --quiet --mono --makegroups --outputdir ./Iosevka1204NFM_20240613 &; done; wait
   ```
 
 ### Compatibility
 
-Latest update: 2023.12.20
+Latest update: 2024.06.13
 
-Compatible with Iosevka 28.0.1 and FontPatcher 3.1.1
+Compatible with Iosevka 30.1.2 and FontPatcher 3.2.1
