@@ -1,4 +1,5 @@
 local status, plugin = pcall(require, 'onedark')
+if (not status) then return end
 -- Plugin onedark.
 
 -- Lua
