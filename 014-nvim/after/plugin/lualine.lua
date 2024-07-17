@@ -26,6 +26,9 @@ local theme_map = {
 	["catppuccin"] = "catppuccin",
 	["catppuccin-macchiato"] = "catppuccin",
 	["catppuccin-mocha"] = "catppuccin",
+
+	-- Moonfly
+	["moonfly"] = "moonfly",
 }
 
 -- Fallback theme.

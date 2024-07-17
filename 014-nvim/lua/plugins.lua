@@ -35,6 +35,9 @@ return require('lazy').setup({
 		'AlexvZyl/nordic.nvim',
 		'luisiacc/gruvbox-baby',
 		{ 'rose-pine/neovim', name = 'rose-pine', },
+		{ 'kepano/flexoki-neovim', name = 'flexoki', },
+		{ "bluz71/vim-moonfly-colors", name = "moonfly", },
+
 	},
 
 	-- nvim-tree
