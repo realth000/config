@@ -24,7 +24,8 @@ vim.o.background = 'dark'
 -- Neovide settings.
 if vim.g.neovide then
 	--测试中文
-	vim.opt.guifont = { "Iosevka1204 Nerd Font Mono,Sarasa Mono SC:h13:" }
+	-- vim.opt.guifont = { "Iosevka1204 Nerd Font Mono,Sarasa Mono SC:h13:" }
+	vim.opt.guifont = { "Iosevka1204 Medium Extended,Sarasa Mono SC:h13:" }
 	vim.g.neovide_transparency = 0.95
 	vim.g.neovide_hide_mouse_when_typing = true
 	vim.g.neovide_floating_blur_amount_x = 2.0
@@ -52,7 +53,8 @@ vim.cmd [[command NI :lua vim.cmd("IBLDisable"); vim.cmd("set nolist")]]
 -- Cursor style
 
 -- vim.opt.guicursor="n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
-vim.opt.guicursor = "n-v-c-sm:block,ci-ve:ver25,r-cr-o:hor20,i:block-blinkwait100-blinkon400-blinkoff400"
+-- vim.opt.guicursor = "n-v-c-sm:block,ci-ve:ver25,r-cr-o:hor20,i:block-blinkwait100-blinkon400-blinkoff400"
+vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,i:ver25-blinkwait100-blinkon400-blinkoff400"
 
 -- Restore scroll config after window resize
 --
