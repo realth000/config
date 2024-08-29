@@ -8,6 +8,7 @@ $git_branch\
 $git_commit\
 $git_state\
 $git_status\
+$status\
 $time\
 $cmd_duration\
 \n$character"""
@@ -82,6 +83,18 @@ deleted = "-${count}"
 typechanged = ""
 style = "red bold"
 format = '[$all_status$ahead_behind ](bg:#242424 fg:#3a86ff)'
+
+[status]
+style = 'bg:#242424 fg:#ff0000'
+symbol = '⨯ '
+success_symbol = ''
+not_executable_symbol = '⨯ '
+not_found_symbol = '⨯ '
+sigint_symbol = '⨯ '
+signal_symbol = '⨯ '
+format = '[$symbol$signal_name$int]($style) '
+map_symbol = true
+disabled = false
 
 [time]
 disabled = false

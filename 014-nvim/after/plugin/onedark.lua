@@ -5,7 +5,7 @@ if (not status) then return end
 -- Lua
 plugin.setup {
 	-- Main options --
-	style = 'darker',          -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+	style = 'deep',          -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
 	-- transparent = true,  -- Show/hide background
 	term_colors = true,        -- Change terminal color as per the selected theme style
 	ending_tildes = false,     -- Show the end-of-buffer tildes. By default they are hidden
