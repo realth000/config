@@ -17,9 +17,6 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-	-- Enable completion triggered by <c-x><c-o>
-	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
 	-- Mappings.
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -88,44 +85,45 @@ plugin['pyright'].setup {
 	flags = lsp_flags,
 	capabilities = capabilities,
 }
-plugin['tsserver'].setup {
+plugin['ts_ls'].setup {
 	on_attach = on_attach,
 	flags = lsp_flags,
 }
-plugin['rust_analyzer'].setup {
-	on_attach = on_attach,
-	flags = lsp_flags,
-	-- Server-specific settings...
-	settings = {
-		['rust-analyzer'] = {
-			completion = {
-				addCallParenthesis = true,
-				addCallArgumentSnippets = false,
-			},
-			imports = {
-				granularity = {
-					group = 'module',
-				},
-				prefix = 'self',
-			},
-			cargo = {
-				buildScripts = {
-					enable = true,
-				},
-			},
-			procMacro = {
-				enable = true
-			},
-		},
-	},
-	capabilities = capabilities,
-}
+-- Use https://github.com/mrcjkb/rustaceanvim instead
+-- plugin['rust_analyzer'].setup {
+-- 	on_attach = on_attach,
+-- 	flags = lsp_flags,
+-- 	-- Server-specific settings...
+-- 	settings = {
+-- 		['rust-analyzer'] = {
+-- 			completion = {
+-- 				addCallParenthesis = true,
+-- 				addCallArgumentSnippets = false,
+-- 			},
+-- 			imports = {
+-- 				granularity = {
+-- 					group = 'module',
+-- 				},
+-- 				prefix = 'self',
+-- 			},
+-- 			cargo = {
+-- 				buildScripts = {
+-- 					enable = true,
+-- 				},
+-- 			},
+-- 			procMacro = {
+-- 				enable = true
+-- 			},
+-- 		},
+-- 	},
+-- 	capabilities = capabilities,
+-- }
 plugin['clangd'].setup {
 	cmd = {
 		'clangd',
 		'--clang-tidy',
 		'--function-arg-placeholders=false', -- Disable clangd completion function parameters.
-		'--fallback-style=LLVM',     -- Set default format style to Google if no .clang-format found.
+		'--fallback-style=LLVM',       -- Set default format style to Google if no .clang-format found.
 		'--header-insertion=never',
 	},
 	on_attach = on_attach,

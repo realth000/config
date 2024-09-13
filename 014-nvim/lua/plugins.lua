@@ -84,7 +84,10 @@ return require('lazy').setup({
 	},
 
 	-- rust-tools takes over some rust lsp configs.
-	{ 'simrat39/rust-tools.nvim', },
+	-- DEPRECATED
+	-- { 'simrat39/rust-tools.nvim', },
+
+	{ 'mrcjkb/rustaceanvim', },
 
 	{ "onsails/lspkind.nvim", },
 

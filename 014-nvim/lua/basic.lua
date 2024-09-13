@@ -22,17 +22,17 @@ vim.opt.list = true
 vim.o.background = 'dark'
 
 -- Neovide settings.
-if vim.g.neovide then
-	--测试中文
-	-- vim.opt.guifont = { "Iosevka1204 Nerd Font Mono,Sarasa Mono SC:h13:" }
-	vim.opt.guifont = { "Iosevka1204 Medium Extended,Sarasa Mono SC:h13:" }
-	vim.g.neovide_transparency = 0.95
-	vim.g.neovide_hide_mouse_when_typing = true
-	vim.g.neovide_floating_blur_amount_x = 2.0
-	vim.g.neovide_floating_blur_amount_y = 2.0
-	-- vim.g.neovide_underline_automatic_scaling = true
-	vim.g.neovide_remember_window_size = false
-end
+-- if vim.g.neovide then
+-- 	--测试中文
+-- 	-- vim.opt.guifont = { "Iosevka1204 Nerd Font Mono,Sarasa Mono SC:h13:" }
+-- 	vim.opt.guifont = { "Iosevka1204 Medium Extended,Sarasa Mono SC:h13:" }
+-- 	vim.g.neovide_transparency = 0.95
+-- 	vim.g.neovide_hide_mouse_when_typing = true
+-- 	vim.g.neovide_floating_blur_amount_x = 2.0
+-- 	vim.g.neovide_floating_blur_amount_y = 2.0
+-- 	-- vim.g.neovide_underline_automatic_scaling = true
+-- 	vim.g.neovide_remember_window_size = false
+-- end
 
 vim.keymap.set('n', '<F3>', '<Cmd>NvimTreeToggle<CR>')
 
