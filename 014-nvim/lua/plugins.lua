@@ -133,4 +133,9 @@ return require('lazy').setup({
 	{
 		"typicode/bg.nvim",
 	},
+
+	-- Syntax highlighting for nushell format
+	{
+		'LhKipp/nvim-nu',
+	},
 })
