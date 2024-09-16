@@ -58,9 +58,9 @@ local config = {}
 
 -- Windows with MSYS2
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
-	msys2_work_dir = 'd://Program/msys64/'
-	config.default_prog = { 'D:/Program/msys64/msys2_shell.cmd', '-defterm', '-where', msys2_work_dir, '-no-start',
-		'-msys' }
+	-- config.default_prog = { 'D:/Program/msys64/msys2_shell.cmd', '-defterm', '-where', msys2_work_dir, '-no-start',
+	local userprofile = os.getenv("USERPROFILE")
+	config.default_prog = { string.format('%s/scoop/apps/nu/current/nu.exe', userprofile) }
 end
 
 -- config.front_end = "OpenGL"
@@ -185,9 +185,14 @@ config.window_frame = {
 			-- weight = 'Medium',
 			-- family = 'JetBrainsMono NFM',
 			-- weight = 'Bold',
-			family = 'Iosevka1204 Nerd Font Mono',
+			-- family = 'Iosevka1204 Nerd Font Mono',
+			family = 'Iosevka1204 Extended',
 			weight = 'Medium',
-			-- weight = 'DemiBold',
+			harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
+		},
+		{
+			family = 'FiraCode NFM',
+			weight = 'Medium',
 			harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
 		},
 		{
@@ -237,18 +242,13 @@ config.colors = {
 -- --- +++ -> <- >= <= != /= && !! ... .. ~> => >> ?.
 config.font = wezterm.font_with_fallback {
 	{
-		-- family = 'FiraCode NFM',
-		-- family = 'JetBrainsMono NFM',
-		-- family = 'Iosevka0828 Nerd Font Mono Extended',
-		family = 'Iosevka1204 Nerd Font Mono',
-		-- family = 'CaskaydiaCove Nerd Font Mono',
-		-- family = 'Hack Nerd Font Mono',
-		-- family = 'IBM Plex Mono',
-		-- weight = 'SemiBold',
-		-- weight = 'Bold',
-		-- weight = 'Medium',
-		weight = 'DemiBold',
-		-- italic = true,
+		family = 'Iosevka1204 Extended',
+		weight = 'Medium',
+		harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
+	},
+	{
+		family = 'FiraCode NFM',
+		weight = 'Medium',
 		harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
 	},
 	{
