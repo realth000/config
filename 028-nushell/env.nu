@@ -86,7 +86,6 @@ $env.NU_PLUGIN_DIRS = [
     ($nu.default-config-dir | path join 'plugins') # add <nushell-config-dir>/plugins
 ]
 
-
 $env.EDITOR = "nvim"
 
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
@@ -108,7 +107,7 @@ $env.NVIM_CUSTOM_COLORSCHEME = 'catppuccin-mocha'
 use ~/.cache/starship/init.nu
 
 alias cw = cd c:\Programming\Projects
-alias c = clear -a
+alias c = clear
 
 # Alias from oh-my-zsh https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh
 #alias grt = cd "$(git rev-parse --show-toplevel || echo .)"
