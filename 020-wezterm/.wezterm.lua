@@ -190,11 +190,6 @@ config.window_frame = {
 			weight = 'DemiBold',
 			harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
 		},
--- 		{
--- 			family = 'FiraCode NFM',
--- 			weight = 'Medium',
--- 			harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
--- 		},
 		{
 			-- family = 'Noto Sans Mono CJK SC',
 			family = 'Sarasa Mono SC',
@@ -246,14 +241,17 @@ config.colors = {
 config.font = wezterm.font_with_fallback {
 	{
 		family = 'Iosevka1204 Extended',
+		-- family = 'CaskaydiaCove Nerd Font Mono',
+		-- family = 'HackNerdFontMono',
+		-- family = 'IntoneMonoNerdFont',
+		-- family = 'HasklugNerdFont',
+		-- family = 'LilexNerdFontMono',
+		-- family = 'MononokiNerdFont',
+		-- family = 'RecMonoCasualNerdFont',
 		weight = 'DemiBold',
+		-- weight = 'Medium',
 		harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
 	},
--- 	{
---		family = 'FiraCode NFM',
---		weight = 'Medium',
---		harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
---	},
 	{
 		-- family = 'Noto Sans Mono CJK SC',
 		family = 'Sarasa Mono SC',
