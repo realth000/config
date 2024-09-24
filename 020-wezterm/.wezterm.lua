@@ -187,14 +187,14 @@ config.window_frame = {
 			-- weight = 'Bold',
 			-- family = 'Iosevka1204 Nerd Font Mono',
 			family = 'Iosevka1204 Extended',
-			weight = 'Medium',
+			weight = 'DemiBold',
 			harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
 		},
-		{
-			family = 'FiraCode NFM',
-			weight = 'Medium',
-			harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
-		},
+-- 		{
+-- 			family = 'FiraCode NFM',
+-- 			weight = 'Medium',
+-- 			harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
+-- 		},
 		{
 			-- family = 'Noto Sans Mono CJK SC',
 			family = 'Sarasa Mono SC',
@@ -202,10 +202,13 @@ config.window_frame = {
 			weight = 'DemiBold',
 			harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
 		},
+		{
+			family = 'SymbolsNerdFontMono',
+		},
 	},
 }
 
-config.font_size = 13.0
+config.font_size = 13.5
 config.show_new_tab_button_in_tab_bar = false
 config.window_background_opacity = 0.92
 config.text_background_opacity = 0.92
@@ -243,14 +246,14 @@ config.colors = {
 config.font = wezterm.font_with_fallback {
 	{
 		family = 'Iosevka1204 Extended',
-		weight = 'Medium',
+		weight = 'DemiBold',
 		harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
 	},
-	{
-		family = 'FiraCode NFM',
-		weight = 'Medium',
-		harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
-	},
+-- 	{
+--		family = 'FiraCode NFM',
+--		weight = 'Medium',
+--		harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
+--	},
 	{
 		-- family = 'Noto Sans Mono CJK SC',
 		family = 'Sarasa Mono SC',
@@ -258,6 +261,9 @@ config.font = wezterm.font_with_fallback {
 		-- 测试中文
 		weight = 'DemiBold',
 		harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
+	},
+	{
+		family = 'SymbolsNerdFontMono',
 	},
 }
 
