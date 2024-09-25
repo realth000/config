@@ -114,7 +114,7 @@ error_symbol = '[✿](bold #e01849)'
 disabled = true
 
 [shell]
-zsh_indicator = ''
+zsh_indicator = '\[zsh\]'
 nu_indicator = '\[nu\]'
 style = 'cyan bold'
 disabled = false
