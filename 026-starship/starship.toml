@@ -2,6 +2,7 @@
 
 format = """\
 $os\
+$shell\
 $hostname\
 $directory\
 $git_branch\
@@ -111,3 +112,9 @@ error_symbol = '[✿](bold #e01849)'
 
 [package]
 disabled = true
+
+[shell]
+zsh_indicator = ''
+nu_indicator = '\[nu\]'
+style = 'cyan bold'
+disabled = false
