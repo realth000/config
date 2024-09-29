@@ -102,7 +102,14 @@ $env.EDITOR = "nvim"
 # To load from a custom file you can use:
 # source ($nu.default-config-dir | path join 'custom.nu')
 
-$env.NVIM_CUSTOM_COLORSCHEME = 'catppuccin-mocha'
+if ($nu.default-config-dir | path join "custom_env.nu" | path exists) {
+  use custom_env.nu define_custom_env
+  define_custom_env | load-env
+} else {
+  print "custom.nu not found in nu default-config-dir"
+}
+#$env.NVIM_CUSTOM_COLORSCHEME = 'monokai-pro-spectrum'
+
 
 use ~/.cache/starship/init.nu
 
