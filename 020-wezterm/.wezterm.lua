@@ -192,7 +192,8 @@ config.window_frame = {
 		},
 		{
 			-- family = 'Noto Sans Mono CJK SC',
-			family = 'Sarasa Mono SC',
+			-- family = 'Sarasa Mono SC',
+			family = 'LXGW WenKai Mono GB',
 			-- family = 'Source Han Sans CN',
 			weight = 'DemiBold',
 			harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
@@ -238,23 +239,69 @@ config.colors = {
 }
 
 -- --- +++ -> <- >= <= != /= && !! ... .. ~> => >> ?.
+--
+-- Fonts from Nerd Fonts:
+--
+-- CascadiaCode
+-- CascadiaMono
+-- CodeNewRoman
+-- ComicShannsMono
+-- FantasqueSansMono
+-- FiraMono
+-- GeistMono
+-- Go-Mono
+-- Hack
+-- Hasklig
+-- IntelOneMono
+-- Iosevka1204_20240613
+-- JetBrainsMono
+-- LXGWWenkai
+-- LiberationMono
+-- Lilex
+-- MartianMono
+-- Meslo
+-- Mononoki
+-- NerdFontsSymbolsOnly
+-- Recursive
+-- VictorMono
+-- iA-Writer
+-- roboto_mono
+-- sarasa
+-- source_code_pro
 config.font = wezterm.font_with_fallback {
 	{
-		family = 'Iosevka1204 Extended',
+		-- family = 'Iosevka1204 Extended',
+		-- family = 'ComicShannsMono Nerd Font Mono',
 		-- family = 'CaskaydiaCove Nerd Font Mono',
+		-- family = 'CodeNewRomanNerdFontMono',
+		-- family = 'ComicShannsMonoNerdFontMono',
+		-- family = 'FantasqueSansMNerdFontMono',
+		-- family = 'FiraMonoNerdFont',
+		-- family = 'GeistMonoNerdFont',
+		-- family = 'GoMonoNerdFont',
 		-- family = 'HackNerdFontMono',
-		-- family = 'IntoneMonoNerdFont',
 		-- family = 'HasklugNerdFont',
+		-- family = 'iMWritingMonoNerdFontMono',
+		-- family = 'IntoneMonoNerdFontMono',
+		-- family = 'JetBrainsMonoNerdFont',
+		-- family = 'LiterationMonoNerdFontMono',
 		-- family = 'LilexNerdFontMono',
+		-- family = 'MartianMonoNerdFont',
+		-- family = 'MesloLGLNerdFontMono',
+		-- family = 'MesloLGMDZNerdFont',
 		-- family = 'MononokiNerdFont',
-		-- family = 'RecMonoCasualNerdFont',
-		weight = 'DemiBold',
-		-- weight = 'Medium',
+		family = 'RecMonoCasualNerdFont',
+		-- family = 'RobotoMonoNerdFont',
+		-- family = 'SauceCodeProNerdFontMono',
+		-- family = 'VictorMonoNerdFontMono',
+		-- weight = 'DemiBold',
+		weight = 'Medium',
 		harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
 	},
 	{
 		-- family = 'Noto Sans Mono CJK SC',
-		family = 'Sarasa Mono SC',
+		-- family = 'Sarasa Mono SC',
+		family = 'LXGW WenKai Mono GB',
 		-- family = 'Source Han Sans CN',
 		-- 测试中文
 		weight = 'DemiBold',
