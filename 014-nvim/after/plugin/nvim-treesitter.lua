@@ -11,6 +11,7 @@ plugin.setup({
 		'doxygen',
 		'gitcommit',
 		'go',
+		'hyprlang',
 		'javascript',
 		'json',
 		'lua',
