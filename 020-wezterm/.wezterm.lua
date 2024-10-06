@@ -238,7 +238,17 @@ config.colors = {
 	},
 }
 
+-- Preview:
+--
 -- --- +++ -> <- >= <= != /= && !! ... .. ~> => >> ?.
+-- abcdefghijkLmnopqrstuvwxyz
+-- ABCDEFGHIJKLMNOPQRSTUVWXYZ
+-- 0123456789
+--
+-- ~ ! # $ % ^ & * ( ) - = _ + [ ] \ | ; ' : "
+-- ` , . / < > ? { }
+--
+-- 测试中文
 --
 -- Fonts from Nerd Fonts:
 --
@@ -254,8 +264,7 @@ config.colors = {
 -- Hasklig
 -- IntelOneMono
 -- Iosevka1204_20240613
--- JetBrainsMono
--- LXGWWenkai
+-- JetBrainsMono LXGWWenkai
 -- LiberationMono
 -- Lilex
 -- MartianMono
@@ -291,6 +300,8 @@ config.font = wezterm.font_with_fallback {
 		-- family = 'MesloLGMDZNerdFont',
 		-- family = 'MononokiNerdFont',
 		family = 'RecMonoCasualNerdFont',
+		-- family = 'RecMonoSmCasualNerdFont', -- sm == smooth
+		-- family = 'RecMonoLinear Nerd Font',
 		-- family = 'RobotoMonoNerdFont',
 		-- family = 'SauceCodeProNerdFontMono',
 		-- family = 'VictorMonoNerdFontMono',
