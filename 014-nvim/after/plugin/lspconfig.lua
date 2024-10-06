@@ -90,34 +90,34 @@ plugin['ts_ls'].setup {
 	flags = lsp_flags,
 }
 -- Use https://github.com/mrcjkb/rustaceanvim instead
--- plugin['rust_analyzer'].setup {
--- 	on_attach = on_attach,
--- 	flags = lsp_flags,
--- 	-- Server-specific settings...
--- 	settings = {
--- 		['rust-analyzer'] = {
--- 			completion = {
--- 				addCallParenthesis = true,
--- 				addCallArgumentSnippets = false,
--- 			},
--- 			imports = {
--- 				granularity = {
--- 					group = 'module',
--- 				},
--- 				prefix = 'self',
--- 			},
--- 			cargo = {
--- 				buildScripts = {
--- 					enable = true,
--- 				},
--- 			},
--- 			procMacro = {
--- 				enable = true
--- 			},
--- 		},
--- 	},
--- 	capabilities = capabilities,
--- }
+plugin['rust_analyzer'].setup {
+	on_attach = on_attach,
+	flags = lsp_flags,
+	-- Server-specific settings...
+	settings = {
+		['rust-analyzer'] = {
+			completion = {
+				addCallParenthesis = true,
+				addCallArgumentSnippets = false,
+			},
+			imports = {
+				granularity = {
+					group = 'module',
+				},
+				prefix = 'self',
+			},
+			cargo = {
+				buildScripts = {
+					enable = true,
+				},
+			},
+			procMacro = {
+				enable = true
+			},
+		},
+	},
+	capabilities = capabilities,
+}
 plugin['clangd'].setup {
 	cmd = {
 		'clangd',

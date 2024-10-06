@@ -94,7 +94,7 @@ vim.g.rustaceanvim = {
 			['rust-analyzer'] = {
 				-- enable clippy on save
 				checkOnSave = {
-					command = 'clippy',
+					command = 'check',
 				},
 				completion = {
 					addCallParenthesis = true,

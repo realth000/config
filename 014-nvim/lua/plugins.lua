@@ -87,7 +87,7 @@ return require('lazy').setup({
 	-- DEPRECATED
 	-- { 'simrat39/rust-tools.nvim', },
 
-	{ 'mrcjkb/rustaceanvim', },
+	-- { 'mrcjkb/rustaceanvim', },
 
 	{ "onsails/lspkind.nvim", },
 
