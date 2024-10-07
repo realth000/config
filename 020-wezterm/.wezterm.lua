@@ -192,8 +192,9 @@ config.window_frame = {
 		},
 		{
 			-- family = 'Noto Sans Mono CJK SC',
-			-- family = 'Sarasa Mono SC',
-			family = 'LXGW WenKai Mono GB',
+			family = 'Sarasa Mono SC',
+			-- family = 'LXGW WenKai Mono GB',
+			-- family = 'LXGW Neo XiHei',
 			-- family = 'Source Han Sans CN',
 			weight = 'DemiBold',
 			harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
@@ -311,8 +312,9 @@ config.font = wezterm.font_with_fallback {
 	},
 	{
 		-- family = 'Noto Sans Mono CJK SC',
-		-- family = 'Sarasa Mono SC',
-		family = 'LXGW WenKai Mono GB',
+		family = 'Sarasa Mono SC',
+		-- family = 'LXGW WenKai Mono GB',
+		-- family = 'lxgw neo xihei',
 		-- family = 'Source Han Sans CN',
 		-- 测试中文
 		weight = 'DemiBold',
