@@ -900,5 +900,9 @@ $env.config = {
             ]
         }
     ]
+    display_errors: {
+        exit_code: false
+        termination_signal: true
+    }
 }
 
