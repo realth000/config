@@ -58,6 +58,6 @@ Note: **Iosevka1204 has ligature for `!=`**
 
 ### Compatibility
 
-Latest update: 2024.06.13
+Latest update: 2024.10.09
 
-Compatible with Iosevka 30.1.2 and FontPatcher 3.2.1
+Compatible with Iosevka 31.8.0
