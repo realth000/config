@@ -396,19 +396,19 @@ $env.config = {
                 ]
             }
         }
-        {
-            name: ide_completion_menu
-            modifier: control
-            keycode: char_n
-            mode: [emacs vi_normal vi_insert]
-            event: {
-                until: [
-                    { send: menu name: ide_completion_menu }
-                    { send: menunext }
-                    { edit: complete }
-                ]
-            }
-        }
+        # {
+        #     name: ide_completion_menu
+        #     modifier: control
+        #     keycode: char_n
+        #     mode: [emacs vi_normal vi_insert]
+        #     event: {
+        #         until: [
+        #             { send: menu name: ide_completion_menu }
+        #             { send: menunext }
+        #             { edit: complete }
+        #         ]
+        #     }
+        # }
         {
             name: history_menu
             modifier: control
@@ -626,7 +626,7 @@ $env.config = {
         {
             name: move_down
             modifier: control
-            keycode: char_t
+            keycode: char_n
             mode: [emacs, vi_normal, vi_insert]
             event: {
                 until: [
@@ -902,7 +902,7 @@ $env.config = {
     ]
     display_errors: {
         exit_code: false
-        termination_signal: true
+        termination_signal: false
     }
 }
 
