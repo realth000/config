@@ -1,0 +1,69 @@
+#!/usr/bin/env nu
+
+let all_targets = [
+    {
+      target: "wz",
+      detail: "wezterm config",
+      file: $"($env.WEZTERM_CONFIG_PATH)"
+    },
+]
+
+# ec short for "edit config", a command similar to nushell built-in command "config".
+#
+# The goal of this command is to provide a convinient way to edit config files
+# files on different machines.
+#
+# All files are targets defined in environment variables so that can be variant on
+# different nushell installed machines.
+#
+# All targets are defined in environments.
+# Define them in $nu.default-conf-dir/custom_env.nu like:
+#
+# ```
+# "WEZTERM_CONFIG_PATH": $"($env.HOME)/.wezterm.lua"
+# ```
+#
+# for
+#
+# ```
+# nvim "$HOME/.wezterm.lua"
+# ```
+#
+# Usage "ec wz" to use $env.EDITOR edit wezterm config file defined in env
+# WEZTERM_CONFIG_PATH
+def main [
+    target?: string # Target config name
+    --print-targets (-p) # Print all available targets
+]: string -> nothing {
+    if $print_targets {
+        print ("All available targets:")
+        print ($all_targets)
+        exit 0
+    }
+
+    if ($env.EDITOR | is-empty) {
+        print ("failed to edit config: $env.EDITOR not set")
+        exit 1
+    }
+
+    if ($target | is-empty) {
+        print ("Target not set")
+        print ("")
+        print ("Hint:")
+        print ("* Use `ec <target>` to set which target config to edit")
+        print ("* Use `ec -p` to check all available config targets")
+        exit 2
+    }
+
+    let target_file: list<string> = $all_targets | where $it.target == $target | get file
+    if ($target_file | is-empty) {
+        print ($"failed to edit config: invalid target ($target)")
+        print ($"all available targets:")
+        print ($all_targets)
+        exit 3
+    }
+    let target_file: string = $target_file | first
+    exec $env.EDITOR $target_file
+}
+
+

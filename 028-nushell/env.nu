@@ -91,6 +91,7 @@ $env.PATH = (
   | split row (char esep)
   | append ($env.HOME | path join .cargo bin)
   | append ($env.HOME | path join .local bin)
+  | append ($nu.default-config-dir | path join bin)
   | uniq # filter so the paths are unique
 )
 
