@@ -186,7 +186,7 @@ config.window_frame = {
 			-- family = 'JetBrainsMono NFM',
 			-- weight = 'Bold',
 			-- family = 'Iosevka1204 Nerd Font Mono',
-			family = 'Iosevka1204 Extended',
+			family = 'Iosevka1204 Nerd Font Mono Extended',
 			weight = 'DemiBold',
 			harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
 		},
@@ -280,7 +280,7 @@ config.colors = {
 -- source_code_pro
 config.font = wezterm.font_with_fallback {
 	{
-		-- family = 'Iosevka1204 Extended',
+		family = 'Iosevka1204 Nerd Font Mono Extended',
 		-- family = 'ComicShannsMono Nerd Font Mono',
 		-- family = 'CaskaydiaCove Nerd Font Mono',
 		-- family = 'CodeNewRomanNerdFontMono',
@@ -300,7 +300,7 @@ config.font = wezterm.font_with_fallback {
 		-- family = 'MesloLGLNerdFontMono',
 		-- family = 'MesloLGMDZNerdFont',
 		-- family = 'MononokiNerdFont',
-		family = 'RecMonoCasualNerdFont',
+		-- family = 'RecMonoCasualNerdFont',
 		-- family = 'RecMonoSmCasualNerdFont', -- sm == smooth
 		-- family = 'RecMonoLinear Nerd Font',
 		-- family = 'RobotoMonoNerdFont',
