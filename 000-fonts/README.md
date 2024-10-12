@@ -56,6 +56,22 @@ Note: **Iosevka1204 has ligature for `!=`**
   for f in `find Iosevka1204_20240613/TTF-Extend -type f`; do ./fontpatcher/font-patcher $f --complete --quiet --mono --makegroups --outputdir ./Iosevka1204NFM_20240613 &; done; wait
   ```
 
+#### To patch on Windows
+
+With nushell, similar with powershel
+
+```nu
+# Install fontforge
+scoop install fontforge
+# Unzip and enter fontpatcher
+cd font-patcher
+mkdir ttf ttf_patched
+# Preapre unpatched fonts
+cp *.ttf ttf
+# Do the patch
+ls ttf | get name | each {|x| fontforge -script font-patcher $x --complete --quiet --mono --makegroups --outputdir ttf_patched}
+```
+
 ### Compatibility
 
 Latest update: 2024.10.09
