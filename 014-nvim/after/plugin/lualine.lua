@@ -1,6 +1,8 @@
 local status, plugin = pcall(require, 'lualine')
 if (not status) then return end
 
+local kanagawa_paper = require("lualine.themes.kanagawa-paper")
+
 -- All lualine theme map assosiated with nvim colorscheme
 local theme_map = {
 	-- Nightfly
@@ -29,6 +31,13 @@ local theme_map = {
 
 	-- Moonfly
 	["moonfly"] = "moonfly",
+
+	-- kanagawa-paper
+	["kanagawa-paper"] = kanagawa_paper,
+	["kanagawa"] = kanagawa_paper,
+	["kanagawa-wave"] = kanagawa_paper,
+	["kanagawa-dragon"] = kanagawa_paper,
+	["kanagawa-lotus"] = kanagawa_paper,
 }
 
 -- Fallback theme.

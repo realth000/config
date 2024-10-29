@@ -1,5 +1,5 @@
 -- Set floating window background color to transparent after loading colorscheme
-vim.api.nvim_set_hl(0, 'NormalFloat', {bg='None'})
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'None' })
 
 -- Setup colorscheme
 -- github_dark
@@ -31,9 +31,12 @@ vim.api.nvim_set_hl(0, 'NormalFloat', {bg='None'})
 -- monokai-pro-octagon
 -- monokai-pro-ristretto
 -- monokai-pro-spectrum
+-- kanagawa-paper
+-- kanagawa-wave
+-- kanagawa-dragon
+-- kanagawa-lotus
 
 local colorscheme = os.getenv('NVIM_CUSTOM_COLORSCHEME')
 if (colorscheme) then
 	vim.cmd('colorscheme ' .. colorscheme)
 end
-

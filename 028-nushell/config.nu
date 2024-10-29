@@ -899,6 +899,17 @@ $env.config = {
               { send: Enter }
             ]
         }
+        {
+            name: prepend_sudo
+            modifier: alt
+            keycode: char_/
+            mode: emacs
+            event: [
+              { edit: MoveToStart }
+              { edit: InsertString, value: "sudo " }
+              { edit: MoveToEnd }
+            ]
+        }
     ]
     display_errors: {
         exit_code: false

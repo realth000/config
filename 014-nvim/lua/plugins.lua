@@ -40,7 +40,8 @@ return require('lazy').setup({
 		{ 'rose-pine/neovim',          name = 'rose-pine', },
 		{ 'kepano/flexoki-neovim',     name = 'flexoki', },
 		{ "bluz71/vim-moonfly-colors", name = "moonfly", },
-
+		{ 'rebelot/kanagawa.nvim' },
+		{ 'sho-87/kanagawa-paper.nvim' },
 	},
 
 	-- nvim-tree
