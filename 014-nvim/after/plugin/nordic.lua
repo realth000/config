@@ -9,7 +9,7 @@ plugin.setup({
 	-- Enable italic comments.
 	italic_comments = true,
 	-- Enable general editor background transparency.
-	transparent = false,
+	transparent = true,
 	-- Enable brighter float border.
 	bright_border = false,
 	-- Reduce the overall amount of blue in the theme (diverges from base Nord).
