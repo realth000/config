@@ -92,9 +92,14 @@ function tab_title(tab_info)
 	if title and #title > 0 then
 		return title
 	end
+	local start = string.find(tab_info.active_pane.title, '>')
+	if start then
+		return '[]' .. tab_info.tab_index + 1 .. ']' .. string.sub(tab_info.active_pane.title, start)
+	else
+		return '[' .. tab_info.tab_index + 1 .. '] ' .. tab_info.active_pane.title
+	end
 	-- Otherwise, use the title from the active pane
 	-- in that tab
-	return tab_info.active_pane.title
 end
 
 wezterm.on(
