@@ -1,7 +1,7 @@
 local status, plugin = pcall(require, 'lualine')
 if (not status) then return end
 
-local kanagawa_paper = require("lualine.themes.kanagawa-paper")
+local kanagawa_paper = require("lualine.themes.kanagawa-paper-ink")
 
 -- All lualine theme map assosiated with nvim colorscheme
 local theme_map = {
