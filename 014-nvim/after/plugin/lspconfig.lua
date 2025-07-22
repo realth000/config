@@ -85,10 +85,11 @@ plugin['pyright'].setup {
 	flags = lsp_flags,
 	capabilities = capabilities,
 }
-plugin['ts_ls'].setup {
-	on_attach = on_attach,
-	flags = lsp_flags,
-}
+
+-- plugin['ts_ls'].setup {
+-- 	on_attach = on_attach,
+-- 	flags = lsp_flags,
+-- }
 -- Use https://github.com/mrcjkb/rustaceanvim instead
 plugin['rust_analyzer'].setup {
 	on_attach = on_attach,
@@ -202,14 +203,21 @@ plugin['lua_ls'].setup {
 		},
 	},
 }
-plugin['volar'].setup {
+
+-- plugin['volar'].setup {
+-- 	on_attach = on_attach,
+-- 	single_file_support = true,
+-- 	capabilities = capabilities,
+-- 	filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
+-- }
+
+plugin['nushell'].setup {
 	on_attach = on_attach,
 	single_file_support = true,
 	capabilities = capabilities,
-	filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
 }
 
-plugin['nushell'].setup {
+plugin['biome'].setup {
 	on_attach = on_attach,
 	single_file_support = true,
 	capabilities = capabilities,
