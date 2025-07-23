@@ -178,31 +178,31 @@ plugin['zls'].setup {
 	single_file_support = true,
 	capabilities = capabilities,
 }
-plugin['lua_ls'].setup {
-	on_attach = on_attach,
-	single_file_support = true,
-	capabilities = capabilities,
-	settings = {
-		Lua = {
-			diagnostics = {
-				-- Get the language server to recognize the `vim` global
-				globals = {
-					'vim',
-					'require',
-				},
-			},
-			workspace = {
-				-- Make the server aware of Neovim runtime files
-				library = vim.api.nvim_get_runtime_file('', true),
-				checkThirdParty = false,
-			},
-			-- Do not send telemetry data containing a randomized but unique identifier
-			telemetry = {
-				enable = false,
-			},
-		},
-	},
-}
+-- plugin['lua_ls'].setup {
+-- 	on_attach = on_attach,
+-- 	single_file_support = true,
+-- 	capabilities = capabilities,
+-- 	settings = {
+-- 		Lua = {
+-- 			diagnostics = {
+-- 				-- Get the language server to recognize the `vim` global
+-- 				globals = {
+-- 					'vim',
+-- 					'require',
+-- 				},
+-- 			},
+-- 			workspace = {
+-- 				-- Make the server aware of Neovim runtime files
+-- 				library = vim.api.nvim_get_runtime_file('', true),
+-- 				checkThirdParty = false,
+-- 			},
+-- 			-- Do not send telemetry data containing a randomized but unique identifier
+-- 			telemetry = {
+-- 				enable = false,
+-- 			},
+-- 		},
+-- 	},
+-- }
 
 -- plugin['volar'].setup {
 -- 	on_attach = on_attach,
