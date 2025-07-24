@@ -93,7 +93,7 @@ not_executable_symbol = '⨯ '
 not_found_symbol = '⨯ '
 sigint_symbol = '⨯ '
 signal_symbol = '⨯ '
-format = '[$symbol$signal_name$int]($style) '
+format = '[$symbol$int ]($style)'
 map_symbol = true
 disabled = false
 
@@ -107,8 +107,10 @@ show_milliseconds = true
 format = "[](bg:#8800dd fg:#242424)[  $duration ](bg:#8800dd fg:#ffffff)[](bg:#242424 fg:#8800dd)"
 
 [character] # 此模块名称为 'character'
-success_symbol = '[✿](bold #3a86ff)'
-error_symbol = '[✿](bold #e01849)'
+# success_symbol = '[✿](bold #3a86ff)'
+# error_symbol = '[✿](bold #e01849)'
+success_symbol = '[->](bold #3a86ff)'
+error_symbol = '[->](bold #e01849)'
 
 [package]
 disabled = true
@@ -116,5 +118,6 @@ disabled = true
 [shell]
 zsh_indicator = '\[zsh\]'
 nu_indicator = '\[nu\]'
-style = 'cyan bold'
+style = 'cyan bold bg:#242424'
+format = '[$indicator ]($style)'
 disabled = false
