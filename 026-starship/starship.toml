@@ -109,8 +109,8 @@ format = "[](bg:#8800dd fg:#242424)[  $duration ](bg:#8800dd fg:#ffffff)[�
 [character] # 此模块名称为 'character'
 # success_symbol = '[✿](bold #3a86ff)'
 # error_symbol = '[✿](bold #e01849)'
-success_symbol = '[->](bold #3a86ff)'
-error_symbol = '[->](bold #e01849)'
+success_symbol = '[](bold #3a86ff)'
+error_symbol = '[](bold #e01849)'
 
 [package]
 disabled = true
