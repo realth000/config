@@ -1,3 +1,6 @@
+local env_no_lsp = os.getenv("NVIM_NO_LSP")
+if env_no_lsp then return end
+
 local lsp_status, plugin = pcall(require, 'lspconfig')
 if (not lsp_status) then return end
 
