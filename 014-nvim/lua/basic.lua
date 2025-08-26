@@ -49,6 +49,7 @@ vim.keymap.set('n', 'ca|', function() ChangeAppend('|') end)
 vim.cmd [[command FW :lua vim.lsp.buf.format(); vim.cmd('w')]]
 vim.cmd [[command SI :lua vim.cmd("IBLEnable"); vim.cmd("set list")]]
 vim.cmd [[command NI :lua vim.cmd("IBLDisable"); vim.cmd("set nolist")]]
+vim.cmd [[command RD :lua vim.cmd("RenderMarkdown toggle")]]
 
 -- Cursor style
 

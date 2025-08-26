@@ -139,4 +139,10 @@ return require('lazy').setup({
 	{
 		'LhKipp/nvim-nu',
 	},
+
+	-- Markdown
+	{
+		'MeanderingProgrammer/render-markdown.nvim',
+		dependencies = { 'nvim-treesitter/nvim-treesitter' }, -- if you use the mini.nvim suite
+	}
 })
