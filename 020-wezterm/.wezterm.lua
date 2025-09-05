@@ -75,7 +75,7 @@ local SOLID_LEFT_ARROW = wezterm.nerdfonts.pl_right_hard_divider
 -- The filled in variant of the > symbol
 local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
 
-config.tab_max_width = 30
+config.tab_max_width = 35
 -- config.max_width = 30
 config.tab_bar_at_bottom = true
 -- fancy bar management may be deprecated in future according to
@@ -86,26 +86,27 @@ config.use_fancy_tab_bar = false
 -- It prefers the title that was set via `tab:set_title()`
 -- or `wezterm cli set-tab-title`, but falls back to the
 -- title of the active pane in that tab.
-function tab_title(tab_info)
+local function tab_title(tab_info)
 	local title = tab_info.tab_title
 	-- if the tab title is explicitly set, take that
 	if title and #title > 0 then
 		return title
 	end
+	-- Otherwise, use the title from the active pane
+	-- in that tab
+	-- return tab_info.tab_index+1 .. ' ' .. tab_info.active_pane.title
+	-- return tab_info.tab_index+1 .. ' ' .. string.sub(tab_info.active_pane.title, -20)
 	local start = string.find(tab_info.active_pane.title, '>')
 	if start then
-		return '[]' .. tab_info.tab_index + 1 .. ']' .. string.sub(tab_info.active_pane.title, start)
+		return '[' .. tab_info.tab_index + 1 .. ']' .. string.sub(tab_info.active_pane.title, start + 1)
 	else
 		return '[' .. tab_info.tab_index + 1 .. '] ' .. tab_info.active_pane.title
 	end
-	-- Otherwise, use the title from the active pane
-	-- in that tab
 end
 
 wezterm.on(
 	'format-tab-title',
 	function(tab, tabs, panes, config, hover, max_width)
-		local title = tab_title(tab)
 		local edge_background1 = 'transparent'
 		local edge_background2 = 'transparent'
 		local edge_background3 = 'transparent'
@@ -210,11 +211,19 @@ config.window_frame = {
 	},
 }
 
-config.font_size = 13.5
+config.background = {
+	{
+		source = {
+			File = '/data/Storage/Picture/pic/lock/001.png'
+		},
+		hsb = { brightness = 0.04 },
+	}
+}
+config.font_size = 14.5
 config.show_new_tab_button_in_tab_bar = false
-config.window_background_opacity = 0.92
-config.text_background_opacity = 0.92
-config.cursor_thickness = "200%"
+-- config.window_background_opacity = 0.92
+-- config.text_background_opacity = 0.92
+config.cursor_thickness = "100%"
 -- This blink rate config will override all blink settings in other software
 -- e.g. vim.opt.guicursor="n-v-c-sm:block,ci-ve:ver25,r-cr-o:hor20,i:block-blinkwait100-blinkon400-blinkoff400"
 -- Blink always stuck when wayland enabled.
@@ -285,16 +294,16 @@ config.colors = {
 -- source_code_pro
 config.font = wezterm.font_with_fallback {
 	{
-		family = 'Iosevka1204 Nerd Font Mono Extended',
+		family = 'Iosevka1204 Nerd Font Mono Extended Medium',  -- good
 		-- family = 'ComicShannsMono Nerd Font Mono',
-		-- family = 'CaskaydiaCove Nerd Font Mono',
+		-- family = 'CaskaydiaCove Nerd Font Mono',  -- good
 		-- family = 'CodeNewRomanNerdFontMono',
 		-- family = 'ComicShannsMonoNerdFontMono',
 		-- family = 'FantasqueSansMNerdFontMono',
 		-- family = 'FiraMonoNerdFont',
-		-- family = 'GeistMonoNerdFont',
+		-- family = 'GeistMonoNerdFont', -- good
 		-- family = 'GoMonoNerdFont',
-		-- family = 'HackNerdFontMono',
+		-- family = 'HackNerdFontMono',  -- good
 		-- family = 'HasklugNerdFont',
 		-- family = 'iMWritingMonoNerdFontMono',
 		-- family = 'IntoneMonoNerdFontMono',
@@ -305,12 +314,13 @@ config.font = wezterm.font_with_fallback {
 		-- family = 'MesloLGLNerdFontMono',
 		-- family = 'MesloLGMDZNerdFont',
 		-- family = 'MononokiNerdFont',
-		-- family = 'RecMonoCasualNerdFont',
-		-- family = 'RecMonoSmCasualNerdFont', -- sm == smooth
-		-- family = 'RecMonoLinear Nerd Font',
-		-- family = 'RobotoMonoNerdFont',
+		-- family = 'RecMonoCasual Nerd Font Mono', -- good
+		-- family = 'RecMonoSmCasual Nerd Font Mono', -- sm == smooth
+		-- family = 'RecMonoLinear Nerd Font Mono',
+		-- family = 'RobotoMonoNerdFont', -- good
 		-- family = 'SauceCodeProNerdFontMono',
 		-- family = 'VictorMonoNerdFontMono',
+		-- family = 'AdwaitaMono Nerd Font Mono',
 		-- weight = 'DemiBold',
 		weight = 'Medium',
 		harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
