@@ -225,3 +225,9 @@ plugin['biome'].setup {
 	single_file_support = true,
 	capabilities = capabilities,
 }
+
+plugin['gleam'].setup {
+	on_attach = on_attach,
+	single_file_support = true,
+	capabilities = capabilities,
+}

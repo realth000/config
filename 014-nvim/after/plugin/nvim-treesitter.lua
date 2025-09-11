@@ -10,6 +10,7 @@ plugin.setup({
 		'diff',
 		'doxygen',
 		'gitcommit',
+		'gleam',
 		'go',
 		'hyprlang',
 		'javascript',
