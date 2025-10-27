@@ -4,6 +4,9 @@ if env_no_lsp then return end
 local nvim_version = vim.version()
 local setup_lang
 
+-- Indicates current nvim version is not less than 0.11 or not.
+local nvim_version_0_11 = false
+
 if nvim_version.major == 0 and nvim_version.minor < 11 then
 	-- nvim < 0.11.0
 	local lsp_status, plugin = pcall(require, 'lspconfig')
@@ -14,10 +17,12 @@ if nvim_version.major == 0 and nvim_version.minor < 11 then
 	end
 else
 	-- nvim >= 0.11.0
+	nvim_version_0_11 = true
 	local plugin = vim.lsp.config
 	if plugin == nil then return end
 	setup_lang = function(lang, config)
 		-- Use nvim provided api.
+		vim.lsp.enable(lang)
 		plugin[lang] = config
 	end
 end
@@ -64,10 +69,41 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
 	vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 
-	local signs = { Error = '⨯', Warn = '⚠', Hint = '󰌶', Info = '󰌶' }
-	for type, icon in pairs(signs) do
-		local hl = 'DiagnosticSign' .. type
-		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+	-- nvim deprecated `vim.fn.sign_define` since 0.11, use the following code to do the same functionality.
+	-- ref: https://www.reddit.com/r/neovim/comments/1jotzfm/what_is_alternative_for_sign_define_for_neovim_011/
+	if nvim_version_0_11 then
+		-- Config fields ref to https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.Opts
+		vim.diagnostic.config({
+			-- Enable inline diagnostic message by default. Why nvim disabled it.
+			virtual_text = true,
+			-- virtual_lines = true,
+			signs = {
+				text = {
+					[vim.diagnostic.severity.ERROR] = '⨯',
+					[vim.diagnostic.severity.WARN] = '⚠',
+					[vim.diagnostic.severity.INFO] = '󰌶',
+					[vim.diagnostic.severity.HINT] = '󰌶',
+				},
+				linehl = {
+					[vim.diagnostic.severity.ERROR] = 'Error',
+					[vim.diagnostic.severity.WARN] = 'Warn',
+					[vim.diagnostic.severity.INFO] = 'Info',
+					[vim.diagnostic.severity.HINT] = 'Hint',
+				},
+				numhl = {
+					[vim.diagnostic.severity.ERROR] = 'Error',
+					[vim.diagnostic.severity.WARN] = 'Warn',
+					[vim.diagnostic.severity.INFO] = 'Info',
+					[vim.diagnostic.severity.HINT] = 'Hint',
+				},
+			},
+		})
+	else
+		local signs = { Error = '⨯', Warn = '⚠', Hint = '󰌶', Info = '󰌶' }
+		for type, icon in pairs(signs) do
+			local hl = 'DiagnosticSign' .. type
+			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+		end
 	end
 end
 
