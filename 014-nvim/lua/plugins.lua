@@ -144,5 +144,16 @@ return require('lazy').setup({
 	{
 		'MeanderingProgrammer/render-markdown.nvim',
 		dependencies = { 'nvim-treesitter/nvim-treesitter' }, -- if you use the mini.nvim suite
-	}
+	},
+
+	-- Select python venv
+	-- Requires `fd` in PATH: https://github.com/sharkdp/fd
+	{
+		"linux-cultist/venv-selector.nvim",
+		dependencies = {
+			"neovim/nvim-lspconfig",
+			{ "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } }, -- optional: you can also use fzf-lua, snacks, mini-pick instead.
+		},
+		ft = "python",
+	},
 })
