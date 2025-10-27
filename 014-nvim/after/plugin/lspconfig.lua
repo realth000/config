@@ -1,11 +1,36 @@
 local env_no_lsp = os.getenv("NVIM_NO_LSP")
 if env_no_lsp then return end
 
-local lsp_status, plugin = pcall(require, 'lspconfig')
-if (not lsp_status) then return end
+local nvim_version = vim.version()
+local setup_lang
+
+if nvim_version.major == 0 and nvim_version.minor < 11 then
+	-- nvim < 0.11.0
+	local lsp_status, plugin = pcall(require, 'lspconfig')
+	if (not lsp_status) then return end
+	setup_lang = function(lang, config)
+		-- Use legacy `require` method.
+		plugin[lang].setup(config)
+	end
+else
+	-- nvim >= 0.11.0
+	local plugin = vim.lsp.config
+	if plugin == nil then return end
+	setup_lang = function(lang, config)
+		-- Use nvim provided api.
+		plugin[lang] = config
+	end
+end
 
 local cmp_status, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 if (not cmp_status) then return end
+
+-- Note that single file support is only needed to configure when
+-- nvim is older than 0.11.0. Since 0.11.0, the `vim.lsp.config` API
+-- enables single file support by default.
+-- Remove this value when setup languages after we remove support for
+-- nvim older than 0.11.0.
+local single_file_support = true
 
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
@@ -83,18 +108,19 @@ vim.diagnostic.config {
 ------------------------------------------------
 -- Set up lsp servers.
 
-plugin['pyright'].setup {
+setup_lang('pyright', {
 	on_attach = on_attach,
 	flags = lsp_flags,
 	capabilities = capabilities,
-}
+})
 
--- plugin['ts_ls'].setup {
+-- setup_lang('ts_ls', {
 -- 	on_attach = on_attach,
 -- 	flags = lsp_flags,
--- }
+-- })
+
 -- Use https://github.com/mrcjkb/rustaceanvim instead
-plugin['rust_analyzer'].setup {
+setup_lang('rust_analyzer', {
 	on_attach = on_attach,
 	flags = lsp_flags,
 	-- Server-specific settings...
@@ -121,8 +147,9 @@ plugin['rust_analyzer'].setup {
 		},
 	},
 	capabilities = capabilities,
-}
-plugin['clangd'].setup {
+})
+
+setup_lang('clangd', {
 	cmd = {
 		'clangd',
 		'--clang-tidy',
@@ -136,54 +163,63 @@ plugin['clangd'].setup {
 		'c',
 		'cpp',
 	},
-	single_file_support = true,
+	single_file_support = single_file_support,
 	capabilities = capabilities,
-}
-plugin['gopls'].setup {
+})
+
+setup_lang('gopls', {
 	on_attach = on_attach,
 	flags = lsp_flags,
-	single_file_support = true,
+	single_file_support = single_file_support,
 	capabilities = capabilities,
-}
-plugin['cmake'].setup {
+})
+
+setup_lang('cmake', {
 	on_attach = on_attach,
-	single_file_support = true,
+	single_file_support = single_file_support,
 	capabilities = capabilities,
-}
-plugin['dartls'].setup {
+})
+
+setup_lang('dartls', {
 	on_attach = on_attach,
 	flags = lsp_flags,
-	single_file_support = true,
+	single_file_support = single_file_support,
 	capabilities = capabilities,
-}
-plugin['marksman'].setup {
+})
+
+setup_lang('marksman', {
 	on_attach = on_attach,
-	single_file_support = true,
+	single_file_support = single_file_support,
 	capabilities = capabilities,
-}
-plugin['bashls'].setup {
+})
+
+setup_lang('bashls', {
 	on_attach = on_attach,
-	single_file_support = true,
+	single_file_support = single_file_support,
 	capabilities = capabilities,
-}
-plugin['hls'].setup {
+})
+
+setup_lang('hls', {
 	on_attach = on_attach,
-	single_file_support = true,
+	single_file_support = single_file_support,
 	capabilities = capabilities,
-}
-plugin['vala_ls'].setup {
+})
+
+setup_lang('vala_ls', {
 	on_attach = on_attach,
-	single_file_support = true,
+	single_file_support = single_file_support,
 	capabilities = capabilities,
-}
-plugin['zls'].setup {
+})
+
+setup_lang('zls', {
 	on_attach = on_attach,
-	single_file_support = true,
+	single_file_support = single_file_support,
 	capabilities = capabilities,
-}
--- plugin['lua_ls'].setup {
+})
+
+-- setup_lang('lua_ls', {
 -- 	on_attach = on_attach,
--- 	single_file_support = true,
+-- 	single_file_support = single_file_support,
 -- 	capabilities = capabilities,
 -- 	settings = {
 -- 		Lua = {
@@ -205,41 +241,34 @@ plugin['zls'].setup {
 -- 			},
 -- 		},
 -- 	},
--- }
+-- })
 
--- plugin['volar'].setup {
--- 	on_attach = on_attach,
--- 	single_file_support = true,
--- 	capabilities = capabilities,
--- 	filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
--- }
-
-plugin['nushell'].setup {
+setup_lang('nushell', {
 	on_attach = on_attach,
-	single_file_support = true,
+	single_file_support = single_file_support,
 	capabilities = capabilities,
-}
+})
 
-plugin['biome'].setup {
+setup_lang('biome', {
 	on_attach = on_attach,
-	single_file_support = true,
+	single_file_support = single_file_support,
 	capabilities = capabilities,
-}
+})
 
-plugin['gleam'].setup {
+setup_lang('gleam', {
 	on_attach = on_attach,
-	single_file_support = true,
+	single_file_support = single_file_support,
 	capabilities = capabilities,
-}
+})
 
-plugin['gleam'].setup {
+setup_lang('gleam', {
 	on_attach = on_attach,
-	single_file_support = true,
+	single_file_support = single_file_support,
 	capabilities = capabilities,
-}
+})
 
-plugin['csharp_ls'].setup {
+setup_lang('csharp_ls', {
 	on_attach = on_attach,
-	single_file_support = true,
+	single_file_support = single_file_support,
 	capabilities = capabilities,
-}
+})
