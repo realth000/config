@@ -101,7 +101,7 @@ plugin.setup({
     },
     latex = {
         -- Turn on / off latex rendering.
-        enabled = true,
+        enabled = false,
         -- Additional modes to render latex.
         render_modes = false,
         -- Executable used to convert latex formula to rendered unicode.
@@ -116,8 +116,6 @@ plugin.setup({
         top_pad = 0,
         -- Number of empty lines below latex blocks.
         bottom_pad = 0,
-        -- Always use virtual lines for rendering instead of attempting to inline.
-        virtual = false,
     },
     on = {
         -- Called when plugin initially attaches to a buffer.
