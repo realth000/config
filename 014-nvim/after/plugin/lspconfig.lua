@@ -241,11 +241,11 @@ setup_lang('hls', {
 	capabilities = capabilities,
 })
 
-setup_lang('vala_ls', {
-	on_attach = on_attach,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
-})
+-- setup_lang('vala_ls', {
+-- 	on_attach = on_attach,
+-- 	single_file_support = single_file_support,
+-- 	capabilities = capabilities,
+-- })
 
 setup_lang('zls', {
 	on_attach = on_attach,
@@ -304,6 +304,18 @@ setup_lang('gleam', {
 })
 
 setup_lang('csharp_ls', {
+	on_attach = on_attach,
+	single_file_support = single_file_support,
+	capabilities = capabilities,
+})
+
+setup_lang('jsonls', {
+	on_attach = on_attach,
+	single_file_support = single_file_support,
+	capabilities = capabilities,
+})
+
+setup_lang('yamlls', {
 	on_attach = on_attach,
 	single_file_support = single_file_support,
 	capabilities = capabilities,
