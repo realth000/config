@@ -24,7 +24,35 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
 end)
 
 vim.opt.list = true
-vim.opt.listchars:append 'space:⋅'
+-- We do not use the legacy vim style listchars config anymore:
+-- vim.opt.listchars:append 'space:⋅'
+--
+-- Use nvim style instead:
+vim.opt.listchars = {
+	--     '•'
+	--     '·'
+	--     '␣'
+	-- space = '·',
+
+	-- Tab need to have 2 characters.
+	-- '» '
+	-- '▸ '
+	-- '▹ '
+	tab = '» ',
+
+	-- Available new line symbols: https://stackoverflow.com/questions/18927672/newline-symbol-unicode-character
+	-- ⤶ U+2936 ARROW POINTING DOWNWARDS THEN CURVING LEFTWARDS
+	-- ↵ U+21B5 DOWNWARDS ARROW WITH CORNER LEFTWARDS
+	-- ⏎ U+23CE RETURN SYMBOL
+	-- ↲ U+21B2 DOWNWARDS ARROW WITH TIP LEFTWARDS
+	-- ↩ U+21A9 LEFTWARDS ARROW WITH HOOK
+	-- eol = '⤶',
+
+	-- Trailing spaces
+	-- '·'
+	-- '␣'
+	trail = '␣',
+}
 vim.g.rainbow_delimiters = { highlight = highlight }
 
 plugin.setup {

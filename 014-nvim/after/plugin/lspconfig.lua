@@ -190,7 +190,7 @@ setup_lang('clangd', {
 		'clangd',
 		'--clang-tidy',
 		'--function-arg-placeholders=false', -- Disable clangd completion function parameters.
-		'--fallback-style=LLVM',       -- Set default format style to Google if no .clang-format found.
+		'--fallback-style=None',       -- Set default format style to Google if no .clang-format found.
 		'--header-insertion=never',
 	},
 	on_attach = on_attach,
