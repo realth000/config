@@ -21,3 +21,5 @@ plugin.setup({
 		}
 	}
 })
+
+vim.keymap.set('n', '<F3>', '<Cmd>NvimTreeToggle<CR>')

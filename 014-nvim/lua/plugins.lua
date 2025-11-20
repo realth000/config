@@ -45,8 +45,19 @@ return require('lazy').setup({
 	},
 
 	-- nvim-tree
-	{ 'kyazdani42/nvim-tree.lua' },
-	{ 'kyazdani42/nvim-web-devicons', lazy = true },
+	-- { 'kyazdani42/nvim-tree.lua' },
+	-- { 'kyazdani42/nvim-web-devicons', lazy = true },
+
+	-- neo-tree
+	{
+		"nvim-neo-tree/neo-tree.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			"nvim-tree/nvim-web-devicons", -- optional, but recommended
+		},
+		lazy = false, -- neo-tree will lazily load itself
+	},
 
 	-- lualine
 	{

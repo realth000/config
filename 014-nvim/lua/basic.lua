@@ -34,8 +34,6 @@ vim.o.background = 'dark'
 -- 	vim.g.neovide_remember_window_size = false
 -- end
 
-vim.keymap.set('n', '<F3>', '<Cmd>NvimTreeToggle<CR>')
-
 -- Content change keymap for other characters.
 vim.keymap.set('n', 'di|', function() DeleteInsert('|') end)
 vim.keymap.set('n', 'da|', function() DeleteAppend('|') end)
