@@ -320,3 +320,9 @@ setup_lang('yamlls', {
 	single_file_support = single_file_support,
 	capabilities = capabilities,
 })
+
+setup_lang('kotlin_language_server', {
+	on_attach = on_attach,
+	single_file_support = single_file_support,
+	capabilities = capabilities,
+})
