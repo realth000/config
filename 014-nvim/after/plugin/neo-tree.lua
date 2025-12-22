@@ -135,7 +135,8 @@ plugin.setup({
 			},
 			['<2-LeftMouse>'] = 'open',
 			['<cr>'] = 'open',
-			['o'] = 'open',
+			-- ['o'] = 'open',
+			['o'] = 'open_with_window_picker',
 			['<esc>'] = 'cancel', -- close preview or floating neo-tree window
 			['P'] = {
 				'toggle_preview',
