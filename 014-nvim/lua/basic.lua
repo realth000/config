@@ -62,8 +62,8 @@ vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,i:ver25-blinkwait
 --
 -- Autocmd usage refer from:
 -- https://github.com/lewis6991/gitsigns.nvim/blob/d927caa075df63bf301d92f874efb72fd22fd3b4/lua/gitsigns.lua#L130
-vim.api.nvim_create_autocmd({ 'VimResized', 'BufRead' }, {
-	callback = function()
-		vim.cmd [[set scroll=10]]
-	end,
-})
+-- vim.api.nvim_create_autocmd({ 'VimResized', 'BufRead' }, {
+-- 	callback = function()
+-- 		vim.cmd [[set scroll=10]]
+-- 	end,
+-- })
