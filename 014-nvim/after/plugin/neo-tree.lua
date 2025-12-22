@@ -206,7 +206,7 @@ plugin.setup({
 	nesting_rules = {},
 	filesystem = {
 		filtered_items = {
-			visible = false, -- when true, they will just be displayed differently than normal items
+			visible = true, -- when true, they will just be displayed differently than normal items
 			hide_dotfiles = true,
 			hide_gitignored = false,
 			hide_ignored = false, -- hide files that are ignored by other gitignore-like files
