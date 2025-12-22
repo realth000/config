@@ -42,6 +42,7 @@ return require('lazy').setup({
 		{ "bluz71/vim-moonfly-colors", name = "moonfly", },
 		{ 'rebelot/kanagawa.nvim' },
 		{ 'sho-87/kanagawa-paper.nvim' },
+		{ 'bgwdotdev/gleam-theme-nvim' },
 	},
 
 	-- nvim-tree

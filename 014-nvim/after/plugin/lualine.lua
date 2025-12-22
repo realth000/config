@@ -38,6 +38,9 @@ local theme_map = {
 	["kanagawa-wave"] = kanagawa_paper,
 	["kanagawa-dragon"] = kanagawa_paper,
 	["kanagawa-lotus"] = kanagawa_paper,
+
+	-- gleam
+	["gleam"] = "gleam",
 }
 
 -- Fallback theme.
