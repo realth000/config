@@ -1,6 +1,8 @@
 {
   "settingsSync.ignoredSettings": [
-    "editor.fontFamily"
+    "editor.fontFamily",
+    "editor.fontSize",
+    "editor.fontWeight"
   ],
   "workbench.startupEditor": "newUntitledFile",
   "explorer.confirmDelete": false,
@@ -9,10 +11,9 @@
     "default": "right",
     "jupyter-notebook": "left"
   },
-  "editor.fontFamily": "'Iosevka1204 Nerd Font Mono', 'Lilex Nerd Font Mono', 'RecMonoLinear Nerd Font', 'Sarasa Mono SC'",
-  "editor.fontWeight": "500",
-  "editor.fontSize": 18.0,
-  "editor.codeLensFontFamily": "'JetBrainsMono NFM', 'Sarasa Mono SC'",
+  "editor.fontFamily": "'GeistMono Nerd Font Mono',  'Iosevka1204 Nerd Font Mono', 'Lilex Nerd Font Mono',  'RecMonoLinear Nerd Font', 'Sarasa Mono SC'",
+  "editor.fontWeight": "normal",
+  "editor.fontSize": 19,
   "terminal.integrated.defaultProfile.windows": "PowerShell",
   "editor.insertSpaces": true,
   "editor.tabSize": 4,
@@ -37,9 +38,6 @@
   },
   "editor.minimap.showSlider": "always",
   "cmake.configureOnOpen": true,
-  "[cpp]": {
-    "editor.defaultFormatter": "xaver.clang-format"
-  },
   "vim.useCtrlKeys": true,
   "vim.mouseSelectionGoesIntoVisualMode": false,
   "vim.autoindent": true,
@@ -81,7 +79,6 @@
   "output.smartScroll.enabled": false,
   "editor.stickyScroll.enabled": false,
   "liveServer.settings.donotShowInfoMsg": true,
-  "workbench.colorTheme": "Catppuccin Mocha",
   "git.autofetch": false,
   "cmake.showOptionsMovedNotification": false,
   "vim.normalModeKeyBindingsNonRecursive": [
@@ -139,7 +136,7 @@
         "d"
       ],
       "commands": [
-        "editor.action.marker.prevInFiles"
+        "editor.action.marker.prev"
       ]
     },
     {
@@ -148,7 +145,7 @@
         "d"
       ],
       "commands": [
-        "editor.action.marker.nextInFiles"
+        "editor.action.marker.next"
       ]
     }
   ],
@@ -164,7 +161,6 @@
   "[markdown]": {
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
   },
-  "chat.commandCenter.enabled": false,
   "dart.lineLength": 120,
   "gitblame.inlineMessageEnabled": true,
   "gitblame.inlineMessageFormat": "Blame ${author.name} (${time.ago}) ${commit.hash_short}",
@@ -172,11 +168,11 @@
   "rust-analyzer.lens.enable": false,
   "update.mode": "none",
   "settingsSync.ignoredExtensions": [
-    "rust-lang.rust-analyzer"
+    "rust-lang.rust-analyzer",
+    "github.codespaces"
   ],
   "kotlin.languageServer.enabled": false,
   "kotlin.debugAdapter.enabled": false,
-  "git.diffGutter": "all",
   "chat.agent.enabled": false,
   "telemetry.feedback.enabled": false,
   "chat.promptFiles": false,
@@ -188,17 +184,103 @@
   "explorer.confirmDragAndDrop": false,
   "extensions.autoUpdate": false,
   "rust-analyzer.inlayHints.typeHints.hideClosureParameter": true,
-  "gitlens.codeLens.enabled": false,
   "zig.zls.enabled": "on",
   "zig.zls.inlayHintsHideRedundantParamNames": true,
   "typescript.suggest.completeFunctionCalls": true,
   "[typescript]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
   "typescript.inlayHints.parameterTypes.enabled": true,
   "typescript.inlayHints.enumMemberValues.enabled": true,
   "typescript.inlayHints.variableTypes.enabled": true,
   "biome.suggestInstallingGlobally": false,
-  "editor.inlayHints.enabled": "offUnlessPressed"
+  "editor.inlayHints.enabled": "offUnlessPressed",
+  "chat.detectParticipant.enabled": false,
+  "chat.extensionTools.enabled": false,
+  "chat.implicitContext.enabled": {
+    "panel": "never"
+  },
+  "chat.instructionsFilesLocations": {
+    ".github/instructions": false
+  },
+  "chat.mcp.discovery.enabled": {
+    "claude-desktop": false,
+    "windsurf": false,
+    "cursor-global": false,
+    "cursor-workspace": false
+  },
+  "chat.sendElementsToChat.enabled": false,
+  "inlineChat.lineNaturalLanguageHint": false,
+  "inlineChat.holdToSpeech": false,
+  "inlineChat.accessibleDiffView": "off",
+  "dart.checkForSdkUpdates": false,
+  "zig.zls.enableArgumentPlaceholders": false,
+  "zig.zls.warnStyle": true,
+  "extensions.ignoreRecommendations": true,
+  "chat.mcp.access": "none",
+  "chat.disableAIFeatures": true,
+  "editor.cursorBlinking": "smooth",
+  "vim.cursorStylePerMode.insert": "line",
+  "workbench.colorTheme": "Gleam",
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "errorLens.enabled": true,
+  "errorLens.enabledDiagnosticLevels": [
+    "error",
+    "warning",
+    "info",
+    "hint"
+  ],
+  "errorLens.gutterIconsEnabled": true,
+  "[c]": {
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+  },
+  "python.analysis.typeCheckingMode": "standard",
+  "python.analysis.packageIndexDepths": [
+    {
+      "name": "sklearn",
+      "depth": 2
+    },
+    {
+      "name": "matplotlib",
+      "depth": 2
+    },
+    {
+      "name": "scipy",
+      "depth": 2
+    },
+    {
+      "name": "django",
+      "depth": 2
+    },
+    {
+      "name": "flask",
+      "depth": 2
+    },
+    {
+      "name": "fastapi",
+      "depth": 2
+    },
+    {
+      "name": "cuda",
+      "depth": 3,
+      "includeAllSymbols": true
+    }
+  ],
+  "clangd.arguments": [
+    "--clang-tidy",
+    "--function-arg-placeholders=false",
+    "--header-insertion=never"
+  ],
+  "C_Cpp.clang_format_fallbackStyle": "LLVM",
+  "C_Cpp.formatting": "vcFormat",
+  "window.title": "${activeEditorMedium}${separator}",
+  "files.associations": {
+    "*.toml": "toml"
+  },
+  "cmake.showConfigureWithDebuggerNotification": false,
+  "window.commandCenter": false,
+  "chat.commandCenter.enabled": false,
 }
