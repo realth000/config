@@ -211,14 +211,14 @@ config.window_frame = {
 	},
 }
 
-config.background = {
-	{
-		source = {
-			File = '/data/Storage/Picture/pic/lock/001.png'
-		},
-		hsb = { brightness = 0.04 },
-	}
-}
+-- config.background = {
+-- 	{
+-- 		source = {
+-- 			File = '/data/Storage/Picture/pic/lock/001.png'
+-- 		},
+-- 		hsb = { brightness = 0.04 },
+-- 	}
+-- }
 config.font_size = 14.5
 config.show_new_tab_button_in_tab_bar = false
 -- config.window_background_opacity = 0.92
@@ -265,6 +265,33 @@ config.colors = {
 --
 -- 测试中文
 --
+-- 2026.01.09 update:
+--
+-- "AdwaitaMono Nerd Font Mono",
+-- "CommitMono Nerd Font Mono",
+-- "CaskaydiaCove Nerd Font Mono",
+-- "Cousine Nerd Font Mono",
+-- "GeistMono Nerd Font Mono",
+-- "FiraCode Nerd Font Mono",
+-- "Hack Nerd Font Mono",
+-- "iMWritingMono Nerd Font Mono",
+-- "IntoneMono Nerd Font Mono",
+-- "Iosevka1204 Nerd Font Mono",
+-- "JetBrainsMono Nerd Font Mono",
+-- "Lilex Nerd Font Mono",
+-- "MartianMono Nerd Font Mono",
+-- "MonaspiceAr Nerd Font Mono",
+-- "MonaspiceKr Nerd Font Mono",
+-- "MonaspiceNe Nerd Font Mono",
+-- "MonaspiceXe Nerd Font Mono",
+-- "NotoSansM Nerd Font Mono",
+-- "RobotoMono Nerd Font Mono",
+-- "RecMonoCasual Nerd Font Mono",
+-- "RecMonoLinear Nerd Font Mono",
+-- "RecMonoSmCasual Nerd Font Mono",
+-- "Sarasa Mono SC",
+-- "D2CodingLigature Nerd Font" // Breaks cjk letters
+--
 -- Fonts from Nerd Fonts:
 --
 -- CascadiaCode
@@ -294,33 +321,30 @@ config.colors = {
 -- source_code_pro
 config.font = wezterm.font_with_fallback {
 	{
-		family = 'Iosevka1204 Nerd Font Mono Extended Medium',  -- good
-		-- family = 'ComicShannsMono Nerd Font Mono',
-		-- family = 'CaskaydiaCove Nerd Font Mono',  -- good
-		-- family = 'CodeNewRomanNerdFontMono',
-		-- family = 'ComicShannsMonoNerdFontMono',
-		-- family = 'FantasqueSansMNerdFontMono',
-		-- family = 'FiraMonoNerdFont',
-		-- family = 'GeistMonoNerdFont', -- good
-		-- family = 'GoMonoNerdFont',
-		-- family = 'HackNerdFontMono',  -- good
-		-- family = 'HasklugNerdFont',
-		-- family = 'iMWritingMonoNerdFontMono',
-		-- family = 'IntoneMonoNerdFontMono',
-		-- family = 'JetBrainsMonoNerdFont',
-		-- family = 'LiterationMonoNerdFontMono',
-		-- family = 'LilexNerdFontMono',
-		-- family = 'MartianMonoNerdFont',
-		-- family = 'MesloLGLNerdFontMono',
-		-- family = 'MesloLGMDZNerdFont',
-		-- family = 'MononokiNerdFont',
-		-- family = 'RecMonoCasual Nerd Font Mono', -- good
-		-- family = 'RecMonoSmCasual Nerd Font Mono', -- sm == smooth
-		-- family = 'RecMonoLinear Nerd Font Mono',
-		-- family = 'RobotoMonoNerdFont', -- good
-		-- family = 'SauceCodeProNerdFontMono',
-		-- family = 'VictorMonoNerdFontMono',
 		-- family = 'AdwaitaMono Nerd Font Mono',
+		-- family = 'CommitMono Nerd Font Mono',
+		-- family = 'CaskaydiaCove Nerd Font Mono',
+		-- family = 'Cousine Nerd Font Mono',
+		-- family = 'GeistMono Nerd Font Mono',
+		-- family = 'FiraCode Nerd Font Mono',
+		-- family = 'Hack Nerd Font Mono',
+		-- family = 'iMWritingMono Nerd Font Mono',
+		-- family = 'IntoneMono Nerd Font Mono',
+		family = 'Iosevka1204 Nerd Font Mono',
+		-- family = 'JetBrainsMono Nerd Font Mono',
+		-- family = 'Lilex Nerd Font Mono',
+		-- family = 'MartianMono Nerd Font Mono',
+		-- family = 'MonaspiceAr Nerd Font Mono',
+		-- family = 'MonaspiceKr Nerd Font Mono',
+		-- family = 'MonaspiceNe Nerd Font Mono',
+		-- family = 'MonaspiceXe Nerd Font Mono',
+		-- family = 'NotoSansM Nerd Font Mono',
+		-- family = 'RobotoMono Nerd Font Mono',
+		-- family = 'RecMonoCasual Nerd Font Mono',
+		-- family = 'RecMonoLinear Nerd Font Mono',
+		-- family = 'RecMonoSmCasual Nerd Font Mono',
+		-- family = 'Sarasa Mono SC',
+		-- family = 'D2CodingLigature Nerd Font' -- Breaks cjk letters
 		-- weight = 'DemiBold',
 		weight = 'Medium',
 		harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },

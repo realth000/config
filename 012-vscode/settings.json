@@ -11,9 +11,37 @@
     "default": "right",
     "jupyter-notebook": "left"
   },
-  "editor.fontFamily": "'GeistMono Nerd Font Mono',  'Iosevka1204 Nerd Font Mono', 'Lilex Nerd Font Mono',  'RecMonoLinear Nerd Font', 'Sarasa Mono SC'",
+  "editor.fontFamily": "'RecMonoSmCasual Nerd Font Mono', 'Sarasa Mono SC'",
+  "self.reserved.editor.fonFamily": [
+    "AdwaitaMono Nerd Font Mono",
+    "CommitMono Nerd Font Mono",
+    "CaskaydiaCove Nerd Font Mono",
+    "Cousine Nerd Font Mono",
+    "GeistMono Nerd Font Mono",
+    "FiraCode Nerd Font Mono",
+    "Hack Nerd Font Mono",
+    "Hasklug Nerd Font Mono",
+    "iMWritingMono Nerd Font Mono",
+    "IntoneMono Nerd Font Mono",
+    "Iosevka1204 Nerd Font Mono",
+    "JetBrainsMono Nerd Font Mono",
+    "Lilex Nerd Font Mono",
+    "LiterationMono Nerd Font Mono",
+    "MartianMono Nerd Font Mono",
+    "MonaspiceAr Nerd Font Mono",
+    "MonaspiceKr Nerd Font Mono",
+    "MonaspiceNe Nerd Font Mono",
+    "MonaspiceXe Nerd Font Mono",
+    "NotoSansM Nerd Font Mono",
+    "RobotoMono Nerd Font Mono",
+    "RecMonoCasual Nerd Font Mono",
+    "RecMonoLinear Nerd Font Mono",
+    "RecMonoSmCasual Nerd Font Mono",
+    "Sarasa Mono SC",
+    "D2CodingLigature Nerd Font # Breaks cjk letters"
+  ],
   "editor.fontWeight": "normal",
-  "editor.fontSize": 19,
+  "editor.fontSize": 18,
   "terminal.integrated.defaultProfile.windows": "PowerShell",
   "editor.insertSpaces": true,
   "editor.tabSize": 4,
@@ -57,8 +85,8 @@
     }
   },
   "gopls": {
-    "usePlaceholders": true, // add parameter placeholders when completing a function
-    "completionDocumentation": true // for documentation in completion items
+    "usePlaceholders": true,
+    "completionDocumentation": true
   },
   "[shellscript]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
@@ -124,7 +152,7 @@
     },
     {
       "before": [
-        "K",
+        "K"
       ],
       "commands": [
         "editor.action.showHover"
@@ -187,14 +215,10 @@
   "zig.zls.enabled": "on",
   "zig.zls.inlayHintsHideRedundantParamNames": true,
   "typescript.suggest.completeFunctionCalls": true,
-  "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
   "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
   "typescript.inlayHints.parameterTypes.enabled": true,
   "typescript.inlayHints.enumMemberValues.enabled": true,
   "typescript.inlayHints.variableTypes.enabled": true,
-  "biome.suggestInstallingGlobally": false,
   "editor.inlayHints.enabled": "offUnlessPressed",
   "chat.detectParticipant.enabled": false,
   "chat.extensionTools.enabled": false,
@@ -222,8 +246,15 @@
   "chat.disableAIFeatures": true,
   "editor.cursorBlinking": "smooth",
   "vim.cursorStylePerMode.insert": "line",
-  "workbench.colorTheme": "Gleam",
+  "workbench.colorTheme": "Hard Hacker",
   "[javascript]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescript]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "errorLens.enabled": true,
@@ -283,4 +314,7 @@
   "cmake.showConfigureWithDebuggerNotification": false,
   "window.commandCenter": false,
   "chat.commandCenter.enabled": false,
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  }
 }
