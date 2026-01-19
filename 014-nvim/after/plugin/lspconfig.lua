@@ -326,3 +326,21 @@ setup_lang('kotlin_language_server', {
 	single_file_support = single_file_support,
 	capabilities = capabilities,
 })
+
+setup_lang('perlnavigator', {
+	on_attach = on_attach,
+	single_file_support = single_file_support,
+	capabilities = capabilities,
+})
+
+setup_lang('ruff', {
+	on_attach = on_attach,
+	single_file_support = single_file_support,
+	capabilities = capabilities,
+})
+
+setup_lang('cssls', {
+	on_attach = on_attach,
+	single_file_support = single_file_support,
+	capabilities = capabilities,
+})
