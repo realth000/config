@@ -5,7 +5,7 @@ $env.PATH = (
 # Configure starship.
 if (echo ~/.cache/starship/init.nu | path exists) { use ~/.cache/starship/init.nu } else { print "startip not found, skip" }
 # Command alias.
-if $nu.os-info.name == "windows" { alias cw = cd c:/Programming/Projects } else { alias cw = cd $env.HOME/Programming }
+alias cw = if $nu.os-info.name == "windows" {  cd c:/Programming/Projects } else { cd $env.HOME/Programming }
 alias c = clear
 # Alias from oh-my-zsh https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh
 #alias grt = cd "$(git rev-parse --show-toplevel || echo .)"
