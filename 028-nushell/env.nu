@@ -1,13 +1,22 @@
 # Setup env.
+
 $env.PATH = (
     $env.PATH | split row (char esep) | append ($env.HOME | path join .cargo bin) | append ($env.HOME | path join .local bin) | append ($nu.default-config-dir | path join bin)
 )
+
 # Configure starship.
 if (echo ~/.cache/starship/init.nu | path exists) { use ~/.cache/starship/init.nu } else { print "startip not found, skip" }
+
 # Command alias.
+
 alias cw = if $nu.os-info.name == "windows" {  cd c:/Programming/Projects } else { cd $env.HOME/Programming }
 alias c = clear
+alias dc = cd
+alias t = tree
+alias tl = tree | less
+
 # Alias from oh-my-zsh https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh
+
 #alias grt = cd "$(git rev-parse --show-toplevel || echo .)"
 #alias ggpur = ggu
 alias g = git
@@ -203,7 +212,14 @@ alias gstu = gsta --include-untracked
 ##alias gtl = gtl(){ git tag --sort=-v:refname -n --list "${1}*" }; noglob gtl
 #alias gk = \gitk --all --branches &!
 #alias gke = \gitk --all $(git log --walk-reflogs --pretty=%h) &!
+
+# Import custom alias.
+# ref: https://github.com/nushell/nushell/discussions/16679#discussioncomment-14391728
+const alias_mod = if ([$nu.default-config-dir, "custom_alias.nu"] | path join | path exists) { "custom_alias.nu" }
+use $alias_mod *
+
 # Import Custom envs.
+
 # "$NU_CONFIG_DIR/custom_env.nu"
 #
 # Sample:
