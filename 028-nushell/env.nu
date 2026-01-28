@@ -215,16 +215,14 @@ alias gstu = gsta --include-untracked
 
 # Import custom alias.
 # ref: https://github.com/nushell/nushell/discussions/16679#discussioncomment-14391728
-const alias_mod = if ([$nu.default-config-dir, "custom_alias.nu"] | path join | path exists) { "custom_alias.nu" }
+const alias_mod = if ([$nu.default-config-dir, "custom", "custom_alias.nu"] | path join | path exists) { "./custom/custom_alias.nu" }
 use $alias_mod *
 
 # Import Custom envs.
 
-# "$NU_CONFIG_DIR/custom_env.nu"
+# "$NU_CONFIG_DIR/custom/custom_env.nu"
 #
-# Sample:
-#
-# #!/usr/bin/env nu
+# Example:
 #
 # export def define_custom_env [] {
 #     {
@@ -232,9 +230,10 @@ use $alias_mod *
 #         "WEZTERM_CONFIG_PATH": $"($env.HOME)/.wezterm.lua"
 #     }
 # }
-if ($nu.default-config-dir | path join "custom_env.nu" | path exists) {
-    use custom_env.nu define_custom_env
+const have_env_mod = [$nu.default-config-dir, "custom", "custom_env.nu"] | path join | path exists
+const env_mod = if ($have_env_mod) { "./custom/custom_env.nu" }
+use $env_mod  define_custom_env
+if ($have_env_mod) {
     define_custom_env | load-env
-} else {
-    print "custom.nu not found in nu default-config-dir"
 }
+
