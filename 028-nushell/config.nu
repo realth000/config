@@ -25,4 +25,12 @@ $env.config.keybindings ++= [
         ]
     }
 ]
+$env.config.completions.case_sensitive = false
+$env.config.completions.quick = true
+$env.config.completions.partial = true
+$env.config.completions.algorithm = "fuzzy"
+
+# Commands
+
 use ./bin/edit_config.nu ec
+use ./bin/vtt_to_lrc.nu vtt2lrc
