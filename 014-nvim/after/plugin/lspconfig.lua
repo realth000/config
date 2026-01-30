@@ -235,11 +235,11 @@ setup_lang('bashls', {
 	capabilities = capabilities,
 })
 
-setup_lang('hls', {
-	on_attach = on_attach,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
-})
+-- setup_lang('hls', {
+-- 	on_attach = on_attach,
+-- 	single_file_support = single_file_support,
+-- 	capabilities = capabilities,
+-- })
 
 -- setup_lang('vala_ls', {
 -- 	on_attach = on_attach,

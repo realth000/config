@@ -18,6 +18,7 @@ plugin.setup({
 		'lua',
 		'nim',
 		'ninja',
+		'nu',
 		'markdown',
 		'markdown_inline',
 		'nginx',

@@ -101,7 +101,7 @@ return require('lazy').setup({
 
 
 	-- treesitter, hightlight
-	{ 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate', },
+	{ 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate', branch = "main"},
 
 	-- lsp
 	{
@@ -164,11 +164,6 @@ return require('lazy').setup({
 	-- Sync terminal background color
 	{
 		"typicode/bg.nvim",
-	},
-
-	-- Syntax highlighting for nushell format
-	{
-		'LhKipp/nvim-nu',
 	},
 
 	-- Markdown
