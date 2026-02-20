@@ -11,35 +11,7 @@
     "default": "right",
     "jupyter-notebook": "left"
   },
-  "editor.fontFamily": "'RecMonoSmCasual Nerd Font Mono', 'Sarasa Mono SC'",
-  "self.reserved.editor.fonFamily": [
-    "AdwaitaMono Nerd Font Mono",
-    "CommitMono Nerd Font Mono",
-    "CaskaydiaCove Nerd Font Mono",
-    "Cousine Nerd Font Mono",
-    "GeistMono Nerd Font Mono",
-    "FiraCode Nerd Font Mono",
-    "Hack Nerd Font Mono",
-    "Hasklug Nerd Font Mono",
-    "iMWritingMono Nerd Font Mono",
-    "IntoneMono Nerd Font Mono",
-    "Iosevka1204 Nerd Font Mono",
-    "JetBrainsMono Nerd Font Mono",
-    "Lilex Nerd Font Mono",
-    "LiterationMono Nerd Font Mono",
-    "MartianMono Nerd Font Mono",
-    "MonaspiceAr Nerd Font Mono",
-    "MonaspiceKr Nerd Font Mono",
-    "MonaspiceNe Nerd Font Mono",
-    "MonaspiceXe Nerd Font Mono",
-    "NotoSansM Nerd Font Mono",
-    "RobotoMono Nerd Font Mono",
-    "RecMonoCasual Nerd Font Mono",
-    "RecMonoLinear Nerd Font Mono",
-    "RecMonoSmCasual Nerd Font Mono",
-    "Sarasa Mono SC",
-    "D2CodingLigature Nerd Font # Breaks cjk letters"
-  ],
+  "editor.fontFamily": "'Iosevka1204 Nerd Font Mono', 'Sarasa Mono SC'",
   "editor.fontWeight": "normal",
   "editor.fontSize": 18,
   "terminal.integrated.defaultProfile.windows": "PowerShell",
@@ -197,7 +169,8 @@
   "update.mode": "none",
   "settingsSync.ignoredExtensions": [
     "rust-lang.rust-analyzer",
-    "github.codespaces"
+    "github.codespaces",
+    "alibaba-cloud.tongyi-lingma"
   ],
   "kotlin.languageServer.enabled": false,
   "kotlin.debugAdapter.enabled": false,
@@ -246,16 +219,18 @@
   "chat.disableAIFeatures": true,
   "editor.cursorBlinking": "smooth",
   "vim.cursorStylePerMode.insert": "line",
-  "workbench.colorTheme": "Hard Hacker",
   "[javascript]": {
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "javascript.preferences.quoteStyle": "single",
+    "typescript.preferences.quoteStyle": "single"
   },
   "[typescript]": {
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "javascript.preferences.quoteStyle": "single",
+    "typescript.preferences.quoteStyle": "single",
+    "editor.formatOnSave": true
   },
   "errorLens.enabled": true,
   "errorLens.enabledDiagnosticLevels": [
@@ -316,5 +291,53 @@
   "chat.commandCenter.enabled": false,
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
-  }
+  },
+  "favFontPicker.favFallbackFonts": [
+    "Sarasa Mono SC",
+    "霞鹜文楷等宽 GB"
+  ],
+  "favFontPicker.favFonts": [
+    "AdwaitaMono Nerd Font Mono",
+    "CommitMono Nerd Font Mono",
+    "CaskaydiaCove Nerd Font Mono",
+    "Cousine Nerd Font Mono",
+    "GeistMono Nerd Font Mono",
+    "FiraCode Nerd Font Mono",
+    "Hack Nerd Font Mono",
+    "Hasklug Nerd Font Mono",
+    "iMWritingMono Nerd Font Mono",
+    "IntoneMono Nerd Font Mono",
+    "Iosevka1204 Nerd Font Mono",
+    "JetBrainsMono Nerd Font Mono",
+    "Lilex Nerd Font Mono",
+    "LiterationMono Nerd Font Mono",
+    "MartianMono Nerd Font Mono",
+    "MonaspiceAr Nerd Font Mono",
+    "MonaspiceKr Nerd Font Mono",
+    "MonaspiceNe Nerd Font Mono",
+    "MonaspiceXe Nerd Font Mono",
+    "NotoSansM Nerd Font Mono",
+    "RobotoMono Nerd Font Mono",
+    "RecMonoCasual Nerd Font Mono",
+    "RecMonoDuotone Nerd Font Mono",
+    "RecMonoLinear Nerd Font Mono",
+    "RecMonoSmCasual Nerd Font Mono",
+    "Sarasa Mono SC",
+    "D2CodingLigature Nerd Font # Breaks cjk letters"
+  ],
+  "favFontPicker.previewFont": true,
+  "editor.aiStats.enabled": false,
+  "[javascriptreact]": {
+    "editor.tabSize": 2,
+    "javascript.preferences.quoteStyle": "single",
+    "typescript.preferences.quoteStyle": "single",
+  },
+  "[typescriptreact]": {
+    "editor.tabSize": 2,
+    "javascript.preferences.quoteStyle": "single",
+    "typescript.preferences.quoteStyle": "single",
+  },
+  "workbench.colorTheme": "Catppuccin Mocha",
+  "redhat.telemetry.enabled": true,
+  "dart.inlayHints": true,
 }
