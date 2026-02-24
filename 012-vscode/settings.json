@@ -338,6 +338,6 @@
     "typescript.preferences.quoteStyle": "single",
   },
   "workbench.colorTheme": "Catppuccin Mocha",
-  "redhat.telemetry.enabled": true,
+  "redhat.telemetry.enabled": false,
   "dart.inlayHints": true,
 }
