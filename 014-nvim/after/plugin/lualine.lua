@@ -26,8 +26,9 @@ local theme_map = {
 
 	-- Catppuccin
 	["catppuccin"] = "catppuccin",
-	["catppuccin-macchiato"] = "catppuccin",
-	["catppuccin-mocha"] = "catppuccin",
+	["catppuccin-macchiato"] = "catppuccin-macchiato",
+	["catppuccin-mocha"] = "catppuccin-mocha",
+	["catppuccin-latte"] = "catppuccin-latte",
 
 	-- Moonfly
 	["moonfly"] = "moonfly",

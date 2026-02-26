@@ -19,7 +19,6 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.list = true
-vim.o.background = 'dark'
 
 -- Neovide settings.
 -- if vim.g.neovide then
@@ -33,7 +32,6 @@ vim.o.background = 'dark'
 -- 	-- vim.g.neovide_underline_automatic_scaling = true
 -- 	vim.g.neovide_remember_window_size = false
 -- end
-
 -- Content change keymap for other characters.
 vim.keymap.set('n', 'di|', function() DeleteInsert('|') end)
 vim.keymap.set('n', 'da|', function() DeleteAppend('|') end)

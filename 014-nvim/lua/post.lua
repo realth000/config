@@ -1,6 +1,11 @@
 -- Set floating window background color to transparent after loading colorscheme
 vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'None' })
 
+local use_dark_mode = os.getenv('NVIM_CUSTOM_USE_DARK_MODE')
+if (use_dark_mode) then
+	vim.o.background = 'dark'
+end
+
 -- Setup colorscheme
 -- github_dark
 -- github_dark_dimmed
