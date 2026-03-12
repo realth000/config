@@ -16,6 +16,9 @@ vim.keymap.set('n', '<leader>fs', extensions.aerial.aerial, {})
 
 plugin.setup {
 	defaults = {
+		preview = {
+			treesitter = false,
+		},
 		-- Default configuration for telescope goes here:
 		-- config_key = value,
 		vimgrep_arguments = {
