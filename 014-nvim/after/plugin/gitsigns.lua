@@ -26,9 +26,10 @@ plugin.setup {
 		delay = 300,
 		ignore_whitespace = false,
 	},
-	current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <abbrev_sha>',
+	-- 「 」 『 』
+	current_line_blame_formatter = '  『 <author> - <author_time:%Y-%m-%d> - <abbrev_sha> 』',
 	sign_priority                = 6,
-	update_debounce              = 100,
+	update_debounce              = 300,
 	status_formatter             = nil, -- Use default
 	max_file_length              = 40000, -- Disable if file is longer than this (in lines)
 	preview_config               = {
@@ -40,3 +41,26 @@ plugin.setup {
 		col = 1
 	},
 }
+
+-- Set blame line text style, based on comment style.
+vim.api.nvim_create_autocmd("ColorScheme", {
+	pattern = "*",
+	callback = function()
+		vim.cmd("highlight! link GitSignsCurrentLineBlame Comment")
+
+		local comment_hl = vim.api.nvim_get_hl(0, { name = "Comment" })
+		local fg_color = comment_hl.fg
+
+		-- Remove all style: no italic/bold/underline
+		if fg_color then
+			vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", {
+				fg = fg_color,
+				underline = false,
+				italic = false,
+				bold = false,
+				underdouble = false,
+				sp = fg_color,
+			})
+		end
+	end,
+})
