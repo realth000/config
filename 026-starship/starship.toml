@@ -14,7 +14,7 @@ $status\
 $cmd_duration\
 \n$character"""
 
-palette = "catppuccin_latte"
+palette = "catppuccin_mocha"
 
 [palettes.custom_dark]
 background = "#343434"
