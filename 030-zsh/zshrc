@@ -7,7 +7,7 @@ fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$PATH:/$HOME/.local/bin:$HOME/.local/share/nu:$HOME/.cargo/bin:/data/Program/go/bin:/data/Program/flutter/bin:$HOME/.pub-cache/bin
+export PATH=$PATH:/$HOME/.ocaml:/$HOME/.local/bin:$HOME/.local/share/nu:$HOME/.cargo/bin:/data/Program/go/bin:/data/Program/flutter/bin:$HOME/.pub-cache/bin
 
 #export PUB_HOSTED_URL=https://pub.flutter-io.cn
 #export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
@@ -22,10 +22,16 @@ export TERM=xterm-256color
 # https://clang.llvm.org/docs/CommandGuide/clang.html#envvar-C_INCLUDE_PATH,OBJC_INCLUDE_PATH,CPLUS_INCLUDE_PATH,OBJCPLUS_INCLUDE_PATH
 #export C_INCLUDE_PATH="${C_INCLUDE_PATH:+${C_INCLUDE_PATH}:}/usr/include/glib-2.0:/usr/include/glib-2.0/glib:/usr/lib/x86_64-linux-gnu/glib-2.0/include"
 
+export NVIM_CUSTOM_COLORSCHEME="nightfox"
+#export NVIM_CUSTOM_COLORSCHEME="nordfox"
 #export NVIM_CUSTOM_COLORSCHEME="duskfox"
+#export NVIM_CUSTOM_COLORSCHEME="cabonfox"
+#export NVIM_CUSTOM_COLORSCHEME="terafox"
+#export NVIM_CUSTOM_COLORSCHEME="tokyonight"
 #export NVIM_CUSTOM_COLORSCHEME="tokyonight-moon"
+#export NVIM_CUSTOM_COLORSCHEME="tokyonight-storm"
 #export NVIM_CUSTOM_COLORSCHEME="nightfly"
-export NVIM_CUSTOM_COLORSCHEME="catppuccin-mocha"
+#export NVIM_CUSTOM_COLORSCHEME="catppuccin-mocha"
 #export NVIM_CUSTOM_COLORSCHEME="oxocarbon"
 #export NVIM_CUSTOM_COLORSCHEME="gruvbox-baby"
 #export NVIM_CUSTOM_COLORSCHEME="monokai-pro-spectrum"
@@ -34,7 +40,7 @@ export NVIM_CUSTOM_COLORSCHEME="catppuccin-mocha"
 #export NVIM_CUSTOM_COLORSCHEME="catppuccin-latte"
 
 # Export this variable if using dark theme in neovim
-#export NVIM_CUSTOM_USE_DARK_MODE="true"
+export NVIM_CUSTOM_USE_DARK_MODE="true"
 if [ "$NVIM_CUSTOM_USE_DARK_MODE" = "true" ];then
 	export WEZTERM_CUSTOM_USE_DARK_MODE="true"
 fi
@@ -194,17 +200,20 @@ if [[ ${CUSTOM_USE_STARSHIP} == true ]];then
 	eval "$(starship init zsh)"
 fi
 
-
-export HTTP_PROXY="http://127.0.0.1:7897"
-export HTTPS_PROXY="http://127.0.0.1:7897"
-
 ZVM_CURSOR_STYLE_ENABLED=false
 
 # pnpm
-export PNPM_HOME="$HOME/.local/share/pnpm"
+export PNPM_HOME="/$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
 
+# BEGIN opam configuration
+# This is useful if you're using opam as it adds:
+#   - the correct directories to the PATH
+#   - auto-completion for the opam binary
+# This section can be safely removed at any time if needed.
+[[ ! -r "/$HOME/.opam/opam-init/init.zsh" ]] || source "/$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null
+# END opam configuration
