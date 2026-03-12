@@ -2,10 +2,20 @@ local wezterm                      = require 'wezterm'
 local mux                          = wezterm.mux
 local act                          = wezterm.action
 
--- customize color scheme
-local catppuccin_mocha             = wezterm.color.get_builtin_schemes()['Catppuccin Mocha']
-local hardhacker                   = wezterm.color.get_builtin_schemes()['hardhacker']
+local use_dark_mode = true
 
+-- customize color scheme
+local catppuccin_mocha       = wezterm.color.get_builtin_schemes()['Catppuccin Mocha']
+local catppuccin_latte       = wezterm.color.get_builtin_schemes()['Catppuccin Latte']
+local hardhacker             = wezterm.color.get_builtin_schemes()['hardhacker']
+local tokyo_night            = wezterm.color.get_builtin_schemes()['Tokyo Night']
+local tokyo_night_storm      = wezterm.color.get_builtin_schemes()['Tokyo Night Storm']
+local tokyo_night_moon       = wezterm.color.get_builtin_schemes()['Tokyo Night Moon']
+local nightfox               = wezterm.color.get_builtin_schemes()['nightfox']
+local nordfox                = wezterm.color.get_builtin_schemes()['nordfox']
+local duskfox                = wezterm.color.get_builtin_schemes()['duskfox']
+local carbonfox               = wezterm.color.get_builtin_schemes()['carbonfox']
+local terafox                = wezterm.color.get_builtin_schemes()['terafox']
 -- customize oh-my-zsh suggestions plugin suggest text color to optimize ctrl + F.
 -- color_scheme = "midnight-in-mojave", -- ctrl + f
 -- color_scheme = "Alabaster", -- ok
@@ -17,31 +27,31 @@ local hardhacker                   = wezterm.color.get_builtin_schemes()['hardha
 -- color_scheme = "MaterialDark", -- as above
 -- color_scheme = "Solarized Darcula", -- ctrl + f
 
-local custom_catppuccin_mocha      = wezterm.color.get_builtin_schemes()['Catppuccin Mocha']
--- black
-custom_catppuccin_mocha.ansi[1]    = "#45475a"
-custom_catppuccin_mocha.brights[1] = "#585b70"
--- red
-custom_catppuccin_mocha.ansi[2]    = "#aa3731"
-custom_catppuccin_mocha.brights[2] = "#f05050"
--- green
-custom_catppuccin_mocha.ansi[3]    = "#448c27"
-custom_catppuccin_mocha.brights[3] = "#60cb00"
--- yellow
-custom_catppuccin_mocha.ansi[4]    = "#cb9000"
-custom_catppuccin_mocha.brights[4] = "#ffbc5d"
--- blue
-custom_catppuccin_mocha.ansi[5]    = "#325cc0"
-custom_catppuccin_mocha.brights[5] = "#007acc"
--- magenta
-custom_catppuccin_mocha.ansi[6]    = "#7a3e9d"
-custom_catppuccin_mocha.brights[6] = "#e64ce6"
--- cyan
-custom_catppuccin_mocha.ansi[7]    = "#0083b2"
-custom_catppuccin_mocha.brights[7] = "#00aacb"
--- white
-custom_catppuccin_mocha.ansi[8]    = "#bac2de"
-custom_catppuccin_mocha.brights[8] = "#a6adc8"
+-- local custom_catppuccin_mocha      = wezterm.color.get_builtin_schemes()['Catppuccin Mocha']
+-- -- black
+-- custom_catppuccin_mocha.ansi[1]    = "#45475a"
+-- custom_catppuccin_mocha.brights[1] = "#585b70"
+-- -- red
+-- custom_catppuccin_mocha.ansi[2]    = "#aa3731"
+-- custom_catppuccin_mocha.brights[2] = "#f05050"
+-- -- green
+-- custom_catppuccin_mocha.ansi[3]    = "#448c27"
+-- custom_catppuccin_mocha.brights[3] = "#60cb00"
+-- -- yellow
+-- custom_catppuccin_mocha.ansi[4]    = "#cb9000"
+-- custom_catppuccin_mocha.brights[4] = "#ffbc5d"
+-- -- blue
+-- custom_catppuccin_mocha.ansi[5]    = "#325cc0"
+-- custom_catppuccin_mocha.brights[5] = "#007acc"
+-- -- magenta
+-- custom_catppuccin_mocha.ansi[6]    = "#7a3e9d"
+-- custom_catppuccin_mocha.brights[6] = "#e64ce6"
+-- -- cyan
+-- custom_catppuccin_mocha.ansi[7]    = "#0083b2"
+-- custom_catppuccin_mocha.brights[7] = "#00aacb"
+-- -- white
+-- custom_catppuccin_mocha.ansi[8]    = "#bac2de"
+-- custom_catppuccin_mocha.brights[8] = "#a6adc8"
 
 wezterm.on('gui-startup', function(cmd)
 	-- allow `wezterm start -- something` to affect what we spawn
@@ -103,6 +113,10 @@ local function tab_title(tab_info)
 		return '[' .. tab_info.tab_index + 1 .. '] ' .. tab_info.active_pane.title
 	end
 end
+
+-- Only apply this on light theme
+
+if use_dark_mode then
 
 wezterm.on(
 	'format-tab-title',
@@ -173,6 +187,8 @@ wezterm.on(
 	end
 )
 
+end
+
 -- NOT check update
 config.check_for_updates = false
 
@@ -239,9 +255,18 @@ config.window_padding = {
 config.color_schemes = {
 	['custom_catppuccin_mocha'] = custom_catppuccin_mocha,
 	['catppuccin_mocha'] = catppuccin_mocha,
+	['catppuccin_latte'] = catppuccin_latte,
 	['hardhacker'] = hardhacker,
+	['tokyo_night'] = tokyo_night,
+	['tokyo_night_storm'] = tokyo_night_storm,
+	['tokyo_night_moon'] = tokyo_night_moon,
+	['nightfox'] = nightfox,
+	['nordfox'] = nordfox,
+	['duskfox'] = duskfox,
+	['carbonfox'] = carbonfox,
+	['terafox'] = terafox,
 }
-config.color_scheme = 'custom_catppuccin_mocha'
+config.color_scheme = 'nightfox'
 config.colors = {
 	-- selection_bg = '#f5e0dc',
 	-- selection_fg = '#1e1e2e',
