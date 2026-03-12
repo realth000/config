@@ -14,7 +14,7 @@ local tokyo_night_moon       = wezterm.color.get_builtin_schemes()['Tokyo Night 
 local nightfox               = wezterm.color.get_builtin_schemes()['nightfox']
 local nordfox                = wezterm.color.get_builtin_schemes()['nordfox']
 local duskfox                = wezterm.color.get_builtin_schemes()['duskfox']
-local carbonfox               = wezterm.color.get_builtin_schemes()['carbonfox']
+local carbonfox              = wezterm.color.get_builtin_schemes()['carbonfox']
 local terafox                = wezterm.color.get_builtin_schemes()['terafox']
 -- customize oh-my-zsh suggestions plugin suggest text color to optimize ctrl + F.
 -- color_scheme = "midnight-in-mojave", -- ctrl + f
@@ -26,32 +26,6 @@ local terafox                = wezterm.color.get_builtin_schemes()['terafox']
 -- color_scheme = "Material", -- ok half ctrl + f
 -- color_scheme = "MaterialDark", -- as above
 -- color_scheme = "Solarized Darcula", -- ctrl + f
-
--- local custom_catppuccin_mocha      = wezterm.color.get_builtin_schemes()['Catppuccin Mocha']
--- -- black
--- custom_catppuccin_mocha.ansi[1]    = "#45475a"
--- custom_catppuccin_mocha.brights[1] = "#585b70"
--- -- red
--- custom_catppuccin_mocha.ansi[2]    = "#aa3731"
--- custom_catppuccin_mocha.brights[2] = "#f05050"
--- -- green
--- custom_catppuccin_mocha.ansi[3]    = "#448c27"
--- custom_catppuccin_mocha.brights[3] = "#60cb00"
--- -- yellow
--- custom_catppuccin_mocha.ansi[4]    = "#cb9000"
--- custom_catppuccin_mocha.brights[4] = "#ffbc5d"
--- -- blue
--- custom_catppuccin_mocha.ansi[5]    = "#325cc0"
--- custom_catppuccin_mocha.brights[5] = "#007acc"
--- -- magenta
--- custom_catppuccin_mocha.ansi[6]    = "#7a3e9d"
--- custom_catppuccin_mocha.brights[6] = "#e64ce6"
--- -- cyan
--- custom_catppuccin_mocha.ansi[7]    = "#0083b2"
--- custom_catppuccin_mocha.brights[7] = "#00aacb"
--- -- white
--- custom_catppuccin_mocha.ansi[8]    = "#bac2de"
--- custom_catppuccin_mocha.brights[8] = "#a6adc8"
 
 wezterm.on('gui-startup', function(cmd)
 	-- allow `wezterm start -- something` to affect what we spawn
@@ -253,7 +227,6 @@ config.window_padding = {
 	bottom = 2,
 }
 config.color_schemes = {
-	['custom_catppuccin_mocha'] = custom_catppuccin_mocha,
 	['catppuccin_mocha'] = catppuccin_mocha,
 	['catppuccin_latte'] = catppuccin_latte,
 	['hardhacker'] = hardhacker,
@@ -266,7 +239,7 @@ config.color_schemes = {
 	['carbonfox'] = carbonfox,
 	['terafox'] = terafox,
 }
-config.color_scheme = 'nightfox'
+config.color_scheme = 'catppuccin_mocha'
 config.colors = {
 	-- selection_bg = '#f5e0dc',
 	-- selection_fg = '#1e1e2e',

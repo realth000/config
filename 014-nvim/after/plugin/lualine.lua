@@ -42,6 +42,14 @@ local theme_map = {
 
 	-- gleam
 	["gleam"] = "gleam",
+
+	-- nightfox
+	-- Ensure nightfox theme is installed.
+	["nightfox"] = "nightfox",
+	["nordfox"] = "nordfox",
+	["duskfox"] = "duskfox",
+	["carbonfox"] = "carbonfox",
+	["terafox"] = "terafox",
 }
 
 -- Fallback theme.
