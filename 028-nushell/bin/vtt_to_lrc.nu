@@ -55,7 +55,7 @@ module internal {
         mut state = $STATE_WAITING
         mut curr_timestamp = null
 
-        # vtt timestamp line format: 00:01.000 --> 00:04.000
+        # vtt timestamp line format: 00:00:01.000 --> 00:00:04.000
         let timestamp_re = r#'(?<time>(\d+:)+\d+\.\d+) --> (\d+:)+\d+\.\d+'#
 
         for $line in ($input_contents | lines) {
@@ -84,8 +84,9 @@ module internal {
         }
 
         let output_contents = $data | each {|x|
-            let idx = $x.timestamp | str index-of '.'
-            let timestamp = $x.timestamp | str substring 0..($idx - 1)
+            let idx = $x.timestamp | str index-of ':'
+            # let timestamp = $x.timestamp | str substring 0..($idx - 1)
+            let timestamp = $x.timestamp | str substring ($idx + 1)..
             $"[($timestamp)]($x.content)"
         } | str join "\n"
 
