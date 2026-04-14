@@ -100,7 +100,7 @@ return require('lazy').setup({
 
 
 	-- treesitter, hightlight
-	{ 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate', branch = "main"},
+	-- { 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate', branch = "main"},
 
 	-- lsp
 	{
@@ -165,11 +165,11 @@ return require('lazy').setup({
 		"typicode/bg.nvim",
 	},
 
-	-- Markdown
-	{
-		'MeanderingProgrammer/render-markdown.nvim',
-		dependencies = { 'nvim-treesitter/nvim-treesitter' }, -- if you use the mini.nvim suite
-	},
+	-- Markdown - disabled for treesitter capability
+	-- {
+	-- 	'MeanderingProgrammer/render-markdown.nvim',
+	-- 	dependencies = { 'nvim-treesitter/nvim-treesitter' }, -- if you use the mini.nvim suite
+	-- },
 
 	-- Select python venv
 	-- Requires `fd` in PATH: https://github.com/sharkdp/fd
@@ -181,4 +181,7 @@ return require('lazy').setup({
 		},
 		ft = "python",
 	},
+
+	-- Treesitter parser manager for nvim-0.12 and above.
+	{ "romus204/tree-sitter-manager.nvim" }
 })
