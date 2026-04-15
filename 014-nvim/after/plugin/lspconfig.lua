@@ -30,6 +30,17 @@ end
 local cmp_status, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 if (not cmp_status) then return end
 
+local float_window_border = {
+	{ '╭', 'FloatBorder' },
+	{ '─', 'FloatBorder' },
+	{ '╮', 'FloatBorder' },
+	{ '│', 'FloatBorder' },
+	{ '╯', 'FloatBorder' },
+	{ '─', 'FloatBorder' },
+	{ '╰', 'FloatBorder' },
+	{ '│', 'FloatBorder' },
+}
+
 -- Note that single file support is only needed to configure when
 -- nvim is older than 0.11.0. Since 0.11.0, the `vim.lsp.config` API
 -- enables single file support by default.
@@ -55,9 +66,15 @@ local on_attach = function(client, bufnr)
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
 	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-	vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+	-- The floating window border styles here are managed by noice.nvim.
+	-- But keep the config here for envs without noice.nvim.
+	--
+	-- Note that the default shortcut for vim.lsp.buf.hover is already Shift+K, so we do not need to specify it again.
+	-- But keep it here as a reminder.
+	vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ border = float_window_border }); vim.notify("foobar") end, bufopts)
 	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+	vim.keymap.set('n', '<C-k>', function() vim.lsp.buf.signature_help { border = float_window_border } end, bufopts)
+	-- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
 	vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
 	vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
 	vim.keymap.set('n', '<space>wl', function()
@@ -112,32 +129,31 @@ local lsp_flags = {
 	debounce_text_changes = 150,
 }
 
-local float_window_border = {
-	{ '╭', 'FloatBorder' },
-	{ '─', 'FloatBorder' },
-	{ '╮', 'FloatBorder' },
-	{ '│', 'FloatBorder' },
-	{ '╯', 'FloatBorder' },
-	{ '─', 'FloatBorder' },
-	{ '╰', 'FloatBorder' },
-	{ '│', 'FloatBorder' },
-}
+-- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+-- 	vim.lsp.handlers.hover, {
+-- 		border = float_window_border
+-- 	}
+-- )
+-- 
+-- vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+-- 	vim.lsp.handlers.signature_help, {
+-- 		border = float_window_border
+-- 	}
+-- )
 
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-	vim.lsp.handlers.hover, {
-		border = float_window_border
-	}
-)
-
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
-	vim.lsp.handlers.signature_help, {
-		border = float_window_border
-	}
-)
-
+-- Since nvim 0.12, vim.lsp.with is deprecated and it is encouraged to setup
+-- handler window style when specifying shortcuts.
+--
+-- However we are using noice.nvim, it handles styles of most of floating windows,
+-- one should configure style there.
+--
+-- However again, the diagnostic config is not handled by noice.nvim by default, so
+-- keep the config here. It is recommended to enable diagnostic window managing in
+-- noice.nvim.
 vim.diagnostic.config {
 	float = {
-		border = float_window_border
+		border = float_window_border,
+		winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
 	}
 }
 
