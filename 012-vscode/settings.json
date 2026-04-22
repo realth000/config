@@ -2,14 +2,14 @@
   "settingsSync.ignoredSettings": [
     "editor.fontFamily",
     "editor.fontSize",
-    "editor.fontWeight"
+    "editor.fontWeight",
   ],
   "workbench.startupEditor": "newUntitledFile",
   "explorer.confirmDelete": false,
   "security.workspace.trust.untrustedFiles": "open",
   "notebook.cellToolbarLocation": {
     "default": "right",
-    "jupyter-notebook": "left"
+    "jupyter-notebook": "left",
   },
   "editor.fontFamily": "'Iosevka1204 Nerd Font Mono', 'Sarasa Mono SC'",
   "editor.fontWeight": "normal",
@@ -26,15 +26,13 @@
   "[dart]": {
     "editor.formatOnSave": true,
     "editor.formatOnType": true,
-    "editor.rulers": [
-      80
-    ],
+    "editor.rulers": [80],
     "editor.selectionHighlight": false,
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "editor.suggestSelection": "first",
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": "off",
-    "editor.inlayHints.enabled": "offUnlessPressed"
+    "editor.inlayHints.enabled": "offUnlessPressed",
   },
   "editor.minimap.showSlider": "always",
   "cmake.configureOnOpen": true,
@@ -53,15 +51,15 @@
     "editor.snippetSuggestions": "none",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.organizeImports": "explicit"
-    }
+      "source.organizeImports": "explicit",
+    },
   },
   "gopls": {
     "usePlaceholders": true,
-    "completionDocumentation": true
+    "completionDocumentation": true,
   },
   "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "foxundermoon.shell-format",
   },
   "window.restoreWindows": "none",
   "editor.formatOnSave": true,
@@ -69,7 +67,7 @@
   "git.openRepositoryInParentFolders": "never",
   "markdownlint.config": {
     "MD033": false,
-    "MD024": false
+    "MD024": false,
   },
   "haskell.manageHLS": "GHCup",
   "editor.unicodeHighlight.nonBasicASCII": false,
@@ -78,88 +76,47 @@
   "editor.cursorSmoothCaretAnimation": "on",
   "output.smartScroll.enabled": false,
   "editor.stickyScroll.enabled": false,
-  "liveServer.settings.donotShowInfoMsg": true,
   "git.autofetch": false,
-  "cmake.showOptionsMovedNotification": false,
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": [
-        "<space>",
-        "c",
-        "a"
-      ],
-      "commands": [
-        "editor.action.quickFix"
-      ]
+      "before": ["<space>", "c", "a"],
+      "commands": ["editor.action.quickFix"],
     },
     {
-      "before": [
-        "<space>",
-        "r",
-        "n"
-      ],
-      "commands": [
-        "editor.action.rename"
-      ]
+      "before": ["<space>", "r", "n"],
+      "commands": ["editor.action.rename"],
     },
     {
-      "before": [
-        "\\",
-        "f",
-        "f"
-      ],
-      "commands": [
-        "workbench.action.quickOpen"
-      ]
+      "before": ["\\", "f", "f"],
+      "commands": ["workbench.action.quickOpen"],
     },
     {
-      "before": [
-        "\\",
-        "f",
-        "g"
-      ],
-      "commands": [
-        "workbench.action.quickTextSearch"
-      ]
+      "before": ["\\", "f", "g"],
+      "commands": ["workbench.action.quickTextSearch"],
     },
     {
-      "before": [
-        "K"
-      ],
-      "commands": [
-        "editor.action.showHover"
-      ]
+      "before": ["K"],
+      "commands": ["editor.action.showHover"],
     },
     {
-      "before": [
-        "[",
-        "d"
-      ],
-      "commands": [
-        "editor.action.marker.prev"
-      ]
+      "before": ["[", "d"],
+      "commands": ["editor.action.marker.prev"],
     },
     {
-      "before": [
-        "]",
-        "d"
-      ],
-      "commands": [
-        "editor.action.marker.next"
-      ]
-    }
+      "before": ["]", "d"],
+      "commands": ["editor.action.marker.next"],
+    },
+    {
+      "before": ["<c-h>"],
+      "commands": ["workbench.action.previousEditor"],
+    },
+    {
+      "before": ["<c-l>"],
+      "commands": ["workbench.action.nextEditor"],
+    },
   ],
-  "indentRainbow.indicatorStyle": "light",
-  "indentRainbow.lightIndicatorStyleLineWidth": 1,
-  "indentRainbow.colors": [
-    "rgba(255,255,64,0.3)",
-    "rgba(127,255,127,0.3)",
-    "rgba(255,127,255,0.3)",
-    "rgba(79,236,236,0.3)"
-  ],
-  "indentRainbow.errorColor": "",
   "[markdown]": {
-    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
   },
   "dart.lineLength": 120,
   "gitblame.inlineMessageEnabled": true,
@@ -170,15 +127,13 @@
   "settingsSync.ignoredExtensions": [
     "rust-lang.rust-analyzer",
     "github.codespaces",
-    "alibaba-cloud.tongyi-lingma"
+    "alibaba-cloud.tongyi-lingma",
   ],
-  "kotlin.languageServer.enabled": false,
-  "kotlin.debugAdapter.enabled": false,
   "chat.agent.enabled": false,
   "telemetry.feedback.enabled": false,
   "chat.promptFiles": false,
   "chat.promptFilesLocations": {
-    ".github/prompts": false
+    ".github/prompts": false,
   },
   "workbench.editor.empty.hint": "hidden",
   "rust-analyzer.completion.callable.snippets": "add_parentheses",
@@ -196,16 +151,16 @@
   "chat.detectParticipant.enabled": false,
   "chat.extensionTools.enabled": false,
   "chat.implicitContext.enabled": {
-    "panel": "never"
+    "panel": "never",
   },
   "chat.instructionsFilesLocations": {
-    ".github/instructions": false
+    ".github/instructions": false,
   },
   "chat.mcp.discovery.enabled": {
     "claude-desktop": false,
     "windsurf": false,
     "cursor-global": false,
-    "cursor-workspace": false
+    "cursor-workspace": false,
   },
   "chat.sendElementsToChat.enabled": false,
   "inlineChat.lineNaturalLanguageHint": false,
@@ -223,79 +178,70 @@
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
     "javascript.preferences.quoteStyle": "single",
-    "typescript.preferences.quoteStyle": "single"
+    "typescript.preferences.quoteStyle": "single",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[typescript]": {
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
     "javascript.preferences.quoteStyle": "single",
     "typescript.preferences.quoteStyle": "single",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
   },
   "errorLens.enabled": true,
-  "errorLens.enabledDiagnosticLevels": [
-    "error",
-    "warning",
-    "info",
-    "hint"
-  ],
+  "errorLens.enabledDiagnosticLevels": ["error", "warning", "info", "hint"],
   "errorLens.gutterIconsEnabled": true,
   "[c]": {
-    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
   },
   "python.analysis.typeCheckingMode": "standard",
   "python.analysis.packageIndexDepths": [
     {
       "name": "sklearn",
-      "depth": 2
+      "depth": 2,
     },
     {
       "name": "matplotlib",
-      "depth": 2
+      "depth": 2,
     },
     {
       "name": "scipy",
-      "depth": 2
+      "depth": 2,
     },
     {
       "name": "django",
-      "depth": 2
+      "depth": 2,
     },
     {
       "name": "flask",
-      "depth": 2
+      "depth": 2,
     },
     {
       "name": "fastapi",
-      "depth": 2
+      "depth": 2,
     },
     {
       "name": "cuda",
       "depth": 3,
-      "includeAllSymbols": true
-    }
+      "includeAllSymbols": true,
+    },
   ],
   "clangd.arguments": [
     "--clang-tidy",
     "--function-arg-placeholders=false",
-    "--header-insertion=never"
+    "--header-insertion=never",
   ],
-  "C_Cpp.clang_format_fallbackStyle": "LLVM",
-  "C_Cpp.formatting": "vcFormat",
   "window.title": "${activeEditorMedium}${separator}",
   "files.associations": {
-    "*.toml": "toml"
+    "*.toml": "toml",
   },
   "cmake.showConfigureWithDebuggerNotification": false,
   "window.commandCenter": false,
   "chat.commandCenter.enabled": false,
   "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
+    "editor.defaultFormatter": "vscode.html-language-features",
   },
-  "favFontPicker.favFallbackFonts": [
-    "Sarasa Mono SC",
-    "霞鹜文楷等宽 GB"
-  ],
+  "favFontPicker.favFallbackFonts": ["Sarasa Mono SC", "霞鹜文楷等宽 GB"],
   "favFontPicker.favFonts": [
     "AdwaitaMono Nerd Font Mono",
     "CommitMono Nerd Font Mono",
@@ -323,7 +269,7 @@
     "RecMonoLinear Nerd Font Mono",
     "RecMonoSmCasual Nerd Font Mono",
     "Sarasa Mono SC",
-    "D2CodingLigature Nerd Font # Breaks cjk letters"
+    "D2CodingLigature Nerd Font # Breaks cjk letters",
   ],
   "favFontPicker.previewFont": true,
   "editor.aiStats.enabled": false,
@@ -338,6 +284,14 @@
     "typescript.preferences.quoteStyle": "single",
   },
   "workbench.colorTheme": "Catppuccin Mocha",
-  "redhat.telemetry.enabled": false,
   "dart.inlayHints": true,
+  "workbench.tree.renderIndentGuides": "always",
+  "editor.guides.highlightActiveIndentation": "always",
+  "editor.guides.bracketPairs": "active",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
 }
