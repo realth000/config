@@ -127,7 +127,7 @@ plugin.setup {
 		lualine_z = {}
 	},
 	tabline = {
-		-- lualine_a = { 'buffers' },
+		lualine_a = { 'buffers' },
 		-- lualine_b = {'branch'},
 		-- lualine_c = { 'filename' },
 		-- lualine_x = {},

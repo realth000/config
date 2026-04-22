@@ -47,6 +47,10 @@ vim.cmd [[command SI :lua vim.cmd("IBLEnable"); vim.cmd("set list")]]
 vim.cmd [[command NI :lua vim.cmd("IBLDisable"); vim.cmd("set nolist")]]
 vim.cmd [[command RD :lua vim.cmd("RenderMarkdown toggle")]]
 
+vim.keymap.set('n', '<C-Q>', vim.cmd.bdelete)
+vim.keymap.set('n', '<C-H>', vim.cmd.bprevious)
+vim.keymap.set('n', '<C-L>', vim.cmd.bnext)
+
 -- Cursor style
 
 -- vim.opt.guicursor="n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
