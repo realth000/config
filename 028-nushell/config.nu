@@ -32,6 +32,8 @@ $env.config.completions.algorithm = "fuzzy"
 
 # Commands
 
+use ./bin/build.nu d
 use ./bin/edit_config.nu ec
 use ./bin/fp.nu *
+use ./bin/list_command.nu list-command
 use ./bin/vtt_to_lrc.nu vtt2lrc
