@@ -15,6 +15,21 @@ alias dc = cd
 alias t = tree
 alias tl = tree | less
 
+# Plugin alias
+
+## fp
+
+if (plugin list | where $it.name == "functional" | is-not-empty) {
+    alias other = fp other
+    alias first-where = fp first-where
+    alias is = fp is
+    alias pure = fp pure
+    alias then = fp then
+} else {
+    print "env.nu: functional plugin not found, alias not added"
+}
+
+
 # Alias from oh-my-zsh https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh
 
 #alias grt = cd "$(git rev-parse --show-toplevel || echo .)"

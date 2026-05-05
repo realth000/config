@@ -21,6 +21,7 @@ def is_null_value [input: any] {
 # An alias to ($in | describe) == $type
 #
 # This command is only intended to use in pipe
+@deprecated "See `is` command in the functional plugin instead"
 @category filters
 @example "Check a variable is int" { 1 | is int } --result true
 @example "Check a variable is string" { 1 | is string } --result false
@@ -59,6 +60,7 @@ export def is [type: string] : any -> bool {
 # * A closure that produce the value
 #
 # See `then` for the opposite operation (do something when input is non-null)
+@deprecated "See `other` command in the functional plugin instead"
 @category filters
 @example "Use the original value on non-null value" { 1 | other 100 } --result 1
 @example "Use the given fallback value on null value" { null | other 100 } --result 100
@@ -92,6 +94,7 @@ export def other [else_value: oneof<closure, any>] {
 # - Empty table
 #
 # See `other` for the opposite operation (do something when input is null)
+@deprecated "See `then` command in the functional plugin instead"
 @category filters
 @example "Use another value on non-null value" { 1 | then 100 } --result 100
 @example "Use and map another value on non-null value" { let foo = 100; 1 | then {|| $foo * 2} } --result 200
@@ -111,6 +114,7 @@ export def then [next: oneof<closure, any>]: any -> any {
 #
 # Unfortunately we can not have a "where like" syntax `[] | first-where $in > 4`,
 # the only pred we have is closure
+@deprecated "See `first-where` command in the functional plugin instead"
 @category filters
 @example "Filter on empty list" { [] | first-where {|x| $x > 2}} --result nothing
 @example "Filter on integer list" { [1,3,5] | first-where {|x| $x > 2}} --result 3
