@@ -51,3 +51,54 @@ These configs are not going to update because not used anymore:
   - I have to use hyprland. **No more nvidia next time I setup my pc.**
 - 029-tmux
   - May come back in the future when I leave wezterm.
+
+## Sync repo config to app
+
+To sync configs in this repo with local target directories, use symbol links.
+
+On linux:
+
+```bash
+ln -s "/path/to/the/project/014-nvim/init.lua" "$HOME/.config/nvim/init.lua"
+```
+
+On windows:
+
+```powershell
+new-Item -ItemType SymbolicLink -Path "$env:LOCALAPPDATA\nvim\init.lua" -Target "\path\to\the\project\014-nvim\init.lua"
+```
+
+Each time the repo is updated, app config is automatically synced to the latest version.
+
+### Customized config
+
+To set different values on locally customized configs, use environment variables.
+
+These variables should be set in shell so apps can use them.
+
+For example, to setup nvim colorscheme in nushell where you want different colorschemes on each machine:
+
+1. Setup the env in shell.
+  - Config the custom env in `$nu.default-config-dir/custom/custom_env.nu`:
+
+   ```nu
+   export def define_custom_env [] {
+       {
+           "NVIM_CUSTOM_COLORSCHEME": "catppuccin-mocha"
+           "WEZTERM_CONFIG_PATH": "D:/Program/WezTerm/wezterm.lua"
+       }
+   }
+   ```
+
+  - When nushell starts, these environment variables are loaded in `028-nushell/env.nu`.
+2. Use env in nvim.
+  - In `014-nvim/post.lua`, it loads the env and setup colorscheme.
+
+   ```lua
+   local colorscheme = os.getenv('NVIM_CUSTOM_COLORSCHEME')
+   if (colorscheme) then
+   	vim.cmd('colorscheme ' .. colorscheme)
+   end
+   ```
+
+These custom envs are **excluded** from this git repo as they have differs on different machines for customizing.
