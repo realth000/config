@@ -1,11 +1,18 @@
 # Setup env.
 
+# The internal logging function.
+def env_log [
+    message: string
+] {
+    print $"(ansi yellow)env.nu: ($message)(ansi reset)"
+}
+
 $env.PATH = (
     $env.PATH | split row (char esep) | append ($env.HOME | path join .cargo bin) | append ($env.HOME | path join .local bin) | append ($nu.default-config-dir | path join bin)
 )
 
 # Configure starship.
-if (echo ~/.cache/starship/init.nu | path exists) { use ~/.cache/starship/init.nu } else { print "startip not found, skip" }
+if (echo ~/.cache/starship/init.nu | path exists) { use ~/.cache/starship/init.nu } else { env_log "startip not found, skip" }
 
 # Command alias.
 
@@ -19,14 +26,13 @@ alias tl = tree | less
 
 ## fp
 
-if (plugin list | where $it.name == "functional" | is-not-empty) {
-    alias other = fp other
-    alias first-where = fp first-where
-    alias is = fp is
-    alias pure = fp pure
-    alias then = fp then
-} else {
-    print "env.nu: functional plugin not found, alias not added"
+alias other = fp other
+alias first-where = fp first-where
+alias is = fp is
+alias pure = fp pure
+alias then = fp then
+if (plugin list | where $it.name == "functional" | is-empty) {
+    env_log "functional plugin not found, alias not added"
 }
 
 
@@ -250,5 +256,7 @@ const env_mod = if ($have_env_mod) { "./custom/custom_env.nu" }
 use $env_mod  define_custom_env
 if ($have_env_mod) {
     define_custom_env | load-env
+} else {
+    env_log "custom_env.nu not found, some envs not loaded.\nPlease make sure $nu.default-config-dir/custom/custom_env.nu exists."
 }
 
