@@ -81,7 +81,7 @@ module internal {
         let minute = $timestamp.minute
         let second = $timestamp.second
         let millisecond = $timestamp.millisecond
-        if ($hour | describe) == 'string' {
+        if (($hour | describe) == 'string') and ($hour != '00') {
             return $"($hour):($minute):($second).($millisecond)"
         } else {
             return $"($minute):($second).($millisecond)"
