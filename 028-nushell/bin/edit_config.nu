@@ -22,6 +22,15 @@ module internal {
         }
     }
 
+    # For platform specific neovim config directory paths.
+    def nvim_config_path [] {
+        if ($nu.os-info.name == "windows") {
+            $env.LOCALAPPDATA | path join "nvim"
+        } else {
+            $env.HOME | path join ".config" "nvim"
+        }
+    }
+
     export def all_targets [] { return [
         {
             target: "nu"
@@ -36,7 +45,7 @@ module internal {
         {
             target: "nv"
             detail: "neovim config"
-            path: $"($env.HOME)/.config/nvim"
+            path: $"(nvim_config_path)"
         }
     ] }
 }
