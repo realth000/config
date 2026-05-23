@@ -68,6 +68,7 @@ export def is [type: string]: any -> bool {
 @example "Use and map the given fallback value on null value" { let foo = 100; null | other {|| $foo * 2} } --result 200
 export def other [else_value: oneof<closure, any>] {
     
+
     # $in become nothing in the if clause, we need to bind it to another variable
     # at the very first begining.
     let input = $in
