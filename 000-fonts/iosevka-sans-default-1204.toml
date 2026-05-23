@@ -1,6 +1,6 @@
 [buildPlans.Iosevka1204]
 family = "Iosevka1204"
-spacing = "normal"
+spacing = "term"
 serifs = "sans"
 noCvSs = false
 exportGlyphNames = true
@@ -101,7 +101,27 @@ lig-double-arrow-bar = "without-notch"
 lig-single-arrow-bar = "without-notch"
 
   [buildPlans.Iosevka1204.ligations]
-  inherits = "php"
+  inherits = "javascript"
+
+[buildPlans.Iosevka1204.weights.Regular]
+shape = 400
+menu = 400
+css = 400
+
+[buildPlans.Iosevka1204.weights.Bold]
+shape = 700
+menu = 700
+css = 700
+
+[buildPlans.Iosevka1204.weights.Medium]
+shape = 500
+menu = 500
+css = 500
+
+[buildPlans.Iosevka1204.widths.Normal]
+shape = 600
+menu = 5
+css = "normal"
 
 [buildPlans.Iosevka1204.slopes.Upright]
 angle = 0

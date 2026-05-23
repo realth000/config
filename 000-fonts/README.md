@@ -1,10 +1,54 @@
 # Fonts
 
+**Iosevka0828 config is deprecated.**
+
+## Iosevka1204
+
+See how Iosevka1204 looks like: Import config file iosevka-sans-default-1204.toml in [Iosevka Customizer](https://typeof.net/Iosevka/customizer).
+
+1. Copy contents in iosevka-sans-default-1204.toml to private-build-plans.toml file in the Iosevka git repo.
+2. Start build:
+   * run `npm run build -- contents::iosevka1204` for TTF and Web fonts.
+   * run `npm run build -- ttf::iosevka1204` for TTF fonts.
+
+### Patching Nerd Fonts
+
+Optional step to patch nerd fonts into the fonts.
+
+**Note that the font patcher breaks font partially, the patches fonts can not be used in strict font systems like zed and wezterm.**
+
+* Use font patcher from [nerd fonts](https://github.com/ryanoasis/nerd-fonts/):
+
+  ``` bash
+  # CAUTION: CPU usage 100%
+  for f in `find Iosevka1204_20240613/TTF-Extend -type f`; do ./fontpatcher/font-patcher $f --complete --quiet --mono --makegroups --outputdir ./Iosevka1204NFM_20240613 &; done; wait
+  ```
+
+#### To patch on Windows
+
+With nushell, similar with powershel
+
+```nu
+# Install fontforge
+scoop install fontforge
+# Unzip and enter fontpatcher
+cd font-patcher
+mkdir ttf_patched
+# Do the patch
+ls TTF | get name | each {|x| fontforge -script FontPatcher/font-patcher $x --complete --quiet --mono --makegroups --outputdir ttf_patched}
+```
+
+### Compatibility
+
+Latest update: 2026.05.24
+
+Compatible with Iosevka 34.6.0
+
 ## Iosevka0828
 
-Iosevka custom font with slab serifs.
+**This font config is deprecated.**
 
-![overview](./iosevka-slab-ss08-0828.png)
+Iosevka custom font with slab serifs.
 
 Note: **Iosevka0828 has ligature for `!=`**
 
@@ -30,50 +74,3 @@ Note: **Iosevka0828 has ligature for `!=`**
 ### Compatibility
 
 Compatible with Iosevka 25.1.1
-
-## Iosevka1204
-
-Iosevka custom font with sans and little serif tails.
-
-![overview](./iosevka-sans-default-1204.png)
-
-Note: **Iosevka1204 has ligature for `!=`**
-
-* See how Iosevka1204 looks like:
-  * Import config file iosevka-sans-default-1204.toml on [Iosevka Customizer](https://typeof.net/Iosevka/customizer).
-
-1. Copy contents in iosevka-sans-default-1204.toml to private-build-plans.toml file in the Iosevka git repo.
-2. Start build:
-   * run `npm run build -- contents::iosevka1204` for TTF and Web fonts.
-   * run `npm run build -- ttf::iosevka1204` for TTF fonts.
-
-### Patching Nerd Fonts
-
-* Use font patcher from [nerd fonts](https://github.com/ryanoasis/nerd-fonts/):
-
-  ``` bash
-  # CAUTION: CPU usage 100%
-  for f in `find Iosevka1204_20240613/TTF-Extend -type f`; do ./fontpatcher/font-patcher $f --complete --quiet --mono --makegroups --outputdir ./Iosevka1204NFM_20240613 &; done; wait
-  ```
-
-#### To patch on Windows
-
-With nushell, similar with powershel
-
-```nu
-# Install fontforge
-scoop install fontforge
-# Unzip and enter fontpatcher
-cd font-patcher
-mkdir ttf ttf_patched
-# Preapre unpatched fonts
-cp *.ttf ttf
-# Do the patch
-ls ttf | get name | each {|x| fontforge -script font-patcher $x --complete --quiet --mono --makegroups --outputdir ttf_patched}
-```
-
-### Compatibility
-
-Latest update: 2024.10.09
-
-Compatible with Iosevka 31.8.0
