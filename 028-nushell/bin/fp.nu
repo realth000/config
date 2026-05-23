@@ -1,13 +1,13 @@
-def is_null_value [input: any] {
+def is_null_value [input] {
     if ($input | is "nothing") {
         true
-    } else if (($input | is string) and ($input | is-empty)) {
+    } else if ($input | is string) and ($input | is-empty) {
         true
-    } else if (($input | is list) and ($input | is-empty)) {
+    } else if ($input | is list) and ($input | is-empty) {
         true
-    } else if (($input | is record) and ($input | is-empty)) {
+    } else if ($input | is record) and ($input | is-empty) {
         true
-    } else if (($input | is table) and ($input | is-empty)) {
+    } else if ($input | is table) and ($input | is-empty) {
         true
     } else {
         false
@@ -27,20 +27,19 @@ def is_null_value [input: any] {
 @example "Check a variable is string" { 1 | is string } --result false
 @example "Check a variable is list" { [1] | is list } --result true
 @example "Check a variable is integer list" { [1] | is list<int> } --result true
-export def is [type: string] : any -> bool {
-   let ty = $in | describe
+export def is [type: string]: any -> bool {
+    let ty = $in | describe
 
-   if $ty =~ "list<.*>" and $type == 'list' {
-       true
-   } else if $ty =~ "record<.*>" and $type == 'record' {
-       true
-   } else if $ty =~ "table<.*>" and $type == 'table' {
-       true
-   } else {
-       $ty == $type
-   }
+    if $ty =~ "list<.*>" and $type == 'list' {
+        true
+    } else if $ty =~ "record<.*>" and $type == 'record' {
+        true
+    } else if $ty =~ "table<.*>" and $type == 'table' {
+        true
+    } else {
+        $ty == $type
+    }
 }
-
 
 # Transform the input to another value if input is null
 #
@@ -68,6 +67,7 @@ export def is [type: string] : any -> bool {
 @example "Use the given fallback value on empty list" { [] | other 100 } --result 100
 @example "Use and map the given fallback value on null value" { let foo = 100; null | other {|| $foo * 2} } --result 200
 export def other [else_value: oneof<closure, any>] {
+    
     # $in become nothing in the if clause, we need to bind it to another variable
     # at the very first begining.
     let input = $in
@@ -119,7 +119,7 @@ export def then [next: oneof<closure, any>]: any -> any {
 @example "Filter on empty list" { [] | first-where {|x| $x > 2}} --result nothing
 @example "Filter on integer list" { [1,3,5] | first-where {|x| $x > 2}} --result 3
 @example "Filter on string list" { ["foo", "bar"] | first-where {|x| $x =~ "a*"}} --result "bar"
-export def first-where [pred: oneof<bool, closure>]: list -> any {
+export def first-where [pred: oneof<bool, closure>]: list<any> -> any {
     let input = $in
     for $item in $input {
         if (do $pred $item) {

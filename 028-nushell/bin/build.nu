@@ -1,71 +1,77 @@
 module internal {
-    export def supported_build_types [] { [
-        {
-            name: deb
-            type: system
-            detection: {
-                directory: debian
-                file: [ [debian, changelog] ]
+    export def supported_build_types [] {
+        [
+            {
+                name: deb
+                type: system
+                detection: {
+                    directory: debian
+                    file: [
+                        [debian, changelog]
+                    ]
+                }
             }
-        }
-        {
-            name: "deb-src"
-            type: system
-            detection: {
-                directory: debian
-                file: [ [debian, changelog] ]
+            {
+                name: "deb-src"
+                type: system
+                detection: {
+                    directory: debian
+                    file: [
+                        [debian, changelog]
+                    ]
+                }
             }
-        }
-        {
-            name: cargo
-            type: language
-            detection: {
-                file: [ Cargo.toml ]
+            {
+                name: cargo
+                type: language
+                detection: {
+                    file: [Cargo.toml]
+                }
             }
-        }
-        {
-            name: cmake
-            type: language
-            detection: {
-                file: [ CMakeLists.txt ]
+            {
+                name: cmake
+                type: language
+                detection: {
+                    file: [CMakeLists.txt]
+                }
             }
-        }
-        {
-            name: go
-            type: language
-            detection: {
-                file: [ go.mod ]
+            {
+                name: go
+                type: language
+                detection: {
+                    file: [go.mod]
+                }
             }
-        }
-        {
-            name: npm
-            type: language
-            detection: {
-                file: [ package-lock.json ]
+            {
+                name: npm
+                type: language
+                detection: {
+                    file: [package-lock.json]
+                }
             }
-        }
-        {
-            name: pnpm
-            type: language
-            detection: {
-                file: [ pnpm-lock.yaml ]
+            {
+                name: pnpm
+                type: language
+                detection: {
+                    file: [pnpm-lock.yaml]
+                }
             }
-        }
-        {
-            name: rpm
-            type: system
-            detection: {
-                file_glob: [ "*.spec" ]
+            {
+                name: rpm
+                type: system
+                detection: {
+                    file_glob: ["*.spec"]
+                }
             }
-        }
-        {
-            name: srpm
-            type: system
-            detection: {
-                file_glob: [ "*.spec" ]
+            {
+                name: srpm
+                type: system
+                detection: {
+                    file_glob: ["*.spec"]
+                }
             }
-        }
-    ] }
+        ]
+    }
 
     export def detect_build_type [] {
         let all_types = supported_build_types
@@ -73,24 +79,22 @@ module internal {
         let system_types = $all_types | where $in.type == "system"
     }
 
-    def detect_type [
-        build_type: record
-    ] {
+    def detect_type [build_type: record] {
         let detection = $build_type.detection
         if "file" in $detection {
-            if ($detection.file | all { |x| ($x | path exists) and ($x | path type | $in == "file") }) {
+            if ($detection.file | all {|x| ($x | path exists) and ($x | path type | $in == "file") }) {
                 return true
             }
         }
 
         if "directory" in $detection {
-            if ($detection.file | all { |x| ($x | path exists) and ($x | path type | $in == "dir") }) {
+            if ($detection.file | all {|x| ($x | path exists) and ($x | path type | $in == "dir") }) {
                 return true
             }
         }
 
         if "file-glob" in $detection {
-            if ($detection.file_glob | all { |x| glob $x | is-not-empty }) {
+            if ($detection.file_glob | all {|x| glob $x | is-not-empty }) {
                 return true
             }
         }
@@ -98,7 +102,6 @@ module internal {
         return false
     }
 }
-
 
 # Auto build command (WIP)
 #

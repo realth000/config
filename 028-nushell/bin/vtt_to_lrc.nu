@@ -1,6 +1,7 @@
 # This script is ONLY intend to use in nushell REPL.
 
 module internal {
+
     # Extract the start time from vtt line text
     #
     # Support two formats:
@@ -14,9 +15,7 @@ module internal {
     #
     # - A record if time matches: { year: string | nothing, minute: string, second: string, millisecond: string }
     # - Nothing if time not matches
-    def extract_time_from_string [
-        time_str: string
-    ] {
+    def extract_time_from_string [time_str: string] {
         # With hour:
         #
         # '00:00:01.000 --> 00:04.000' | parse --regex '...'
@@ -37,7 +36,7 @@ module internal {
         # │ 0 │          │    │    │    │     │ 00:01.000 │ 00 │ 01 │ 000 │ 00:      │
         # ╰───┴──────────┴────┴────┴────┴─────┴───────────┴────┴────┴─────┴──────────╯
         let timestamp_re = r#'((?<h1>\d+):(?<m1>\d+):(?<s1>\d+)\.(?<ms1>\d+))|((?<m2>\d+):(?<s2>\d+)\.(?<ms2>\d+)) --> (\d+:)+\d+\.\d+'#
-        if ($time_str !~ $timestamp_re) {
+        if $time_str !~ $timestamp_re {
             return
         }
 
@@ -50,11 +49,7 @@ module internal {
             let s = $all_matches | get s2 | first
             let ms = $all_matches | get ms2 | first
 
-            return {
-               minute: $m
-               second: $s
-               millisecond: $ms
-            }
+            return {minute: $m, second: $s, millisecond: $ms}
         }
 
         # With hour.
@@ -88,11 +83,7 @@ module internal {
         }
     }
 
-    export def fatal [
-        error: string
-        help?: string
-        exit_code: int = 1
-    ] {
+    export def fatal [error: string, help?: string, exit_code: int = 1] {
         use ../log.nu fatal
         fatal "vtt2lrc" $error $help $exit_code
     }
@@ -102,13 +93,11 @@ module internal {
     # The call MUST ensure `vtt_path` exsits and is readable
     #
     # Returns a list of vtt file path: [*.vtt]
-    export def collect_vtt_files [
-        vtt_path: string
-    ] {
+    export def collect_vtt_files [vtt_path: string] {
         let target_type = $vtt_path | path type
 
-        if ($target_type == "file") {
-            if (not ($vtt_path | str ends-with ".vtt")) {
+        if $target_type == "file" {
+            if not ($vtt_path | str ends-with ".vtt") {
                 # Expected *.vtt file name
                 fatal "invalid vtt file name" "expected *.vtt file name"
             }
@@ -116,8 +105,8 @@ module internal {
             return [$vtt_path]
         }
 
-        if ($target_type == "dir") {
-            return  (ls $vtt_path
+        if $target_type == "dir" {
+            return (ls $vtt_path
                 | where { $in.type == "file" and ($in.name | str ends-with ".vtt") }
                 | each { $in.name })
         }
@@ -130,9 +119,7 @@ module internal {
     # The output file name is automatically computed from the input `file_path`
     #
     # The caller MUST ensure `file_path` exists and is a valid vtt file with name "*.vtt"
-    export def convert [
-        file_path: string
-    ] {
+    export def convert [file_path: string] {
         let output_path = $file_path | str replace --regex "([^.]+)(\\..+)+" "$1.lrc"
         let input_contents = open $file_path --raw | decode utf-8
         mut data: list<record<timestamp: record, content: string>> = []
@@ -146,15 +133,15 @@ module internal {
         let timestamp_re = r#'(?<time>(\d+:)+\d+\.\d+) --> (\d+:)+\d+\.\d+'#
 
         for $line in ($input_contents | lines) {
-            if ($state == $STATE_WAITING) {
+            if $state == $STATE_WAITING {
                 # Waiting for timestamp line
                 let parsed_time = extract_time_from_string $line
-                if (($parsed_time | describe) != 'nothing') {
+                if ($parsed_time | describe) != 'nothing' {
                     $curr_timestamp = $parsed_time
                     $state = $STATE_COLLECTING
                 }
                 continue
-            } else if ($state == $STATE_COLLECTING) {
+            } else if $state == $STATE_COLLECTING {
                 if ($line | str trim | is-empty) {
                     $state = $STATE_WAITING
                     continue
@@ -198,7 +185,7 @@ export def vtt2lrc [
 ] {
     use internal *
 
-    if (not ($vtt_path | path exists)) {
+    if not ($vtt_path | path exists) {
         fatal "failed to open path" $"path ($vtt_path) not exists"
     }
 

@@ -1,11 +1,7 @@
 # This script is ONLY intend to use in nushell REPL.
 
 module internal {
-    export def fatal [
-        error: string
-        help?: string
-        exit_code: int = 1
-    ] {
+    export def fatal [error: string, help?: string, exit_code: int = 1] {
         use ../log.nu fatal
         fatal "ec" $error $help $exit_code
     }
@@ -16,7 +12,7 @@ module internal {
 
     def check_envs [] {
         let env_names = $env | columns
-        let invalid_env = required_env | where { |x| $env_names | all { |y| $y != $x } }
+        let invalid_env = required_env | where {|x| $env_names | all {|y| $y != $x } }
         if ($invalid_env | is-not-empty) {
             fatal $"envs not found: ($invalid_env)"
         }
@@ -24,30 +20,32 @@ module internal {
 
     # For platform specific neovim config directory paths.
     def nvim_config_path [] {
-        if ($nu.os-info.name == "windows") {
+        if $nu.os-info.name == "windows" {
             $env.LOCALAPPDATA | path join "nvim"
         } else {
             $env.HOME | path join ".config" "nvim"
         }
     }
 
-    export def all_targets [] { return [
-        {
-            target: "nu"
-            detail: "nushell config"
-            path: $"($nu.default-config-dir)"
-        }
-        {
-            target: "wz"
-            detail: "wezterm config"
-            path: $"($env.WEZTERM_CONFIG_PATH)"
-        }
-        {
-            target: "nv"
-            detail: "neovim config"
-            path: $"(nvim_config_path)"
-        }
-    ] }
+    export def all_targets [] {
+        return [
+            {
+                target: "nu"
+                detail: "nushell config"
+                path: $"($nu.default-config-dir)"
+            }
+            {
+                target: "wz"
+                detail: "wezterm config"
+                path: $"($env.WEZTERM_CONFIG_PATH)"
+            }
+            {
+                target: "nv"
+                detail: "neovim config"
+                path: $"(nvim_config_path)"
+            }
+        ]
+    }
 }
 
 # Edit config

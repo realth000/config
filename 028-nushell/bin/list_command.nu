@@ -36,7 +36,7 @@ export def list-command [
     if ($target_command_types | is-empty) {
         $cmds = help commands | select name category command_type description
     } else {
-        $cmds = help commands | where { |cmd_info| $target_command_types | any { |cmd_type| $cmd_type == $cmd_info.command_type} }  | select name category command_type description
+        $cmds = help commands | where {|cmd_info| $target_command_types | any {|cmd_type| $cmd_type == $cmd_info.command_type} } | select name category command_type description
     }
 
     if ($category | is-not-empty) {
@@ -44,5 +44,4 @@ export def list-command [
     } else {
         $cmds
     }
-
 }

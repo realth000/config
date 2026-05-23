@@ -1,9 +1,7 @@
 # Setup env.
 
 # The internal logging function.
-def env_log [
-    message: string
-] {
+def env_log [message: string] {
     print $"(ansi yellow)env.nu: ($message)(ansi reset)"
 }
 
@@ -34,7 +32,6 @@ alias then = fp then
 if (plugin list | where $it.name == "functional" | is-empty) {
     env_log "functional plugin not found, alias not added"
 }
-
 
 # Alias from oh-my-zsh https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh
 
@@ -230,6 +227,7 @@ alias gwtls = git worktree list
 alias gwtmv = git worktree move
 alias gwtrm = git worktree remove
 alias gstu = gsta --include-untracked
+
 ##alias gtl = gtl(){ git tag --sort=-v:refname -n --list "${1}*" }; noglob gtl
 #alias gk = \gitk --all --branches &!
 #alias gke = \gitk --all $(git log --walk-reflogs --pretty=%h) &!
@@ -252,11 +250,10 @@ use $alias_mod *
 #     }
 # }
 const have_env_mod = [$nu.default-config-dir, "custom", "custom_env.nu"] | path join | path exists
-const env_mod = if ($have_env_mod) { "./custom/custom_env.nu" }
+const env_mod = if $have_env_mod { "./custom/custom_env.nu" }
 use $env_mod  define_custom_env
-if ($have_env_mod) {
+if $have_env_mod {
     define_custom_env | load-env
 } else {
     env_log "custom_env.nu not found, some envs not loaded.\nPlease make sure $nu.default-config-dir/custom/custom_env.nu exists."
 }
-

@@ -9,8 +9,8 @@ $env.config.keybindings ++= [
         keycode: char_.
         mode: emacs
         event: [
-            { edit: InsertString, value: "!$" }
-            { send: Enter }
+            {edit: InsertString, value: "!$"}
+            {send: Enter}
         ]
     }
     {
@@ -19,9 +19,9 @@ $env.config.keybindings ++= [
         keycode: char_/
         mode: emacs
         event: [
-            { edit: MoveToStart }
-            { edit: InsertString, value: "sudo " }
-            { edit: MoveToEnd }
+            {edit: MoveToStart}
+            {edit: InsertString, value: "sudo "}
+            {edit: MoveToEnd}
         ]
     }
 ]
