@@ -35,7 +35,7 @@
     "editor.inlayHints.enabled": "offUnlessPressed",
   },
   "editor.minimap.showSlider": "always",
-  "cmake.configureOnOpen": true,
+  "cmake.configureOnOpen": false,
   "vim.useCtrlKeys": true,
   "vim.mouseSelectionGoesIntoVisualMode": false,
   "vim.autoindent": true,
@@ -236,13 +236,13 @@
     "*.toml": "toml",
   },
   "cmake.showConfigureWithDebuggerNotification": false,
-  "window.commandCenter": false,
   "chat.commandCenter.enabled": false,
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features",
   },
   "favFontPicker.favFallbackFonts": ["Sarasa Mono SC", "霞鹜文楷等宽 GB"],
   "favFontPicker.favFonts": [
+    "0xProto Nerd Font",
     "AdwaitaMono Nerd Font Mono",
     "CommitMono Nerd Font Mono",
     "CaskaydiaCove Nerd Font Mono",
@@ -269,6 +269,7 @@
     "RecMonoLinear Nerd Font Mono",
     "RecMonoSmCasual Nerd Font Mono",
     "Sarasa Mono SC",
+    "SpaceMono Nerd Font Mono",
     "D2CodingLigature Nerd Font # Breaks cjk letters",
   ],
   "favFontPicker.previewFont": true,
@@ -294,4 +295,7 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
+  "window.commandCenter": false,
+  "window.menuBarVisibility": "toggle",
+  "workbench.layoutControl.enabled": false,
 }

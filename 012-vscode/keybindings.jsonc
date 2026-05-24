@@ -51,11 +51,6 @@
     "command": "-workbench.action.openEditorAtIndex9",
   },
   {
-    "key": "alt+1",
-    "command": "workbench.action.toggleSidebarVisibility",
-  },
-  // Disabled to avoid conflicts with vim keymap.
-  {
     "key": "ctrl+b",
     "command": "-workbench.action.toggleSidebarVisibility",
   },
@@ -152,5 +147,68 @@
     "key": "ctrl+b",
     "command": "quickInput.pagePrevious",
     "when": "inQuickInput && quickInputType == 'quickPick' || inQuickInput && quickInputType == 'quickTree'",
+  },
+  {
+    "key": "alt+1",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "!editorTextFocus",
+  },
+  {
+    "key": "ctrl+1",
+    "command": "-workbench.action.focusFirstEditorGroup",
+  },
+
+  ////////////////////////////////////////////////////
+  //
+  // Side bar views toggles.
+  //
+  // Below are group of shortcuts toggling specific side bar view.
+  //
+  // 1. Open the side bar view if side bar is not open or side bar showing other views.
+  // 2. Close the side bar if side bar is open and showing the specific view.
+  // 3. Focus on side bar if side bar is open and show the specific view but focus is not there.
+  //
+  ////////////////////////////////////////////////////
+
+  /////////////////////////
+  //
+  // 1. File explorer
+  //
+  /////////////////////////
+  {
+    "key": "alt+1",
+    "command": "workbench.view.explorer",
+    "when": "!sideBarVisible || activeViewlet != 'workbench.view.explorer'",
+  },
+  {
+    "key": "alt+1",
+    "command": "workbench.action.closeSidebar",
+    "when": "sideBarVisible && activeViewlet == 'workbench.view.explorer' && filesExplorerFocus",
+  },
+  {
+    "key": "alt+1",
+    "command": "workbench.view.explorer",
+    "when": "sideBarVisible && activeViewlet == 'workbench.view.explorer' && !filesExplorerFocus",
+  },
+
+  /////////////////////////
+  //
+  // 2. Search view
+  //
+  /////////////////////////
+  {
+    "key": "alt+2",
+    "command": "workbench.view.search",
+    "when": "!sideBarVisible || activeViewlet != 'workbench.view.search'",
+  },
+  {
+    "key": "alt+2",
+    "command": "workbench.action.closeSidebar",
+    "when": "sideBarVisible && activeViewlet == 'workbench.view.search' && searchViewletFocus",
+  },
+  {
+    "key": "alt+2",
+    "command": "workbench.view.search",
+    "when": "sideBarVisible && activeViewlet == 'workbench.view.search' && !searchViewletFocus",
   },
 ]
