@@ -45,6 +45,10 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 	-- config.default_prog = { 'D:/Program/msys64/msys2_shell.cmd', '-defterm', '-where', msys2_work_dir, '-no-start',
 	local userprofile = os.getenv("USERPROFILE")
 	config.default_prog = { string.format('%s/scoop/apps/nu/current/nu.exe', userprofile) }
+	-- Let nushell aware it is in wezterm.
+	config.set_environment_variables = {
+		NU_IN_WEZTERM = 'true',
+	}
 end
 
 -- config.front_end = "OpenGL"
