@@ -258,7 +258,7 @@ if $have_env_mod {
     env_log "custom_env.nu not found, some envs not loaded.\nPlease make sure $nu.default-config-dir/custom/custom_env.nu exists."
 }
 
-if ($env.OS | str downcase) =~ windows and "NU_IN_WEZTERM" in $env and $env.NU_IN_WEZTERM == "true" {
+if ($nu.os-info.name | str downcase) =~ windows and "NU_IN_WEZTERM" in $env and $env.NU_IN_WEZTERM == "true" {
     # Fix buffer scolling up issue when using with wezterm on windows.
     # https://github.com/wezterm/wezterm/discussions/5859#discussioncomment-13981942
     $env.config.shell_integration.osc133 = false
