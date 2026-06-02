@@ -291,7 +291,9 @@ config.colors = {
 -- "RecMonoLinear Nerd Font Mono",
 -- "RecMonoSmCasual Nerd Font Mono",
 -- "Sarasa Mono SC",
--- "D2CodingLigature Nerd Font" // Breaks cjk letters
+-- "SpaceMono Nerd Font Mono"
+-- "ZedMono Nerd Font Mono"
+-- "ZedMono NFM Extd"
 --
 -- Fonts from Nerd Fonts:
 --
@@ -345,7 +347,9 @@ config.font = wezterm.font_with_fallback {
 		-- family = 'RecMonoLinear Nerd Font Mono',
 		-- family = 'RecMonoSmCasual Nerd Font Mono',
 		-- family = 'Sarasa Mono SC',
-		-- family = 'D2CodingLigature Nerd Font' -- Breaks cjk letters
+		-- family = 'SpaceMono Nerd Font Mono',
+		-- family = 'ZedMono Nerd Font Mono',
+		-- family = 'ZedMono NFM Extd',
 		-- weight = 'DemiBold',
 		weight = 'Medium',
 		harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
