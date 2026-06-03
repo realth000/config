@@ -8,8 +8,7 @@ plugin.setup({
 	bold_keywords = true,
 	-- Enable italic comments.
 	italic_comments = true,
-	-- Enable general editor background transparency.
-	transparent = true,
+	transparent = GetThemeUseTransparent(),
 	-- Enable brighter float border.
 	bright_border = false,
 	-- Reduce the overall amount of blue in the theme (diverges from base Nord).

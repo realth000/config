@@ -3,7 +3,7 @@ if (not status) then return end
 
 plugin.setup({
 	undercurl = true,
-	transparent = true,
+	transparent = GetThemeUseTransparent(),
 	gutter = false,
 	dimInactive = true, -- disabled when transparent
 	terminalColors = true,

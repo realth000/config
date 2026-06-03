@@ -71,3 +71,17 @@ end
 function ChangeAppend(target)
 	updateContent(target, true, true)
 end
+
+local _use_transparent_background = nil
+--Get should use transparent background theme color or not from OS env.
+function GetThemeUseTransparent()
+	if (_use_transparent_background == nil) then
+		local transparent = os.getenv('NVIM_CUSTOM_TRANSPARENT_BACKGROUND')
+		if transparent and transparent == "true" then
+			_use_transparent_background = true
+		else
+			_use_transparent_background = false
+		end
+	end
+	return _use_transparent_background
+end

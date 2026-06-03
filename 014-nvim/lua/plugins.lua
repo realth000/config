@@ -152,11 +152,6 @@ return require('lazy').setup({
 		{ 'MunifTanjim/nui.nvim', lazy = true, },
 	},
 
-	-- Sync terminal background color
-	{
-		"typicode/bg.nvim",
-	},
-
 	-- Markdown - disabled for treesitter capability
 	-- {
 	-- 	'MeanderingProgrammer/render-markdown.nvim',

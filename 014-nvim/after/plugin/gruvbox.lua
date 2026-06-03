@@ -21,6 +21,6 @@ plugin.setup({
 	palette_overrides = {},
 	overrides = {},
 	dim_inactive = false,
-	transparent_mode = true,
+	transparent_mode = GetThemeUseTransparent(),
 })
 -- Setup theme

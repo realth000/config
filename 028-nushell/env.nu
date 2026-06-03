@@ -241,14 +241,7 @@ use $alias_mod *
 
 # "$NU_CONFIG_DIR/custom/custom_env.nu"
 #
-# Example:
-#
-# export def define_custom_env [] {
-#     {
-#         "NVIM_CUSTOM_COLORSCHEME": "",
-#         "WEZTERM_CONFIG_PATH": $"($env.HOME)/.wezterm.lua"
-#     }
-# }
+# Refer to custom.md for example.
 const have_env_mod = [$nu.default-config-dir, "custom", "custom_env.nu"] | path join | path exists
 const env_mod = if $have_env_mod { "./custom/custom_env.nu" }
 use $env_mod  define_custom_env
