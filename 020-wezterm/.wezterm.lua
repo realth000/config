@@ -4,28 +4,10 @@ local act                          = wezterm.action
 
 local use_dark_mode = true
 
--- customize color scheme
-local catppuccin_mocha       = wezterm.color.get_builtin_schemes()['Catppuccin Mocha']
-local catppuccin_latte       = wezterm.color.get_builtin_schemes()['Catppuccin Latte']
-local hardhacker             = wezterm.color.get_builtin_schemes()['hardhacker']
-local tokyo_night            = wezterm.color.get_builtin_schemes()['Tokyo Night']
-local tokyo_night_storm      = wezterm.color.get_builtin_schemes()['Tokyo Night Storm']
-local tokyo_night_moon       = wezterm.color.get_builtin_schemes()['Tokyo Night Moon']
-local nightfox               = wezterm.color.get_builtin_schemes()['nightfox']
-local nordfox                = wezterm.color.get_builtin_schemes()['nordfox']
-local duskfox                = wezterm.color.get_builtin_schemes()['duskfox']
-local carbonfox              = wezterm.color.get_builtin_schemes()['carbonfox']
-local terafox                = wezterm.color.get_builtin_schemes()['terafox']
--- customize oh-my-zsh suggestions plugin suggest text color to optimize ctrl + F.
--- color_scheme = "midnight-in-mojave", -- ctrl + f
--- color_scheme = "Alabaster", -- ok
--- color_scheme = "CLRS", -- good
--- color_scheme = "Doom Peacock", -- ctrl + f
--- color_scheme = "Galizur", -- good
--- color_scheme = "GoogleDark (Gogh)", -- cursor
--- color_scheme = "Material", -- ok half ctrl + f
--- color_scheme = "MaterialDark", -- as above
--- color_scheme = "Solarized Darcula", -- ctrl + f
+-- Get wezterm builtin colorschemes.
+local function colorscheme(name)
+	return wezterm.color.get_builtin_schemes()[name]
+end
 
 wezterm.on('gui-startup', function(cmd)
 	-- allow `wezterm start -- something` to affect what we spawn
@@ -230,19 +212,43 @@ config.window_padding = {
 	bottom = 2,
 }
 config.color_schemes = {
-	['catppuccin_mocha'] = catppuccin_mocha,
-	['catppuccin_latte'] = catppuccin_latte,
-	['hardhacker'] = hardhacker,
-	['tokyo_night'] = tokyo_night,
-	['tokyo_night_storm'] = tokyo_night_storm,
-	['tokyo_night_moon'] = tokyo_night_moon,
-	['nightfox'] = nightfox,
-	['nordfox'] = nordfox,
-	['duskfox'] = duskfox,
-	['carbonfox'] = carbonfox,
-	['terafox'] = terafox,
+	['catppuccin-mocha'] = colorscheme('Catppuccin Mocha'),
+	['catppuccin-latte'] = colorscheme('Catppuccin Latte'),
+	['hardhacker'] = colorscheme('hardhacker'),
+	['hardhacker-darker'] = colorscheme('hardhacker'),
+	['tokyonight'] = colorscheme('Tokyo Night'),
+	['tokyonight-storm'] = colorscheme('Tokyo Night Storm'),
+	['tokyonight-moon'] = colorscheme('Tokyo Night Moon'),
+	['nightfox'] = colorscheme('nightfox'),
+	['nordfox'] = colorscheme('nordfox'),
+	['duskfox'] = colorscheme('duskfox'),
+	['duskfox'] = colorscheme('duskfox'),
+	['carbonfox'] = colorscheme('carbonfox'),
+	['terafox'] = colorscheme('terafox'),
+	['github_dark'] = colorscheme('GitHub Dark'),
+	['github_dark_dimmed'] = colorscheme('GitHub Dark'),
+	['github_dark_tritanopia'] = colorscheme('GitHub Dark'),
+	['github_dark_default'] = colorscheme('GitHub Dark'),
+	['gruvbox'] = colorscheme('GruvboxDark'),
+	['onedark'] = colorscheme('OneDark (base16)'),
+	['monokai-pro'] = colorscheme('Monokai Dark (Gogh)'),
+	['monokai-pro-classic'] = colorscheme('Monokai Dark (Gogh)'),
+	['monokai-pro-default'] = colorscheme('Monokai Dark (Gogh)'),
+	['monokai-pro-machine'] = colorscheme('Monokai Dark (Gogh)'),
+	['monokai-pro-octagon'] = colorscheme('Monokai Dark (Gogh)'),
+	['monokai-pro-ristretto'] = colorscheme('Monokai Dark (Gogh)'),
+	['monokai-pro-spectrum'] = colorscheme('Monokai Dark (Gogh)'),
+	['nordic'] = colorscheme('nord'),
+	['kanagawa-paper'] = colorscheme('Kanagawa (Gogh)'),
+	['kanagawa-dragon'] = colorscheme('Kanagawa Draon (Gogh)'),
+	['palenight'] = colorscheme('Palenight (Gogh)')
 }
-config.color_scheme = 'catppuccin_mocha'
+
+local colorscheme = 'catppuccin-mocha' -- @@WEZTERM_COLORSCHEME@@
+if (config.color_schemes[colorscheme] ~= nil) then
+	config.color_scheme = colorscheme
+end
+
 config.colors = {
 	-- selection_bg = '#f5e0dc',
 	-- selection_fg = '#1e1e2e',
@@ -351,7 +357,7 @@ config.font = wezterm.font_with_fallback {
 		-- family = 'ZedMono Nerd Font Mono',
 		-- family = 'ZedMono NFM Extd',
 		-- weight = 'DemiBold',
-		weight = 'Medium',
+		-- weight = 'Medium',
 		harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
 	},
 	{

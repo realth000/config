@@ -42,6 +42,8 @@ return require('lazy').setup({
 		{ 'rebelot/kanagawa.nvim' },
 		{ 'sho-87/kanagawa-paper.nvim' },
 		{ 'bgwdotdev/gleam-theme-nvim' },
+		{ 'alexmozaidze/palenight.nvim' },
+		{ 'wtfox/jellybeans.nvim' },
 	},
 
 	-- nvim-tree

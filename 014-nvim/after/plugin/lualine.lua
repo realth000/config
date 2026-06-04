@@ -50,6 +50,15 @@ local theme_map = {
 	["duskfox"] = "duskfox",
 	["carbonfox"] = "carbonfox",
 	["terafox"] = "terafox",
+
+	-- nordic
+	["nordic"] = "nord",
+
+	-- palenight
+	["palenight"] = "palenight",
+
+	-- jellybeans
+	["jellybeans"] = "jellybeans",
 }
 
 -- Fallback theme.

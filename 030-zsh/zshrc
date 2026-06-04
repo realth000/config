@@ -44,6 +44,8 @@ export NVIM_CUSTOM_USE_DARK_MODE="true"
 if [ "$NVIM_CUSTOM_USE_DARK_MODE" = "true" ];then
 	export WEZTERM_CUSTOM_USE_DARK_MODE="true"
 fi
+export NVIM_CUSTOM_TRANSPARENT_BACKGROUND="false"
+export NVIM_CUSTOM_SYNC_WEZTERM_COLORSCHEME="true"
 
 # alias
 alias tl="tree | less"
