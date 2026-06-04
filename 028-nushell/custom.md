@@ -31,15 +31,17 @@ export def define_custom_env [] {
      "NVIM_CUSTOM_COLORSCHEME": "catppuccin-mocha"
      "WEZTERM_CONFIG_PATH": $"($env.HOME)/.wezterm.lua"
      "NVIM_CUSTOM_TRANSPARENT_BACKGROUND": "false"
+     "NVIM_CUSTOM_USE_DARK_MODE": "true"
    }
 }
 ```
 
 The code above defines two envs:
 
-1. `NVIM_CUSTOM_COLORSCHEME`, value is string "monokai-pro-spectrum".
-2. `WEZTERM_CONFIG_PATH`, value is `.wezterm.lua` in current user's home directory.
-3. `NVIM_CUSTOM_TRANSPARENT_BACKGROUND`, value is `true` or `false` or not set it, control using transparent colorscheme background in neovim.
+1. `NVIM_CUSTOM_COLORSCHEME`, value is string, colorscheme name, e.g. "catppuccin-mocha".
+2. `WEZTERM_CONFIG_PATH`, value is the `.wezterm.lua` file path.
+3. `NVIM_CUSTOM_TRANSPARENT_BACKGROUND`, value is `true` or `false` or not set, controls transparent colorscheme background in neovim.
+4. `NVIM_CUSTOM_USE_DARK_MODE`, value is `true` or `false` or not set, controls `vim.o.background`.
 
 ## Custom alias
 
