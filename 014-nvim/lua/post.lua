@@ -84,3 +84,25 @@ if (sync_wezterm_theme == 'true') and (vim.fn.executable('nu') == 1) then
 		end
 	})
 end
+
+-- Add autocmd for syncing nvim theme config in file.
+--
+-- Only sync theme value in file.
+--
+-- 1. `NVIM_CUSTOM_SYNC_NVIM_COLORSCHEME` set to `true`.
+-- 2. `nu` is an executable globally, e.g. in `$PATH`.
+--
+-- To sync theme value to config file, `$nu.default-config-dir/bin/nvim_set_theme.nu` MUST exists.
+local sync_nvim_theme = os.getenv('NVIM_CUSTOM_SYNC_NVIM_COLORSCHEME')
+if (sync_nvim_theme == 'true') and (vim.fn.executable('nu') == 1) then
+	vim.api.nvim_create_autocmd('ColorScheme', {
+		callback = function(args)
+			local theme = args.match
+			local nu_dir = vim.fn.system({ "nu", "-c", "$nu.default-config-dir" }):gsub("%s+", "")
+			local script_path = vim.fs.joinpath(nu_dir, "bin", "nvim_set_theme.nu")
+			local subcommand = vim.system({ "nu", script_path, theme }, { text = true }):wait()
+			local result = string.format("[%s] %s", subcommand.code, subcommand.stdout)
+			print(result)
+		end
+	})
+end

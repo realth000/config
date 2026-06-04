@@ -33,6 +33,7 @@ export def define_custom_env [] {
      "NVIM_CUSTOM_TRANSPARENT_BACKGROUND": "false"
      "NVIM_CUSTOM_USE_DARK_MODE": "true"
      "NVIM_CUSTOM_SYNC_WEZTERM_COLORSCHEME": "true"
+     "NVIM_CUSTOM_SYNC_NVIM_COLORSCHEME": "true"
    }
 }
 ```
@@ -44,6 +45,7 @@ The code above defines two envs:
 3. `NVIM_CUSTOM_TRANSPARENT_BACKGROUND`, value is `true` or `false` or not set, controls transparent colorscheme background in neovim.
 4. `NVIM_CUSTOM_USE_DARK_MODE`, value is `true` or `false` or not set, controls `vim.o.background`.
 5. `NVIM_CUSTOM_SYNC_WEZTERM_COLORSCHEME`, value is `true` or `false` or not set, sync neovim theme to wezterm when neovim theme changed.
+6. `NVIM_CUSTOM_SYNC_NVIM_COLORSCHEME`, value is `true` or `false` or not set, sync neovim to neovim config file when neovim theme changed.
 
 ## Custom alias
 
