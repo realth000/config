@@ -145,3 +145,31 @@ plugin.setup {
 	inactive_winbar = {},
 	extensions = {}
 }
+
+-- Get or set lualine colorscheme.
+--
+-- If args is not provided, print current colorscheme name.
+-- If args is provided, use it as the colorscheme name to set.
+local function lualineColorScheme(args)
+	local theme = args.args
+	local status, lualine = pcall(require, 'lualine')
+	if (not status) then return end
+
+	if (theme == nil or theme == '') then
+		print(vim.inspect(lualine.get_config().options.theme))
+	else
+		lualine.setup({ options = { theme = theme } })
+	end
+end
+
+vim.api.nvim_create_user_command('LualineColorscheme', lualineColorScheme, { nargs='?', desc = 'Get or set Lualine colorscheme'})
+
+-- Sync lualine theme after nvim colorscheme changed.
+vim.api.nvim_create_autocmd('ColorScheme', {
+	pattern = '*',
+	callback = function()
+		local nvim_colorscheme = vim.g.colors_name
+		local theme = theme_map[nvim_colorscheme] or fallback_theme
+		plugin.setup({ options = { theme = theme } })
+	end,
+})
