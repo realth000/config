@@ -14,7 +14,7 @@ if (echo ~/.cache/starship/init.nu | path exists) { use ~/.cache/starship/init.n
 
 # Command alias.
 
-alias cw = if $nu.os-info.name == "windows" {  cd c:/Programming/Projects } else { cd $env.HOME/Programming }
+alias cw = if $nu.os-info.name == "windows" {  cd c:/Programming/Projects } else { cd ($env.HOME | path join "Programming") }
 alias c = clear
 alias dc = cd
 alias t = tree
