@@ -21,6 +21,15 @@ vim.opt.shiftwidth = 4
 vim.opt.list = true
 vim.opt.termguicolors = true
 
+-- Use nushell to run commands.
+--
+-- To enable nushell, set `NVIM_CUSTOM_USE_NUSHELL` to `true` in environment.
+local use_nushell = os.getenv('NVIM_CUSTOM_USE_NUSHELL')
+if (use_nushell == 'true') and (vim.fn.executable('nu') == 1) then
+	vim.opt.shell = 'nu'
+	vim.opt.shellcmdflag = '--no-newline --stdin -c'
+end
+
 -- Neovide settings.
 -- if vim.g.neovide then
 -- 	--测试中文
