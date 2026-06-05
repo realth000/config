@@ -2,7 +2,6 @@
 
 format = """\
 $os\
-$shell\
 $hostname\
 $directory\
 $git_branch\
