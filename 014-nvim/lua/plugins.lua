@@ -172,5 +172,8 @@ return require('lazy').setup({
 	},
 
 	-- Treesitter parser manager for nvim-0.12 and above.
-	{ "romus204/tree-sitter-manager.nvim" }
+	{ "romus204/tree-sitter-manager.nvim" },
+
+	-- Formatting for some file types.
+	{ "stevearc/conform.nvim" },
 })
