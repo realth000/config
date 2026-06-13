@@ -120,7 +120,13 @@ module internal {
     #
     # The caller MUST ensure `file_path` exists and is a valid vtt file with name "*.vtt"
     export def convert [file_path: string] {
-        let output_path = $file_path | str replace --regex "([^.]+)(\\..+)+" "$1.lrc"
+        let output_path = if ($file_path | str ends-with ".mp3.vtt") or ($file_path | str ends-with ".wav.vtt") {
+            $"($file_path | str substring 0..-9).lrc"
+        } else if ($file_path | str ends-with ".flac.vtt") {
+            $"($file_path | str substring 0..-10).lrc"
+        } else {
+            $file_path | str replace --regex "([^.]+)(\\..+)+" "$1.lrc"
+        }
         let input_contents = open $file_path --raw | decode utf-8
         mut data: list<record<timestamp: record, content: string>> = []
 
