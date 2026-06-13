@@ -234,7 +234,8 @@ alias gstu = gsta --include-untracked
 
 # Import custom alias.
 # ref: https://github.com/nushell/nushell/discussions/16679#discussioncomment-14391728
-const alias_mod = if ([$nu.default-config-dir, "custom", "custom_alias.nu"] | path join | path exists) { "./custom/custom_alias.nu" }
+const alias_mod_path = [$nu.default-config-dir, "custom", "custom_alias.nu"] | path join
+const alias_mod = if ($alias_mod_path | path exists) { $alias_mod_path }
 use $alias_mod *
 
 # Import Custom envs.
@@ -242,13 +243,25 @@ use $alias_mod *
 # "$NU_CONFIG_DIR/custom/custom_env.nu"
 #
 # Refer to custom.md for example.
-const have_env_mod = [$nu.default-config-dir, "custom", "custom_env.nu"] | path join | path exists
-const env_mod = if $have_env_mod { "./custom/custom_env.nu" }
-use $env_mod  define_custom_env
+const env_mod_path = [$nu.default-config-dir, "custom", "custom_env.nu"] | path join
+const have_env_mod = $env_mod_path | path exists
+const env_mod = if $have_env_mod { $env_mod_path }
+use $env_mod define_custom_env
 if $have_env_mod {
     define_custom_env | load-env
 } else {
     env_log "custom_env.nu not found, some envs not loaded.\nPlease make sure $nu.default-config-dir/custom/custom_env.nu exists."
+}
+
+# Import custom paths.
+#
+# All values returns in `define_custom_path` will be added to `$env.PATH`
+const custom_mod_path = [$nu.default-config-dir, "custom", "custom_path.nu"] | path join
+const have_path_mod =  $custom_mod_path | path exists
+const path_mod = if $have_path_mod { $custom_mod_path }
+use $path_mod define_custom_path
+if $have_path_mod {
+    $env.PATH = ($env.PATH | split row (char esep) | append (define_custom_path))
 }
 
 if ($nu.os-info.name | str downcase) =~ windows and "NU_IN_WEZTERM" in $env and $env.NU_IN_WEZTERM == "true" {

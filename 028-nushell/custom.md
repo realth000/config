@@ -55,6 +55,18 @@ Saved in `custom_alias.nu`.
 
 Save custom alias in this file.
 
+## Custom path
+
+Add custom `$env.PATH` variable values in `custom_path.nu`
+
+```nu
+export def define_custom_path [] {
+    return [
+        "/path/to/add/to/PATH",
+    ]
+}
+```
+
 ### Example
 
 ```nu
