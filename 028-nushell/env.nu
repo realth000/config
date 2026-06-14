@@ -29,6 +29,7 @@ alias first-where = fp first-where
 alias is = fp is
 alias pure = fp pure
 alias then = fp then
+alias handle = fp handle
 if (plugin list | where $it.name == "functional" | is-empty) {
     env_log "functional plugin not found, alias not added"
 }
