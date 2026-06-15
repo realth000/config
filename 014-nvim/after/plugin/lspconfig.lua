@@ -365,3 +365,7 @@ setup_lang('cssls', {
 	single_file_support = single_file_support,
 	capabilities = capabilities,
 })
+
+setup_lang('ocamllsp', {
+	on_attach = on_attach,
+})
