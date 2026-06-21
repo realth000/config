@@ -4,7 +4,7 @@
     "editor.fontSize",
     "editor.fontWeight",
   ],
-  "workbench.startupEditor": "newUntitledFile",
+  "workbench.startupEditor": "none",
   "explorer.confirmDelete": false,
   "security.workspace.trust.untrustedFiles": "open",
   "notebook.cellToolbarLocation": {
@@ -69,7 +69,6 @@
     "MD033": false,
     "MD024": false,
   },
-  "haskell.manageHLS": "GHCup",
   "editor.unicodeHighlight.nonBasicASCII": false,
   "vim.vimrc.path": "$HOME/.vimrc",
   "terminal.integrated.cursorBlinking": true,
@@ -93,10 +92,6 @@
     {
       "before": ["\\", "f", "g"],
       "commands": ["workbench.action.quickTextSearch"],
-    },
-    {
-      "before": ["K"],
-      "commands": ["editor.action.showHover"],
     },
     {
       "before": ["[", "d"],
@@ -138,7 +133,7 @@
   "workbench.editor.empty.hint": "hidden",
   "rust-analyzer.completion.callable.snippets": "add_parentheses",
   "explorer.confirmDragAndDrop": false,
-  "extensions.autoUpdate": false,
+  "extensions.autoUpdate": "off",
   "rust-analyzer.inlayHints.typeHints.hideClosureParameter": true,
   "zig.zls.enabled": "on",
   "zig.zls.inlayHintsHideRedundantParamNames": true,
@@ -254,6 +249,7 @@
     "iMWritingMono Nerd Font Mono",
     "IntoneMono Nerd Font Mono",
     "Iosevka1204 Nerd Font Mono",
+    "IoskeleyMono Nerd Font",
     "JetBrainsMono Nerd Font Mono",
     "Lilex Nerd Font Mono",
     "LiterationMono Nerd Font Mono",
@@ -269,6 +265,7 @@
     "RecMonoLinear Nerd Font Mono",
     "RecMonoSmCasual Nerd Font Mono",
     "Sarasa Mono SC",
+    "SauceCodePro Nerd Font Mono",
     "SpaceMono Nerd Font Mono",
     "ZedMono Nerd Font Mono",
     "ZedMono NFM Extd",
@@ -299,4 +296,10 @@
   "window.commandCenter": false,
   "window.menuBarVisibility": "toggle",
   "workbench.layoutControl.enabled": false,
+  "workbench.editor.useModal": "off",
+  "haskell.formattingProvider": "fourmolu",
+  "[haskell]": {
+    "editor.defaultFormatter": "haskell.haskell",
+    "editor.formatOnSave": true,
+  },
 }

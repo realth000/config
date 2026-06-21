@@ -1,4 +1,21 @@
 [
+  // Show the hover window on currnet symbol at cursor or focus on it if
+  // the window is already open.
+  {
+    "key": "shift+k",
+    "command": "editor.action.showHover",
+    "when": "vim.active && vim.mode == 'Normal'",
+  },
+  {
+    "key": "j",
+    "command": "editor.action.scrollDownHover",
+    "when": "vim.active && vim.mode == 'Normal' && editorHoverFocused",
+  },
+  {
+    "key": "k",
+    "command": "editor.action.scrollUpHover",
+    "when": "vim.active && vim.mode == 'Normal' && editorHoverFocused",
+  },
   {
     "key": "ctrl+shift+c",
     "command": "-workbench.action.terminal.openNativeConsole",
