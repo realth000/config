@@ -258,7 +258,7 @@ if $have_env_mod {
 #
 # All values returns in `define_custom_path` will be added to `$env.PATH`
 const custom_mod_path = [$nu.default-config-dir, "custom", "custom_path.nu"] | path join
-const have_path_mod =  $custom_mod_path | path exists
+const have_path_mod = $custom_mod_path | path exists
 const path_mod = if $have_path_mod { $custom_mod_path }
 use $path_mod define_custom_path
 if $have_path_mod {
