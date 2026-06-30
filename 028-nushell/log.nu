@@ -8,9 +8,5 @@ export def fatal [
     help?: string
     exit_code: int = 1
 ] {
-    error make --unspanned {
-        msg: $"[($keyword)] ($error)"
-        help: $help
-        raw_code: exit_code
-    }
+    error make --unspanned {msg: $"[($keyword)] ($error)", help: $help, raw_code: exit_code}
 }
