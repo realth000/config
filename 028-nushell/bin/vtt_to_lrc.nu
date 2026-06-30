@@ -42,7 +42,7 @@ module internal {
 
         let all_matches = $time_str | parse --regex $timestamp_re
 
-        if ($all_matches | get h1 | describe | str contains 'nothing') {
+        if ($all_matches | get h1 | describe | str contains "nothing") {
             # Without hour.
 
             let m = $all_matches | get m2 | first
@@ -76,7 +76,7 @@ module internal {
         let minute = $timestamp.minute
         let second = $timestamp.second
         let millisecond = $timestamp.millisecond
-        if (($hour | describe) == 'string') and ($hour != '00') {
+        if (($hour | describe) == "string") and ($hour != "00") {
             return $"($hour):($minute):($second).($millisecond)"
         } else {
             return $"($minute):($second).($millisecond)"
@@ -142,7 +142,7 @@ module internal {
             if $state == $STATE_WAITING {
                 # Waiting for timestamp line
                 let parsed_time = extract_time_from_string $line
-                if ($parsed_time | describe) != 'nothing' {
+                if ($parsed_time | describe) != "nothing" {
                     $curr_timestamp = $parsed_time
                     $state = $STATE_COLLECTING
                 }

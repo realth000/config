@@ -2,7 +2,5 @@
     indent: 4
     indent_char: "space"
     line_length: 80
-    margin: 1
-    exclude: ["vendor/**", "target/**"]
-    # string_quote: "double" # This is a config only availables in fork.
+    double_quotes: true
 }

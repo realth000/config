@@ -16,19 +16,19 @@ export def list-command [
     mut target_command_types: list<string> = []
 
     if $built_in {
-        $target_command_types = ($target_command_types | append 'built-in')
+        $target_command_types = ($target_command_types | append "built-in")
     }
 
     if $keyword {
-        $target_command_types = ($target_command_types | append 'keyword')
+        $target_command_types = ($target_command_types | append "keyword")
     }
 
     if $alias {
-        $target_command_types = ($target_command_types | append 'alias')
+        $target_command_types = ($target_command_types | append "alias")
     }
 
     if $custom {
-        $target_command_types = ($target_command_types | append 'custom')
+        $target_command_types = ($target_command_types | append "custom")
     }
 
     mut cmds = []

@@ -78,7 +78,7 @@ export def insert-last-command-last-arg [] {
         let all_chars = $last_command | split chars | reverse
         mut idx = 0
         for $ch in $all_chars {
-            if $ch == ' ' {
+            if $ch == " " {
                 break
             }
             $idx += 1

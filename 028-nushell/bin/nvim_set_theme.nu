@@ -9,7 +9,7 @@ def main [theme: string] {
         return 1
     }
 
-    const file = $nu.default-config-dir | path join 'custom' | path join 'custom_env.nu'
+    const file = $nu.default-config-dir | path join "custom" | path join "custom_env.nu"
     if not ($file | path exists) {
         print "failed to sync nvim theme: custom_env.nu not exists"
         return 1

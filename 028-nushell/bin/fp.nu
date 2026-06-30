@@ -30,11 +30,11 @@ def is_null_value [input] {
 export def is [type: string]: any -> bool {
     let ty = $in | describe
 
-    if $ty =~ "list<.*>" and $type == 'list' {
+    if $ty =~ "list<.*>" and $type == "list" {
         true
-    } else if $ty =~ "record<.*>" and $type == 'record' {
+    } else if $ty =~ "record<.*>" and $type == "record" {
         true
-    } else if $ty =~ "table<.*>" and $type == 'table' {
+    } else if $ty =~ "table<.*>" and $type == "table" {
         true
     } else {
         $ty == $type

@@ -42,7 +42,7 @@ for dir in $dirs {
         continue
     }
 
-    let part_id = $page | fill -a right -c '0' -w 3
+    let part_id = $page | fill -a right -c "0" -w 3
     let output_file_name = $"($title)-($part_id)-($part).mp3"
     let output_file_path = $output_dir | path join $output_file_name
 
