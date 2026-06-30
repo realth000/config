@@ -1,7 +1,9 @@
 # Configure configs.
 
 $env.config.show_banner = false
+
 $env.config.buffer_editor = "nvim"
+
 $env.config.keybindings ++= [
     {
         name: prepend_sudo
@@ -26,13 +28,20 @@ $env.config.keybindings ++= [
         ]
     }
 ]
+
 $env.config.completions.case_sensitive = false
+
 $env.config.completions.quick = true
+
 $env.config.completions.partial = true
+
 $env.config.completions.algorithm = "fuzzy"
-$env.config.history.file_format = 'sqlite'
-$env.config.datetime_format.table = '%Y-%m-%d %H:%M:%S'
-$env.config.datetime_format.normal = '%Y-%m-%d %H:%M:%S'
+
+$env.config.history.file_format = "sqlite"
+
+$env.config.datetime_format.table = "%Y-%m-%d %H:%M:%S"
+
+$env.config.datetime_format.normal = "%Y-%m-%d %H:%M:%S"
 
 # Download carapace from https://github.com/carapace-sh/carapace-bin/releases/latest
 $env.config.completions.external.completer = {|spans|
@@ -40,6 +49,7 @@ $env.config.completions.external.completer = {|spans|
     if $nu.os-info.name == "linux" {
         export-env { $env.LC_ALL = "C" }
     }
+
     carapace $spans.0 nushell ...$spans | from json
 }
 

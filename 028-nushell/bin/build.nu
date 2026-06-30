@@ -75,12 +75,15 @@ module internal {
 
     export def detect_build_type [] {
         let all_types = supported_build_types
+
         let language_types = $all_types | where $in.type == "language"
+
         let system_types = $all_types | where $in.type == "system"
     }
 
     def detect_type [build_type: record] {
         let detection = $build_type.detection
+
         if "file" in $detection {
             if ($detection.file | all {|x| ($x | path exists) and ($x | path type | $in == "file") }) {
                 return true
@@ -128,8 +131,11 @@ export def d [
 
     for $build_type in (supported_build_types) {
         print ($build_type | describe)
+
         print ($build_type.detection | describe)
+
         print ($build_type.detection | columns | ("directory" in $in))
+
         print ($build_type.detection | columns | ("file" in $in))
     }
 }

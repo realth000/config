@@ -3,6 +3,7 @@
 module internal {
     export def fatal [error: string, help?: string, exit_code: int = 1] {
         use ../log.nu fatal
+
         fatal "ec" $error $help $exit_code
     }
 
@@ -12,7 +13,9 @@ module internal {
 
     def check_envs [] {
         let env_names = $env | columns
+
         let invalid_env = required_env | where {|x| $env_names | all {|y| $y != $x } }
+
         if ($invalid_env | is-not-empty) {
             fatal $"envs not found: ($invalid_env)"
         }
@@ -59,7 +62,9 @@ export def ec [
 
     if $print_targets {
         print "all available targets:"
+
         print $"(all_targets | to json)"
+
         return
     }
 
@@ -68,6 +73,7 @@ export def ec [
     }
 
     let target_path = all_targets | where $it.target == $target | get path
+
     if ($target_path | is-empty) {
         fatal "invalid target" $"invalid target ($target)"
     }

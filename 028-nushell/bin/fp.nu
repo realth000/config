@@ -102,6 +102,7 @@ export def other [else_value: oneof<closure, any>] {
 @example "Keep the original value if input is null value" { [] | then 100 } --result []
 export def then [next: oneof<closure, any>]: any -> any {
     let input = $in
+
     if (is_null_value $input) {
         $input
     } else if ($next | is closure) {
@@ -122,6 +123,7 @@ export def then [next: oneof<closure, any>]: any -> any {
 @example "Filter on string list" { ["foo", "bar"] | first-where {|x| $x =~ "a*"}} --result "bar"
 export def first-where [pred: oneof<bool, closure>]: list<any> -> any {
     let input = $in
+
     for $item in $input {
         if (do $pred $item) {
             return $item

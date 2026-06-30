@@ -1,6 +1,7 @@
 module internal {
     export def fatal [error: string, help?: string, exit_code: int = 1] {
         use ../log.nu fatal
+
         fatal "insert-last-command-last-arg" $error $help $exit_code
     }
 }
@@ -17,6 +18,7 @@ export def insert-last-command-last-arg [] {
     use internal *
 
     let history_file_path = $nu.history-path
+
     let history_file_format = $env.config.history.file_format
 
     # Get the last command from history.
@@ -26,6 +28,7 @@ export def insert-last-command-last-arg [] {
         open $history_file_path | lines | last
     } else if $history_file_format == "sqlite" {
         let history_db = open $history_file_path
+
         # Compatibility check: check if the schema of history table is recognized.
         #
         # 1. There should be a table called "history".
@@ -33,15 +36,19 @@ export def insert-last-command-last-arg [] {
         #
         # If the above conditions are all met, the query result should be 1, otherwise 0 or throws an error.
         let compatible_history_table = $history_db | query db "SELECT COUNT(*) FROM PRAGMA_TABLE_INFO('history') WHERE name = 'command_line'" | get "COUNT(*)" | first
+
         if $compatible_history_table != 1 {
             # Not compatible
             fatal "command not available: history table in history sqlite database is not compatible"
+
             return 1
         }
+
         $history_db | query db "SELECT command_line FROM history ORDER BY rowid DESC LIMIT 1" | get command_line | last
     } else {
         # Unknown history file format.
         fatal $"command not available: unknown history file format: ($history_file_format)"
+
         return 1
     }
 
@@ -61,8 +68,10 @@ export def insert-last-command-last-arg [] {
     # or
     # 'foo "xxxx"'
     let double_re = r#'(^|\$| )(".*")$'#
+
     # Match single quoted text
     let single_re = r#'(\'.*\')$'#
+
     let last_arg = if ($last_command | str ends-with '"') and ($last_command =~ $double_re) {
         $last_command | parse --regex $double_re | get capture1 | first
     } else if ($last_command | str ends-with "'") and ($last_command =~ $single_re) {
@@ -76,13 +85,17 @@ export def insert-last-command-last-arg [] {
         # for ch in $all_chars { if $ch == ' ' {break;}; $idx += 1 }
         # print $"last=($all_chars | take $idx | reverse | str join)"
         let all_chars = $last_command | split chars | reverse
+
         mut idx = 0
+
         for $ch in $all_chars {
             if $ch == ' ' {
                 break
             }
+
             $idx += 1
         }
+
         $all_chars | take $idx | reverse | str join
     }
 

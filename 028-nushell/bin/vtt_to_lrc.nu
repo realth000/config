@@ -36,6 +36,7 @@ module internal {
         # │ 0 │          │    │    │    │     │ 00:01.000 │ 00 │ 01 │ 000 │ 00:      │
         # ╰───┴──────────┴────┴────┴────┴─────┴───────────┴────┴────┴─────┴──────────╯
         let timestamp_re = r#'((?<h1>\d+):(?<m1>\d+):(?<s1>\d+)\.(?<ms1>\d+))|((?<m2>\d+):(?<s2>\d+)\.(?<ms2>\d+)) --> (\d+:)+\d+\.\d+'#
+
         if $time_str !~ $timestamp_re {
             return
         }
@@ -46,7 +47,9 @@ module internal {
             # Without hour.
 
             let m = $all_matches | get m2 | first
+
             let s = $all_matches | get s2 | first
+
             let ms = $all_matches | get ms2 | first
 
             return {minute: $m, second: $s, millisecond: $ms}
@@ -55,8 +58,11 @@ module internal {
         # With hour.
 
         let h = $all_matches | get h1 | first
+
         let m = $all_matches | get m1 | first
+
         let s = $all_matches | get s1 | first
+
         let ms = $all_matches | get ms1 | first
 
         return {
@@ -73,9 +79,13 @@ module internal {
     ] {
         # hour is optional
         let hour = $timestamp.hour?
+
         let minute = $timestamp.minute
+
         let second = $timestamp.second
+
         let millisecond = $timestamp.millisecond
+
         if (($hour | describe) == 'string') and ($hour != '00') {
             return $"($hour):($minute):($second).($millisecond)"
         } else {
@@ -85,6 +95,7 @@ module internal {
 
     export def fatal [error: string, help?: string, exit_code: int = 1] {
         use ../log.nu fatal
+
         fatal "vtt2lrc" $error $help $exit_code
     }
 
@@ -127,12 +138,17 @@ module internal {
         } else {
             $file_path | str replace --regex "([^.]+)(\\..+)+" "$1.lrc"
         }
+
         let input_contents = open $file_path --raw | decode utf-8
+
         mut data: list<record<timestamp: record, content: string>> = []
 
         const STATE_WAITING = 0
+
         const STATE_COLLECTING = 1
+
         mut state = $STATE_WAITING
+
         mut curr_timestamp = null
 
         # vtt timestamp line format: 00:01.000 --> 00:04.000
@@ -142,14 +158,18 @@ module internal {
             if $state == $STATE_WAITING {
                 # Waiting for timestamp line
                 let parsed_time = extract_time_from_string $line
+
                 if ($parsed_time | describe) != 'nothing' {
                     $curr_timestamp = $parsed_time
+
                     $state = $STATE_COLLECTING
                 }
+
                 continue
             } else if $state == $STATE_COLLECTING {
                 if ($line | str trim | is-empty) {
                     $state = $STATE_WAITING
+
                     continue
                 }
 
@@ -158,6 +178,7 @@ module internal {
                     timestamp: $curr_timestamp
                     content: ($line | str trim)
                 })
+
                 continue
             }
 
@@ -170,6 +191,7 @@ module internal {
         } | str join "\n"
 
         $output_contents | save -fp $output_path
+
         return
     }
 }
