@@ -34,6 +34,15 @@ $env.config.history.file_format = 'sqlite'
 $env.config.datetime_format.table = '%Y-%m-%d %H:%M:%S'
 $env.config.datetime_format.normal = '%Y-%m-%d %H:%M:%S'
 
+# Download carapace from https://github.com/carapace-sh/carapace-bin/releases/latest
+$env.config.completions.external.completer = {|spans|
+    # Reset locale so that carapace does not report errors.
+    if $nu.os-info.name == "linux" {
+        export-env { $env.LC_ALL = "C" }
+    }
+    carapace $spans.0 nushell ...$spans | from json
+}
+
 # Commands
 
 use ./bin/build.nu d
