@@ -29,6 +29,7 @@ $env.config.completions.case_sensitive = false
 $env.config.completions.quick = true
 $env.config.completions.partial = true
 $env.config.completions.algorithm = "fuzzy"
+$env.config.history.file_format = 'sqlite'
 
 # Commands
 
