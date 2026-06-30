@@ -4,16 +4,6 @@ $env.config.show_banner = false
 $env.config.buffer_editor = "nvim"
 $env.config.keybindings ++= [
     {
-        name: insert_last_token
-        modifier: alt
-        keycode: char_.
-        mode: emacs
-        event: [
-            {edit: InsertString, value: "!$"}
-            {send: Enter}
-        ]
-    }
-    {
         name: prepend_sudo
         modifier: alt
         keycode: char_/
@@ -22,6 +12,17 @@ $env.config.keybindings ++= [
             {edit: MoveToStart}
             {edit: InsertString, value: "sudo "}
             {edit: MoveToEnd}
+        ]
+    }
+    # Add the last argument in last command.
+    # The command fixes various issue in the built-in '!$' insert string.
+    {
+        name: insert_last_token
+        modifier: alt
+        keycode: char_.
+        mode: emacs
+        event: [
+            {send: ExecuteHostCommand, cmd: "insert-last-command-last-arg"}
         ]
     }
 ]
@@ -38,3 +39,4 @@ use ./bin/edit_config.nu ec
 # use ./bin/fp.nu *
 use ./bin/list_command.nu list-command
 use ./bin/vtt_to_lrc.nu vtt2lrc
+use ./bin/insert_last_command_last_arg.nu insert-last-command-last-arg
