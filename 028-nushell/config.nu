@@ -51,3 +51,4 @@ use ./bin/edit_config.nu ec
 use ./bin/list_command.nu list-command
 use ./bin/vtt_to_lrc.nu vtt2lrc
 use ./bin/insert_last_command_last_arg.nu insert-last-command-last-arg
+use ./bin/tree_.nu tree
