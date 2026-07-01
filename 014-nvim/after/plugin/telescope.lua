@@ -30,6 +30,7 @@ plugin.setup {
 			'--column',
 			'--smart-case',
 			'--sort=path',
+			'--glob', '!**/*.patch',
 		},
 		mappings = {
 			i = {
