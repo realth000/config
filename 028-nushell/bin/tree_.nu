@@ -83,6 +83,7 @@ module internal {
                 files_count: int,
                 directories_count: int,
                 paths: list<string>,
+                ls_args: list<string>,
             >,
             config: record<
                 list_all: bool,
@@ -97,7 +98,7 @@ module internal {
         $ctx.state.indent_level += 1
         $ctx.state.indent_just_changed = true
 
-        let targets = (ls ($ctx.state.paths | path join))
+        let targets = (ls -a ($ctx.state.paths | path join))
         let targets_count = $targets | length
         for idx in 0..($targets_count - 1)  {
             let entry = $targets | get $idx
@@ -174,6 +175,7 @@ export def tree [
         files_count: 0
         directories_count: 0
         paths: ["."]
+        ls_args: []
     }
     mut config = {
         list_all: false
@@ -185,7 +187,10 @@ export def tree [
 
     mut context = {state: $state, config: $config}
 
-    if $all { $config.list_all = true }
+    if $all {
+        $config.list_all = true
+        $state.ls_args = $state.ls_args | append "-a"
+    }
     if $dir { $config.list_dirs_only = true }
     if $link { $config.follow_links = true }
     if $full { $config.full_path = true }
