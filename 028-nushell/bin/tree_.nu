@@ -3,9 +3,7 @@
 # For reference only, here is the original `tree` command help message:
 #
 # ```bash
-# $ tree --help
-# usage: tree [-acdfghilnpqrstuvxACDFJQNSUX] [-H baseHREF] [-T title ]
-#         [-L level [-R]] [-P pattern] [-I pattern] [-o filename] [--version]
+# $ tree --help # usage: tree [-acdfghilnpqrstuvxACDFJQNSUX] [-H baseHREF] [-T title ] #         [-L level [-R]] [-P pattern] [-I pattern] [-o filename] [--version]
 #         [--help] [--inodes] [--device] [--noreport] [--nolinks] [--dirsfirst]
 #         [--charset charset] [--filelimit[=]#] [--si] [--timefmt[=]<f>]
 #         [--sort[=]<name>] [--matchdirs] [--ignore-case] [--fromfile] [--]
@@ -71,6 +69,7 @@
 
 const PREFIX_BOTTOM_RIGHT_AND_DOWN = "├"
 const PREFIX_BOTTOM_RIGHT = "└"
+const PREFIX_BOTTOM = "│"
 const PREFIX_RIGHT = "─"
 
 module internal {
@@ -98,18 +97,12 @@ module internal {
         $ctx.state.indent_level += 1
         $ctx.state.indent_just_changed = true
 
-        let targets = (ls -a ($ctx.state.paths | path join))
+        let targets = nu --no-history -c $"ls (echo ...$ctx.state.ls_args | str join ' ') ($ctx.state.paths | path join) | to nuon" | from nuon
         let targets_count = $targets | length
         for idx in 0..($targets_count - 1)  {
             let entry = $targets | get $idx
 
-            let prefix0 = if $idx < ($targets_count - 1) {
-                $PREFIX_BOTTOM_RIGHT_AND_DOWN
-            } else {
-                $PREFIX_BOTTOM_RIGHT
-            }
-
-            let prefix1 = repeate_str $PREFIX_RIGHT ([(4 * ($ctx.state.indent_level + 1) - 2), 0] | math max)
+            let prefix = make-prefix0 $ctx.state.indent_level ($idx == $targets_count - 1)
 
             let file_info = if $ctx.config.full_path {
                 $entry | get name
@@ -118,7 +111,7 @@ module internal {
             }
 
             if not $ctx.config.list_dirs_only {
-                print $"($prefix0)($prefix1) ($file_info)"
+                print $"($prefix)($file_info)"
             }
 
             if $ctx.state.indent_just_changed {
@@ -139,9 +132,9 @@ module internal {
         return $ctx
     }
 
-    def repeate_str [ str: string, times: int] {
+    def repeat_str [ str: string, times: int] {
         if $times < 0 {
-            error make $"invalid repeate times in `repeat_str`: ($times)"
+            error make $"invalid repeat times in `repeat_str`: ($times)"
         }
 
         mut out = ""
@@ -153,6 +146,37 @@ module internal {
         }
 
         return $out
+    }
+
+    def make-prefix0 [
+        indent_level: int,
+        is_last_item_in_current_level: bool,
+    ]: nothing -> string {
+        let prefix0 = if $indent_level > 0 {
+            $PREFIX_BOTTOM
+        } else if $is_last_item_in_current_level {
+            $PREFIX_BOTTOM_RIGHT
+        } else {
+            $PREFIX_BOTTOM_RIGHT_AND_DOWN
+        }
+
+        let prefix1 = if $indent_level > 0 {
+            repeat_str " " ([(4 * ($indent_level) - 1), 0] | math max)
+        } else {
+            ""
+        }
+
+        let prefix2 = if $indent_level > 0 {
+            if $is_last_item_in_current_level {
+                "└── "
+            } else {
+                "├── "
+            }
+        } else {
+            ""
+        }
+
+        $prefix1 + $prefix2
     }
 }
 
@@ -185,8 +209,6 @@ export def tree [
         max_level: null
     }
 
-    mut context = {state: $state, config: $config}
-
     if $all {
         $config.list_all = true
         $state.ls_args = $state.ls_args | append "-a"
@@ -205,7 +227,7 @@ export def tree [
         $config.max_level = $level
     }
 
-    # print $"max_level is ($config.max_level), type is ($config.max_level | describe)"
+    mut context = {state: $state, config: $config}
 
     let _ = list_at_path $context
 }
