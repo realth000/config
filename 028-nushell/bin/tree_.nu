@@ -101,17 +101,7 @@ module internal {
     }
 
     def list-dir [args: list<string>, target: string] {
-        if "-s" in $args and "-a" in $args and "-l" in $args {
-            ls -s -a -l $target
-        } else if "-s" in $args and "-a" in $args {
-            ls -s -a $target
-        } else if "-s" in $args and "-l" in $args {
-            ls -s -l $target
-        } else if "-s" in $args {
-            ls -s $target
-        } else {
-            assert false "unreachable: \"-s\" should always present in ls args"
-        }
+        ls -s --all=("-a" in $args) --long=("-l" in $args) $target
     }
 
     def repeat-str [str: string, times: int] {
