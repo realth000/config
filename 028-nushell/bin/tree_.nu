@@ -79,8 +79,7 @@ module internal {
                 let prefix = make-prefix $layer_level $ctx.state.history
 
                 let file_info = if $ctx.config.full_path {
-                    # TODO: Always use '/' to join path segments.
-                    $ctx.state.paths | path join ($entry | get name)
+                    [...$ctx.state.paths, ($entry | get name)] | str join "/"
                 } else {
                     $entry | get name
                 }
