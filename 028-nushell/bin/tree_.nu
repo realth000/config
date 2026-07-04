@@ -1,71 +1,6 @@
-# This nushell script can be used both in repl and other scripts.
-#
-# For reference only, here is the original `tree` command help message:
-#
-# ```bash
-# $ tree --help # usage: tree [-acdfghilnpqrstuvxACDFJQNSUX] [-H baseHREF] [-T title ] #         [-L level [-R]] [-P pattern] [-I pattern] [-o filename] [--version]
-#         [--help] [--inodes] [--device] [--noreport] [--nolinks] [--dirsfirst]
-#         [--charset charset] [--filelimit[=]#] [--si] [--timefmt[=]<f>]
-#         [--sort[=]<name>] [--matchdirs] [--ignore-case] [--fromfile] [--]
-#         [<directory list>]
-#   ------- Listing options -------
-#   -a            All files are listed.
-#   -d            List directories only.
-#   -l            Follow symbolic links like directories.
-#   -f            Print the full path prefix for each file.
-#   -x            Stay on current filesystem only.
-#   -L level      Descend only level directories deep.
-#   -R            Rerun tree when max dir level reached.
-#   -P pattern    List only those files that match the pattern given.
-#   -I pattern    Do not list files that match the given pattern.
-#   --ignore-case Ignore case when pattern matching.
-#   --matchdirs   Include directory names in -P pattern matching.
-#   --noreport    Turn off file/directory count at end of tree listing.
-#   --charset X   Use charset X for terminal/HTML and indentation line output.
-#   --filelimit # Do not descend dirs with more than # files in them.
-#   --timefmt <f> Print and format time according to the format <f>.
-#   -o filename   Output to file instead of stdout.
-#   ------- File options -------
-#   -q            Print non-printable characters as '?'.
-#   -N            Print non-printable characters as is.
-#   -Q            Quote filenames with double quotes.
-#   -p            Print the protections for each file.
-#   -u            Displays file owner or UID number.
-#   -g            Displays file group owner or GID number.
-#   -s            Print the size in bytes of each file.
-#   -h            Print the size in a more human readable way.
-#   --si          Like -h, but use in SI units (powers of 1000).
-#   -D            Print the date of last modification or (-c) status change.
-#   -F            Appends '/', '=', '*', '@', '|' or '>' as per ls -F.
-#   --inodes      Print inode number of each file.
-#   --device      Print device ID number to which each file belongs.
-#   ------- Sorting options -------
-#   -v            Sort files alphanumerically by version.
-#   -t            Sort files by last modification time.
-#   -c            Sort files by last status change time.
-#   -U            Leave files unsorted.
-#   -r            Reverse the order of the sort.
-#   --dirsfirst   List directories before files (-U disables).
-#   --sort X      Select sort: name,version,size,mtime,ctime.
-#   ------- Graphics options -------
-#   -i            Don't print indentation lines.
-#   -A            Print ANSI lines graphic indentation lines.
-#   -S            Print with CP437 (console) graphics indentation lines.
-#   -n            Turn colorization off always (-C overrides).
-#   -C            Turn colorization on always.
-#   ------- XML/HTML/JSON options -------
-#   -X            Prints out an XML representation of the tree.
-#   -J            Prints out an JSON representation of the tree.
-#   -H baseHREF   Prints out HTML format with baseHREF as top directory.
-#   -T string     Replace the default HTML title and H1 header with string.
-#   --nolinks     Turn off hyperlinks in HTML output.
-#   ------- Input options -------
-#   --fromfile    Reads paths from files (.=stdin)
-#   ------- Miscellaneous options -------
-#   --version     Print version and exit.
-#   --help        Print usage and this help message and exit.
-#   --            Options processing terminator.
-# ```
+# This nushell script can be used both in repl and scripts.
+
+use std/assert
 
 const PREFIX_BOTTOM_RIGHT_AND_DOWN = "├"
 const PREFIX_BOTTOM_RIGHT = "└"
@@ -73,68 +8,116 @@ const PREFIX_BOTTOM = "│"
 const PREFIX_RIGHT = "─"
 
 module internal {
-    export def list_at_path [
+    export def list-at-path [
         ctx: record<
             state: record<
-                indent_level: int,
-                indent_line_width: int,
-                indent_just_changed: bool,
+                layer_level: int,
                 files_count: int,
                 directories_count: int,
                 paths: list<string>,
                 ls_args: list<string>,
+                history: list<record<curr: int, count: int, ignored: int>>,
             >,
             config: record<
                 list_all: bool,
                 list_dirs_only: bool,
-                follow_links: bool,
                 full_path: bool,
                 max_level: oneof<int, nothing>,
-            >,
-        >,
-    ] : nothing -> record {
+            >
+        >
+    ]: nothing -> record {
         mut ctx = $ctx
-        $ctx.state.indent_level += 1
-        $ctx.state.indent_just_changed = true
+        $ctx.state.layer_level += 1
+        let layer_level = $ctx.state.layer_level
+        if $ctx.config.max_level != null and $ctx.config.max_level <= $ctx.state.layer_level {
+            $ctx.state.layer_level -= 1
+            return $ctx
+        }
 
-        let targets = nu --no-history -c $"ls (echo ...$ctx.state.ls_args | str join ' ') ($ctx.state.paths | path join) | to nuon" | from nuon
+        # Here we intend to pass all ls_args to the ls command but not worked:
+        # ls is a built-in command so it does not accept list of args from
+        # variables, the only way is construct args in place, that's why we have
+        # a function `list-dir`.
+        #
+        # Likely it is a bug in nushell because for external commands we can do
+        # `^ls ...$args`.
+        #
+        # But if the count of args grows, it is tedious to list all the
+        # combinations of args.
+        #
+        # For now, an alternative solution is spawn a nushell instance and pass
+        # the ls command to it, it works, but **extremly slow**. So use the
+        # handly version.
+        #
+        # let targets = nu --no-history -c $"ls (echo ...$ctx.state.ls_args | str join ' ') ($ctx.state.paths | path join) | to nuon" | from nuon
+        let targets = list-dir $ctx.state.ls_args ($ctx.state.paths | path join)
         let targets_count = $targets | length
-        for idx in 0..($targets_count - 1)  {
-            let entry = $targets | get $idx
+        $ctx.state.history = $ctx.state.history | append {curr: -1, count: $targets_count, ignored: 0}
+        mut layer = $ctx.state.history | get $layer_level
 
-            let prefix = make-prefix0 $ctx.state.indent_level ($idx == $targets_count - 1)
+        assert (($ctx.state.history | length) == ($layer_level + 1)) $"incorrect count of layers in state history, expected ($layer_level + 1), got ($ctx.state.history | length)"
 
-            let file_info = if $ctx.config.full_path {
-                $entry | get name
-            } else {
-                $entry | get name | path basename 
-            }
+        if $targets_count > 0 {
+            for idx in 0..($targets_count - 1) {
+                let entry = $targets | get $idx
 
-            if not $ctx.config.list_dirs_only {
+                let should_ignore = (
+                    # Not show hidden attribute.
+                    ((not $ctx.config.list_all) and ($entry | get name | str starts-with "."))
+                    or
+                    # Only show directory.
+                    ($ctx.config.list_dirs_only and (($entry | get type) != "dir"))
+                )
+                if $should_ignore {
+                    $layer = $layer | update ignored {$in + 1}
+                    continue
+                }
+
+                $layer = $layer | update curr {$in + 1}
+
+                $ctx.state.history = $ctx.state.history | update $layer_level $layer
+                let prefix = make-prefix $layer_level $ctx.state.history
+
+                let file_info = if $ctx.config.full_path {
+                    # TODO: Always use '/' to join path segments.
+                    $ctx.state.paths | path join ($entry | get name)
+                } else {
+                    $entry | get name
+                }
+
                 print $"($prefix)($file_info)"
-            }
 
-            if $ctx.state.indent_just_changed {
-                $ctx.state.indent_just_changed = false
-            }
-
-            if $entry.type == "dir" {
-                $ctx.state.paths = $ctx.state.paths | append $entry.name
-                $ctx = list_at_path $ctx
-                $ctx.state.paths = $ctx.state.paths | drop 1
+                if $entry.type == "dir" {
+                    $ctx.state.paths = $ctx.state.paths | append $entry.name
+                    $ctx = list-at-path $ctx
+                    $ctx.state.paths = $ctx.state.paths | drop 1
+                }
             }
         }
 
-
-        $ctx.state.indent_level -= 1
-        $ctx.state.indent_just_changed = true
+        $ctx.state.layer_level -= 1
+        $ctx.state.history = $ctx.state.history | drop 1
 
         return $ctx
     }
 
-    def repeat_str [ str: string, times: int] {
+    def list-dir [args: list<string>, target: string] {
+        if "-s" in $args and "-a" in $args and "-l" in $args {
+            ls -s -a -l $target
+        } else if "-s" in $args and "-a" in $args {
+            ls -s -a $target
+        } else if "-s" in $args and "-l" in $args {
+            ls -s -l $target
+        } else if "-s" in $args {
+            ls -s $target
+        } else {
+            assert false "unreachable: \"-s\" should always present in ls args"
+        }
+    }
+
+    def repeat-str [str: string, times: int] {
         if $times < 0 {
-            error make $"invalid repeat times in `repeat_str`: ($times)"
+            error make $"invalid repeat times in `repeat-str`: ($times)"
         }
 
         mut out = ""
@@ -148,63 +131,88 @@ module internal {
         return $out
     }
 
-    def make-prefix0 [
-        indent_level: int,
-        is_last_item_in_current_level: bool,
-    ]: nothing -> string {
-        let prefix0 = if $indent_level > 0 {
-            $PREFIX_BOTTOM
-        } else if $is_last_item_in_current_level {
-            $PREFIX_BOTTOM_RIGHT
-        } else {
-            $PREFIX_BOTTOM_RIGHT_AND_DOWN
-        }
+    def make-prefix [layer_level: int, history: list<record<curr: int, count: int, ignored: int>>]: nothing -> string {
+        let curr_layer = $history | last
+        let is_last_item_in_current_level = is-at-end-of-layer $curr_layer
+        let layers_count = $history | length
 
-        let prefix1 = if $indent_level > 0 {
-            repeat_str " " ([(4 * ($indent_level) - 1), 0] | math max)
-        } else {
-            ""
-        }
+        mut prefix = ""
 
-        let prefix2 = if $indent_level > 0 {
-            if $is_last_item_in_current_level {
-                "└── "
+        for layer in ($history | take ($layers_count - 1)) {
+            if (is-at-end-of-layer $layer) {
+                $prefix = $prefix ++ (repeat-str " " 4)
             } else {
-                "├── "
+                $prefix = $prefix ++ $PREFIX_BOTTOM ++ (repeat-str " " 3)
             }
-        } else {
-            ""
         }
 
-        $prefix1 + $prefix2
+        if $is_last_item_in_current_level {
+            $prefix = $prefix ++ $PREFIX_BOTTOM_RIGHT ++ (repeat-str $PREFIX_RIGHT 2) ++ " "
+        } else {
+            $prefix = $prefix ++ $PREFIX_BOTTOM_RIGHT_AND_DOWN ++ (repeat-str $PREFIX_RIGHT 2) ++ " "
+        }
+
+        $prefix
+    }
+
+    def is-at-end-of-layer [layer: record<curr: int, count: int, ignored: int>]: nothing -> bool {
+        let curr = $layer | get curr
+        let ignored = $layer | get ignored
+        let count = $layer | get count
+        assert (($curr + $ignored) < $count) "too many items counted in layer"
+        $curr + $ignored == ($count) - 1
     }
 }
 
-# Like external command but written in nushell.
+# Like the `tree` command in bash but written in nushell.
+#
+# This command implements part of the original `tree` command and have some
+# different behavior.
+#
+# Output is plain text, not structured data.
+#
+# Behavior differences:
+#
+# - On all platforms, only "." prefix named ones are considered as hidden files.
 @category filesystem
 @example "List files and directories in current folder" { tree }
 export def tree [
     --all (-a) # List all files, including hidden files.
     --dir (-d) # List directories only, files wil be ignored.
-    --link (-l) # Follow symbolic links.
     --full (-f) # Print full relative path to current work directory.
     --level (-L) : int # Set the max directory depth when listing.
 ] {
     use internal *
 
     mut state = {
-        indent_level: -1
-        indent_line_width: 2
-        indent_just_changed: false
+        layer_level: -1
         files_count: 0
         directories_count: 0
         paths: ["."]
-        ls_args: []
+        ls_args: ["-s"]
+        # `history` records all traversing state of all levels of layers.
+        #
+        # Type: list<record<curr: int, count: int>>
+        #
+        # That is, for each depth, we save:
+        #
+        # - The index of current node in current layer.
+        # - The count of node in current depth.
+        #
+        # On each node of each layer, check all upper layers, for
+        # each layer `i`, go upward from current node and find the node `j`
+        # in layer `i`:
+        #
+        # - If node `j` is the last node of layer `i`, only print spaces
+        #   for the positions of `i` layer.
+        # - Otherwise, in layer `i`, we still have nodes after node `j` so
+        #   when we go back to node `j`, that is, print '│' to indicate layer
+        #   `i` is not finished.
+        history: []
     }
     mut config = {
         list_all: false
         list_dirs_only: false
-        follow_links: false
         full_path: false
         max_level: null
     }
@@ -214,13 +222,17 @@ export def tree [
         $state.ls_args = $state.ls_args | append "-a"
     }
     if $dir { $config.list_dirs_only = true }
-    if $link { $config.follow_links = true }
     if $full { $config.full_path = true }
     if $level != null {
         if $level <= 0 {
             error make {
                 msg: "Invalid max depth level value"
-                labels: [{ text: $"invalid value \"($level)\"", span: (metadata $level).span }]
+                labels: [
+                    {
+                        text: $"invalid value \"($level)\""
+                        span: (metadata $level).span
+                    }
+                ]
                 help: "The max directory depth level value should be an integer greater than 0"
             }
         }
@@ -229,5 +241,6 @@ export def tree [
 
     mut context = {state: $state, config: $config}
 
-    let _ = list_at_path $context
+    print "."
+    let _ = list-at-path $context
 }
