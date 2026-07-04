@@ -1,7 +1,7 @@
 # Setup env.
 
 # The internal logging function.
-def env_log [message: string] {
+def env-log [message: string] {
     print $"(ansi yellow)env.nu: ($message)(ansi reset)"
 }
 
@@ -10,7 +10,7 @@ $env.PATH = (
 )
 
 # Configure starship.
-if (echo ~/.cache/starship/init.nu | path exists) { use ~/.cache/starship/init.nu } else { env_log "startip not found, skip" }
+if (echo ~/.cache/starship/init.nu | path exists) { use ~/.cache/starship/init.nu } else { env-log "starship not found, skip" }
 
 # Command alias.
 
@@ -20,7 +20,28 @@ alias dc = cd
 
 # Plugin alias
 
+def has-plugin [name: string] {
+    if (plugin list | where name == $name | is-empty) {
+        false
+    } else {
+        true
+    }
+}
+def check-plugin-installation [name: string] {
+    if (has-plugin $name) {
+        # Do nothing
+    } else {
+        log-plugin-not-installed $name
+    }
+}
+
+def log-plugin-not-installed [name: string] {
+    env-log $"command unavailable: plugin \"($name)\" not installed, relavant plugin comand alias are not available"
+}
+
 ## fp
+
+check-plugin-installation "functional"
 
 alias other = fp other
 alias first-where = fp first-where
@@ -28,9 +49,6 @@ alias is = fp is
 alias pure = fp pure
 alias then = fp then
 alias handle = fp handle
-if (plugin list | where $it.name == "functional" | is-empty) {
-    env_log "functional plugin not found, alias not added"
-}
 
 # Alias from oh-my-zsh https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh
 
@@ -249,7 +267,7 @@ use $env_mod define_custom_env
 if $have_env_mod {
     define_custom_env | load-env
 } else {
-    env_log "custom_env.nu not found, some envs not loaded.\nPlease make sure $nu.default-config-dir/custom/custom_env.nu exists."
+    env-log "custom_env.nu not found, some envs not loaded.\nPlease make sure $nu.default-config-dir/custom/custom_env.nu exists."
 }
 
 # Import custom paths.
