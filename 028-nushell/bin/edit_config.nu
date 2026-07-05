@@ -36,6 +36,15 @@ module internal {
         }
     }
 
+    # For platform specific alacritty config directory paths.
+    def get-alacritty-path [] {
+        if $nu.os-info.name == "windows" {
+            $env.APPDATA | path join "alacritty"
+        } else {
+            $env.HOME | path join ".config" "alacritty"
+        }
+    }
+
     export def all_targets [] {
         return [
             {
@@ -57,6 +66,11 @@ module internal {
                 target: "zlj"
                 detail: "zellij config"
                 path: $"(get-zellij-path)"
+            }
+            {
+                target: "alc"
+                detail: "alacritty config"
+                path: $"(get-alacritty-path)"
             }
         ]
     }

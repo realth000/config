@@ -32,22 +32,24 @@ export def define_custom_env [] {
      "WEZTERM_CONFIG_PATH": $"($env.HOME)/.wezterm.lua"
      "NVIM_CUSTOM_TRANSPARENT_BACKGROUND": "false"
      "NVIM_CUSTOM_USE_DARK_MODE": "true"
+     "NVIM_CUSTOM_USE_NUSHELL": "true"
      "NVIM_CUSTOM_SYNC_WEZTERM_COLORSCHEME": "true"
      "NVIM_CUSTOM_SYNC_NVIM_COLORSCHEME": "true"
-     "NVIM_CUSTOM_USE_NUSHELL": "true"
+     "NVIM_CUSTOM_SYNC_ALACRITTY_COLORSCHEME": "true"
    }
 }
 ```
 
-The code above defines two envs:
+The code above define envs:
 
-1. `NVIM_CUSTOM_COLORSCHEME`, value is string, colorscheme name, e.g. "catppuccin-mocha".
-2. `WEZTERM_CONFIG_PATH`, value is the `.wezterm.lua` file path.
-3. `NVIM_CUSTOM_TRANSPARENT_BACKGROUND`, value is `true` or `false` or not set, controls transparent colorscheme background in neovim.
-4. `NVIM_CUSTOM_USE_DARK_MODE`, value is `true` or `false` or not set, controls `vim.o.background`.
-5. `NVIM_CUSTOM_SYNC_WEZTERM_COLORSCHEME`, value is `true` or `false` or not set, sync neovim theme to wezterm when neovim theme changed.
-6. `NVIM_CUSTOM_SYNC_NVIM_COLORSCHEME`, value is `true` or `false` or not set, sync neovim to neovim config file when neovim theme changed.
-7. `NVIM_CUSTOM_USE_NUSHELL`, value is `true` or `false` or not set, use nushell as the shell in nvim.
+- `NVIM_CUSTOM_COLORSCHEME`, value is string, colorscheme name, e.g. "catppuccin-mocha".
+- `WEZTERM_CONFIG_PATH`, value is the `.wezterm.lua` file path.
+- `NVIM_CUSTOM_TRANSPARENT_BACKGROUND`, value is `true` or `false` or not set, controls transparent colorscheme background in neovim.
+- `NVIM_CUSTOM_USE_DARK_MODE`, value is `true` or `false` or not set, controls `vim.o.background`.
+- `NVIM_CUSTOM_USE_NUSHELL`, value is `true` or `false` or not set, use nushell as the shell in nvim.
+- `NVIM_CUSTOM_SYNC_WEZTERM_COLORSCHEME`, value is `true` or `false` or not set, sync neovim theme to wezterm when neovim theme changed.
+- `NVIM_CUSTOM_SYNC_NVIM_COLORSCHEME`, value is `true` or `false` or not set, sync neovim to neovim config file when neovim theme changed.
+- `NVIM_CUSTOM_SYNC_ALACRITTY_COLORSCHEME`, value is `true` or `false` or not set, sync neovim theme to alacritty config file when neovim theme changed.
 
 ## Custom alias
 

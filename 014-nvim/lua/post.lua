@@ -106,3 +106,26 @@ if (sync_nvim_theme == 'true') and (vim.fn.executable('nu') == 1) then
 		end
 	})
 end
+
+-- Add autocmd for syncing alacritty config in file.
+--
+-- Only sync theme value in file.
+--
+-- 1. `NVIM_CUSTOM_SYNC_ALACRITTY_COLORSCHEME` set to `true`.
+-- 2. `nu` is an executable globally, e.g. in `$PATH`.
+-- 3. `alacritty` is an executable globally, e.g. in `$PATH`.
+--
+-- To sync theme value to config file, `$nu.default-config-dir/bin/alacritty_set_theme.nu` MUST exists.
+local sync_alacritty_theme = os.getenv('NVIM_CUSTOM_SYNC_ALACRITTY_COLORSCHEME')
+if (sync_alacritty_theme == 'true') and (vim.fn.executable('nu') == 1) and (vim.fn.executable('alacritty') == 1) then
+	vim.api.nvim_create_autocmd('ColorScheme', {
+		callback = function(args)
+			local theme = args.match
+			local nu_dir = vim.fn.system({ "nu", "-c", "$nu.default-config-dir" }):gsub("%s+", "")
+			local script_path = vim.fs.joinpath(nu_dir, "bin", "alacritty_set_theme.nu")
+			local subcommand = vim.system({ "nu", script_path, theme }, { text = true }):wait()
+			local result = string.format("[%s] %s", subcommand.code, subcommand.stdout)
+			print(result)
+		end
+	})
+end

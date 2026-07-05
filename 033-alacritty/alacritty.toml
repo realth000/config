@@ -1,0 +1,30 @@
+[general]
+ipc_socket = false
+import = ["themes/catppuccin-mocha.toml"]
+
+[terminal]
+shell = "nu"
+
+[font]
+size = 14.0
+
+[font.normal]
+family = "IoskeleyMono Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "IoskeleyMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "IoskeleyMono Nerd Font"
+style = "Italic"
+
+[font.bold_italic]
+family = "IoskeleyMono Nerd Font"
+style = "Bold Italic"
+
+[cursor]
+style.shape = "Block"
+style.blinking = "On"
+
