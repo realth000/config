@@ -18,6 +18,16 @@ alias cw = if $nu.os-info.name == "windows" {  cd c:/Programming/Projects } else
 alias c = clear
 alias dc = cd
 
+def get-zellij-layout-file []: nothing -> string {
+    if ($nu.os-info.name | str downcase) =~ windows {
+        [$env.APPDATA, "Zellij", "config", "default_layout.kdl"] | path join
+    } else {
+        [$env.HOME, ".config", "zellij", "default_layout.kdl"] | path join
+    }
+}
+
+alias zlj = zellij --layout (get-zellij-layout-file)
+
 # Plugin alias
 
 def has-plugin [name: string] {

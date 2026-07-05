@@ -27,6 +27,15 @@ module internal {
         }
     }
 
+    # For platform specific zellij config directory paths.
+    def get-zellij-path [] {
+        if $nu.os-info.name == "windows" {
+            [$env.APPDATA, "Zellij", "config"] | path join
+        } else {
+            [$env.HOME, ".config", "zellij"] | path join
+        }
+    }
+
     export def all_targets [] {
         return [
             {
@@ -43,6 +52,11 @@ module internal {
                 target: "nv"
                 detail: "neovim config"
                 path: $"(nvim_config_path)"
+            }
+            {
+                target: "zlj"
+                detail: "zellij config"
+                path: $"(get-zellij-path)"
             }
         ]
     }
