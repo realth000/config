@@ -24,13 +24,12 @@ layout {
                 mode_tab    "#[bg=blue,fg=black,bold] tab "
                 mode_pane   "#[bg=cyan,fg=black,bold] pane "
                 mode_move   "#[bg=yellow,fg=black,bold] move "
-                mode_resize "#[bg=red,fg=black,bold] resize "
+                mode_resize "#[bg=purple,fg=black,bold] resize "
+                mode_locked "#[bg=white,fg=bright_black,bold] locked "
+                mode_session "#[bg=red,fg=black,bold] session "
 
-                // tab_normal   "#[fg=#6C7086] {index} "
-                // tab_active   "#[fg=#9399B2,bold] {index} "
-                tab_normal   "#[fg=gray] {index} "
+                tab_normal   "#[fg=bright_black] {index} "
                 tab_active   "#[bg=magenta,fg=black,bold] {index} "
-                // tab_rename   "#[fg=#eba0ac,bg=#181825] {index} {name} {floating_indicator} "
 
                 command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
                 command_git_branch_format      "#[fg=blue] {stdout} "

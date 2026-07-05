@@ -1,6 +1,6 @@
 keybinds clear-defaults=true {
     // Use defined keybindings begin
-    normal {
+    shared_among "normal" "locked" {
         bind "Alt 1" { GoToTab 1; }
         bind "Alt 2" { GoToTab 2; }
         bind "Alt 3" { GoToTab 3; }
@@ -165,7 +165,7 @@ keybinds clear-defaults=true {
     //         SwitchToMode "normal"
     //     }
     // }
-    // shared_except "locked" {
+    shared_except "locked" {
     //     bind "Alt left" { MoveFocusOrTab "left"; }
     //     bind "Alt down" { MoveFocus "down"; }
     //     bind "Alt up" { MoveFocus "up"; }
@@ -176,7 +176,7 @@ keybinds clear-defaults=true {
     //     bind "Alt [" { PreviousSwapLayout; }
     //     bind "Alt ]" { NextSwapLayout; }
     //     bind "Alt f" { ToggleFloatingPanes; }
-    //     bind "Ctrl g" { SwitchToMode "locked"; }
+           bind "Ctrl g" { SwitchToMode "locked"; }
     //     bind "Alt h" { MoveFocusOrTab "left"; }
     //     bind "Alt i" { MoveTab "left"; }
     //     bind "Alt j" { MoveFocus "down"; }
@@ -187,9 +187,9 @@ keybinds clear-defaults=true {
     //     bind "Alt p" { TogglePaneInGroup; }
     //     bind "Alt Shift p" { ToggleGroupMarking; }
     //     bind "Ctrl q" { Quit; }
-    // }
+    }
     shared_except "locked" "move" {
-        bind "Ctrl h" { SwitchToMode "move"; }
+        bind "Ctrl m" { SwitchToMode "move"; }
     }
     // shared_except "locked" "session" {
     //     bind "Ctrl o" { SwitchToMode "session"; }
@@ -207,7 +207,7 @@ keybinds clear-defaults=true {
         bind "Ctrl p" { SwitchToMode "pane"; }
     }
     shared_except "locked" "resize" {
-        bind "Ctrl n" { SwitchToMode "resize"; }
+        bind "Ctrl r" { SwitchToMode "resize"; }
     }
     shared_except "normal" "locked" "entersearch" {
         bind "enter" { SwitchToMode "normal"; }
@@ -350,7 +350,7 @@ theme "nord"
 // Choose the base input mode of zellij.
 // Default: normal
 // 
-// default_mode "locked"
+default_mode "locked"
  
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
