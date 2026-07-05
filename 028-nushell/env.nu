@@ -18,15 +18,14 @@ alias cw = if $nu.os-info.name == "windows" {  cd c:/Programming/Projects } else
 alias c = clear
 alias dc = cd
 
-def get-zellij-layout-file []: nothing -> string {
-    if ($nu.os-info.name | str downcase) =~ windows {
-        [$env.APPDATA, "Zellij", "config", "default_layout.kdl"] | path join
-    } else {
-        [$env.HOME, ".config", "zellij", "default_layout.kdl"] | path join
-    }
-}
-
-alias zlj = zellij --layout (get-zellij-layout-file)
+# The `default_layout.kdl` is saved at `ZELLIJ_CONFIG_DIR/layouts/default_layout.kdl`
+# Run `zellij setup --check` to confirm layouts dir.
+#
+# By default it is:
+#
+# - on windows, 'C:/Users/$USERNAME/AppData/Roaming/Zellij/config/layouts'
+# - on linux, '$HOME/.config/zellij/layouts'
+alias zlj = zellij --layout default_layout
 
 # Plugin alias
 

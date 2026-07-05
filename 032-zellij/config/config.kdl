@@ -295,11 +295,23 @@ plugins {
     }
 }
 
-// Plugins to load in the background when a new session starts
-// eg. "file:/path/to/my-plugin.wasm"
-// eg. "https://example.com/my-plugin.wasm"
+// Save plugin files in the plugin directory.
+// To confirm where is the plugin directory, run `zellij setup --check`.
+//
+// By default, it is:
+//
+// - on windows, "C:\Users\$USERNAME\AppData\Roaming\Zellij\data\plugins"
+// - on linux, "$HOME/.config/zellij/data/plugins"
 load_plugins {
     zellij:link
+
+    "file:zjstatus.wasm"
+
+    "file:zjframes.wasm" {
+        hide_frame_for_single_pane       "false"
+        hide_frame_except_for_search     "true"
+        hide_frame_except_for_fullscreen "true"
+    }
 }
 web_client {
     font "monospace"

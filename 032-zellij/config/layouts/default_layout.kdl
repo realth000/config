@@ -1,0 +1,47 @@
+layout {
+    default_tab_template {
+        children
+        pane size=1 borderless=true {
+            // Save `zjstatus.wasm` in the plugin directory.
+            // To confirm where is the plugin directory, run `zellij setup --check`.
+            //
+            // By default, it is:
+            //
+            // - on windows, "C:\Users\$USERNAME\AppData\Roaming\Zellij\data\plugins"
+            // - on linux, "$HOME/.config/zellij/data/plugins"
+            plugin location="file:zjstatus.wasm" {
+                format_left   "{mode}"
+                format_center "{tabs}"
+                format_right  "{command_git_branch} {datetime}"
+                format_space  ""
+
+                border_enabled  "false"
+                border_char     "─"
+                border_format   "#[fg=#6C7086]{char}"
+                border_position "top"
+
+                mode_normal "#[bg=green,fg=black,bold] normal "
+                mode_tab    "#[bg=blue,fg=black,bold] tab "
+                mode_pane   "#[bg=cyan,fg=black,bold] pane "
+                mode_move   "#[bg=yellow,fg=black,bold] move "
+                mode_resize "#[bg=red,fg=black,bold] resize "
+
+                // tab_normal   "#[fg=#6C7086] {index} "
+                // tab_active   "#[fg=#9399B2,bold] {index} "
+                tab_normal   "#[fg=gray] {index} "
+                tab_active   "#[bg=magenta,fg=black,bold] {index} "
+                // tab_rename   "#[fg=#eba0ac,bg=#181825] {index} {name} {floating_indicator} "
+
+                command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
+                command_git_branch_format      "#[fg=blue] {stdout} "
+                command_git_branch_interval    "10"
+                command_git_branch_rendermode  "static"
+
+                datetime        "#[fg=#6C7086,bold] {format} "
+                datetime_format "%Y-%m-%d %H:%M"
+                datetime_timezone "Asia/Shanghai"
+            }
+        }
+    }
+}
+
