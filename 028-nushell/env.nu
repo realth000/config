@@ -12,6 +12,9 @@ $env.PATH = (
 # Configure starship.
 if (echo ~/.cache/starship/init.nu | path exists) { use ~/.cache/starship/init.nu } else { env-log "starship not found, skip" }
 
+# Do case-insensitive matching.
+$env.CARAPACE_MATCH = "1"
+
 # Command alias.
 
 alias cw = if $nu.os-info.name == "windows" {  cd c:/Programming/Projects } else { cd ($env.HOME | path join "Programming") }

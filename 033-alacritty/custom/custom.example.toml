@@ -1,0 +1,26 @@
+# An example config to define custom values on each machine.
+#
+# Copy the content into `custom.toml` in this `custom` directory and all these
+# configs will be imported in `../alacritty.toml`.
+#
+# The `custom.toml` is ignored in git repo so that we can have different configs
+# on each machine.
+[general]
+import = ["../themes/catppuccin-mocha.toml"]
+
+[font.normal]
+family = "Iosevka1204 Nerd Font Mono"
+style = "Regular"
+
+[font.bold]
+family = "Iosevka1204 Nerd Font Mono"
+style = "Bold"
+
+[font.italic]
+family = "Iosevka1204 Nerd Font Mono"
+style = "Italic"
+
+[font.bold_italic]
+family = "Iosevka1204 Nerd Font Mono"
+style = "Bold Italic"
+

@@ -39,10 +39,12 @@ def main [theme: string] {
         return 1
     }
 
+    # Update the config in `custom/custom.toml` in alacritty config directory,
+    # we only intend to modify custom configs so that to keep the git repository clean.
     let alacritty_config_path = if $nu.os-info.name == "windows" {
-        [$env.APPDATA, "alacritty", "alacritty.toml"] | path join
+        [$env.APPDATA, "alacritty", "custom", "custom.toml"] | path join
     } else {
-        [$env.HOME, ".config" "alacritty", "alacritty.toml"] | path join
+        [$env.HOME, ".config" "alacritty", "custom", "custom.toml"] | path join
     }
 
     if $alacritty_config_path == null {
@@ -63,7 +65,7 @@ def main [theme: string] {
     }
 
     open $alacritty_config_path
-    | update general.import [$"themes/($parsed_theme).toml"]
+    | update general.import [$"../themes/($parsed_theme).toml"]
     | save -f $alacritty_config_path
 
     print $"alacritty theme changed to ($theme) at ($alacritty_config_path)"
