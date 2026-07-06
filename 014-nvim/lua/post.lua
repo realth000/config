@@ -122,8 +122,8 @@ if (sync_alacritty_theme == 'true') and (vim.fn.executable('nu') == 1) and (vim.
 		callback = function(args)
 			local theme = args.match
 			local nu_dir = vim.fn.system({ "nu", "-c", "$nu.default-config-dir" }):gsub("%s+", "")
-			local script_path = vim.fs.joinpath(nu_dir, "bin", "alacritty_set_theme.nu")
-			local subcommand = vim.system({ "nu", script_path, theme }, { text = true }):wait()
+			local script_path = vim.fs.joinpath(nu_dir, "bin", "alacritty_update_config.nu")
+			local subcommand = vim.system({ "nu", script_path, "--theme", theme }, { text = true }):wait()
 			local result = string.format("[%s] %s", subcommand.code, subcommand.stdout)
 			print(result)
 		end
