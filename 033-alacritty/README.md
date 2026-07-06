@@ -6,11 +6,12 @@ Make symbol links.
 
 ### Linux
 
-Run in nushell:
+Run in nushell in `033-alacritty`:
 
 ```nushell
-ln -s "/absolute/path/to/repo/033-alacritty/alacritty.toml" $"($env.HOME)/.config/alacritty/alacritty.toml"
-ln -s "/absolute/path/to/repo/033-alacritty/themes" $"($env.HOME)/.config/alacritty/themes"
+mkdir ~/.config/alacritty
+ln -s $"($env.PWD)/alacritty.toml" $"($env.HOME)/.config/alacritty/alacritty.toml"
+ln -s $"($env.PWD)/themes" $"($env.HOME)/.config/alacritty/themes"
 ```
 
 ### Windows
