@@ -12,7 +12,7 @@ Zellij supports loading layout files and plugins files from a relative file path
 - On linux:
   - `$HOME/.config/zellij/config.kdl` for config file.
   - `$HOME/.config/zellij/layouts` directory for layout files.
-  - `$HOME/.local/share/zellij/data/plugins` directory for plugin files.
+  - `$HOME/.local/share/zellij/plugins` directory for plugin files.
 - On windows, it's `$env.APPDATA/Zellij`.
   - `$env:APPDATA/Zellij/config/config.kdl` for config file.
   - `$env:APPDATA/Zellij/config/layouts` directory for layout files.
@@ -30,13 +30,13 @@ Symbol link the `config` directory and `data` directory here to the default zell
 
 ### Linux platform
 
-To create symbol link on windows, run command in nushell:
+To create symbol link on linux, run command in nushell:
 
 ```nushell
 ln -s $"($env.PWD)/config/config.kdl" $"($env.HOME)/.config/zellij/config.kdl"
 ln -s $"($env.PWD)/layouts" $"($env.HOME)/.config/zellij/layouts"
 mkdir ~/.local/share/zellij
-ln -s $"($env.PWD)/data/plugins" $"($env.PWD)/.local/share/zellij/plugins"
+ln -s $"($env.PWD)/data/plugins" $"($env.HOME)/.local/share/zellij/plugins"
 ```
 
 links config directories to zellij default directory.
