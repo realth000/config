@@ -51,26 +51,31 @@ module internal {
                 target: "nu"
                 detail: "nushell config"
                 path: $"($nu.default-config-dir)"
+                use_lsp: true
             }
             {
                 target: "wz"
                 detail: "wezterm config"
                 path: $"($env.WEZTERM_CONFIG_PATH)"
+                use_lsp: false
             }
             {
                 target: "nv"
                 detail: "neovim config"
                 path: $"(nvim_config_path)"
+                use_lsp: false
             }
             {
                 target: "zlj"
                 detail: "zellij config"
                 path: $"(get-zellij-path)"
+                use_lsp: true
             }
             {
                 target: "alc"
                 detail: "alacritty config"
                 path: $"(get-alacritty-path)"
+                use_lsp: true
             }
         ]
     }
@@ -95,10 +100,15 @@ export def ec [
         fatal "target not set" "* Use `ec <target>` to edit targeted config\n* Use `ec -p/--print-target to check all configs available"
     }
 
-    let target_path = all_targets | where $it.target == $target | get path
-    if ($target_path | is-empty) {
+    let found_target = all_targets | where $it.target == $target | first
+    if $found_target == null {
         fatal "invalid target" $"invalid target ($target)"
     }
 
-    with-env { "NVIM_NO_LSP": 1 } { nvim $target_path.0 }
+    let target_path = $found_target | get path
+    if $found_target.use_lsp {
+        nvim $target_path
+    } else {
+        with-env { "NVIM_NO_LSP": 1 } { nvim $target_path }
+    }
 }

@@ -10,6 +10,8 @@ layout {
             // - on windows, "C:\Users\$USERNAME\AppData\Roaming\Zellij\data\plugins"
             // - on linux, "$HOME/.config/zellij/data/plugins"
             plugin location="file:zjstatus.wasm" {
+                color_bg_time "#686284"
+
                 format_left   "{mode}"
                 format_center "{tabs}"
                 format_right  "{datetime}"
@@ -20,19 +22,18 @@ layout {
                 border_format   "#[fg=#6C7086]{char}"
                 border_position "top"
 
-                mode_normal "#[bg=green,fg=black,bold] normal "
-                mode_tab    "#[bg=blue,fg=black,bold] tab "
-                mode_pane   "#[bg=cyan,fg=black,bold] pane "
-                mode_move   "#[bg=yellow,fg=black,bold] move "
-                mode_resize "#[bg=purple,fg=black,bold] resize "
-                mode_locked "#[bg=white,fg=bright_black,bold] locked "
-                mode_session "#[bg=red,fg=black,bold] session "
+                mode_normal "#[bg=green,fg=black,bold] NORMAL "
+                mode_tab    "#[bg=blue,fg=black,bold]  TABS  "
+                mode_pane   "#[bg=cyan,fg=black,bold]  PANE  "
+                mode_move   "#[bg=yellow,fg=black,bold]  MOVE  "
+                mode_resize "#[bg=red,fg=black,bold] RESIZE "
+                mode_locked "#[bg=bright_black,fg=black,bold] LOCKED "
 
                 tab_normal   "#[fg=bright_black] {index} "
                 tab_active   "#[bg=magenta,fg=black,bold] {index} "
 
                 // Use zjstatus > 0.23.0 to avoid a UI refresh issue.
-                datetime        "#[fg=#6C7086,bold] {format} "
+                datetime        "#[bg=$bg_time,fg=black,bold] {format} "
                 datetime_format "%Y-%m-%d %H:%M:%S"
                 datetime_timezone "Asia/Shanghai"
             }

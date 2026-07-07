@@ -32,10 +32,10 @@ keybinds clear-defaults=true {
         bind "down" { MoveFocus "down"; }
         bind "up" { MoveFocus "up"; }
         bind "right" { MoveFocus "right"; }
-        bind "c" { SwitchToMode "renamepane"; PaneNameInput 0; }
+        // bind "c" { SwitchToMode "renamepane"; PaneNameInput 0; }
         bind "d" { NewPane "down"; SwitchToMode "normal"; }
-        bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "normal"; }
-        bind "f" { ToggleFocusFullscreen; SwitchToMode "normal"; }
+        // bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "normal"; }
+        // bind "f" { ToggleFocusFullscreen; SwitchToMode "normal"; }
         bind "h" { MoveFocus "left"; }
         // bind "i" { TogglePanePinned; SwitchToMode "normal"; }
         bind "j" { MoveFocus "down"; }
@@ -45,7 +45,7 @@ keybinds clear-defaults=true {
         bind "p" { SwitchFocus; }
         bind "Ctrl p" { SwitchToMode "normal"; }
         bind "r" { NewPane "right"; SwitchToMode "normal"; }
-        bind "s" { NewPane "stacked"; SwitchToMode "normal"; }
+        // bind "s" { NewPane "stacked"; SwitchToMode "normal"; }
         // bind "w" { ToggleFloatingPanes; SwitchToMode "normal"; }
         // bind "z" { TogglePaneFrames; SwitchToMode "normal"; }
     }
@@ -71,7 +71,7 @@ keybinds clear-defaults=true {
         bind "k" { GoToPreviousTab; }
         bind "l" { GoToNextTab; }
         bind "n" { NewTab; SwitchToMode "normal"; }
-        bind "r" { SwitchToMode "renametab"; TabNameInput 0; }
+        // bind "r" { SwitchToMode "renametab"; TabNameInput 0; }
         // bind "s" { ToggleActiveSyncTab; SwitchToMode "normal"; }
         bind "Ctrl t" { SwitchToMode "normal"; }
         bind "x" { CloseTab; SwitchToMode "normal"; }
@@ -109,17 +109,17 @@ keybinds clear-defaults=true {
         bind "p" { MovePaneBackwards; }
         bind "tab" { MovePane; }
     }
-    scroll {
-        bind "e" { EditScrollback; SwitchToMode "normal"; }
-        bind "s" { SwitchToMode "entersearch"; SearchInput 0; }
-    }
-    search {
-        bind "c" { SearchToggleOption "CaseSensitivity"; }
-        bind "n" { Search "down"; }
-        bind "o" { SearchToggleOption "WholeWord"; }
-        bind "p" { Search "up"; }
-        bind "w" { SearchToggleOption "Wrap"; }
-    }
+    // scroll {
+    //     bind "e" { EditScrollback; SwitchToMode "normal"; }
+    //     bind "s" { SwitchToMode "entersearch"; SearchInput 0; }
+    // }
+    // search {
+    //     bind "c" { SearchToggleOption "CaseSensitivity"; }
+    //     bind "n" { Search "down"; }
+    //     bind "o" { SearchToggleOption "WholeWord"; }
+    //     bind "p" { Search "up"; }
+    //     bind "w" { SearchToggleOption "Wrap"; }
+    // }
     // session {
     //     bind "a" {
     //         LaunchOrFocusPlugin "zellij:about" {
@@ -218,38 +218,38 @@ keybinds clear-defaults=true {
     // shared_among "pane" "tmux" {
     //     bind "x" { CloseFocus; SwitchToMode "normal"; }
     // }
-    shared_among "scroll" "search" {
-        bind "PageDown" { PageScrollDown; }
-        bind "PageUp" { PageScrollUp; }
-        bind "left" { PageScrollUp; }
-        bind "down" { ScrollDown; }
-        bind "up" { ScrollUp; }
-        bind "right" { PageScrollDown; }
-        bind "Ctrl b" { PageScrollUp; }
-        bind "Ctrl c" { ScrollToBottom; SwitchToMode "normal"; }
-        bind "d" { HalfPageScrollDown; }
-        bind "Ctrl f" { PageScrollDown; }
-        bind "h" { PageScrollUp; }
-        bind "j" { ScrollDown; }
-        bind "k" { ScrollUp; }
-        bind "l" { PageScrollDown; }
-        bind "Ctrl s" { SwitchToMode "normal"; }
-        bind "u" { HalfPageScrollUp; }
-    }
-    entersearch {
-        bind "Ctrl c" { SwitchToMode "scroll"; }
-        bind "esc" { SwitchToMode "scroll"; }
-        bind "enter" { SwitchToMode "search"; }
-    }
-    renametab {
-        bind "esc" { UndoRenameTab; SwitchToMode "tab"; }
-    }
-    shared_among "renametab" "renamepane" {
-        bind "Ctrl c" { SwitchToMode "normal"; }
-    }
-    renamepane {
-        bind "esc" { UndoRenamePane; SwitchToMode "pane"; }
-    }
+    // shared_among "scroll" "search" {
+    //     bind "PageDown" { PageScrollDown; }
+    //     bind "PageUp" { PageScrollUp; }
+    //     bind "left" { PageScrollUp; }
+    //     bind "down" { ScrollDown; }
+    //     bind "up" { ScrollUp; }
+    //     bind "right" { PageScrollDown; }
+    //     bind "Ctrl b" { PageScrollUp; }
+    //     bind "Ctrl c" { ScrollToBottom; SwitchToMode "normal"; }
+    //     bind "d" { HalfPageScrollDown; }
+    //     bind "Ctrl f" { PageScrollDown; }
+    //     bind "h" { PageScrollUp; }
+    //     bind "j" { ScrollDown; }
+    //     bind "k" { ScrollUp; }
+    //     bind "l" { PageScrollDown; }
+    //     bind "Ctrl s" { SwitchToMode "normal"; }
+    //     bind "u" { HalfPageScrollUp; }
+    // }
+    // entersearch {
+    //     bind "Ctrl c" { SwitchToMode "scroll"; }
+    //     bind "esc" { SwitchToMode "scroll"; }
+    //     bind "enter" { SwitchToMode "search"; }
+    // }
+    // renametab {
+    //     bind "esc" { UndoRenameTab; SwitchToMode "tab"; }
+    // }
+    // shared_among "renametab" "renamepane" {
+    //     bind "Ctrl c" { SwitchToMode "normal"; }
+    // }
+    // renamepane {
+    //     bind "esc" { UndoRenamePane; SwitchToMode "pane"; }
+    // }
     // shared_among "session" "tmux" {
     //     bind "d" { Detach; }
     // }
@@ -316,7 +316,7 @@ load_plugins {
 web_client {
     font "monospace"
 }
- 
+
 // Use a simplified UI without special fonts (arrow glyphs)
 // Options:
 //   - true
@@ -453,7 +453,7 @@ pane_frames false
 // otherwise this will error if such a session exists.
 // Default: <RANDOM>
 // 
-// session_name "My singleton session"
+session_name "workspace"
  
 // When `session_name` is provided, attaches to that session
 // if it is already running or creates it otherwise.

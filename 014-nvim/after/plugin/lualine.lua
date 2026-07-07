@@ -77,12 +77,14 @@ plugin.setup {
 		-- palenight moonfly codedark gruvbox-material horizon material nightfly onedark
 		-- powerline_dark solarized_dark jellybeans everforest gruvbox_dark iceberg_dark modus-vivendi wombat papercolor_dark
 		theme = theme,
-		-- component_separators = { left = '', right = ''},
-		-- section_separators = { left = '', right = ''},
-		-- component_separators = { left = '/', right = '/'},
-		section_separators = { left = '', right = '' },
+		-- section_separators = { left = '', right = '' },
 		-- section_separators = { left = '', right = '' },
-		component_separators = { left = '', right = '' },
+		-- section_separators = { left = '', right = ''},
+		section_separators = { left = '', right = ''},
+		-- component_separators = { left = '', right = ''},
+		-- component_separators = { left = '/', right = '/'},
+		-- component_separators = { left = '', right = '' },
+		component_separators = { left = '│', right = '│' },
 		--     disabled_filetypes = {
 		--       statusline = {},
 		--       winbar = {},
