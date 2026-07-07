@@ -7,7 +7,7 @@ vim.opt.ruler = true
 -- see Clipboard integration in https://neovim.io/doc/user/provider.html
 -- Need to install clipboard tool. vim.opt.clipboard = "unnamedplus"
 vim.opt.clipboard = "unnamedplus"
-vim.opt.mouse = ''
+vim.opt.mouse = 'a'
 vim.opt.autoindent = true
 vim.opt.cursorline = true
 -- Ctrl + D/U scroll 10 lines each time
