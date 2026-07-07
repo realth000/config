@@ -35,7 +35,7 @@ def zlj [] {
     }
     let has_fish = zellij ls | find -r "workspace" | length
 
-    if $has_fish {
+    if $has_fish > 0 {
         zellij delete-all-sessions workspace --force
     }
 
