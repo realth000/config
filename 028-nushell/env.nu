@@ -28,7 +28,19 @@ alias dc = cd
 #
 # - on windows, 'C:/Users/$USERNAME/AppData/Roaming/Zellij/config/layouts'
 # - on linux, '$HOME/.config/zellij/layouts'
-alias zlj = zellij --layout default_layout
+def zlj [] {
+    if "ZELLIJ" in $env {
+        env-log "You already in zellij"
+        return
+    }
+    let has_fish = zellij ls | find -r "workspace" | length
+
+    if $has_fish {
+        zellij delete-all-sessions workspace --force
+    }
+
+    zellij --layout default_layout
+}
 
 # Plugin alias
 

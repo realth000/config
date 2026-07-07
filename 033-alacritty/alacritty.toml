@@ -1,14 +1,11 @@
-[general]
-ipc_socket = false
-import = ["custom/custom.toml"]
-
 [terminal]
 shell = "nu"
-
-[font]
-size = 14.0
 
 [cursor]
 style.shape = "Block"
 style.blinking = "On"
+blink_interval = 500
 
+[general]
+ipc_socket = false
+import = ["custom/custom.toml"]

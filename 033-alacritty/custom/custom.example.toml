@@ -8,6 +8,9 @@
 [general]
 import = ["../themes/catppuccin-mocha.toml"]
 
+[font]
+size = 16.0
+
 [font.normal]
 family = "Iosevka1204 Nerd Font Mono"
 style = "Regular"
