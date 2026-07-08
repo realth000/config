@@ -36,7 +36,7 @@ def zlj [] {
     let has_fish = zellij ls | find -r "workspace" | length
 
     if $has_fish > 0 {
-        zellij delete-all-sessions workspace --force
+        zellij delete-session workspace --force
     }
 
     zellij --layout default_layout
