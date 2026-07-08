@@ -40,7 +40,10 @@ $env.config.completions.external.completer = {|spans|
     if $nu.os-info.name == "linux" {
         export-env { $env.LC_ALL = "C" }
     }
-    carapace $spans.0 nushell ...$spans | from json
+
+    # Return null if external completer returns empty result so that fallback to
+    # nushell internal completion.
+    carapace $spans.0 nushell ...$spans | from json | if ($in | is-empty) { null } else { $in }
 }
 
 # Commands
