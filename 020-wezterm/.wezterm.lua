@@ -3,6 +3,11 @@ local mux                          = wezterm.mux
 local act                          = wezterm.action
 
 local use_dark_mode = true
+-- Enable built-in multiplexer or not.
+--
+-- Disable it when using external ones like zellij.
+-- All tab related features should be disabled, too.
+local enable_multiplexer = false
 
 -- Get wezterm builtin colorschemes.
 local function colorscheme(name)
@@ -51,6 +56,8 @@ config.tab_bar_at_bottom = true
 -- fancy bar management may be deprecated in future according to
 -- https://github.com/wez/wezterm/issues/1180
 config.use_fancy_tab_bar = false
+
+config.enable_tab_bar = enable_multiplexer
 
 -- This function returns the suggested title for a tab.
 -- It prefers the title that was set via `tab:set_title()`
@@ -375,53 +382,64 @@ config.font = wezterm.font_with_fallback {
 	},
 }
 
-config.keys = {
-	{ key = '1',          mods = 'ALT',        action = act.ActivateTab(0), },
-	{ key = '2',          mods = 'ALT',        action = act.ActivateTab(1), },
-	{ key = '3',          mods = 'ALT',        action = act.ActivateTab(2), },
-	{ key = '4',          mods = 'ALT',        action = act.ActivateTab(3), },
-	{ key = '5',          mods = 'ALT',        action = act.ActivateTab(4), },
-	{ key = '6',          mods = 'ALT',        action = act.ActivateTab(5), },
-	{ key = '7',          mods = 'ALT',        action = act.ActivateTab(6), },
-	{ key = '8',          mods = 'ALT',        action = act.ActivateTab(7), },
-	{ key = '9',          mods = 'ALT',        action = act.ActivateTab(8), },
-	{ key = '`',          mods = 'CTRL|ALT',   action = act.CloseCurrentTab { confirm = true }, },
-	{ key = 'LeftArrow',  mods = 'SHIFT',      action = act.ActivateTabRelative(-1), },
-	{ key = 'RightArrow', mods = 'SHIFT',      action = act.ActivateTabRelative(1), },
-	{ key = 'PageUp',     mods = 'CTRL|SHIFT', action = act.MoveTabRelative(-1), },
-	{ key = 'PageDown',   mods = 'CTRL|SHIFT', action = act.MoveTabRelative(1), },
-	{ key = '`',          mods = 'CTRL',       action = act.CloseCurrentPane { confirm = true }, },
-	{ key = '|',          mods = 'CTRL|SHIFT', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' }, },
-	{ key = '\\',         mods = 'CTRL',       action = act.SplitVertical { domain = 'CurrentPaneDomain' }, },
-	{ key = '1',          mods = 'CTRL',       action = act.PaneSelect { alphabet = '1234567890' }, },
-	{ key = '2',          mods = 'CTRL',       action = act.PaneSelect { alphabet = '1234567890' }, },
-	{ key = '3',          mods = 'CTRL',       action = act.PaneSelect { alphabet = '1234567890' }, },
-	{ key = '4',          mods = 'CTRL',       action = act.PaneSelect { alphabet = '1234567890' }, },
-	{ key = '5',          mods = 'CTRL',       action = act.PaneSelect { alphabet = '1234567890' }, },
-	{ key = '6',          mods = 'CTRL',       action = act.PaneSelect { alphabet = '1234567890' }, },
-	{ key = '0',          mods = 'CTRL',       action = act.PaneSelect { mode = 'SwapWithActive' }, },
-	{ key = 'UpArrow',    mods = 'CTRL|SHIFT', action = act.ScrollByLine(-1), },
-	{ key = 'k',          mods = 'CTRL|SHIFT', action = act.ScrollByLine(-1), },
-	{ key = 'DownArrow',  mods = 'CTRL|SHIFT', action = act.ScrollByLine(1), },
-	{ key = 'j',          mods = 'CTRL|SHIFT', action = act.ScrollByLine(1), },
-	{
-		key = ',',
-		mods = 'CTRL',
-		action = act.ActivateKeyTable {
-			name = 'resize_pane',
-			-- ont_shot = false,
-			timeout_milliseconds = 1000,
+if enable_multiplexer then
+	config.keys = {
+		{ key = '1',          mods = 'ALT',        action = act.ActivateTab(0), },
+		{ key = '2',          mods = 'ALT',        action = act.ActivateTab(1), },
+		{ key = '3',          mods = 'ALT',        action = act.ActivateTab(2), },
+		{ key = '4',          mods = 'ALT',        action = act.ActivateTab(3), },
+		{ key = '5',          mods = 'ALT',        action = act.ActivateTab(4), },
+		{ key = '6',          mods = 'ALT',        action = act.ActivateTab(5), },
+		{ key = '7',          mods = 'ALT',        action = act.ActivateTab(6), },
+		{ key = '8',          mods = 'ALT',        action = act.ActivateTab(7), },
+		{ key = '9',          mods = 'ALT',        action = act.ActivateTab(8), },
+		{ key = '`',          mods = 'CTRL|ALT',   action = act.CloseCurrentTab { confirm = true }, },
+		{ key = 'LeftArrow',  mods = 'SHIFT',      action = act.ActivateTabRelative(-1), },
+		{ key = 'RightArrow', mods = 'SHIFT',      action = act.ActivateTabRelative(1), },
+		{ key = 'PageUp',     mods = 'CTRL|SHIFT', action = act.MoveTabRelative(-1), },
+		{ key = 'PageDown',   mods = 'CTRL|SHIFT', action = act.MoveTabRelative(1), },
+		{ key = '`',          mods = 'CTRL',       action = act.CloseCurrentPane { confirm = true }, },
+		{ key = '|',          mods = 'CTRL|SHIFT', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' }, },
+		{ key = '\\',         mods = 'CTRL',       action = act.SplitVertical { domain = 'CurrentPaneDomain' }, },
+		{ key = '1',          mods = 'CTRL',       action = act.PaneSelect { alphabet = '1234567890' }, },
+		{ key = '2',          mods = 'CTRL',       action = act.PaneSelect { alphabet = '1234567890' }, },
+		{ key = '3',          mods = 'CTRL',       action = act.PaneSelect { alphabet = '1234567890' }, },
+		{ key = '4',          mods = 'CTRL',       action = act.PaneSelect { alphabet = '1234567890' }, },
+		{ key = '5',          mods = 'CTRL',       action = act.PaneSelect { alphabet = '1234567890' }, },
+		{ key = '6',          mods = 'CTRL',       action = act.PaneSelect { alphabet = '1234567890' }, },
+		{ key = '0',          mods = 'CTRL',       action = act.PaneSelect { mode = 'SwapWithActive' }, },
+		{ key = 'UpArrow',    mods = 'CTRL|SHIFT', action = act.ScrollByLine(-1), },
+		{ key = 'k',          mods = 'CTRL|SHIFT', action = act.ScrollByLine(-1), },
+		{ key = 'DownArrow',  mods = 'CTRL|SHIFT', action = act.ScrollByLine(1), },
+		{ key = 'j',          mods = 'CTRL|SHIFT', action = act.ScrollByLine(1), },
+		{
+			key = ',',
+			mods = 'CTRL',
+			action = act.ActivateKeyTable {
+				name = 'resize_pane',
+				-- ont_shot = false,
+				timeout_milliseconds = 1000,
+			},
 		},
-	},
-}
+	}
 
-config.key_tables = {
-	resize_pane = {
-		{ key = 'h', action = act.AdjustPaneSize { 'Left', 5 }, },
-		{ key = 'j', action = act.AdjustPaneSize { 'Down', 5 }, },
-		{ key = 'k', action = act.AdjustPaneSize { 'Up', 5 }, },
-		{ key = 'l', action = act.AdjustPaneSize { 'Right', 5 }, },
-	},
-}
+	config.key_tables = {
+		resize_pane = {
+			{ key = 'h', action = act.AdjustPaneSize { 'Left', 5 }, },
+			{ key = 'j', action = act.AdjustPaneSize { 'Down', 5 }, },
+			{ key = 'k', action = act.AdjustPaneSize { 'Up', 5 }, },
+			{ key = 'l', action = act.AdjustPaneSize { 'Right', 5 }, },
+		},
+	}
+else
+	-- Disable shortcut for spawning new tabs.
+	config.keys = {
+		{
+			key = 't',
+			mods = 'CTRL|SHIFT',
+			action = wezterm.action.DisableDefaultAssignment,
+		},
+	}
+end
 
 return config
