@@ -28,6 +28,7 @@ layout {
                 mode_move   "#[bg=yellow,fg=black,bold]  MOVE  "
                 mode_resize "#[bg=red,fg=black,bold] RESIZE "
                 mode_locked "#[bg=bright_black,fg=black,bold] LOCKED "
+                mode_scroll "#[bg=magenta,fg=black,bold] SCROLL "
 
                 tab_normal   "#[fg=bright_black] {index} "
                 tab_active   "#[bg=magenta,fg=black,bold] {index} "

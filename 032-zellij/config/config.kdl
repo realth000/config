@@ -109,10 +109,10 @@ keybinds clear-defaults=true {
         bind "p" { MovePaneBackwards; }
         bind "tab" { MovePane; }
     }
-    // scroll {
-    //     bind "e" { EditScrollback; SwitchToMode "normal"; }
-    //     bind "s" { SwitchToMode "entersearch"; SearchInput 0; }
-    // }
+    scroll {
+        bind "e" { EditScrollback; SwitchToMode "normal"; }
+        bind "s" { SwitchToMode "entersearch"; SearchInput 0; }
+    }
     // search {
     //     bind "c" { SearchToggleOption "CaseSensitivity"; }
     //     bind "n" { Search "down"; }
@@ -197,9 +197,9 @@ keybinds clear-defaults=true {
     // shared_except "locked" "scroll" "search" "tmux" {
     //     bind "Ctrl b" { SwitchToMode "tmux"; }
     // }
-    // shared_except "locked" "scroll" "search" {
-    //     bind "Ctrl s" { SwitchToMode "scroll"; }
-    // }
+    shared_except "locked" "scroll" "search" {
+        bind "Ctrl s" { SwitchToMode "scroll"; }
+    }
     shared_except "locked" "tab" {
         bind "Ctrl t" { SwitchToMode "tab"; }
     }
@@ -218,24 +218,24 @@ keybinds clear-defaults=true {
     // shared_among "pane" "tmux" {
     //     bind "x" { CloseFocus; SwitchToMode "normal"; }
     // }
-    // shared_among "scroll" "search" {
-    //     bind "PageDown" { PageScrollDown; }
-    //     bind "PageUp" { PageScrollUp; }
-    //     bind "left" { PageScrollUp; }
-    //     bind "down" { ScrollDown; }
-    //     bind "up" { ScrollUp; }
-    //     bind "right" { PageScrollDown; }
-    //     bind "Ctrl b" { PageScrollUp; }
-    //     bind "Ctrl c" { ScrollToBottom; SwitchToMode "normal"; }
-    //     bind "d" { HalfPageScrollDown; }
-    //     bind "Ctrl f" { PageScrollDown; }
-    //     bind "h" { PageScrollUp; }
-    //     bind "j" { ScrollDown; }
-    //     bind "k" { ScrollUp; }
-    //     bind "l" { PageScrollDown; }
-    //     bind "Ctrl s" { SwitchToMode "normal"; }
-    //     bind "u" { HalfPageScrollUp; }
-    // }
+    shared_among "scroll" "search" {
+        bind "PageDown" { PageScrollDown; }
+        bind "PageUp" { PageScrollUp; }
+        bind "left" { PageScrollUp; }
+        bind "down" { ScrollDown; }
+        bind "up" { ScrollUp; }
+        bind "right" { PageScrollDown; }
+        bind "Ctrl b" { PageScrollUp; }
+        bind "Ctrl c" { ScrollToBottom; SwitchToMode "normal"; }
+        bind "d" { HalfPageScrollDown; }
+        bind "Ctrl f" { PageScrollDown; }
+        bind "h" { PageScrollUp; }
+        bind "j" { ScrollDown; }
+        bind "k" { ScrollUp; }
+        bind "l" { PageScrollDown; }
+        bind "Ctrl s" { SwitchToMode "normal"; }
+        bind "u" { HalfPageScrollUp; }
+    }
     // entersearch {
     //     bind "Ctrl c" { SwitchToMode "scroll"; }
     //     bind "esc" { SwitchToMode "scroll"; }
