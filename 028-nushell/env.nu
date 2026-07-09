@@ -305,7 +305,7 @@ if $have_path_mod {
     $env.PATH = ($env.PATH | split row (char esep) | append (define_custom_path))
 }
 
-if ($nu.os-info.name | str downcase) =~ windows and "NU_IN_WEZTERM" in $env and $env.NU_IN_WEZTERM == "true" {
+if $nu.os-info.name =~ windows and "NU_IN_WEZTERM" in $env and $env.NU_IN_WEZTERM == "true" {
     # Fix buffer scolling up issue when using with wezterm on windows.
     # https://github.com/wezterm/wezterm/discussions/5859#discussioncomment-13981942
     $env.config.shell_integration.osc133 = false
