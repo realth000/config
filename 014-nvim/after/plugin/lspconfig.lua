@@ -369,3 +369,11 @@ setup_lang('cssls', {
 setup_lang('ocamllsp', {
 	on_attach = on_attach,
 })
+
+setup_lang('ts_ls', {
+	on_attach = on_attach,
+})
+
+setup_lang('tailwindcss', {
+	on_attach = on_attach,
+})

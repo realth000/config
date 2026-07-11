@@ -16,11 +16,13 @@ $cmd_duration\
 palette = "catppuccin_mocha"
 
 [palettes.custom_dark]
-background = "#343434"
+# background = "#343434"
+background = "transparent"
 blue = "#3a86ff"
 
 [palettes.custom_light]
-background = "#acb0be"
+# background = "#acb0be"
+background = "transparent"
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
@@ -49,7 +51,8 @@ surface0 = "#313244"
 base = "#1e1e2e"
 mantle = "#181825"
 crust = "#11111b"
-background= "#313244"
+# background= "#313244"
+background= "transparent"
 
 [palettes.catppuccin_latte]
 rosewater = "#dc8a78"
@@ -78,11 +81,12 @@ surface0 = "#ccd0da"
 base = "#eff1f5"
 mantle = "#e6e9ef"
 crust = "#dce0e8"
-background= "#ccd0da"
+# background= "#ccd0da"
+background= "transparent"
 
 [os]
 format = "[  ](bg:background fg:cyan)"
-disabled = false
+disabled = true
 
 [hostname]
 ssh_only = true
@@ -122,19 +126,23 @@ Macos = "\uF179"
 Linux = "\uF17c"
 
 [directory]
-format = "[  $path ](bg:background fg:green)(bg:background fg:background)"
+# format = "[  $path ](bg:background fg:green)"
+format = "[$path](bg:background fg:green)"
 
 [git_branch]
 symbol = ""
-format = '[ $symbol $branch](bg:background fg:blue)'
+# format = '[ $symbol $branch](bg:background fg:blue)'
+format = '[ $branch](bg:background fg:blue)'
 
 [git_commit]
 only_detached = false
 commit_hash_length = 7
-format = "[ 󰜘 $hash ](bg:background fg:blue)"
+# format = "[ 󰜘 $hash ](bg:background fg:blue)"
+format = "[ $hash](bg:background fg:blue)"
 
 [git_state]
-format = '[ \($state($progress_current of $progress_total)\) ]($style)'
+# format = '[ \($state($progress_current of $progress_total)\) ]($style)'
+format = '[ \($state($progress_current of $progress_total)\)]($style)'
 
 [git_status]
 ahead = "⇡${count}"
@@ -149,7 +157,7 @@ renamed = "»${count}"
 deleted = "-${count}"
 typechanged = ""
 style = "red bold"
-format = '[$all_status$ahead_behind](bg:background fg:red)'
+format = '[ $all_status$ahead_behind](bg:background fg:red)'
 
 [status]
 style = 'bg:background fg:red'
@@ -159,22 +167,26 @@ not_executable_symbol = '⨯ '
 not_found_symbol = '⨯ '
 sigint_symbol = '⨯ '
 signal_symbol = '⨯ '
-format = '[ $symbol$int ]($style)'
+# format = '[ $symbol$int ]($style)'
+format = '[ $int]($style)'
 map_symbol = true
 disabled = false
 
 [time]
 disabled = false
-format = "[  $time ](bg:background fg:yellow)"
+# format = "[  $time ](bg:background fg:yellow)"
+format = "[ $time](bg:background fg:yellow)"
 
 [cmd_duration]
 min_time = 1000
 show_milliseconds = true
-format = "[  $duration ](bg:background fg:purple)"
+# format = "[  $duration ](bg:background fg:purple)"
+format = "[ $duration](bg:background fg:purple)"
 
-[character] # 此模块名称为 'character'
-success_symbol = '[](bold #3a86ff)'
-error_symbol = '[](bold #e01849)'
+[character]
+#  ❯
+success_symbol = '[❯](bold #3a86ff)'
+error_symbol = '[❯](bold #e01849)'
 
 [package]
 disabled = true
