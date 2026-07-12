@@ -16,6 +16,37 @@ vim.keymap.set('n', '<leader>fs', extensions.aerial.aerial, {})
 
 plugin.setup {
 	defaults = {
+		layout_strategy = 'bottom_pane',
+		layout_config = {
+			bottom_pane = {
+				height = 80,
+				preview_cutoff = 40,
+				prompt_position = "bottom",
+			},
+			center = {
+				height = 0.4,
+				preview_cutoff = 40,
+				prompt_position = "top",
+				width = 0.5,
+			},
+			cursor = {
+				height = 0.9,
+				preview_cutoff = 40,
+				width = 0.8,
+			},
+			horizontal = {
+				height = 0.9,
+				preview_cutoff = 120,
+				prompt_position = "bottom",
+				width = 0.9,
+			},
+			vertical = {
+				height = 0.9,
+				preview_cutoff = 40,
+				prompt_position = "bottom",
+				width = 0.9,
+			}
+		},
 		preview = {
 			treesitter = false,
 		},
@@ -49,12 +80,31 @@ plugin.setup {
 	},
 	pickers = {
 		-- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#pickers
-		find_files = {
-			-- 	find_command = { 'rg',  '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case' },
+		live_grep = {
+			-- Do NOT use the `find_command` here, set options in `vimgrep_arguments`.
+			-- find_command = {
+			-- 	"rg",
+			-- 	"--hidden",
+			-- 	"--glob", "!**/.git/*",
+			-- 	"--glob", "!**/.patch",
+			-- },
 			follow = true,
+			-- theme = "ivy",
+		},
+		find_files = {
+			find_command = {
+				"rg",
+				"--files",
+				"--hidden",
+				"--glob", "!**/.git/*",
+				"--glob", "!**/.patch",
+			},
+			follow = true,
+			previewer = false,
 		},
 		colorscheme = {
-			enable_preview = true,
+			theme = "dropdown",
+			previewer = false,
 		},
 	},
 	extensions = {
@@ -70,6 +120,15 @@ plugin.setup {
 				json = true, -- You can set the option for specific filetypes
 				yaml = true,
 			}
+		},
+		fzf = {
+			fuzzy = false,
+			override_generic_sorter = true,
+			override_file_sorter = true,
+			case_mode = "smart_case",
 		}
 	},
 }
+
+-- WTF FZF MUST LOAD AFTER PLUGIN SETUP, OTHERWISE IT DOES NOT WORK, UNLIKE AERIAL.
+plugin.load_extension('fzf')

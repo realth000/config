@@ -124,6 +124,18 @@ return require('lazy').setup({
 		'nvim-telescope/telescope.nvim',
 		{
 			'nvim-lua/plenary.nvim',
+			{
+				'nvim-telescope/telescope-fzf-native.nvim',
+				build = (function()
+					local is_windows = vim.uv.os_uname().sysname:find('Windows') and true or false
+
+					if is_windows then
+						return 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+					else
+						return 'make'
+					end
+				end)()
+			},
 			lazy = true,
 		},
 	},
@@ -166,7 +178,7 @@ return require('lazy').setup({
 		"linux-cultist/venv-selector.nvim",
 		dependencies = {
 			"neovim/nvim-lspconfig",
-			{ "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } }, -- optional: you can also use fzf-lua, snacks, mini-pick instead.
+			{ "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } }, -- optional: you can also use fzf-lua, snacks, mini-pick instead.
 		},
 		ft = "python",
 	},
