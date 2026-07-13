@@ -93,7 +93,7 @@ return require('lazy').setup({
 	-- },
 
 
-	-- treesitter, hightlight
+	-- treesitter, highlight
 	-- { 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate', branch = "main"},
 
 	-- lsp
@@ -188,4 +188,7 @@ return require('lazy').setup({
 
 	-- Formatting for some file types.
 	{ "stevearc/conform.nvim" },
+
+	-- highlight all occurrences of word at cursor.
+	{ "RRethy/vim-illuminate" },
 })
