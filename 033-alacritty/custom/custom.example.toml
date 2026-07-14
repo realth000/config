@@ -8,13 +8,23 @@
 [general]
 import = ["../themes/catppuccin-mocha.toml"]
 
-[env]
-# Workaround to fix the keyboard freeze when exit vi mode.
+# Disable vi mode by overriding the default keybindings.
 #
-# ref: https://github.com/alacritty/alacritty/issues/8907
+# On Linux platform, alacritty keyboard freezes after exit vi mode:
 #
-# But this seems NOT work in the config file. set the env in desktop file.
-XMODIFIERS = ""
+# https://github.com/alacritty/alacritty/issues/8907
+#
+# And a workaround for this issue is settings the `XMODIFIERS` env to an empty string,
+# but it also disables fcitx.
+#
+# And in most conditions we use zellij instead of raw alacritty buffering where vi mode
+# not works.
+#
+# Disable the vi mode keybinding for sake.
+[[keyboard.bindings]]
+mods = "Control | Shift"
+key = "Space"
+action = "None"
 
 [font]
 size = 16.0
