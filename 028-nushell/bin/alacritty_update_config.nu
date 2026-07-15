@@ -5,6 +5,8 @@ const alacritty_colorschemes = {
     "catppuccin-macchiato": "catppuccin-macchiato"
     "catppuccin-mocha": "catppuccin-mocha"
     "dawnfox": "dawnfox"
+    "carbonfox": "carbonfox"
+    "duskfox": "duskfox"
     "hardhacker": "hardhacker"
     "hardhacker-darker": "hardhacker"
     "kanagawa-dragon": "kanagawa_dragon"
@@ -64,7 +66,7 @@ def main [--font-family: string, --theme: string] {
 
     if $theme != null {
         let parsed_theme = $alacritty_colorschemes | get -o $theme
-        if parsed_theme == null {
+        if $parsed_theme == null {
             print $"alacritty unknown theme: ($theme)"
         } else {
             $config = $config
