@@ -26,6 +26,12 @@ mods = "Control | Shift"
 key = "Space"
 action = "None"
 
+# Disable search mode because we use zellij.
+[[keyboard.bindings]]
+mods = "Control | Shift"
+key = "F"
+action = "None"
+
 [font]
 size = 16.0
 
