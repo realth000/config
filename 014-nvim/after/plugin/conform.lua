@@ -3,7 +3,7 @@ if (not status) then return end
 
 plugin.setup({
 	formatters_by_ft = {
-		haskell = { "ormolu" },
+		-- haskell = { "fourmolu" },
 	},
 	-- Optional: Set up format-on-save
 	format_on_save = {

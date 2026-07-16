@@ -253,13 +253,14 @@ setup_lang('bashls', {
 
 setup_lang('hls', {
 	on_attach = on_attach,
-	-- single_file_support = single_file_support,
-	-- capabilities = capabilities,
-	-- settings = {
-	-- 	haskell = {
-	-- 		formattingProvider = 'ormolu',
-	-- 	}
-	-- }
+	single_file_support = single_file_support,
+	capabilities = capabilities,
+	settings = {
+		haskell = {
+			cabalFormattingProvider = "cabal-fmt",
+			formattingProvider = "fourmolu",
+		}
+	}
 })
 
 -- setup_lang('vala_ls', {
