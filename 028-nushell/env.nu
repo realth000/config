@@ -20,6 +20,7 @@ $env.CARAPACE_MATCH = "1"
 alias cw = if $nu.os-info.name == "windows" {  cd c:/Programming/Projects } else { cd ($env.HOME | path join "Programming") }
 alias c = clear
 alias dc = cd
+alias update-alacritty-config = nu $"($nu.default-config-dir)/bin/alacritty_update_config.nu"
 
 # The `default_layout.kdl` is saved at `ZELLIJ_CONFIG_DIR/layouts/default_layout.kdl`
 # Run `zellij setup --check` to confirm layouts dir.
