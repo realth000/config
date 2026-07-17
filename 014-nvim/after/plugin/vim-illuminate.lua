@@ -1,7 +1,7 @@
-local status, plugin = pcall(require, 'vim-illuminate')
+local status, plugin = pcall(require, 'illuminate')
 if (not status) then return end
 
-plugin.setup({
+plugin.configure({
 	-- providers: provider used to get references in the buffer, ordered by priority
 	providers = {
 		'lsp',
@@ -28,7 +28,7 @@ plugin.setup({
 	modes_denylist = {},
 	-- modes_allowlist: modes to illuminate, this is overridden by modes_denylist
 	-- See `:help mode()` for possible values
-	modes_allowlist = {},
+	modes_allowlist = { 'n' },
 	-- providers_regex_syntax_denylist: syntax to not illuminate, this overrides providers_regex_syntax_allowlist
 	-- Only applies to the 'regex' provider
 	-- Use :echom synIDattr(synIDtrans(synID(line('.'), col('.'), 1)), 'name')
@@ -55,6 +55,11 @@ plugin.setup({
 	-- case_insensitive_regex: sets regex case sensitivity
 	case_insensitive_regex = false,
 	-- disable_keymaps: disable default keymaps
-	disable_keymaps = false,
+	disable_keymaps = true,
 })
+
+-- Keymap
+
+vim.keymap.set('n', '<s-n>', plugin.goto_next_reference, { desc = 'Move to next reference' })
+vim.keymap.set('n', '<s-p>', plugin.goto_prev_reference, { desc = 'Move to previous reference' })
 

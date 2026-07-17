@@ -78,7 +78,6 @@ return require('lazy').setup({
 				end,
 			},
 		},
-		lazy = false, -- neo-tree will lazily load itself
 	},
 
 	-- lualine
