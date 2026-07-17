@@ -1,10 +1,12 @@
 [
   // Show the hover window on currnet symbol at cursor or focus on it if
   // the window is already open.
+  //
+  // Disable when using an not readonly popup, e.g. lsp rename popup.
   {
     "key": "shift+k",
     "command": "editor.action.showHover",
-    "when": "vim.active && vim.mode == 'Normal'",
+    "when": "vim.active && vim.mode == 'Normal' && !renameInputVisible",
   },
   {
     "key": "j",
@@ -227,5 +229,15 @@
     "key": "alt+2",
     "command": "workbench.view.search",
     "when": "sideBarVisible && activeViewlet == 'workbench.view.search' && !searchViewletFocus",
+  },
+  {
+    "key": "ctrl+o",
+    "command": "workbench.action.files.openFile",
+    "when": "!vim.active",
+  },
+  {
+    "key": "ctrl+o",
+    "command": "-workbench.action.files.openFile",
+    "when": "true",
   },
 ]
