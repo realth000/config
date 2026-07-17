@@ -38,7 +38,7 @@ vim.opt.listchars = {
 	-- '» '
 	-- '▸ '
 	-- '▹ '
-	tab = '» ',
+	tab = '▸ ',
 
 	-- Available new line symbols: https://stackoverflow.com/questions/18927672/newline-symbol-unicode-character
 	-- ⤶ U+2936 ARROW POINTING DOWNWARDS THEN CURVING LEFTWARDS

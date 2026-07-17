@@ -16,6 +16,10 @@ vim.keymap.set('n', '<leader>fs', extensions.aerial.aerial, {})
 
 plugin.setup {
 	defaults = {
+		-- http://xahlee.info/comp/unicode_computing_symbols.html
+		-- ↑ ↓ ← → • ◀ ▶ ▲ ▼ • ◁ ▷ △ ▽ • ⇦ ⇨ ⇧ ⇩ • ⬅ ➡ ⮕ ⬆ ⬇
+		prompt_prefix = '✦ ',
+		selection_caret = '▶ ',
 		layout_strategy = 'bottom_pane',
 		layout_config = {
 			bottom_pane = {

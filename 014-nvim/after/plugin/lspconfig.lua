@@ -1,34 +1,13 @@
 local env_no_lsp = os.getenv("NVIM_NO_LSP")
 if env_no_lsp then return end
 
-local nvim_version = vim.version()
-local setup_lang
+local plugin = vim.lsp.config
+if plugin == nil then return end
 
--- Indicates current nvim version is not less than 0.11 or not.
-local nvim_version_0_11 = false
-
-if nvim_version.major == 0 and nvim_version.minor < 11 then
-	-- nvim < 0.11.0
-	local lsp_status, plugin = pcall(require, 'lspconfig')
-	if (not lsp_status) then return end
-	setup_lang = function(lang, config)
-		-- Use legacy `require` method.
-		plugin[lang].setup(config)
-	end
-else
-	-- nvim >= 0.11.0
-	nvim_version_0_11 = true
-	local plugin = vim.lsp.config
-	if plugin == nil then return end
-	setup_lang = function(lang, config)
-		-- Use nvim provided api.
-		vim.lsp.enable(lang)
-		plugin[lang] = config
-	end
+local setup_lang = function(lang, config)
+	-- Use nvim provided api.
+	vim.lsp.enable(lang, config)
 end
-
-local cmp_status, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-if (not cmp_status) then return end
 
 local float_window_border = {
 	{ '╭', 'FloatBorder' },
@@ -41,15 +20,6 @@ local float_window_border = {
 	{ '│', 'FloatBorder' },
 }
 
--- Note that single file support is only needed to configure when
--- nvim is older than 0.11.0. Since 0.11.0, the `vim.lsp.config` API
--- enables single file support by default.
--- Remove this value when setup languages after we remove support for
--- nvim older than 0.11.0.
-local single_file_support = true
-
-local capabilities = cmp_nvim_lsp.default_capabilities()
-
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
@@ -58,123 +28,85 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-	-- Mappings.
-	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-	-- The floating window border styles here are managed by noice.nvim.
-	-- But keep the config here for envs without noice.nvim.
-	--
-	-- Note that the default shortcut for vim.lsp.buf.hover is already Shift+K, so we do not need to specify it again.
-	-- But keep it here as a reminder.
-	vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ border = float_window_border }); vim.notify("foobar") end, bufopts)
-	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-	vim.keymap.set('n', '<C-k>', function() vim.lsp.buf.signature_help { border = float_window_border } end, bufopts)
-	-- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-	vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-	vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-	vim.keymap.set('n', '<space>wl', function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end, bufopts)
-	vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-	vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-	vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-	vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
-
-	-- nvim deprecated `vim.fn.sign_define` since 0.11, use the following code to do the same functionality.
-	-- ref: https://www.reddit.com/r/neovim/comments/1jotzfm/what_is_alternative_for_sign_define_for_neovim_011/
-	if nvim_version_0_11 then
-		-- Config fields ref to https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.Opts
-		vim.diagnostic.config({
-			-- Enable inline diagnostic message by default. Why nvim disabled it.
-			virtual_text = true,
-			-- virtual_lines = true,
-			signs = {
-				text = {
-					[vim.diagnostic.severity.ERROR] = '⨯',
-					[vim.diagnostic.severity.WARN] = '⚠',
-					[vim.diagnostic.severity.INFO] = '󰌶',
-					[vim.diagnostic.severity.HINT] = '󰌶',
-				},
-				linehl = {
-					[vim.diagnostic.severity.ERROR] = 'Error',
-					[vim.diagnostic.severity.WARN] = 'Warn',
-					[vim.diagnostic.severity.INFO] = 'Info',
-					[vim.diagnostic.severity.HINT] = 'Hint',
-				},
-				numhl = {
-					[vim.diagnostic.severity.ERROR] = 'Error',
-					[vim.diagnostic.severity.WARN] = 'Warn',
-					[vim.diagnostic.severity.INFO] = 'Info',
-					[vim.diagnostic.severity.HINT] = 'Hint',
-				},
-			},
-		})
-	else
-		local signs = { Error = '⨯', Warn = '⚠', Hint = '󰌶', Info = '󰌶' }
-		for type, icon in pairs(signs) do
-			local hl = 'DiagnosticSign' .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-		end
-	end
-end
-
-local lsp_flags = {
-	-- This is the default in Nvim 0.7+
-	debounce_text_changes = 150,
-}
-
--- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
--- 	vim.lsp.handlers.hover, {
--- 		border = float_window_border
--- 	}
--- )
--- 
--- vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
--- 	vim.lsp.handlers.signature_help, {
--- 		border = float_window_border
--- 	}
--- )
-
--- Since nvim 0.12, vim.lsp.with is deprecated and it is encouraged to setup
--- handler window style when specifying shortcuts.
+-- Mappings.
+-- See `:help vim.lsp.*` for documentation on any of the below functions
+local bufopts = { noremap = true, silent = true, buffer = bufnr }
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+-- The floating window border styles here are managed by noice.nvim.
+-- But keep the config here for envs without noice.nvim.
 --
--- However we are using noice.nvim, it handles styles of most of floating windows,
--- one should configure style there.
---
--- However again, the diagnostic config is not handled by noice.nvim by default, so
--- keep the config here. It is recommended to enable diagnostic window managing in
--- noice.nvim.
-vim.diagnostic.config {
+-- Note that the default shortcut for vim.lsp.buf.hover is already Shift+K, so we do not need to specify it again.
+-- But keep it here as a reminder.
+vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ border = float_window_border }); end, bufopts)
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+vim.keymap.set('n', '<C-k>', function() vim.lsp.buf.signature_help { border = float_window_border } end, bufopts)
+-- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+vim.keymap.set('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, bufopts)
+vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+
+-- Config fields ref to https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.Opts
+vim.diagnostic.config({
+	-- severity_sort = true,
+	-- update_in_insert = false,
 	float = {
 		border = float_window_border,
 		winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
-	}
-}
+	},
+	-- Enable inline diagnostic message by default. Why nvim disabled it.
+	--
+	-- Inline error message.
+	virtual_text = true,
+
+	-- Verbose inline error message. The mesage appears under the current line for showing verbose info.
+	-- virtual_lines = true,
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = '⨯',
+			[vim.diagnostic.severity.WARN] = '󰀪',
+			[vim.diagnostic.severity.INFO] = 'ℹ',
+			[vim.diagnostic.severity.HINT] = '󰌶',
+		},
+		linehl = {
+			[vim.diagnostic.severity.ERROR] = 'Error',
+			[vim.diagnostic.severity.WARN] = 'Warn',
+			[vim.diagnostic.severity.INFO] = 'Info',
+			[vim.diagnostic.severity.HINT] = 'Hint',
+		},
+		numhl = {
+			[vim.diagnostic.severity.ERROR] = 'Error',
+			[vim.diagnostic.severity.WARN] = 'Warn',
+			[vim.diagnostic.severity.INFO] = 'Info',
+			[vim.diagnostic.severity.HINT] = 'Hint',
+		},
+	},
+})
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+end
 
 ------------------------------------------------
 -- Set up lsp servers.
 
 setup_lang('pyright', {
 	on_attach = on_attach,
-	flags = lsp_flags,
-	capabilities = capabilities,
 })
 
 -- setup_lang('ts_ls', {
 -- 	on_attach = on_attach,
--- 	flags = lsp_flags,
 -- })
 
 -- Use https://github.com/mrcjkb/rustaceanvim instead
 setup_lang('rust_analyzer', {
 	on_attach = on_attach,
-	flags = lsp_flags,
 	-- Server-specific settings...
 	settings = {
 		['rust-analyzer'] = {
@@ -198,7 +130,6 @@ setup_lang('rust_analyzer', {
 			},
 		},
 	},
-	capabilities = capabilities,
 })
 
 setup_lang('clangd', {
@@ -210,51 +141,34 @@ setup_lang('clangd', {
 		'--header-insertion=never',
 	},
 	on_attach = on_attach,
-	flags = lsp_flags,
 	filetypes = {
 		'c',
 		'cpp',
 	},
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 })
 
 setup_lang('gopls', {
 	on_attach = on_attach,
-	flags = lsp_flags,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 })
 
 setup_lang('cmake', {
 	on_attach = on_attach,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 })
 
 setup_lang('dartls', {
 	on_attach = on_attach,
-	flags = lsp_flags,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 })
 
 setup_lang('marksman', {
 	on_attach = on_attach,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 })
 
 setup_lang('bashls', {
 	on_attach = on_attach,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 })
 
 setup_lang('hls', {
 	on_attach = on_attach,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 	settings = {
 		haskell = {
 			cabalFormattingProvider = "cabal-fmt",
@@ -265,20 +179,14 @@ setup_lang('hls', {
 
 -- setup_lang('vala_ls', {
 -- 	on_attach = on_attach,
--- 	single_file_support = single_file_support,
--- 	capabilities = capabilities,
 -- })
 
 setup_lang('zls', {
 	on_attach = on_attach,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 })
 
 -- setup_lang('lua_ls', {
 -- 	on_attach = on_attach,
--- 	single_file_support = single_file_support,
--- 	capabilities = capabilities,
 -- 	settings = {
 -- 		Lua = {
 -- 			diagnostics = {
@@ -303,68 +211,46 @@ setup_lang('zls', {
 
 setup_lang('nushell', {
 	on_attach = on_attach,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 })
 
 setup_lang('biome', {
 	on_attach = on_attach,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 })
 
 setup_lang('gleam', {
 	on_attach = on_attach,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 })
 
 setup_lang('gleam', {
 	on_attach = on_attach,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 })
 
 setup_lang('csharp_ls', {
 	on_attach = on_attach,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 })
 
 setup_lang('jsonls', {
 	on_attach = on_attach,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 })
 
 setup_lang('yamlls', {
 	on_attach = on_attach,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 })
 
 setup_lang('kotlin_language_server', {
 	on_attach = on_attach,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 })
 
 setup_lang('perlnavigator', {
 	on_attach = on_attach,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 })
 
 setup_lang('ruff', {
 	on_attach = on_attach,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 })
 
 setup_lang('cssls', {
 	on_attach = on_attach,
-	single_file_support = single_file_support,
-	capabilities = capabilities,
 })
 
 setup_lang('ocamllsp', {

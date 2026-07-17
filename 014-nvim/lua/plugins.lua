@@ -100,12 +100,19 @@ return require('lazy').setup({
 	{
 		'neovim/nvim-lspconfig',
 		'williamboman/mason.nvim',
-		'hrsh7th/cmp-nvim-lsp',
-		'hrsh7th/cmp-buffer',
-		'hrsh7th/cmp-path',
-		'hrsh7th/cmp-cmdline',
-		'hrsh7th/nvim-cmp',
-		'hrsh7th/vim-vsnip', -- Fix dart snippet only
+		{
+			'saghen/blink.cmp',
+			dependencies = {
+				'saghen/blink.lib',
+				-- -- optional: provides snippets for the snippet source
+				-- 'rafamadriz/friendly-snippets',
+			},
+			build = function()
+				-- build the fuzzy matcher, optionally add a timeout to `pwait(timeout_ms)`
+				-- you can use `gb` in `:Lazy` to rebuild the plugin as needed
+				require('blink.cmp').build():pwait()
+			end,
+		}
 	},
 
 	-- rust-tools takes over some rust lsp configs.
@@ -113,8 +120,6 @@ return require('lazy').setup({
 	-- { 'simrat39/rust-tools.nvim', },
 
 	-- { 'mrcjkb/rustaceanvim', },
-
-	{ "onsails/lspkind.nvim", },
 
 	-- Auto complete brackts
 	{ 'windwp/nvim-autopairs', },
