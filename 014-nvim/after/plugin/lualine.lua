@@ -59,6 +59,12 @@ local theme_map = {
 
 	-- jellybeans
 	["jellybeans"] = "jellybeans",
+
+	-- kintsugi
+	--
+	-- kintsugi theme uses highlight groups.
+	["kintsugi-dark"] = "auto",
+	["kintsugi-flared"] = "auto",
 }
 
 -- Fallback theme.
