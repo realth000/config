@@ -44,6 +44,7 @@ return require('lazy').setup({
 		{ 'bgwdotdev/gleam-theme-nvim' },
 		{ 'alexmozaidze/palenight.nvim' },
 		{ 'wtfox/jellybeans.nvim' },
+		{ 'metalelf0/kintsugi-nvim' },
 	},
 
 	-- nvim-tree

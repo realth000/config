@@ -12,6 +12,8 @@ const alacritty_colorschemes = {
     "kanagawa-dragon": "kanagawa_dragon"
     "kanagawa-paper": "kanagawa_wave"
     "kanagawa-wave": "kanagawa_wave"
+    "kintsugi-dark": "kintsugi"
+    "kintsugi-flared": "kintsugi"
     "monokai": "monokai"
     "monokai-pro": "monokai"
     "monokai-pro-classis": "monokai"

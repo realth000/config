@@ -1,0 +1,66 @@
+# Kintsugi theme for Alacritty
+# https://github.com/metalelf0/kintsugi-nvim
+#
+# Save to ~/.config/alacritty/kintsugi.toml and import it from alacritty.toml:
+#   [general]
+#   import = ["~/.config/alacritty/kintsugi.toml"]
+
+[colors.primary]
+background = "#131314"
+foreground = "#cacac2"
+
+[colors.cursor]
+text   = "#0e0e0e"
+cursor = "#d4a943"
+
+[colors.vi_mode_cursor]
+text   = "#0e0e0e"
+cursor = "#ebcb8b"
+
+[colors.selection]
+text       = "#dddddd"
+background = "#47464c"
+
+[colors.search.matches]
+foreground = "#dddddd"
+background = "#47464c"
+
+[colors.search.focused_match]
+foreground = "#131314"
+background = "#b8943a"
+
+[colors.footer_bar]
+foreground = "#dddddd"
+background = "#131314"
+
+[colors.hints.start]
+foreground = "#131314"
+background = "#ebcb8b"
+
+[colors.hints.end]
+foreground = "#131314"
+background = "#b8943a"
+
+[colors.line_indicator]
+foreground = "None"
+background = "None"
+
+[colors.normal]
+black   = "#131314"
+red     = "#b38f8f"
+green   = "#a3be8c"
+yellow  = "#ebcb8b"
+blue    = "#6c7a8a"
+magenta = "#b3a3d3"
+cyan    = "#6ac6f2"
+white   = "#dddddd"
+
+[colors.bright]
+black   = "#444444"
+red     = "#d9a6a6"
+green   = "#c3de9c"
+yellow  = "#fbe4a8"
+blue    = "#8fa3b3"
+magenta = "#d3a3d3"
+cyan    = "#8ac6f2"
+white   = "#ffffff"

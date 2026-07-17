@@ -17,6 +17,8 @@ end
 -- github_dark_colorblind
 -- github_dark_high_contrast
 -- gruvbox
+-- kintsugi-dark
+-- kintsugi-flared
 -- hardhacker
 -- hardhacker-darker
 -- monokai-pro
