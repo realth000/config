@@ -9,6 +9,7 @@ const alacritty_colorschemes = {
     "duskfox": "duskfox"
     "hardhacker": "hardhacker"
     "hardhacker-darker": "hardhacker"
+    "kanagawa": "kanagawa_wave"
     "kanagawa-dragon": "kanagawa_dragon"
     "kanagawa-paper": "kanagawa_wave"
     "kanagawa-wave": "kanagawa_wave"
