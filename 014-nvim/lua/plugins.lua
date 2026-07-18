@@ -180,9 +180,6 @@ return require('lazy').setup({
 	-- Treesitter parser manager for nvim-0.12 and above.
 	{ "romus204/tree-sitter-manager.nvim" },
 
-	-- Formatting for some file types.
-	{ "stevearc/conform.nvim" },
-
 	-- highlight all occurrences of word at cursor.
 	{ "RRethy/vim-illuminate" },
 })
