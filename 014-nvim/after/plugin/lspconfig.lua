@@ -213,21 +213,17 @@ setup_lang('nushell', {
 	on_attach = on_attach,
 })
 
-setup_lang('biome', {
-	on_attach = on_attach,
-})
+-- setup_lang('biome', {
+-- 	on_attach = on_attach,
+-- })
 
 setup_lang('gleam', {
 	on_attach = on_attach,
 })
 
-setup_lang('gleam', {
-	on_attach = on_attach,
-})
-
-setup_lang('csharp_ls', {
-	on_attach = on_attach,
-})
+-- setup_lang('csharp_ls', {
+-- 	on_attach = on_attach,
+-- })
 
 setup_lang('jsonls', {
 	on_attach = on_attach,
@@ -237,9 +233,9 @@ setup_lang('yamlls', {
 	on_attach = on_attach,
 })
 
-setup_lang('kotlin_language_server', {
-	on_attach = on_attach,
-})
+-- setup_lang('kotlin_language_server', {
+-- 	on_attach = on_attach,
+-- })
 
 setup_lang('perlnavigator', {
 	on_attach = on_attach,

@@ -60,6 +60,6 @@ plugin.configure({
 
 -- Keymap
 
-vim.keymap.set('n', '<s-n>', plugin.goto_next_reference, { desc = 'Move to next reference' })
-vim.keymap.set('n', '<s-p>', plugin.goto_prev_reference, { desc = 'Move to previous reference' })
+-- vim.keymap.set('n', '<s-n>', plugin.goto_next_reference, { desc = 'Move to next reference' })
+-- vim.keymap.set('n', '<s-p>', plugin.goto_prev_reference, { desc = 'Move to previous reference' })
 
