@@ -20,6 +20,8 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.list = true
 vim.opt.termguicolors = true
+-- Global broder config since 0.11
+vim.o.winborder = 'rounded'
 
 -- Use nushell to run commands.
 --

@@ -7,8 +7,10 @@ if plugin == nil then return end
 local setup_lang = function(lang, config)
 	-- Use nvim provided api.
 	vim.lsp.enable(lang, config)
+	vim.lsp.config(lang, config)
 end
 
+-- Setting borders for lsp is discouraged, use the global `vim.o.winborder` config instead.
 local float_window_border = {
 	{ '╭', 'FloatBorder' },
 	{ '─', 'FloatBorder' },
@@ -38,9 +40,13 @@ vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
 --
 -- Note that the default shortcut for vim.lsp.buf.hover is already Shift+K, so we do not need to specify it again.
 -- But keep it here as a reminder.
-vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ border = float_window_border }); end, bufopts)
+vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({
+	-- border = float_window_border
+}); end, bufopts)
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-vim.keymap.set('n', '<C-k>', function() vim.lsp.buf.signature_help { border = float_window_border } end, bufopts)
+vim.keymap.set('n', '<C-k>', function() vim.lsp.buf.signature_help {
+	-- border = float_window_border
+} end, bufopts)
 -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
 vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
 vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
@@ -55,10 +61,12 @@ vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } e
 vim.diagnostic.config({
 	-- severity_sort = true,
 	-- update_in_insert = false,
-	float = {
-		border = float_window_border,
-		winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
-	},
+	--
+	-- Setting borders for lsp is discouraged, use the global `vim.o.winborder` config instead.
+	-- float = {
+	-- 	border = float_window_border,
+	-- 	winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
+	-- },
 	-- Enable inline diagnostic message by default. Why nvim disabled it.
 	--
 	-- Inline error message.
