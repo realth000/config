@@ -32,12 +32,10 @@ return require('lazy').setup({
 		{
 			"loctvl842/monokai-pro.nvim",
 		},
-		{ 'kepano/flexoki-neovim',      name = 'flexoki' },
 		{ "bluz71/vim-nightfly-colors", name = "nightfly" },
 		'AlexvZyl/nordic.nvim',
 		'luisiacc/gruvbox-baby',
 		{ 'rose-pine/neovim',          name = 'rose-pine', },
-		{ 'kepano/flexoki-neovim',     name = 'flexoki', },
 		{ "bluz71/vim-moonfly-colors", name = "moonfly", },
 		{ 'rebelot/kanagawa.nvim' },
 		{ 'sho-87/kanagawa-paper.nvim' },
@@ -147,8 +145,6 @@ return require('lazy').setup({
 
 	-- GitSigns
 	{ 'lewis6991/gitsigns.nvim', },
-
-	{ 'vala-lang/vala.vim', },
 
 	-- Terminal
 	{ 'numToStr/FTerm.nvim', },
