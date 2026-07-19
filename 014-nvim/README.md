@@ -66,8 +66,8 @@ new-Item -ItemType SymbolicLink -Path "$env:APPDATA\nvim\after" -Target "$($PWD.
   - [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) for inline and file git blames.
   - [HiPhish/rainbow-delimiters.nvim](https://github.com/hiphish/rainbow-delimiters.nvim) for colorful brackets.
   - [RRethy/vim-illuminate](https://github.com/rrethy/vim-illuminate) for highlighting words at current cursor.
-- Shell intergration:
-  - [numToStr/FTerm.nvim](https://github.com/numtostr/fterm.nvim) for terminal intergration.
+- Shell integration:
+  - [numToStr/FTerm.nvim](https://github.com/numtostr/fterm.nvim) for terminal integration.
     - Use [nushell](https://www.nushell.sh/) as the default shell.
 - Themes:
   - [navarasu/onedark.nvim](https://github.com/navarasu/onedark.nvim)
@@ -99,36 +99,36 @@ Most features described in this section depends on environment variables.
 
 For more info about using envs in config, see `Customizing configs` section in [repo readme](../README.md).
 
-### Shell intergration
+### Shell integration
 
 Uses nushell to reach consist cross-platform shell experience.
 
-By default [nushell](https://www.nushell.sh/) is the shell we use when running command and invoking floating termianl windows. It is powerful, some kind bashlike and cross-platform.
+By default [nushell](https://www.nushell.sh/) is the shell we use when running command and invoking floating terminal windows. It is powerful, some kind bashlike and cross-platform.
 
-- To notice the current shell is nushell, set `NVIM_CUSTOM_USE_NUSHELL` to `true` and place nu in path where it becomes a global executable.
-- To disable nushell intergration, set `cmd` in [fterm config](./after/plugin/fterm.lua) to another value or comment it.
+- To tell enable nushell integration, set `NVIM_CUSTOM_USE_NUSHELL` to `true` and place nu in path where it becomes a global executable.
+- To disable nushell integration, set `cmd` in [fterm config](./after/plugin/fterm.lua) to another value or comment it.
   - Disabing nushell makes some script based features unavailable.
 
-### Custimized colorscheme
+### Customizing colorscheme
 
-- Set the current coloscheme name to the value of `NVIM_CUSTOM_COLORSCHEME` in env.
+- Set the current colorscheme name in `NVIM_CUSTOM_COLORSCHEME` in env.
 - Enable dark background via setting `NVIM_CUSTOM_USE_DARK_MODE` in env.
 
 Check [post.lua](./after/post.lua) for details.
 
-### Colorscheme updates
+### Colorscheme update
 
 > This feature requires nushell.
 
-When `colorscheme` command is called to set colorschemes, these theme configs are also updated:
+When `colorscheme` command is called to set the theme, these configs are also updated:
 
 - nvim theme in config.
 - wezterm theme in config.
 - alacritty theme in config.
 
-if enabled in env, and the related program and nushell is available.
+if enabled in env, and the related program and nushell are available.
 
-To enable these sync actions set `NVIM_CUSTOM_SYNC_WEZTERM_COLORSCHEME`, `NVIM_CUSTOM_SYNC_NVIM_COLORSCHEME` and `NVIM_CUSTOM_SYNC_ALACRITTY_COLORSCHEME` to `true` in env.
+To enable these sync actions, set `NVIM_CUSTOM_SYNC_WEZTERM_COLORSCHEME`, `NVIM_CUSTOM_SYNC_NVIM_COLORSCHEME` and `NVIM_CUSTOM_SYNC_ALACRITTY_COLORSCHEME` to `true` in env.
 
 Check [post.lua](./after/post.lua) for details.
 
@@ -140,7 +140,7 @@ Check [pre.lua](./after/pre.lua) for details.
 
 ### Paired operation on pipe sign
 
-For `|`, adds paired operations like what we have for `(`:
+For `|`, paired operations are useful like what we have for `(`:
 
 - `di|` deletes all text inside the current `|` pair.
 - `da|` deletes all text inside the current `|` pair and surrounded `|`.
