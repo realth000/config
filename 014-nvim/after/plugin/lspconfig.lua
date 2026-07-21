@@ -108,10 +108,6 @@ setup_lang('pyright', {
 	on_attach = on_attach,
 })
 
--- setup_lang('ts_ls', {
--- 	on_attach = on_attach,
--- })
-
 -- Use https://github.com/mrcjkb/rustaceanvim instead
 setup_lang('rust_analyzer', {
 	on_attach = on_attach,
@@ -159,10 +155,6 @@ setup_lang('gopls', {
 	on_attach = on_attach,
 })
 
-setup_lang('cmake', {
-	on_attach = on_attach,
-})
-
 setup_lang('dartls', {
 	on_attach = on_attach,
 })
@@ -184,10 +176,6 @@ setup_lang('hls', {
 		}
 	}
 })
-
--- setup_lang('vala_ls', {
--- 	on_attach = on_attach,
--- })
 
 setup_lang('zls', {
 	on_attach = on_attach,
@@ -221,18 +209,6 @@ setup_lang('nushell', {
 	on_attach = on_attach,
 })
 
--- setup_lang('biome', {
--- 	on_attach = on_attach,
--- })
-
-setup_lang('gleam', {
-	on_attach = on_attach,
-})
-
--- setup_lang('csharp_ls', {
--- 	on_attach = on_attach,
--- })
-
 setup_lang('jsonls', {
 	on_attach = on_attach,
 })
@@ -241,30 +217,10 @@ setup_lang('yamlls', {
 	on_attach = on_attach,
 })
 
--- setup_lang('kotlin_language_server', {
--- 	on_attach = on_attach,
--- })
-
-setup_lang('perlnavigator', {
-	on_attach = on_attach,
-})
-
 setup_lang('ruff', {
 	on_attach = on_attach,
 })
 
-setup_lang('cssls', {
-	on_attach = on_attach,
-})
-
 setup_lang('ocamllsp', {
-	on_attach = on_attach,
-})
-
-setup_lang('ts_ls', {
-	on_attach = on_attach,
-})
-
-setup_lang('tailwindcss', {
 	on_attach = on_attach,
 })
