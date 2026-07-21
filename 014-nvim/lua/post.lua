@@ -70,6 +70,8 @@ local function override_float_window_style()
 		vim.api.nvim_set_hl(0, 'BlinkCmpDoc', { fg = norm_hl.fg, bg = 'None' })
 		vim.api.nvim_set_hl(0, 'BlinkCmpDocBorder', { fg = border_hl.fg, bg = 'None' })
 		vim.api.nvim_set_hl(0, 'BlinkCmpDocSeparator', { fg = border_hl.fg, bg = 'None' })
+		vim.api.nvim_set_hl(0, 'PmenuThumb', { fg = 'None', bg = border_hl.fg })
+		vim.api.nvim_set_hl(0, 'PmenuSbar', { fg = 'None', bg = 'None' })
 	end
 end
 
