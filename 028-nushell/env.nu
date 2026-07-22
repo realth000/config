@@ -15,6 +15,10 @@ if (echo ~/.cache/starship/init.nu | path exists) { use ~/.cache/starship/init.n
 # Do case-insensitive matching.
 $env.CARAPACE_MATCH = "1"
 
+if not $nu.history-enabled {
+    $env.NU_NO_HISTORY = "true"
+}
+
 # Command alias.
 
 alias cw = if $nu.os-info.name == "windows" {  cd c:/Programming/Projects } else { cd ($env.HOME | path join "Programming") }

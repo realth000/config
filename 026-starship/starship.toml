@@ -1,6 +1,8 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """\
+${env_var.NU_NO_HISTORY}\
+${custom.nu_no_history}\
 $os\
 $hostname\
 $directory\
@@ -197,3 +199,13 @@ nu_indicator = '\[nu\]'
 style = 'cyan bold bg:background'
 format = '[$indicator]($style)'
 disabled = false
+
+# Here we add a state to show if current nushell disables history.
+#
+# Tricky thing is that it is impossible to get the status of
+# `$nu.history-enabled` as custom command because every time starship runs the
+# command it spawns a new nushell instance and we can not embed variable into
+# the
+[env_var.NU_NO_HISTORY]
+format = '[](fg:cyan) '
+

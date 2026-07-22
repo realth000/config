@@ -178,4 +178,7 @@ return require('lazy').setup({
 
 	-- highlight all occurrences of word at cursor.
 	{ "RRethy/vim-illuminate" },
+
+	-- Scroll bar.
+	-- { 'petertriho/nvim-scrollbar' },
 })
