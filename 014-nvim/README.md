@@ -26,6 +26,7 @@ Run in nushell in the current directory:
 ln -s $"($env.PWD)/init.lua" $"($env.HOME)/.config/nvim/init.lua"
 ln -s $"($env.PWD)/lua" $"($env.HOME)/.config/nvim/lua"
 ln -s $"($env.PWD)/after" $"($env.HOME)/.config/nvim/after"
+ln -s $"($env.PWD)/.emmyrc.json" $"($env.HOME)/.config/nvim/.emmyrc.json"
 ```
 
 ### Windows
@@ -41,6 +42,7 @@ Run in powershell in the current directory:
 new-Item -ItemType SymbolicLink -Path "$env:APPDATA\nvim\init.lua" -Target "$($PWD.ProviderPath)\init.lua"
 new-Item -ItemType SymbolicLink -Path "$env:APPDATA\nvim\lua" -Target "$($PWD.ProviderPath)\lua"
 new-Item -ItemType SymbolicLink -Path "$env:APPDATA\nvim\after" -Target "$($PWD.ProviderPath)\after"
+new-Item -ItemType SymbolicLink -Path "$env:APPDATA\nvim\.emmyrc.json" -Target "$($PWD.ProviderPath)\.emmyrc.json"
 ```
 
 ## Plugins

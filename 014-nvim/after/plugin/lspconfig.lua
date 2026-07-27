@@ -181,29 +181,13 @@ setup_lang('zls', {
 	on_attach = on_attach,
 })
 
--- setup_lang('lua_ls', {
--- 	on_attach = on_attach,
--- 	settings = {
--- 		Lua = {
--- 			diagnostics = {
--- 				-- Get the language server to recognize the `vim` global
--- 				globals = {
--- 					'vim',
--- 					'require',
--- 				},
--- 			},
--- 			workspace = {
--- 				-- Make the server aware of Neovim runtime files
--- 				library = vim.api.nvim_get_runtime_file('', true),
--- 				checkThirdParty = false,
--- 			},
--- 			-- Do not send telemetry data containing a randomized but unique identifier
--- 			telemetry = {
--- 				enable = false,
--- 			},
--- 		},
--- 	},
--- })
+setup_lang('emmylua_ls', {
+	on_attach = on_attach,
+
+	cmd = { 'emmylua_ls' },
+	filetypes = { 'lua' },
+	root_markers = { '.emmyrc.json', '.luarc.json', '.git' },
+})
 
 setup_lang('nushell', {
 	on_attach = on_attach,

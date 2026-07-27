@@ -55,8 +55,17 @@ plugin.setup({
 
 	-- (Default) list of enabled providers defined so that you can extend it
 	-- elsewhere in your config, without redefining it, due to `opts_extend`
-	sources = { default = { 'lsp', 'path', 'snippets', 'buffer' } },
-
+	sources = {
+		default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+		providers = {
+			lazydev = {
+				name = "LazyDev",
+				module = "lazydev.integrations.blink",
+				-- make lazydev completions top priority (see `:h blink.cmp`)
+				score_offset = 100,
+			},
+		},
+	},
 	-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
 	-- You may use a lua implementation instead by using `implementation = "lua"`
 	-- See the fuzzy documentation for more information

@@ -12,6 +12,17 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 return require('lazy').setup({
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				-- See the configuration section for more details
+				-- Load luvit types when the `vim.uv` word is found
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+			},
+		},
+	},
 
 	-- Color scheme
 	{
