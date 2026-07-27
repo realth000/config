@@ -1,9 +1,6 @@
 local env_no_lsp = os.getenv("NVIM_NO_LSP")
 if env_no_lsp then return end
 
-local plugin = vim.lsp.config
-if plugin == nil then return end
-
 local setup_lang = function(lang, config)
 	-- Use nvim provided api.
 	vim.lsp.enable(lang, config)
@@ -187,6 +184,29 @@ setup_lang('emmylua_ls', {
 	cmd = { 'emmylua_ls' },
 	filetypes = { 'lua' },
 	root_markers = { '.emmyrc.json', '.luarc.json', '.git' },
+
+	settings = {
+		Lua = {
+			completion = {
+				autoRequire = false,
+				displayContext = 1,
+			},
+			hint = {
+				enable = true,
+				paramName = 'Literal',
+				semicolon = 'Disable',
+			},
+			diagnostics = {
+				globals = { 'vim' },
+				disable = { 'need-check-nil' },
+			},
+			workspace = {
+				library = {
+					vim.env.VIMRUNTIME,
+				},
+			},
+		},
+	}
 })
 
 setup_lang('nushell', {

@@ -1,5 +1,8 @@
+-- @var plugin telescope|nil
 local status, plugin = pcall(require, 'telescope')
 if (not status) then return end
+
+local _x = require('telescope')
 
 local builtin = require('telescope.builtin')
 -- <leader> = '\\'
