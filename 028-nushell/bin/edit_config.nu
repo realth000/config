@@ -63,7 +63,7 @@ module internal {
                 target: "nv"
                 detail: "neovim config"
                 path: $"(nvim_config_path)"
-                use_lsp: false
+                use_lsp: true
             }
             {
                 target: "zlj"
