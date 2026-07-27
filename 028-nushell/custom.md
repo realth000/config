@@ -36,6 +36,8 @@ export def define_custom_env [] {
      "NVIM_CUSTOM_SYNC_WEZTERM_COLORSCHEME": "true"
      "NVIM_CUSTOM_SYNC_NVIM_COLORSCHEME": "true"
      "NVIM_CUSTOM_SYNC_ALACRITTY_COLORSCHEME": "true"
+     "EDITOR": "nvim"
+     "NVIM_RUNTIME_DIR": "/path/to/nvim/runtime"
    }
 }
 ```
@@ -50,6 +52,8 @@ The code above define envs:
 - `NVIM_CUSTOM_SYNC_WEZTERM_COLORSCHEME`, value is `true` or `false` or not set, sync neovim theme to wezterm when neovim theme changed.
 - `NVIM_CUSTOM_SYNC_NVIM_COLORSCHEME`, value is `true` or `false` or not set, sync neovim to neovim config file when neovim theme changed.
 - `NVIM_CUSTOM_SYNC_ALACRITTY_COLORSCHEME`, value is `true` or `false` or not set, sync neovim theme to alacritty config file when neovim theme changed.
+- `NVIM`, value is `nvim` to let zellij use nvim as the editor when `EditScrollback`.
+- `NVIM_RUNTIME_DIR`, value is the path to `runtime` directory in neovim directory. This variable is used for loading neovim symbols when editing neovim config.
 
 ## Custom alias
 
