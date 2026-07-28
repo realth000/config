@@ -229,7 +229,6 @@ config.color_schemes = {
 	['nightfox'] = colorscheme('nightfox'),
 	['nordfox'] = colorscheme('nordfox'),
 	['duskfox'] = colorscheme('duskfox'),
-	['duskfox'] = colorscheme('duskfox'),
 	['carbonfox'] = colorscheme('carbonfox'),
 	['terafox'] = colorscheme('terafox'),
 	['github_dark'] = colorscheme('GitHub Dark'),
@@ -248,6 +247,10 @@ config.color_schemes = {
 	['nordic'] = colorscheme('nord'),
 	['kanagawa-paper'] = colorscheme('Kanagawa (Gogh)'),
 	['kanagawa-dragon'] = colorscheme('Kanagawa Draon (Gogh)'),
+	['rose-pine'] = colorscheme('rose-pine'),
+	['rose-pine-main'] = colorscheme('rose-pine'),
+	['rose-pine-dawn'] = colorscheme('rose-pine-dawn'),
+	['rose-pine-moon'] = colorscheme('rose-pine-moon'),
 	['palenight'] = colorscheme('Palenight (Gogh)')
 }
 

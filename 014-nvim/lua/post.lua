@@ -35,6 +35,10 @@ end
 -- kanagawa-dragon
 -- kanagawa-lotus
 -- onedark
+-- rose-pine
+-- rose-pine-main
+-- rose-pine-dawn
+-- rose-pine-moon
 -- palenight
 -- terafox
 -- tokyonight-moon
