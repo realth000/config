@@ -1,74 +1,71 @@
-local status, plugin = pcall(require, 'lualine')
+local status, _p = pcall(require, 'lualine')
 if (not status) then return end
-
-local kanagawa_paper = require("lualine.themes.kanagawa-paper-ink")
 
 -- All lualine theme map assosiated with nvim colorscheme
 local theme_map = {
 	-- Nightfly
-	["nightfly"] = "nightfly",
+	["nightfly"] = 'nightfly',
 
 	-- Gruvbox
-	["gruvbox"] = "gruvbox_dark",
-	["gruvbox-baby"] = "gruvbox_dark",
+	["gruvbox"] = 'gruvbox_dark',
+	["gruvbox-baby"] = 'gruvbox_dark',
 
 	-- Monokai pro
-	["monokai-pro"] = "monokai-pro",
-	["monokai-pro-classic"] = "monokai-pro",
-	["monokai-pro-default"] = "monokai-pro",
-	["monokai-pro-machine"] = "monokai-pro",
-	["monokai-pro-octagon"] = "monokai-pro",
-	["monokai-pro-ristretto"] = "monokai-pro",
-	["monokai-pro-spectrum"] = "monokai-pro",
+	["monokai-pro"] = 'monokai-pro',
+	["monokai-pro-classic"] = 'monokai-pro',
+	["monokai-pro-default"] = 'monokai-pro',
+	["monokai-pro-machine"] = 'monokai-pro',
+	["monokai-pro-octagon"] = 'monokai-pro',
+	["monokai-pro-ristretto"] = 'monokai-pro',
+	["monokai-pro-spectrum"] = 'monokai-pro',
 
 	-- Onedark
-	["onedark"] = "onedark",
+	["onedark"] = 'onedark',
 
 	-- Catppuccin
-	["catppuccin"] = "catppuccin",
-	["catppuccin-macchiato"] = "catppuccin-macchiato",
-	["catppuccin-mocha"] = "catppuccin-mocha",
-	["catppuccin-latte"] = "catppuccin-latte",
+	["catppuccin"] = 'catppuccin',
+	["catppuccin-macchiato"] = 'catppuccin-macchiato',
+	["catppuccin-mocha"] = 'catppuccin-mocha',
+	["catppuccin-latte"] = 'catppuccin-latte',
 
 	-- Moonfly
-	["moonfly"] = "moonfly",
+	["moonfly"] = 'moonfly',
 
-	-- kanagawa-paper
-	["kanagawa-paper"] = kanagawa_paper,
-	["kanagawa"] = kanagawa_paper,
-	["kanagawa-wave"] = kanagawa_paper,
-	["kanagawa-dragon"] = kanagawa_paper,
-	["kanagawa-lotus"] = kanagawa_paper,
+	-- kanagawa
+	["kanagawa"] = 'kanagawa',
+	["kanagawa-wave"] = 'kanagawa',
+	["kanagawa-dragon"] = 'kanagawa',
+	["kanagawa-lotus"] = 'kanagawa',
 
 	-- gleam
-	["gleam"] = "gleam",
+	["gleam"] = 'gleam',
 
 	-- nightfox
 	-- Ensure nightfox theme is installed.
-	["nightfox"] = "nightfox",
-	["nordfox"] = "nordfox",
-	["duskfox"] = "duskfox",
-	["carbonfox"] = "carbonfox",
-	["terafox"] = "terafox",
+	["nightfox"] = 'nightfox',
+	["nordfox"] = 'nordfox',
+	["duskfox"] = 'duskfox',
+	["carbonfox"] = 'carbonfox',
+	["terafox"] = 'terafox',
 
 	-- nordic
-	["nordic"] = "nord",
+	["nordic"] = 'nord',
 
 	-- palenight
-	["palenight"] = "palenight",
+	["palenight"] = 'palenight',
 
 	-- jellybeans
-	["jellybeans"] = "jellybeans",
+	["jellybeans"] = 'jellybeans',
 
 	-- kintsugi
 	--
 	-- kintsugi theme uses highlight groups.
-	["kintsugi-dark"] = "auto",
-	["kintsugi-flared"] = "auto",
+	["kintsugi-dark"] = 'auto',
+	["kintsugi-flared"] = 'auto',
 }
 
 -- Fallback theme.
-local fallback_theme = "palenight"
+local fallback_theme = 'palenight'
 
 -- Currrent nvim colorscheme.
 local colorscheme = os.getenv('NVIM_CUSTOM_COLORSCHEME')
@@ -76,7 +73,12 @@ local colorscheme = os.getenv('NVIM_CUSTOM_COLORSCHEME')
 -- Finally selected lualine theme.
 local theme = theme_map[colorscheme] or fallback_theme
 
-plugin.setup {
+---@class lualineModule
+---
+---@field setup function(table)
+local plugin = require('lualine')
+
+plugin.setup({
 	options = {
 		icons_enabled = true,
 		-- See https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
@@ -86,7 +88,7 @@ plugin.setup {
 		-- section_separators = { left = '', right = '' },
 		-- section_separators = { left = '', right = '' },
 		-- section_separators = { left = '', right = ''},
-		section_separators = { left = '', right = ''},
+		section_separators = { left = '', right = '' },
 		-- component_separators = { left = '', right = ''},
 		-- component_separators = { left = '/', right = '/'},
 		-- component_separators = { left = '', right = '' },
@@ -103,7 +105,7 @@ plugin.setup {
 			statusline = 1000,
 			tabline = 1000,
 			winbar = 1000,
-		}
+		},
 	},
 	sections = {
 		lualine_a = { 'mode' },
@@ -125,7 +127,7 @@ plugin.setup {
 				-- 	info  = 'DiagnosticInfo',
 				-- 	hint  = 'DiagnosticHint',
 				-- },
-				symbols = {error = '⨯', warn = '󰀪', info = 'ℹ', hint = '󰌶'},
+				symbols = { error = '⨯', warn = '󰀪', info = 'ℹ', hint = '󰌶' },
 				colored = true,           -- Displays diagnostics status in color if set to true.
 				update_in_insert = false, -- Update diagnostics in insert mode.
 				always_visible = false,   -- Show diagnostics even if there are none.
@@ -157,7 +159,7 @@ plugin.setup {
 		},
 		lualine_x = { 'encoding', 'fileformat', 'filetype' },
 		lualine_y = { 'progress' },
-		lualine_z = { 'location' }
+		lualine_z = { 'location' },
 	},
 	inactive_sections = {
 		lualine_a = {},
@@ -165,7 +167,7 @@ plugin.setup {
 		lualine_c = { 'filename' },
 		lualine_x = { 'location' },
 		lualine_y = {},
-		lualine_z = {}
+		lualine_z = {},
 	},
 	-- tabline = {
 	-- 	lualine_a = { 'buffers' },
@@ -184,33 +186,36 @@ plugin.setup {
 		-- lualine_z = {}
 	},
 	inactive_winbar = {},
-	extensions = {}
-}
+	extensions = {},
+})
 
 -- Get or set lualine colorscheme.
 --
 -- If args is not provided, print current colorscheme name.
 -- If args is provided, use it as the colorscheme name to set.
 local function lualineColorScheme(args)
-	local theme = args.args
-	local status, lualine = pcall(require, 'lualine')
-	if (not status) then return end
+	local _theme = args.args
+	local _status, lualine = pcall(require, 'lualine')
+	if (not _status) then return end
 
-	if (theme == nil or theme == '') then
+	if (_theme == nil or _theme == '') then
 		print(vim.inspect(lualine.get_config().options.theme))
 	else
-		lualine.setup({ options = { theme = theme } })
+		lualine.setup({ options = { theme = _theme } })
 	end
 end
 
-vim.api.nvim_create_user_command('LualineColorscheme', lualineColorScheme, { nargs='?', desc = 'Get or set Lualine colorscheme'})
+vim.api.nvim_create_user_command('LualineColorscheme', lualineColorScheme, {
+	nargs = '?',
+	desc = 'Get or set Lualine colorscheme',
+})
 
 -- Sync lualine theme after nvim colorscheme changed.
 vim.api.nvim_create_autocmd('ColorScheme', {
 	pattern = '*',
-	callback = function()
+	callback = function ()
 		local nvim_colorscheme = vim.g.colors_name
-		local theme = theme_map[nvim_colorscheme] or fallback_theme
-		plugin.setup({ options = { theme = theme } })
+		local _theme = theme_map[nvim_colorscheme] or fallback_theme
+		plugin.setup({ options = { theme = _theme } })
 	end,
 })

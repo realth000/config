@@ -1,26 +1,28 @@
-local status, plugin = pcall(require, 'neo-tree')
+local status, _p = pcall(require, 'neo-tree')
 if (not status) then return end
 
--- Commenting keymaps does not disable it. Instead, set the binding to 'noop'.
--- Commenting keymaps does not disable it. Instead, set the binding to 'noop'.
--- Commenting keymaps does not disable it. Instead, set the binding to 'noop'.
--- IT SUCKS.
--- IT SUCKS.
--- IT SUCKS.
+---@module 'neo-tree'
+local plugin = _p
 
--- Default options
-plugin.setup({
-	close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
-	popup_border_style = 'NC', -- or '' to use 'winborder' on Neovim v0.11+
+--- Commenting keymaps does not disable it. Instead, set the binding to 'noop'.
+--- Commenting keymaps does not disable it. Instead, set the binding to 'noop'.
+--- Commenting keymaps does not disable it. Instead, set the binding to 'noop'.
+--- IT SUCKS.
+--- IT SUCKS.
+--- IT SUCKS.
+---@type neotree.Config | table
+local config = {
+	close_if_last_window = false,                                      -- Close Neo-tree if it is the last window left in the tab
+	popup_border_style = 'NC',                                         -- or '' to use 'winborder' on Neovim v0.11+
 	clipboard = {
-		sync = 'none',         -- or 'global'/'universal' to share a clipboard for each/all Neovim instance(s), respectively
+		sync = 'none', -- or 'global'/'universal' to share a clipboard for each/all Neovim instance(s), respectively
 	},
 	enable_git_status = true,
 	enable_diagnostics = true,
 	open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' }, -- when opening files, do not use windows containing these filetypes or buftypes
 	open_files_using_relative_paths = false,
-	sort_case_insensitive = false,                                  -- used when sorting files and directories in the tree
-	sort_function = nil,                                            -- use a custom function for sorting files and directories in the tree
+	sort_case_insensitive = false,                                     -- used when sorting files and directories in the tree
+	sort_function = nil,                                               -- use a custom function for sorting files and directories in the tree
 	-- sort_function = function (a,b)
 	--       if a.type == b.type then
 	--           return a.path > b.path
@@ -34,7 +36,7 @@ plugin.setup({
 		},
 		indent = {
 			indent_size = 2,
-			padding = 1, -- extra padding on left hand side
+			padding = 1,          -- extra padding on left hand side
 			-- indent guides
 			with_markers = true,
 			indent_marker = '│',
@@ -50,7 +52,8 @@ plugin.setup({
 			folder_closed = '',
 			folder_open = '',
 			folder_empty = '󰜌',
-			provider = function(icon, node, state) -- default icon provider utilizes nvim-web-devicons if available
+			provider = function (icon, node, state)
+				-- default icon provider utilizes nvim-web-devicons if available
 				if node.type == 'file' or node.type == 'terminal' then
 					local success, web_devicons = pcall(require, 'nvim-web-devicons')
 					local name = node.type == 'terminal' and 'terminal' or node.name
@@ -80,9 +83,9 @@ plugin.setup({
 		git_status = {
 			symbols = {
 				-- Change type
-				added = '', -- or '✚'
-				modified = '', -- or ''
-				deleted = '✖', -- this can only be used in the git_status source
+				added = '',       -- or '✚'
+				modified = '',    -- or ''
+				deleted = '✖',  -- this can only be used in the git_status source
 				renamed = '󰁕', -- this can only be used in the git_status source
 				-- Status type
 				untracked = '',
@@ -95,22 +98,22 @@ plugin.setup({
 		-- If you don't want to use these columns, you can set `enabled = false` for each of them individually
 		file_size = {
 			enabled = true,
-			width = 12, -- width of the column
+			width = 12,          -- width of the column
 			required_width = 64, -- min width of window required to show this column
 		},
 		type = {
 			enabled = true,
-			width = 10,  -- width of the column
+			width = 10,           -- width of the column
 			required_width = 122, -- min width of window required to show this column
 		},
 		last_modified = {
 			enabled = true,
-			width = 20, -- width of the column
+			width = 20,          -- width of the column
 			required_width = 88, -- min width of window required to show this column
 		},
 		created = {
 			enabled = true,
-			width = 20,  -- width of the column
+			width = 20,           -- width of the column
 			required_width = 110, -- min width of window required to show this column
 		},
 		symlink_target = {
@@ -137,7 +140,7 @@ plugin.setup({
 			['<cr>'] = 'open',
 			-- ['o'] = 'open',
 			['o'] = 'open_with_window_picker',
-			['<esc>'] = 'cancel', -- close preview or floating neo-tree window
+			['<esc>'] = 'cancel',    -- close preview or floating neo-tree window
 			['P'] = {
 				'toggle_preview',
 				config = {
@@ -178,14 +181,14 @@ plugin.setup({
 			['x'] = 'cut_to_clipboard',
 			['p'] = 'paste_from_clipboard',
 			['<C-r>'] = 'clear_clipboard',
-			['c'] = 'copy', -- takes text input for destination, also accepts the optional config.show_path option like 'add':
+			['c'] = 'copy',          -- takes text input for destination, also accepts the optional config.show_path option like 'add':
 			-- ['c'] = {
 			--  'copy',
 			--  config = {
 			--    show_path = 'none' -- 'none', 'relative', 'absolute'
 			--  }
 			--}
-			['m'] = 'move', -- takes text input for destination, also accepts the optional config.show_path option like 'add'.
+			['m'] = 'move',          -- takes text input for destination, also accepts the optional config.show_path option like 'add'.
 			['q'] = 'close_window',
 			['R'] = 'refresh',
 			['?'] = 'show_help',
@@ -207,7 +210,7 @@ plugin.setup({
 	nesting_rules = {},
 	filesystem = {
 		filtered_items = {
-			visible = true, -- when true, they will just be displayed differently than normal items
+			visible = true,       -- when true, they will just be displayed differently than normal items
 			hide_dotfiles = true,
 			hide_gitignored = false,
 			hide_ignored = false, -- hide files that are ignored by other gitignore-like files
@@ -217,7 +220,7 @@ plugin.setup({
 				'.ignore',
 				-- '.rgignore'
 			},
-			hide_hidden = true, -- only works on Windows for hidden files/directories
+			hide_hidden = true,   -- only works on Windows for hidden files/directories
 			hide_by_name = {
 				--'node_modules'
 			},
@@ -240,17 +243,17 @@ plugin.setup({
 			},
 		},
 		follow_current_file = {
-			enabled = false,              -- This will find and focus the file in the active buffer every time
+			enabled = false,         -- This will find and focus the file in the active buffer every time
 			-- the current file is changed while the tree is open.
-			leave_dirs_open = false,      -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+			leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
 		},
-		group_empty_dirs = false,         -- when true, empty folders will be grouped together
+		group_empty_dirs = false,               -- when true, empty folders will be grouped together
 		hijack_netrw_behavior = 'open_default', -- netrw disabled, opening a directory opens neo-tree
 		-- in whatever position is specified in window.position
 		-- 'open_current',  -- netrw disabled, opening a directory opens within the
 		-- window like netrw would, regardless of window.position
 		-- 'disabled',    -- netrw left alone, neo-tree does not handle opening dirs
-		use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
+		use_libuv_file_watcher = false,         -- This will use the OS level file watchers to detect changes
 		-- instead of relying on nvim autocmd events.
 		window = {
 			mappings = {
@@ -304,14 +307,14 @@ plugin.setup({
 						['<S-CR>'] = 'close_keep_filter',
 						['<C-CR>'] = 'close_clear_filter',
 						['<esc>'] = 'close',
-					}
-				}
+					},
+				},
 				-- ['<esc>'] = 'noop', -- if you want to use normal mode
 				-- ['key'] = function(state, scroll_padding) ... end,
 			},
 		},
 
-	-- 	commands = {}, -- Add a custom command or override a global one using the same function name
+		-- 	commands = {}, -- Add a custom command or override a global one using the same function name
 	-- },
 	-- buffers = {
 	-- 	follow_current_file = {
@@ -367,6 +370,8 @@ plugin.setup({
 	-- 		},
 	-- 	},
 	},
-})
+}
+
+plugin.setup(config)
 
 vim.keymap.set('n', '<F3>', '<Cmd>Neotree toggle<CR>')

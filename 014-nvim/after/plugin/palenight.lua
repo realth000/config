@@ -1,3 +1,5 @@
+-- Variables in this file are not documented with type.
+
 local status, plugin = pcall(require, 'palenight')
 if (not status) then return end
 
@@ -13,6 +15,5 @@ plugin.setup({
 	-- "auto" => 16 color palette if in linux tty, 256 otherwise.
 	-- 256    => 256 color palette.
 	-- 16     => 16 color palette.
-	cterm_palette = "auto",
+	cterm_palette = 'auto',
 })
-

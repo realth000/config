@@ -1,6 +1,9 @@
-local status, plugin = pcall(require, 'nvim-autopairs')
+local status, _p = pcall(require, 'nvim-autopairs')
 if (not status) then return end
 
-plugin.setup({
-	disable_filetype = { 'TelescopePrompt', 'vim' },
-})
+---@module 'nvim-autopairs'
+local plugin = _p
+
+local config = { disable_filetype = { 'TelescopePrompt', 'vim' } }
+
+plugin.setup(config)

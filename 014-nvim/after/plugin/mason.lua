@@ -1,7 +1,11 @@
-local status, plugin = pcall(require, 'mason')
+local status, _p = pcall(require, 'mason')
 if (not status) then return end
 
-local DEFAULT_SETTINGS = {
+---@module 'mason'
+local plugin = _p
+
+---@type MasonSettings | table
+local config = {
 	-- The directory in which to install packages.
 	-- install_root_dir = path.concat { vim.fn.stdpath 'data', 'mason' },
 	-- install_root_dir = path.concat { vim.fn.stdpath 'data', 'mason' },
@@ -89,4 +93,4 @@ local DEFAULT_SETTINGS = {
 	},
 }
 
-plugin.setup(DEFAULT_SETTINGS)
+plugin.setup(config)

@@ -1,4 +1,4 @@
-local status, plugin = pcall(require, 'hardhacker')
+local status, _ = pcall(require, 'hardhacker')
 if (not status) then return end
 
 vim.g.hardhacker_hide_tilde = 1

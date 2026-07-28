@@ -1,7 +1,11 @@
-local status, plugin = pcall(require, 'blink.cmp')
+local status, p = pcall(require, 'blink.cmp')
 if (not status) then return end
 
-plugin.setup({
+---@module 'blink.cmp'
+local plugin = p
+
+---@type blink.cmp.Config | table
+local config = {
 	-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
 	-- 'super-tab' for mappings similar to vscode (tab to accept)
 	-- 'enter' for enter to accept
@@ -39,15 +43,15 @@ plugin.setup({
 						-- ```lua
 						-- text = function(ctx) return ctx.label .. ctx.label_detail end,
 						-- ```
-						text = function(ctx) return ctx.label end,
+						text = function (ctx) return ctx.label end,
 					},
 					-- An empty component works as a placeholder.
-					space = { text = function (ctx) return ' ' end, },
+					space = { text = function (_ctx) return ' ' end },
 				},
 				columns = {
 					-- Disable "label_description", it is useless.
-					{ "kind_icon", "label", gap = 1 },
-					{ "kind" },
+					{ 'kind_icon', 'label', gap = 1 },
+					{ 'kind' },
 				},
 			},
 		},
@@ -56,23 +60,16 @@ plugin.setup({
 	-- (Default) list of enabled providers defined so that you can extend it
 	-- elsewhere in your config, without redefining it, due to `opts_extend`
 	sources = {
-		default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
-		providers = {
-			lazydev = {
-				name = "LazyDev",
-				module = "lazydev.integrations.blink",
-				-- make lazydev completions top priority (see `:h blink.cmp`)
-				score_offset = 100,
-			},
-		},
+		default = { 'lsp', 'path', 'snippets', 'buffer' },
 	},
 	-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
 	-- You may use a lua implementation instead by using `implementation = "lua"`
 	-- See the fuzzy documentation for more information
 	fuzzy = {
-		implementation = "rust",
+		implementation = 'rust',
 	},
+}
 
-})
+plugin.setup(config)
 
 -- vim.api.nvim_set_hl(0, 'BlinkCmpGhostText', { fg = '#808080' })

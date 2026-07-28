@@ -1,5 +1,8 @@
-local status, plugin = pcall(require, 'tree-sitter-manager')
+local status, _p = pcall(require, 'tree-sitter-manager')
 if (not status) then return end
+
+---@module 'tree-sitter-manager'
+local plugin = _p
 
 plugin.setup({
 	-- Default Options

@@ -1,10 +1,11 @@
--- @var plugin telescope|nil
-local status, plugin = pcall(require, 'telescope')
+local status, _p = pcall(require, 'telescope')
 if (not status) then return end
 
-local _x = require('telescope')
+---@module 'telescope'
+local plugin = _p
 
 local builtin = require('telescope.builtin')
+
 -- <leader> = '\\'
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
@@ -17,7 +18,8 @@ plugin.load_extension('aerial')
 local extensions = require('telescope').extensions
 vim.keymap.set('n', '<leader>fs', extensions.aerial.aerial, {})
 
-plugin.setup {
+---@type table
+local config = {
 	defaults = {
 		-- http://xahlee.info/comp/unicode_computing_symbols.html
 		-- ↑ ↓ ← → • ◀ ▶ ▲ ▼ • ◁ ▷ △ ▽ • ⇦ ⇨ ⇧ ⇩ • ⬅ ➡ ⮕ ⬆ ⬇
@@ -28,12 +30,12 @@ plugin.setup {
 			bottom_pane = {
 				height = 80,
 				preview_cutoff = 40,
-				prompt_position = "bottom",
+				prompt_position = 'bottom',
 			},
 			center = {
 				height = 0.4,
 				preview_cutoff = 40,
-				prompt_position = "top",
+				prompt_position = 'top',
 				width = 0.5,
 			},
 			cursor = {
@@ -44,15 +46,15 @@ plugin.setup {
 			horizontal = {
 				height = 0.9,
 				preview_cutoff = 120,
-				prompt_position = "bottom",
+				prompt_position = 'bottom',
 				width = 0.9,
 			},
 			vertical = {
 				height = 0.9,
 				preview_cutoff = 40,
-				prompt_position = "bottom",
+				prompt_position = 'bottom',
 				width = 0.9,
-			}
+			},
 		},
 		preview = {
 			treesitter = false,
@@ -68,7 +70,8 @@ plugin.setup {
 			'--column',
 			'--smart-case',
 			'--sort=path',
-			'--glob', '!**/*.patch',
+			'--glob',
+			'!**/*.patch',
 		},
 		mappings = {
 			i = {
@@ -80,7 +83,7 @@ plugin.setup {
 				['<C-k>'] = 'move_selection_previous',
 				['<C-b>'] = 'results_scrolling_up',
 				['<C-f>'] = 'results_scrolling_down',
-			}
+			},
 		},
 		-- generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
 		shorten_path = true,
@@ -100,17 +103,19 @@ plugin.setup {
 		},
 		find_files = {
 			find_command = {
-				"rg",
-				"--files",
-				"--hidden",
-				"--glob", "!**/.git/*",
-				"--glob", "!**/.patch",
+				'rg',
+				'--files',
+				'--hidden',
+				'--glob',
+				'!**/.git/*',
+				'--glob',
+				'!**/.patch',
 			},
 			follow = true,
 			previewer = false,
 		},
 		colorscheme = {
-			theme = "dropdown",
+			theme = 'dropdown',
 			previewer = false,
 		},
 	},
@@ -124,18 +129,20 @@ plugin.setup {
 			-- Display symbols as <root>.<parent>.<symbol>
 			show_nesting = {
 				['_'] = false, -- This key will be the default
-				json = true, -- You can set the option for specific filetypes
+				json = true,   -- You can set the option for specific filetypes
 				yaml = true,
-			}
+			},
 		},
 		fzf = {
 			fuzzy = false,
 			override_generic_sorter = true,
 			override_file_sorter = true,
-			case_mode = "smart_case",
-		}
+			case_mode = 'smart_case',
+		},
 	},
 }
+
+plugin.setup(config)
 
 -- WTF FZF MUST LOAD AFTER PLUGIN SETUP, OTHERWISE IT DOES NOT WORK, UNLIKE AERIAL.
 plugin.load_extension('fzf')

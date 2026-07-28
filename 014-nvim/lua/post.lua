@@ -31,7 +31,6 @@ end
 -- nightfox
 -- nordfox
 -- jellybeans
--- kanagawa-paper
 -- kanagawa-wave
 -- kanagawa-dragon
 -- kanagawa-lotus

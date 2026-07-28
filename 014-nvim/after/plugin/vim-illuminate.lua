@@ -1,5 +1,8 @@
-local status, plugin = pcall(require, 'illuminate')
+local status, _p = pcall(require, 'illuminate')
 if (not status) then return end
+
+---@module 'illuminate'
+local plugin = _p
 
 plugin.configure({
 	-- providers: provider used to get references in the buffer, ordered by priority
@@ -51,7 +54,7 @@ plugin.configure({
 	-- should_enable: a callback that overrides all other settings to
 	-- enable/disable illumination. This will be called a lot so don't do
 	-- anything expensive in it.
-	should_enable = function(bufnr) return true end,
+	should_enable = function (_bufnr) return true end,
 	-- case_insensitive_regex: sets regex case sensitivity
 	case_insensitive_regex = false,
 	-- disable_keymaps: disable default keymaps
@@ -62,4 +65,3 @@ plugin.configure({
 
 -- vim.keymap.set('n', '<s-n>', plugin.goto_next_reference, { desc = 'Move to next reference' })
 -- vim.keymap.set('n', '<s-p>', plugin.goto_prev_reference, { desc = 'Move to previous reference' })
-

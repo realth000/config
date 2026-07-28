@@ -1,58 +1,65 @@
-local env_no_lsp = os.getenv("NVIM_NO_LSP")
+local env_no_lsp = os.getenv('NVIM_NO_LSP')
 if env_no_lsp then return end
 
-local setup_lang = function(lang, config)
+local setup_lang = function (lang, config)
 	-- Use nvim provided api.
 	vim.lsp.enable(lang, config)
 	vim.lsp.config(lang, config)
 end
 
--- Setting borders for lsp is discouraged, use the global `vim.o.winborder` config instead.
-local float_window_border = {
-	{ '╭', 'FloatBorder' },
-	{ '─', 'FloatBorder' },
-	{ '╮', 'FloatBorder' },
-	{ '│', 'FloatBorder' },
-	{ '╯', 'FloatBorder' },
-	{ '─', 'FloatBorder' },
-	{ '╰', 'FloatBorder' },
-	{ '│', 'FloatBorder' },
-}
+--- The callback function when jump to to diagnostic.
+---@param diag  vim.Diagnostic?
+---@param bufnr integer
+local function on_diag_jump(diag, bufnr)
+	if not diag then
+		return
+	end
+
+	-- Copied from `goto_diagnostic` in `runtime/lua/vim/diagnostic.lua`.
+	vim.diagnostic.open_float({
+		bufnr = bufnr,
+		namespace = diag.namespace,
+		scope = 'cursor',
+		focus = false,
+	})
+end
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '[d', function ()
+	vim.diagnostic.jump({ count = -1, on_jump = on_diag_jump })
+end)
+vim.keymap.set('n', ']d', function ()
+	vim.diagnostic.jump({ count = 1, on_jump = on_diag_jump })
+end)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 -- Mappings.
 -- See `:help vim.lsp.*` for documentation on any of the below functions
-local bufopts = { noremap = true, silent = true, buffer = bufnr }
-vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
 -- The floating window border styles here are managed by noice.nvim.
 -- But keep the config here for envs without noice.nvim.
 --
 -- Note that the default shortcut for vim.lsp.buf.hover is already Shift+K, so we do not need to specify it again.
 -- But keep it here as a reminder.
-vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({
-	-- border = float_window_border
-}); end, bufopts)
-vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-vim.keymap.set('n', '<C-k>', function() vim.lsp.buf.signature_help {
-	-- border = float_window_border
-} end, bufopts)
--- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-vim.keymap.set('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, bufopts)
-vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
+vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help)
+-- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help)
+vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder)
+vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder)
+vim.keymap.set('n', '<space>wl', function ()
+	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+end)
+vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition)
+vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename)
+vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action)
+vim.keymap.set('n', 'gr', vim.lsp.buf.references)
+vim.keymap.set('n', '<space>f', function ()
+	vim.lsp.buf.format({ async = true })
+end)
 
 -- Config fields ref to https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.Opts
 vim.diagnostic.config({
@@ -95,7 +102,7 @@ vim.diagnostic.config({
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+local on_attach = function (_client, _bufnr)
 end
 
 ------------------------------------------------
@@ -127,7 +134,7 @@ setup_lang('rust_analyzer', {
 				},
 			},
 			procMacro = {
-				enable = true
+				enable = true,
 			},
 		},
 	},
@@ -168,10 +175,10 @@ setup_lang('hls', {
 	on_attach = on_attach,
 	settings = {
 		haskell = {
-			cabalFormattingProvider = "cabal-fmt",
-			formattingProvider = "fourmolu",
-		}
-	}
+			cabalFormattingProvider = 'cabal-fmt',
+			formattingProvider = 'fourmolu',
+		},
+	},
 })
 
 setup_lang('zls', {
@@ -183,30 +190,7 @@ setup_lang('emmylua_ls', {
 
 	cmd = { 'emmylua_ls' },
 	filetypes = { 'lua' },
-	root_markers = { '.emmyrc.json', '.luarc.json', '.git' },
-
-	settings = {
-		Lua = {
-			completion = {
-				autoRequire = false,
-				displayContext = 1,
-			},
-			hint = {
-				enable = true,
-				paramName = 'Literal',
-				semicolon = 'Disable',
-			},
-			diagnostics = {
-				globals = { 'vim' },
-				disable = { 'need-check-nil' },
-			},
-			workspace = {
-				library = {
-					vim.env.VIMRUNTIME,
-				},
-			},
-		},
-	}
+	root_markers = { '.emmyrc.lua', '.emmyrc.json', '.luarc.json', '.git' },
 })
 
 setup_lang('nushell', {

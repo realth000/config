@@ -1,14 +1,18 @@
 -- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes
-local status, plugin = pcall(require, 'noice')
+local status, _p = pcall(require, 'noice')
 if (not status) then return end
 
-plugin.setup({
+---@module 'noice'
+local plugin = _p
+
+---@type NoiceConfig | table
+local config = {
 	cmdline = {
 		enabled = true, -- enables the Noice cmdline UI
 		-- view = 'cmdline_popup', -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
 		view = 'cmdline',
-		opts = {}, -- global options for the cmdline. See section on views
-		---@type table<string, CmdlineFormat>
+		opts = {},      -- global options for the cmdline. See section on views
+		---@type table<string, CmdlineFormat | table>
 		format = {
 			-- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
 			-- view: (default is cmdline view)
@@ -28,18 +32,18 @@ plugin.setup({
 	messages = {
 		-- NOTE: If you enable messages, then the cmdline is enabled automatically.
 		-- This is a current Neovim limitation.
-		enabled = true,        -- enables the Noice messages UI
-		view = 'notify',       -- default view for messages
-		view_error = 'notify', -- view for errors
-		view_warn = 'notify',  -- view for warnings
+		enabled = true,            -- enables the Noice messages UI
+		view = 'notify',           -- default view for messages
+		view_error = 'notify',     -- view for errors
+		view_warn = 'notify',      -- view for warnings
 		view_history = 'messages', -- view for :messages
-		view_search = 'mini', --'virtualtext', -- view for search count messages. Set to `false` to disable
+		view_search = 'mini',      -- 'virtualtext', -- view for search count messages. Set to `false` to disable
 	},
 	popupmenu = {
-		enabled = true, -- enables the Noice popupmenu UI
-		---@type 'nui'|'cmp'
+		enabled = true,  -- enables the Noice popupmenu UI
+		---@type 'nui' | 'cmp'
 		backend = 'nui', -- backend to use to show regular cmdline completions
-		---@type NoicePopupmenuItemKind|false
+		---@type NoicePopupmenuItemKind | table | false
 		-- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
 		kind_icons = {}, -- set to `false` to disable icons
 	},
@@ -51,7 +55,7 @@ plugin.setup({
 		filter = { event = 'msg_show' },
 	},
 	-- You can add any custom commands below that will be available with `:Noice command`
-	---@type table<string, NoiceCommand>
+	---@type table<string, NoiceCommand | table>
 	commands = {
 		history = {
 			-- options for the message history that you get with `:Noice`
@@ -63,7 +67,7 @@ plugin.setup({
 					{ error = true },
 					{ warning = true },
 					{ event = 'msg_show', kind = { '' } },
-					{ event = 'lsp',      kind = 'message' },
+					{ event = 'lsp', kind = 'message' },
 				},
 			},
 		},
@@ -77,7 +81,7 @@ plugin.setup({
 					{ error = true },
 					{ warning = true },
 					{ event = 'msg_show', kind = { '' } },
-					{ event = 'lsp',      kind = 'message' },
+					{ event = 'lsp', kind = 'message' },
 				},
 			},
 			filter_opts = { count = 1 },
@@ -107,7 +111,7 @@ plugin.setup({
 			-- See the section on formatting for more details on how to customize.
 			--- @type NoiceFormat|string
 			format = 'lsp_progress',
-			--- @type NoiceFormat|string
+			---@type NoiceFormat | string
 			format_done = 'lsp_progress_done',
 			throttle = 1000 / 30, -- frequency to update lsp progress message
 			view = 'mini',
@@ -123,9 +127,9 @@ plugin.setup({
 		hover = {
 			enabled = true,
 			silent = false, -- set to true to not show a message if hover is not available
-			view = nil, -- when nil, use defaults from documentation
+			view = nil,     -- when nil, use defaults from documentation
 			---@type NoiceViewOptions
-			opts = {}, -- merged with defaults from documentation
+			opts = {},      -- merged with defaults from documentation
 		},
 		signature = {
 			enabled = true,
@@ -133,11 +137,11 @@ plugin.setup({
 				enabled = true,
 				trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
 				luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
-				throttle = 50, -- Debounce lsp signature help request by 50ms
+				throttle = 50,  -- Debounce lsp signature help request by 50ms
 			},
 			view = nil, -- when nil, use defaults from documentation
 			---@type NoiceViewOptions
-			opts = {}, -- merged with defaults from documentation
+			opts = {},  -- merged with defaults from documentation
 		},
 		message = {
 			-- Messages shown by lsp servers
@@ -148,7 +152,7 @@ plugin.setup({
 		-- defaults for hover and signature help
 		documentation = {
 			view = 'hover',
-			---@type NoiceViewOptions
+			---@type NoiceViewOptions | table
 			opts = {
 				lang = 'markdown',
 				replace = true,
@@ -160,7 +164,7 @@ plugin.setup({
 	},
 	markdown = {
 		hover = {
-			['|(%S-)|'] = vim.cmd.help,              -- vim help links
+			['|(%S-)|'] = vim.cmd.help,                       -- vim help links
 			['%[.-%]%((%S-)%)'] = require('noice.util').open, -- markdown links
 		},
 		highlights = {
@@ -181,36 +185,38 @@ plugin.setup({
 		-- add any filetypes here, that shouldn't trigger smart move.
 		excluded_filetypes = { 'cmp_menu', 'cmp_docs', 'notify' },
 	},
-	---@type NoicePresets
+	---@type NoicePresets | table
 	presets = {
 		-- you can enable a preset by setting it to true, or a table that will override the preset config
 		-- you can also add custom presets that you can enable/disable with enabled=true
-		bottom_search = true,   -- use a classic bottom cmdline for search
-		command_palette = true, -- position the cmdline and popupmenu together
+		bottom_search = true,         -- use a classic bottom cmdline for search
+		command_palette = true,       -- position the cmdline and popupmenu together
 		long_message_to_split = true, -- long messages will be sent to a split
-		inc_rename = false,     -- enables an input dialog for inc-rename.nvim
-		lsp_doc_border = true, -- add a border to hover docs and signature help
+		inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+		lsp_doc_border = true,        -- add a border to hover docs and signature help
 	},
-	throttle = 1000 / 30,       -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
-	---@type NoiceConfigViews
-	views = {}, ---@see section on views
+	throttle = 1000 / 30,                                                                                                      -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
+	---@type NoiceConfigViews | table
+	views = {},                                                                                                                ---@see section on views
 	---@type NoiceRouteConfig[]
 	routes = {
 		-- Hidden file written events
 		{
 			filter = {
-				event = "msg_show",
-				kind = "",
-				find = "written",
+				event = 'msg_show',
+				kind = '',
+				find = 'written',
 			},
 			opts = { skip = true },
 		},
-	},        --- @see section on routes
+	}, ---@see section on routes
 	---@type table<string, NoiceFilter>
-	status = {}, --- @see section on statusline components
-	---@type NoiceFormatOptions
-	format = {}, --- @see section on formatting
-})
+	status = {},                                                                                                               ---@see section on statusline components
+	---@type NoiceFormatOptions | table
+	format = {},                                                                                                               ---@see section on formatting
+}
+
+plugin.setup(config)
 
 -- Setup notify
 

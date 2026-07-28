@@ -1,10 +1,11 @@
-local status, plugin = pcall(require, 'aerial')
+local status, _p = pcall(require, 'aerial')
 if (not status) then return end
 
--- Setup Aerial.nvim symbol outline
-vim.keymap.set('n', '<leader>a', '<cmd>AerialToggle!<CR>')
--- Call the setup function to change the default behavior
-plugin.setup({
+---@module 'aerial'
+local plugin = _p
+
+---@type table
+local config = {
 	-- Priority list of preferred backends for aerial.
 	-- This can be a filetype map (see :help aerial-filetype-map)
 	-- 'treesitter', 'lsp', 'markdown', 'man'
@@ -197,14 +198,14 @@ plugin.setup({
 	nerd_font = 'auto',
 
 	-- Call this function when aerial attaches to a buffer.
-	on_attach = function(bufnr)
+	on_attach = function (bufnr)
 		-- Jump forwards/backwards with '{' and '}'
 		vim.keymap.set('n', '{', '<cmd>AerialPrev<CR>', { buffer = bufnr })
 		vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', { buffer = bufnr })
 	end,
 
 	-- Call this function when aerial first sets symbols on a buffer.
-	on_first_symbols = function(bufnr) end,
+	on_first_symbols = function (_bufnr) end,
 
 	-- Automatically open aerial when entering supported buffers.
 	-- This can be a function (see :help aerial-open-automatic)
@@ -225,7 +226,7 @@ plugin.setup({
 	--   * symbol?: specific to the lsp backend
 	--   * syntax_tree?: specific to the treesitter backend
 	--   * match?: specific to the treesitter backend, TS query match
-	post_parse_symbol = function(bufnr, item, ctx)
+	post_parse_symbol = function (_bufnr, _item, _ctx)
 		return true
 	end,
 
@@ -240,7 +241,7 @@ plugin.setup({
 	--   * lang: info about the language
 	--   * symbols?: specific to the lsp backend
 	--   * syntax_tree?: specific to the treesitter backend
-	post_add_all_symbols = function(bufnr, items, ctx)
+	post_add_all_symbols = function (_bufnr, items, _ctx)
 		return items
 	end,
 
@@ -266,8 +267,9 @@ plugin.setup({
 	},
 
 	-- Set this function to override the highlight groups for certain symbols
-	get_highlight = function(symbol, is_icon, is_collapsed)
+	get_highlight = function (_symbol, _is_icon, _is_collapsed)
 		-- return 'MyHighlight' .. symbol.kind
+
 	end,
 
 	-- Options for opening aerial in a floating win
@@ -289,7 +291,7 @@ plugin.setup({
 		height = nil,
 		min_height = { 8, 0.1 },
 
-		override = function(conf, source_winid)
+		override = function (conf, _source_winid)
 			-- This is the config that will be passed to nvim_open_win.
 			-- Change values here to customize the layout
 			return conf
@@ -357,4 +359,9 @@ plugin.setup({
 	--   -- How long to wait (in ms) after a buffer change before updating
 	--   update_delay = 300,
 	-- },
-})
+}
+
+-- Setup Aerial.nvim symbol outline
+vim.keymap.set('n', '<leader>a', '<cmd>AerialToggle!<CR>')
+-- Call the setup function to change the default behavior
+plugin.setup(config)

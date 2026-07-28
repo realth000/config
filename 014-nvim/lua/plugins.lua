@@ -1,7 +1,9 @@
 -- Init lazy.nvim
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({ 'git', 'clone',
+if not vim.uv.fs_stat(lazypath) then
+	vim.fn.system({
+		'git',
+		'clone',
 		'--filter=blob:none',
 		'https://github.com/folke/lazy.nvim.git',
 		'--branch=stable',
@@ -11,19 +13,12 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-return require('lazy').setup({
-	{
-		"folke/lazydev.nvim",
-		ft = "lua",
-		opts = {
-			library = {
-				-- See the configuration section for more details
-				-- Load luvit types when the `vim.uv` word is found
-				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-			},
-		},
-	},
+---@diagnostic disable-next-line: assign-type-mismatch
+---@type Lazy
+local lazy = require('lazy')
 
+---@type LazyConfig | table
+local config = {
 	-- Color scheme
 	{
 		'navarasu/onedark.nvim',
@@ -32,8 +27,8 @@ return require('lazy').setup({
 		'folke/tokyonight.nvim',
 		'EdenEast/nightfox.nvim',
 		{
-			"catppuccin/nvim",
-			name = "catppuccin",
+			'catppuccin/nvim',
+			name = 'catppuccin',
 			priority = 1000,
 		},
 		{
@@ -41,46 +36,41 @@ return require('lazy').setup({
 			name = 'hardhacker',
 		},
 		{
-			"loctvl842/monokai-pro.nvim",
+			'loctvl842/monokai-pro.nvim',
 		},
-		{ "bluz71/vim-nightfly-colors", name = "nightfly" },
+		{ 'bluz71/vim-nightfly-colors', name = 'nightfly' },
 		'AlexvZyl/nordic.nvim',
 		'luisiacc/gruvbox-baby',
-		{ 'rose-pine/neovim',          name = 'rose-pine', },
-		{ "bluz71/vim-moonfly-colors", name = "moonfly", },
+		{ 'rose-pine/neovim', name = 'rose-pine' },
+		{ 'bluz71/vim-moonfly-colors', name = 'moonfly' },
 		{ 'rebelot/kanagawa.nvim' },
-		{ 'sho-87/kanagawa-paper.nvim' },
 		{ 'bgwdotdev/gleam-theme-nvim' },
 		{ 'alexmozaidze/palenight.nvim' },
 		{ 'wtfox/jellybeans.nvim' },
 		{ 'metalelf0/kintsugi-nvim' },
 	},
 
-	-- nvim-tree
-	-- { 'kyazdani42/nvim-tree.lua' },
-	-- { 'kyazdani42/nvim-web-devicons', lazy = true },
-
 	-- neo-tree
 	{
-		"nvim-neo-tree/neo-tree.nvim",
+		'nvim-neo-tree/neo-tree.nvim',
 		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-			"nvim-tree/nvim-web-devicons", -- optional, but recommended
+			'nvim-lua/plenary.nvim',
+			'MunifTanjim/nui.nvim',
+			'nvim-tree/nvim-web-devicons', -- optional, but recommended
 			{
-				"s1n7ax/nvim-window-picker",
-				version = "2.*",
-				config = function()
-					require("window-picker").setup({
+				's1n7ax/nvim-window-picker',
+				version = '2.*',
+				config = function ()
+					require('window-picker').setup({
 						filter_rules = {
 							include_current_win = false,
 							autoselect_one = true,
 							-- filter using buffer options
 							bo = {
 								-- if the file type is one of following, the window will be ignored
-								filetype = { "neo-tree", "neo-tree-popup", "notify" },
+								filetype = { 'neo-tree', 'neo-tree-popup', 'notify' },
 								-- if the buffer type is one of following, the window will be ignored
-								buftype = { "terminal", "quickfix" },
+								buftype = { 'terminal', 'quickfix' },
 							},
 						},
 					})
@@ -101,7 +91,6 @@ return require('lazy').setup({
 	-- 	dependencies = 'nvim-tree/nvim-web-devicons'
 	-- },
 
-
 	-- treesitter, highlight
 	-- { 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate', branch = "main"},
 
@@ -116,12 +105,12 @@ return require('lazy').setup({
 				-- -- optional: provides snippets for the snippet source
 				-- 'rafamadriz/friendly-snippets',
 			},
-			build = function()
+			build = function ()
 				-- build the fuzzy matcher, optionally add a timeout to `pwait(timeout_ms)`
 				-- you can use `gb` in `:Lazy` to rebuild the plugin as needed
 				require('blink.cmp').build():pwait()
 			end,
-		}
+		},
 	},
 
 	-- rust-tools takes over some rust lsp configs.
@@ -131,7 +120,7 @@ return require('lazy').setup({
 	-- { 'mrcjkb/rustaceanvim', },
 
 	-- Auto complete brackts
-	{ 'windwp/nvim-autopairs', },
+	{ 'windwp/nvim-autopairs' },
 
 	-- telescope
 	{
@@ -140,7 +129,7 @@ return require('lazy').setup({
 			'nvim-lua/plenary.nvim',
 			{
 				'nvim-telescope/telescope-fzf-native.nvim',
-				build = (function()
+				build = (function ()
 					local is_windows = vim.uv.os_uname().sysname:find('Windows') and true or false
 
 					if is_windows then
@@ -148,48 +137,44 @@ return require('lazy').setup({
 					else
 						return 'make'
 					end
-				end)()
+				end)(),
 			},
 			lazy = true,
 		},
 	},
 
 	-- GitSigns
-	{ 'lewis6991/gitsigns.nvim', },
+	{ 'lewis6991/gitsigns.nvim' },
 
 	-- Terminal
-	{ 'numToStr/FTerm.nvim', },
+	{ 'numToStr/FTerm.nvim' },
 
 	-- Symbol outline
-	{ 'stevearc/aerial.nvim', },
+	{ 'stevearc/aerial.nvim' },
 
 	-- Blankline indent color
 	{
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
+		'lukas-reineke/indent-blankline.nvim',
+		main = 'ibl',
 	},
 
 	-- Rainbow brackts
-	{ "HiPhish/rainbow-delimiters.nvim", },
+	{ 'HiPhish/rainbow-delimiters.nvim' },
 
 	-- Notice, command line.
 	{
-		"folke/noice.nvim",
-		{ 'MunifTanjim/nui.nvim', lazy = true, },
+		'folke/noice.nvim',
+		{ 'MunifTanjim/nui.nvim', lazy = true },
 	},
 
-	-- Markdown - disabled for treesitter capability
-	-- {
-	-- 	'MeanderingProgrammer/render-markdown.nvim',
-	-- 	dependencies = { 'nvim-treesitter/nvim-treesitter' }, -- if you use the mini.nvim suite
-	-- },
-
 	-- Treesitter parser manager for nvim-0.12 and above.
-	{ "romus204/tree-sitter-manager.nvim" },
+	{ 'romus204/tree-sitter-manager.nvim' },
 
 	-- highlight all occurrences of word at cursor.
-	{ "RRethy/vim-illuminate" },
+	{ 'RRethy/vim-illuminate' },
 
 	-- Scroll bar.
 	-- { 'petertriho/nvim-scrollbar' },
-})
+}
+
+return lazy.setup(config)

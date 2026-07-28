@@ -6,7 +6,7 @@ vim.opt.ruler = true
 -- Always use system clipboard,
 -- see Clipboard integration in https://neovim.io/doc/user/provider.html
 -- Need to install clipboard tool. vim.opt.clipboard = "unnamedplus"
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = 'unnamedplus'
 vim.opt.mouse = 'a'
 vim.opt.autoindent = true
 vim.opt.cursorline = true
@@ -45,19 +45,27 @@ end
 -- 	vim.g.neovide_remember_window_size = false
 -- end
 -- Content change keymap for other characters.
-vim.keymap.set('n', 'di|', function() DeleteInsert('|') end)
-vim.keymap.set('n', 'da|', function() DeleteAppend('|') end)
-vim.keymap.set('n', 'ci|', function() ChangeInsert('|') end)
-vim.keymap.set('n', 'ca|', function() ChangeAppend('|') end)
+vim.keymap.set('n', 'di|', function ()
+	DeleteInsert('|')
+end)
+vim.keymap.set('n', 'da|', function ()
+	DeleteAppend('|')
+end)
+vim.keymap.set('n', 'ci|', function ()
+	ChangeInsert('|')
+end)
+vim.keymap.set('n', 'ca|', function ()
+	ChangeAppend('|')
+end)
 
 -- Auto formatting when save file.
 -- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
 
 -- Format and save command.
-vim.cmd [[command FW :lua vim.lsp.buf.format(); vim.cmd('w')]]
-vim.cmd [[command SI :lua vim.cmd("IBLEnable"); vim.cmd("set list")]]
-vim.cmd [[command NI :lua vim.cmd("IBLDisable"); vim.cmd("set nolist")]]
-vim.cmd [[command RD :lua vim.cmd("RenderMarkdown toggle")]]
+vim.cmd([[command FW :lua vim.lsp.buf.format(); vim.cmd('w')]])
+vim.cmd([[command SI :lua vim.cmd("IBLEnable"); vim.cmd("set list")]])
+vim.cmd([[command NI :lua vim.cmd("IBLDisable"); vim.cmd("set nolist")]])
+vim.cmd([[command RD :lua vim.cmd("RenderMarkdown toggle")]])
 
 vim.keymap.set('n', '<C-Q>', vim.cmd.bdelete)
 vim.keymap.set('n', '<C-H>', vim.cmd.bprevious)
@@ -67,7 +75,7 @@ vim.keymap.set('n', '<C-L>', vim.cmd.bnext)
 
 -- vim.opt.guicursor="n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 -- vim.opt.guicursor = "n-v-c-sm:block,ci-ve:ver25,r-cr-o:hor20,i:block-blinkwait100-blinkon400-blinkoff400"
-vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,i:ver25-blinkwait100-blinkon400-blinkoff400"
+vim.opt.guicursor = 'n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,i:ver25-blinkwait100-blinkon400-blinkoff400'
 
 -- Restore scroll config after window resize
 --
@@ -81,3 +89,34 @@ vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,i:ver25-blinkwait
 -- 		vim.cmd [[set scroll=10]]
 -- 	end,
 -- })
+
+vim.opt.list = true
+-- We do not use the legacy vim style listchars config anymore:
+-- vim.opt.listchars:append 'space:⋅'
+--
+-- Use nvim style instead:
+vim.opt.listchars = {
+	--     '•'
+	--     '·'
+	--     '␣'
+	-- space = '·',
+
+	-- Tab need to have 2 characters.
+	-- '» '
+	-- '▸ '
+	-- '▹ '
+	tab = '▸ ',
+
+	-- Available new line symbols: https://stackoverflow.com/questions/18927672/newline-symbol-unicode-character
+	-- ⤶ U+2936 ARROW POINTING DOWNWARDS THEN CURVING LEFTWARDS
+	-- ↵ U+21B5 DOWNWARDS ARROW WITH CORNER LEFTWARDS
+	-- ⏎ U+23CE RETURN SYMBOL
+	-- ↲ U+21B2 DOWNWARDS ARROW WITH TIP LEFTWARDS
+	-- ↩ U+21A9 LEFTWARDS ARROW WITH HOOK
+	-- eol = '⤶',
+
+	-- Trailing spaces
+	-- '·'
+	-- '␣'
+	trail = '␣',
+}

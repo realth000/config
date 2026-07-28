@@ -87,7 +87,6 @@ new-Item -ItemType SymbolicLink -Path "$env:APPDATA\nvim\.emmyrc.json" -Target "
   - [rose-pine/neovim](https://github.com/rose-pine/neovim)
   - [bluz71/vim-moonfly-colors](https://github.com/bluz71/vim-moonfly-colors)
   - [rebelot/kanagawa.nvim](https://github.com/rebelot/kanagawa.nvim)
-  - [sho-87/kanagawa-paper.nvim](https://github.com/sho-87/kanagawa-paper.nvim)
   - [bgwdotdev/gleam-theme-nvim](https://github.com/bgwdotdev/gleam-theme-nvim)
   - [alexmozaidze/palenight.nvim](https://github.com/alexmozaidze/palenight.nvim)
   - [wtfox/jellybeans.nvim](https://github.com/wtfox/jellybeans.nvim)

@@ -11,7 +11,6 @@ const alacritty_colorschemes = {
     "hardhacker-darker": "hardhacker"
     "kanagawa": "kanagawa_wave"
     "kanagawa-dragon": "kanagawa_dragon"
-    "kanagawa-paper": "kanagawa_wave"
     "kanagawa-wave": "kanagawa_wave"
     "kintsugi-dark": "kintsugi"
     "kintsugi-flared": "kintsugi"
