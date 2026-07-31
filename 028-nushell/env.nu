@@ -78,6 +78,7 @@ alias is = fp is
 alias pure = fp pure
 alias then = fp then
 alias handle = fp handle
+alias invoke = fp invoke
 
 # Alias from oh-my-zsh https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh
 
