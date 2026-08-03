@@ -136,6 +136,9 @@ setup_lang('rust_analyzer', {
 			procMacro = {
 				enable = true,
 			},
+			diagnostics = {
+				disabled = { 'inactive-code' },
+			},
 		},
 	},
 })
@@ -210,5 +213,9 @@ setup_lang('ruff', {
 })
 
 setup_lang('ocamllsp', {
+	on_attach = on_attach,
+})
+
+setup_lang('koka', {
 	on_attach = on_attach,
 })
