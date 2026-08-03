@@ -9,6 +9,11 @@
     "when": "vim.active && vim.mode == 'Normal' && !renameInputVisible",
   },
   {
+    "key": "q",
+    "command": "editor.action.hideHover",
+    "when": "vim.active && vim.mode == 'Normal' && !renameInputVisible",
+  },
+  {
     "key": "j",
     "command": "editor.action.scrollDownHover",
     "when": "vim.active && vim.mode == 'Normal' && editorHoverFocused",
