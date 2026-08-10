@@ -188,9 +188,10 @@
   //
   // Below are group of shortcuts toggling specific side bar view.
   //
-  // 1. Open the side bar view if side bar is not open or side bar showing other views.
-  // 2. Close the side bar if side bar is open and showing the specific view.
-  // 3. Focus on side bar if side bar is open and show the specific view but focus is not there.
+  // 1. Open the side bar view if side bar is not opened or side bar showing other views.
+  // 2. Close the side bar if side bar is opened and showing the specific view.
+  // 3. Focus on editor if side bar is opened and showing the specific view.
+  // 4. Focus on side bar if side bar is opened and show the specific view but focus is not there.
   //
   ////////////////////////////////////////////////////
 
@@ -202,7 +203,17 @@
   {
     "key": "alt+1",
     "command": "workbench.view.explorer",
-    "when": "!sideBarVisible || activeViewlet != 'workbench.view.explorer'",
+    "when": "!sideBarVisible",
+  },
+  {
+    "key": "alt+1",
+    "command": "workbench.view.explorer",
+    "when": "sideBarVisible && activeViewlet != 'workbench.view.explorer'",
+  },
+  {
+    "key": "alt+1",
+    "command": "workbench.view.explorer",
+    "when": "sideBarVisible && activeViewlet == 'workbench.view.explorer' && !filesExplorerFocus",
   },
   {
     "key": "alt+1",
@@ -210,9 +221,9 @@
     "when": "sideBarVisible && activeViewlet == 'workbench.view.explorer' && filesExplorerFocus",
   },
   {
-    "key": "alt+1",
-    "command": "workbench.view.explorer",
-    "when": "sideBarVisible && activeViewlet == 'workbench.view.explorer' && !filesExplorerFocus",
+    "key": "escape",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "sideBarVisible && activeViewlet == 'workbench.view.explorer' && filesExplorerFocus",
   },
 
   /////////////////////////
@@ -223,7 +234,17 @@
   {
     "key": "alt+2",
     "command": "workbench.view.search",
-    "when": "!sideBarVisible || activeViewlet != 'workbench.view.search'",
+    "when": "!sideBarVisible",
+  },
+  {
+    "key": "alt+2",
+    "command": "workbench.view.search",
+    "when": "sideBarVisible && activeViewlet != 'workbench.view.search'",
+  },
+  {
+    "key": "alt+2",
+    "command": "workbench.view.search",
+    "when": "sideBarVisible && activeViewlet == 'workbench.view.search' && !searchViewletFocus",
   },
   {
     "key": "alt+2",
@@ -231,10 +252,11 @@
     "when": "sideBarVisible && activeViewlet == 'workbench.view.search' && searchViewletFocus",
   },
   {
-    "key": "alt+2",
-    "command": "workbench.view.search",
-    "when": "sideBarVisible && activeViewlet == 'workbench.view.search' && !searchViewletFocus",
+    "key": "escape",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "sideBarVisible && activeViewlet == 'workbench.view.search' && filesExplorerFocus",
   },
+
   {
     "key": "ctrl+o",
     "command": "workbench.action.files.openFile",
