@@ -44,7 +44,6 @@ local config = {
 		{ 'rose-pine/neovim', name = 'rose-pine' },
 		{ 'bluz71/vim-moonfly-colors', name = 'moonfly' },
 		{ 'rebelot/kanagawa.nvim' },
-		{ 'bgwdotdev/gleam-theme-nvim' },
 		{ 'alexmozaidze/palenight.nvim' },
 		{ 'wtfox/jellybeans.nvim' },
 		{ 'metalelf0/kintsugi-nvim' },
