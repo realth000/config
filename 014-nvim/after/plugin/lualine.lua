@@ -156,6 +156,7 @@ plugin.setup({
 
 				colored = false,
 			},
+			'macro_recording',
 		},
 		lualine_x = { 'encoding', 'fileformat', 'filetype' },
 		lualine_y = { 'progress' },
