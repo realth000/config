@@ -78,12 +78,14 @@ vim.diagnostic.config({
 
 	-- Verbose inline error message. The mesage appears under the current line for showing verbose info.
 	-- virtual_lines = true,
+	-- ■
+	-- ⨯ 󰀪 ℹ 󰌶
 	signs = {
 		text = {
-			[vim.diagnostic.severity.ERROR] = '⨯',
-			[vim.diagnostic.severity.WARN] = '󰀪',
-			[vim.diagnostic.severity.INFO] = 'ℹ',
-			[vim.diagnostic.severity.HINT] = '󰌶',
+			[vim.diagnostic.severity.ERROR] = '■',
+			[vim.diagnostic.severity.WARN] = '■',
+			[vim.diagnostic.severity.INFO] = '■',
+			[vim.diagnostic.severity.HINT] = '■',
 		},
 		linehl = {
 			[vim.diagnostic.severity.ERROR] = 'Error',
