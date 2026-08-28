@@ -17,7 +17,7 @@ keybinds clear-defaults=true {
         bind "Ctrl `" { CloseFocus; }
     }
     normal {
-        bind "Ctrl s" { SwitchToMode "scroll"; EditScrollback; SwitchToMode "locked"; }
+        bind "Ctrl s" { SwitchToMode "scroll"; }
     }
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
@@ -118,7 +118,18 @@ keybinds clear-defaults=true {
     }
     scroll {
         bind "e" { EditScrollback; SwitchToMode "locked"; }
-        bind "s" { SwitchToMode "entersearch"; SearchInput 0; }
+        // bind "s" { SwitchToMode "entersearch"; SearchInput 0; }
+        bind "Ctrl c" { ScrollToBottom; SwitchToMode "locked"; }
+        bind "j" "Down" { ScrollDown; }
+        bind "k" "Up" { ScrollUp; }
+        bind "Ctrl f" "PageDown" "Right" "l" { PageScrollDown; }
+        bind "Ctrl b" "PageUp" "Left" "h" { PageScrollUp; }
+        bind "d" { HalfPageScrollDown; }
+        bind "u" { HalfPageScrollUp; }
+        bind "[" { ScrollToPreviousPrompt; }
+        bind "]" { ScrollToNextPrompt; }
+        bind "m" { SelectCommandAtScrollPosition; }
+        bind "c" { CopyLastCommandOutput; SwitchToMode "locked"; }
     }
     // search {
     //     bind "c" { SearchToggleOption "CaseSensitivity"; }
@@ -626,3 +637,26 @@ show_startup_tips false
 // typically work best. Set to 0 to use the number of (physical) CPU cores.
 // Note: This only applies to web clients at the moment.
 // client_async_worker_tasks 4
+
+
+// Since 0.45.0
+//
+// "full" or "titles" (default)
+pane_frame_style "titles"
+
+// Since 0.45.0
+//
+// Running Zellij inside a Zellij pane (eg. after ssh-ing to a remote machine) is now a first-class workflow. The inner session announces itself to the outer one, and the outer session reacts when its pane gains focus, providing the user with 2 options:
+//
+// Zoom in and control the nested session - the nested session takes up the whole screen until toggled back (Ctrl o + f, or clicking the session breadcrumbs in the tab-bar)
+// Control the nested session on focus - keys and mouse are routed directly to it, with the outer session's chrome dimmed. Ascend back with Ctrl o + ], descend again with Ctrl o + [
+//
+// The behavior is controlled with the new nested_session_handling config option (ask (default) / fullscreen / descend / never).
+nested_session_handling "never"
+
+// Since 0.45.0
+//
+// Zellij now implements the Kitty graphics protocol in addition to the existing Sixel support. Image placements are tracked per pane and behave correctly across resizes, relayouts, scrollback, fullscreen and floating/pinned panes. The host terminal needs to support the protocol as well (queried at startup); the feature can be disabled with support_kitty_graphics_protocol false.
+//
+// Relatedly, Sixel support is now only advertised to applications (through DA1 / XTSMGRAPHICS) when the attached terminal actually supports it.
+support_kitty_graphics_protocol false

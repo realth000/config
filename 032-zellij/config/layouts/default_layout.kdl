@@ -97,11 +97,11 @@ layout {
                 mode_move   "#[fg=$gold,bold] MOVE  "
                 mode_resize "#[fg=$cyan,bold] RESIZE "
                 mode_locked "#[fg=$outline,bold] LOCKED "
+                mode_scroll "#[fg=magenta,bold] SCROLL "
 
                 tab_normal  "#[fg=$secondary] {index} "
                 tab_active  "#[fg=$primary,bold] {index} "
 
-                // Use zjstatus > 0.23.0 to avoid a UI refresh issue.
                 datetime        "#[fg=$outline] {format} "
                 datetime_format "%Y-%m-%d %H:%M:%S"
                 datetime_timezone "Asia/Shanghai"

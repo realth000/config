@@ -7,6 +7,8 @@
 
 ## Install config
 
+**Requires zellij >= 0.45.0**
+
 Zellij supports loading layout files and plugins files from a relative file path, as long as those files are stored in **the default directory**:
 
 - On linux:
