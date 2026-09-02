@@ -158,7 +158,7 @@ plugin.setup({
 			},
 			'macro_recording',
 		},
-		lualine_x = { 'encoding', 'fileformat', 'filetype' },
+		lualine_x = { 'selectioncount', 'encoding', 'fileformat', 'filetype' },
 		lualine_y = { 'progress' },
 		lualine_z = { 'location' },
 	},
