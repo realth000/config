@@ -35,7 +35,7 @@ $env.config.datetime_format.table = "%Y-%m-%d %H:%M:%S"
 $env.config.datetime_format.normal = "%Y-%m-%d %H:%M:%S"
 
 # Download carapace from https://github.com/carapace-sh/carapace-bin/releases/latest
-$env.config.completions.external.completer = {|spans|
+$env.config.completions.external.completer = {|place|
     # Reset locale so that carapace does not report errors.
     if $nu.os-info.name == "linux" {
         export-env { $env.LC_ALL = "C" }
@@ -43,7 +43,7 @@ $env.config.completions.external.completer = {|spans|
 
     # Return null if external completer returns empty result so that fallback to
     # nushell internal completion.
-    carapace $spans.0 nushell ...$spans | from json | if ($in | is-empty) { null } else { $in }
+    carapace ($place.command | first) nushell ...$place.command | from json | if ($in | is-empty) { null } else { $in }
 }
 
 # Commands
