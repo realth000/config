@@ -133,7 +133,7 @@ module internal {
         const STATE_WAITING = 0
         const STATE_COLLECTING = 1
         mut state = $STATE_WAITING
-        mut curr_timestamp = null
+        mut curr_timestamp: record = {}
 
         # vtt timestamp line format: 00:01.000 --> 00:04.000
         let timestamp_re = r#'(?<time>(\d+:)+\d+\.\d+) --> (\d+:)+\d+\.\d+'#
