@@ -57,3 +57,4 @@ use ./bin/insert_last_command_last_arg.nu insert-last-command-last-arg
 use ./bin/tree_.nu tree
 use ./bin/print_colors.nu print-colors
 use ./bin/patch.nu [appatch, unpatch]
+use ./bin/update_alacritty_config.nu update-alacritty-config

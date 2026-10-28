@@ -43,8 +43,9 @@ const alacritty_colorschemes = {
 # - theme
 # - font-family
 @category alacritty
-@example "Set alacritty theme to catppuccin-mocha" { alacritty_set_theme.nu --theme catppuccin-mocha }
-def main [--font-family: string, --theme: string] {
+@example "Set alacritty theme to catppuccin-mocha" { update-alacritty-config --theme catppuccin-mocha }
+@example "Set alacritty font family" { update-alacritty-config --font-family 'Iosevka1204 Nerd Font Mono' }
+export def update-alacritty-config [--font-family: string, --theme: string] {
     if ([$font_family, $theme] | all {$in == null}) {
         print "no config to update"
         exit 1
