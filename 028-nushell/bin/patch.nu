@@ -3,6 +3,32 @@ module internal {
         use ../log.nu fatal
         fatal "patch" $error $help $exit_code
     }
+
+    export def expand-run-paths [cmd: string, input: string, on_path: closure] : nothing -> int {
+        for $path in (glob $input) {
+            if not ($path | path exists) {
+                fatal $"path \"($path)\" not exists"
+            }
+
+            print $"[($cmd)] applying: ($path)"
+            let ret = do -i $on_path $path | complete
+
+            if ($ret.stdout | is-not-empty) {
+                print $"(ansi grey)($ret.stdout)(ansi reset)"
+            }
+
+            if ($ret.stderr | is-not-empty) {
+                print $"(ansi red)($ret.stderr)(ansi reset)"
+            }
+
+            if $ret.exit_code != 0 {
+                return $ret.exit_code
+            }
+        }
+
+        print $"[($cmd)] done"
+        return 0
+    }
 }
 
 # Apply patch file to current directory.
@@ -17,15 +43,21 @@ export def appatch [
 ] {
     use internal *
 
-    if not ($path | path exists) {
-        fatal "path not exists"
-    }
-
     if (which ^patch | is-empty) {
         fatal "external patch command not found"
     }
 
-    open $path | ^patch -p1
+    let payload = { |path|
+            open $path | ^patch -s -f -p1
+    }
+
+    let ret = expand-run-paths "appatch" $path $payload
+    if $ret != 0 {
+        error make --unspanned {
+            msg: $"failed to appatch"
+            raw_code: $ret
+        }
+    }
 }
 
 # Reverse apply patch file from current directory.
@@ -34,19 +66,25 @@ export def appatch [
 #
 # External `patch` command is required.
 @category dev
-@example "Reverse apply patch file from ./some-patch.patch" { unapply ./some-patch.patch }
+@example "Reverse apply patch file from ./some-patch.patch" { unpatch ./some-patch.patch }
 export def unpatch [
     path: string # File path to the patch to remove.
 ] {
     use internal *
 
-    if not ($path | path exists) {
-        fatal "file not exists"
-    }
-
     if (which ^patch | is-empty) {
         fatal "external patch command not found"
     }
 
-    open $path | ^patch -R -p1
+    let payload = { |path|
+        open $path | patch -R -s -f -p1
+    }
+
+    let ret = expand-run-paths "unpatch" $path $payload
+    if $ret != 0 {
+        error make --unspanned {
+            msg: $"failed to unpatch"
+            raw_code: $ret
+        }
+    }
 }
