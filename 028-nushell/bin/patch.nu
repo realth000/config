@@ -5,25 +5,24 @@ module internal {
     }
 
     export def expand-run-paths [cmd: string, input: string, on_path: closure] : nothing -> int {
-        for $path in (glob $input) {
-            if not ($path | path exists) {
-                fatal $"path \"($path)\" not exists"
-            }
+        let path = $"($input)" | path expand
+        if not ($path | path exists) {
+            fatal $"path \"($path)\" not exists"
+        }
 
-            print $"[($cmd)] applying: ($path)"
-            let ret = do -i $on_path $path | complete
+        print $"[($cmd)] applying: ($path)"
+        let ret = do -i $on_path $path | complete
 
-            if ($ret.stdout | is-not-empty) {
-                print $"(ansi grey)($ret.stdout)(ansi reset)"
-            }
+        if ($ret.stdout | is-not-empty) {
+            print $"(ansi grey)($ret.stdout)(ansi reset)"
+        }
 
-            if ($ret.stderr | is-not-empty) {
-                print $"(ansi red)($ret.stderr)(ansi reset)"
-            }
+        if ($ret.stderr | is-not-empty) {
+            print $"(ansi red)($ret.stderr)(ansi reset)"
+        }
 
-            if $ret.exit_code != 0 {
-                return $ret.exit_code
-            }
+        if $ret.exit_code != 0 {
+            return $ret.exit_code
         }
 
         print $"[($cmd)] done"
