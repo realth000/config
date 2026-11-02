@@ -11,7 +11,7 @@
   {
     "key": "q",
     "command": "editor.action.hideHover",
-    "when": "vim.active && vim.mode == 'Normal' && !renameInputVisible",
+    "when": "vim.active && vim.mode == 'Normal' && !renameInputVisible && editorHoverFocused",
   },
   {
     "key": "j",
