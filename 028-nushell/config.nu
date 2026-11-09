@@ -58,3 +58,4 @@ use ./bin/tree_.nu tree
 use ./bin/print_colors.nu print-colors
 use ./bin/patch.nu [appatch, unpatch]
 use ./bin/update_alacritty_config.nu update-alacritty-config
+use ./bin/restore_daily_dir_.nu restore-daily-dir
