@@ -156,14 +156,21 @@ export def tree [
     --dir (-d) # List directories only, files wil be ignored.
     --full (-f) # Print full relative path to current work directory.
     --level (-L) : int # Set the max directory depth when listing.
+    path?: string # Root path to list, default to current directory.
 ] {
     use internal *
+
+    mut root = "."
+
+    if ($path != null) {
+        $root = $path
+    }
 
     mut state = {
         layer_level: -1
         files_count: 0
         directories_count: 0
-        paths: ["."]
+        paths: [$root]
         ls_args: ["-s"]
         # `history` records all traversing state of all levels of layers.
         #
@@ -216,6 +223,6 @@ export def tree [
 
     mut context = {state: $state, config: $config}
 
-    print "."
+    print $root
     let _ = list-at-path $context
 }
