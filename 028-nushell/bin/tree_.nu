@@ -8,24 +8,7 @@ const PREFIX_BOTTOM = "│"
 const PREFIX_RIGHT = "─"
 
 module internal {
-    export def list-at-path [
-        ctx: record<
-            state: record<
-                layer_level: int,
-                files_count: int,
-                directories_count: int,
-                paths: list<string>,
-                ls_args: list<string>,
-                history: list<record<curr: int, count: int, ignored: int>>,
-            >,
-            config: record<
-                list_all: bool,
-                list_dirs_only: bool,
-                full_path: bool,
-                max_level: oneof<int, nothing>,
-            >
-        >
-    ]: nothing -> record {
+    export def list-at-path [ctx: record<state: record<layer_level: int, files_count: int, directories_count: int, paths: list<string>, ls_args: list<string>, history: list<record<curr: int, count: int, ignored: int>>>, config: record<list_all: bool, list_dirs_only: bool, full_path: bool, max_level: oneof<int, nothing>>>]: nothing -> record {
         mut ctx = $ctx
         $ctx.state.layer_level += 1
         let layer_level = $ctx.state.layer_level
@@ -79,7 +62,10 @@ module internal {
                 let prefix = make-prefix $layer_level $ctx.state.history
 
                 let file_info = if $ctx.config.full_path {
-                    [...$ctx.state.paths, ($entry | get name)] | str join "/"
+                    [
+                        ...$ctx.state.paths
+                        ($entry | get name)
+                    ] | str join "/"
                 } else {
                     $entry | get name
                 }
