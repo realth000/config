@@ -62,14 +62,49 @@ end)
 -- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
 
 -- Format and save command.
-vim.cmd([[command FW :lua vim.lsp.buf.format(); vim.cmd('w')]])
-vim.cmd([[command SI :lua vim.cmd("IBLEnable"); vim.cmd("set list")]])
-vim.cmd([[command NI :lua vim.cmd("IBLDisable"); vim.cmd("set nolist")]])
-vim.cmd([[command RD :lua vim.cmd("RenderMarkdown toggle")]])
+vim.api.nvim_create_user_command('FW', function ()
+	local impl = vim.b.custom_command_format_code_and_write
 
-vim.keymap.set('n', '<C-Q>', vim.cmd.bdelete)
-vim.keymap.set('n', '<C-H>', vim.cmd.bprevious)
-vim.keymap.set('n', '<C-L>', vim.cmd.bnext)
+	if impl then
+		impl()
+	else
+		vim.lsp.buf.format({ async = false })
+		vim.cmd('write')
+	end
+	print('[FW] formatted')
+end, { desc = 'Fomat code and save code' }
+)
+
+vim.api.nvim_create_user_command('SI', function ()
+	vim.cmd('IBLEnable')
+	vim.opt_local.list = true
+end, { desc = 'Enable indent rainbow plugin' }
+)
+
+vim.api.nvim_create_user_command('NI', function ()
+	vim.cmd('IBLDisable')
+	vim.opt_local.list = false
+end, { desc = 'Disable indent rainbow plugin' }
+)
+
+vim.keymap.set(
+	'n', '<C-Q>',
+	function ()
+		vim.cmd.bdelete()
+	end
+)
+vim.keymap.set(
+	'n', '<C-H>',
+	function ()
+		vim.cmd.bprevious()
+	end
+)
+vim.keymap.set(
+	'n', '<C-L>',
+	function ()
+		vim.cmd.bnext()
+	end
+)
 
 -- Cursor style
 

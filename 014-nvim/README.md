@@ -154,3 +154,15 @@ For `|`, paired operations are useful like what we have for `(`:
 This is helpful for languages using paired `|` syntax, like bash and rust.
 
 Check [basic.lua](./after/basic.lua) for details.
+
+### Customized code formatter
+
+In the config, there is a `FW` user command to format code and save buffer, generally we use the default format ability via lsp. For languages that need
+standalone or custom formatter, an implementation can be loaded from `after/indent/lang.lua`, define a variable `custom_command_format_code_and_write` function in buffer scope:
+
+```lua
+vim.b.custom_command_format_code_and_write = function()
+	vim.cmd('%! nufmt --stdin')
+	vim.cmd('write')
+end
+```

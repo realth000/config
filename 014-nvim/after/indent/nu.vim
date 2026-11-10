@@ -5,3 +5,8 @@
 setlocal expandtab
 setlocal softtabstop=4
 setlocal shiftwidth=4
+
+" runtime/indent/nu.vim set`0#` which breaks indent when starting
+" comments, remove it.
+setlocal cinkeys-=0#
+setlocal indentkeys-=0#
