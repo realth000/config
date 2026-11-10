@@ -21,7 +21,7 @@ local function updateContent(target, insert, removeTarget)
 	local find_pos = 1
 	while true do
 		local x, y = string.find(buffer_text, target, find_pos, true)
-		if x == nil then break end
+		if x == nil or y == nil then break end
 		if x <= cursor_col then
 			delete_start_pos = y
 		end
@@ -31,7 +31,7 @@ local function updateContent(target, insert, removeTarget)
 
 		if delete_start_pos ~= nil and delete_end_pos ~= nil then
 			if removeTarget then
-				delete_start_pos = math.max(1, delete_start_pos - 1)
+				delete_start_pos = math.max(1, delete_start_pos - 1) --[[@as integer]]
 				delete_end_pos = delete_end_pos + 1
 			end
 			ret = buffer_text:sub(1, delete_start_pos) .. buffer_text:sub(delete_end_pos)
