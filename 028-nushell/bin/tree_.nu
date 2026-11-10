@@ -21,18 +21,6 @@ module internal {
         # ls is a built-in command so it does not accept list of args from
         # variables, the only way is construct args in place, that's why we have
         # a function `list-dir`.
-        #
-        # Likely it is a bug in nushell because for external commands we can do
-        # `^ls ...$args`.
-        #
-        # But if the count of args grows, it is tedious to list all the
-        # combinations of args.
-        #
-        # For now, an alternative solution is spawn a nushell instance and pass
-        # the ls command to it, it works, but **extremly slow**. So use the
-        # handly version.
-        #
-        # let targets = nu --no-history -c $"ls (echo ...$ctx.state.ls_args | str join ' ') ($ctx.state.paths | path join) | to nuon" | from nuon
         let targets = list-dir $ctx.state.ls_args ($ctx.state.paths | path join)
         let targets_count = $targets | length
         $ctx.state.history = $ctx.state.history | append {curr: -1, count: $targets_count, ignored: 0}
