@@ -66,7 +66,11 @@ vim.api.nvim_create_user_command('FW', function ()
 	local impl = vim.b.custom_command_format_code_and_write
 
 	if impl then
-		impl()
+		local err = impl()
+		if err ~= nil then
+			print('[FW] ' .. err)
+			return
+		end
 	else
 		vim.lsp.buf.format({ async = false })
 		vim.cmd('write')
