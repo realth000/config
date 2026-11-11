@@ -91,24 +91,15 @@ vim.api.nvim_create_user_command('NI', function ()
 end, { desc = 'Disable indent rainbow plugin' }
 )
 
-vim.keymap.set(
-	'n', '<C-Q>',
-	function ()
-		vim.cmd.bdelete()
-	end
-)
-vim.keymap.set(
-	'n', '<C-H>',
-	function ()
-		vim.cmd.bprevious()
-	end
-)
-vim.keymap.set(
-	'n', '<C-L>',
-	function ()
-		vim.cmd.bnext()
-	end
-)
+vim.keymap.set('n', '<C-Q>', function ()
+	vim.cmd.bdelete()
+end)
+vim.keymap.set('n', '<C-H>', function ()
+	vim.cmd.bprevious()
+end)
+vim.keymap.set('n', '<C-L>', function ()
+	vim.cmd.bnext()
+end)
 
 -- Cursor style
 

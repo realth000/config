@@ -91,14 +91,14 @@ override_float_window_style()
 local sync_wezterm_theme = os.getenv('NVIM_CUSTOM_SYNC_WEZTERM_COLORSCHEME')
 if (sync_wezterm_theme == 'true') and (vim.fn.executable('nu') == 1) then
 	vim.api.nvim_create_autocmd('ColorScheme', {
-		callback = function(args)
+		callback = function (args)
 			local theme = args.match
-			local nu_dir = vim.fn.system({ "nu", "-c", "$nu.default-config-dir" }):gsub("%s+", "")
-			local script_path = vim.fs.joinpath(nu_dir, "bin", "wezterm_set_theme.nu")
-			local subcommand = vim.system({ "nu", script_path, theme }, { text = true }):wait()
-			local result = string.format("[%s] %s", subcommand.code, subcommand.stdout)
+			local nu_dir = vim.fn.system({ 'nu', '-c', '$nu.default-config-dir' }):gsub('%s+', '')
+			local script_path = vim.fs.joinpath(nu_dir, 'bin', 'wezterm_set_theme.nu')
+			local subcommand = vim.system({ 'nu', script_path, theme }, { text = true }):wait()
+			local result = string.format('[%s] %s', subcommand.code, subcommand.stdout)
 			print(result)
-		end
+		end,
 	})
 end
 
@@ -113,14 +113,14 @@ end
 local sync_nvim_theme = os.getenv('NVIM_CUSTOM_SYNC_NVIM_COLORSCHEME')
 if (sync_nvim_theme == 'true') and (vim.fn.executable('nu') == 1) then
 	vim.api.nvim_create_autocmd('ColorScheme', {
-		callback = function(args)
+		callback = function (args)
 			local theme = args.match
-			local nu_dir = vim.fn.system({ "nu", "-c", "$nu.default-config-dir" }):gsub("%s+", "")
-			local script_path = vim.fs.joinpath(nu_dir, "bin", "nvim_set_theme.nu")
-			local subcommand = vim.system({ "nu", script_path, theme }, { text = true }):wait()
-			local result = string.format("[%s] %s", subcommand.code, subcommand.stdout)
+			local nu_dir = vim.fn.system({ 'nu', '-c', '$nu.default-config-dir' }):gsub('%s+', '')
+			local script_path = vim.fs.joinpath(nu_dir, 'bin', 'nvim_set_theme.nu')
+			local subcommand = vim.system({ 'nu', script_path, theme }, { text = true }):wait()
+			local result = string.format('[%s] %s', subcommand.code, subcommand.stdout)
 			print(result)
-		end
+		end,
 	})
 end
 
@@ -136,13 +136,13 @@ end
 local sync_alacritty_theme = os.getenv('NVIM_CUSTOM_SYNC_ALACRITTY_COLORSCHEME')
 if (sync_alacritty_theme == 'true') and (vim.fn.executable('nu') == 1) and (vim.fn.executable('alacritty') == 1) then
 	vim.api.nvim_create_autocmd('ColorScheme', {
-		callback = function(args)
+		callback = function (args)
 			local theme = args.match
-			local nu_dir = vim.fn.system({ "nu", "-c", "$nu.default-config-dir" }):gsub("%s+", "")
-			local script_path = vim.fs.joinpath(nu_dir, "bin", "alacritty_update_config.nu")
-			local subcommand = vim.system({ "nu", script_path, "--theme", theme }, { text = true }):wait()
-			local result = string.format("[%s] %s", subcommand.code, subcommand.stdout)
+			local nu_dir = vim.fn.system({ 'nu', '-c', '$nu.default-config-dir' }):gsub('%s+', '')
+			local script_path = vim.fs.joinpath(nu_dir, 'bin', 'alacritty_update_config.nu')
+			local subcommand = vim.system({ 'nu', script_path, '--theme', theme }, { text = true }):wait()
+			local result = string.format('[%s] %s', subcommand.code, subcommand.stdout)
 			print(result)
-		end
+		end,
 	})
 end

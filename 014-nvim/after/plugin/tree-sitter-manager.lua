@@ -58,8 +58,8 @@ plugin.setup({
 	languages = {
 		koka = {
 			install_info = {
-				url = "https://github.com/koka-community/tree-sitter-koka",
-				queries = "queries",
+				url = 'https://github.com/koka-community/tree-sitter-koka',
+				queries = 'queries',
 			},
 		},
 	},

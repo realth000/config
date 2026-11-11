@@ -1,5 +1,5 @@
----@param target string -- Target char to act
----@param insert boolean -- Set to insert mode after action or not
+---@param target       string  -- Target char to act
+---@param insert       boolean -- Set to insert mode after action or not
 ---@param removeTarget boolean -- Remove [target] or not
 local function updateContent(target, insert, removeTarget)
 	local cursor_row = vim.api.nvim_win_get_cursor(0)[1]
@@ -8,9 +8,9 @@ local function updateContent(target, insert, removeTarget)
 	local end_pos = math.max(0, cursor_row)
 	local buffer_rows = vim.api.nvim_buf_get_lines(0, start_pos, end_pos, false)
 	local ret = ''
-	---@type integer|nil
+	---@type integer | nil
 	local delete_start_pos
-	---@type integer|nil
+	---@type integer | nil
 	local delete_end_pos
 
 	local buffer_text = ''
@@ -48,36 +48,36 @@ local function updateContent(target, insert, removeTarget)
 	end
 end
 
---Implement di_
+-- Implement di_
 ---@param target string
 function DeleteInsert(target)
 	updateContent(target, false, false)
 end
 
---Implement da_
+-- Implement da_
 ---@param target string
 function DeleteAppend(target)
 	updateContent(target, false, true)
 end
 
---Implement ci_
+-- Implement ci_
 ---@param target string
 function ChangeInsert(target)
 	updateContent(target, true, false)
 end
 
---Implement ca_
+-- Implement ca_
 ---@param target string
 function ChangeAppend(target)
 	updateContent(target, true, true)
 end
 
 local _use_transparent_background = nil
---Get should use transparent background theme color or not from OS env.
+-- Get should use transparent background theme color or not from OS env.
 function GetThemeUseTransparent()
 	if (_use_transparent_background == nil) then
 		local transparent = os.getenv('NVIM_CUSTOM_TRANSPARENT_BACKGROUND')
-		if transparent and transparent == "true" then
+		if transparent and transparent == 'true' then
 			_use_transparent_background = true
 		else
 			_use_transparent_background = false

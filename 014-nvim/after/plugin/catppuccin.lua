@@ -16,7 +16,7 @@ local config = {
 		shade = 'dark',
 		percentage = 0.15,
 	},
-	no_italic = true,          -- Force no italic
+	no_italic = true,           -- Force no italic
 	no_bold = false,            -- Force no bold
 	no_underline = false,       -- Force no underline
 	styles = {
