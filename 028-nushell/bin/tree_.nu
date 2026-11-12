@@ -7,14 +7,14 @@ const PREFIX_BOTTOM_RIGHT = "└"
 const PREFIX_BOTTOM = "│"
 const PREFIX_RIGHT = "─"
 
-type State = record<layer_level: int, files_count: int, directories_count: int, paths: list<string>, ls_args: list<string>, history: list<record<curr: int, count: int, ignored: int>>>
-
+type HistoryItem = record<curr: int, count: int, ignored: int>
+type History = list<HistoryItem>
+type State = record<layer_level: int, files_count: int, directories_count: int, paths: list<string>, ls_args: list<string>, history: History>
 type Config = record<list_all: bool, list_dirs_only: bool, full_path: bool, max_level: oneof<int, nothing>>
-
 type Ctx = record<state: State, config: Config>
 
 module internal {
-    export def list-at-path [ctx]: nothing -> record {
+    export def list-at-path [ctx: Ctx]: nothing -> record {
         mut ctx = $ctx
         $ctx.state.layer_level += 1
         let layer_level = $ctx.state.layer_level
@@ -100,7 +100,7 @@ module internal {
         return $out
     }
 
-    def make-prefix [layer_level: int, history: list<record<curr: int, count: int, ignored: int>>]: nothing -> string {
+    def make-prefix [layer_level: int, history: History]: nothing -> string {
         let curr_layer = $history | last
         let is_last_item_in_current_level = is-at-end-of-layer $curr_layer
         let layers_count = $history | length
@@ -124,10 +124,10 @@ module internal {
         $prefix
     }
 
-    def is-at-end-of-layer [layer: record<curr: int, count: int, ignored: int>]: nothing -> bool {
-        let curr = $layer | get curr
-        let ignored = $layer | get ignored
-        let count = $layer | get count
+    def is-at-end-of-layer [item: HistoryItem]: nothing -> bool {
+        let curr = $item | get curr
+        let ignored = $item | get ignored
+        let count = $item | get count
         assert (($curr + $ignored) < $count) "too many items counted in layer"
         $curr + $ignored == ($count) - 1
     }
