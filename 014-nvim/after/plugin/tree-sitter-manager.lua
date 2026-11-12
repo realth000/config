@@ -62,5 +62,12 @@ plugin.setup({
 				queries = 'queries',
 			},
 		},
+		nu = {
+			install_info = {
+				url = 'https://github.com/nushell/tree-sitter-nu',
+				queries = 'queries/nu',
+				revision = '0c3f6dfbc30d7713dcbb15b10954f2dee86ef63c', -- For nushell == 0.117.0
+			},
+		},
 	},
 })
