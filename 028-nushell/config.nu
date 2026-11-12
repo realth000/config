@@ -46,6 +46,13 @@ $env.config.completions.external.completer = {|place|
     carapace ($place.command | first) nushell ...$place.command | from json | if ($in | is-empty) { null } else { $in }
 }
 
+$env.config.status_line = {
+    errors: true
+    signature: false
+    type: false
+    preview: false
+}
+
 # Commands
 
 use ./bin/build.nu d
