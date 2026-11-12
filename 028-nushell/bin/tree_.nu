@@ -7,8 +7,14 @@ const PREFIX_BOTTOM_RIGHT = "└"
 const PREFIX_BOTTOM = "│"
 const PREFIX_RIGHT = "─"
 
+type State = record<layer_level: int, files_count: int, directories_count: int, paths: list<string>, ls_args: list<string>, history: list<record<curr: int, count: int, ignored: int>>>
+
+type Config = record<list_all: bool, list_dirs_only: bool, full_path: bool, max_level: oneof<int, nothing>>
+
+type Ctx = record<state: State, config: Config>
+
 module internal {
-    export def list-at-path [ctx: record<state: record<layer_level: int, files_count: int, directories_count: int, paths: list<string>, ls_args: list<string>, history: list<record<curr: int, count: int, ignored: int>>>, config: record<list_all: bool, list_dirs_only: bool, full_path: bool, max_level: oneof<int, nothing>>>]: nothing -> record {
+    export def list-at-path [ctx]: nothing -> record {
         mut ctx = $ctx
         $ctx.state.layer_level += 1
         let layer_level = $ctx.state.layer_level
@@ -150,11 +156,11 @@ export def tree [
 
     mut root = "."
 
-    if ($path != null) {
+    if $path != null {
         $root = $path
     }
 
-    mut state = {
+    mut state: State = {
         layer_level: -1
         files_count: 0
         directories_count: 0
@@ -180,7 +186,7 @@ export def tree [
         #   `i` is not finished.
         history: []
     }
-    mut config = {
+    mut config: Config = {
         list_all: false
         list_dirs_only: false
         full_path: false
