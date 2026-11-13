@@ -13,19 +13,22 @@ module internal {
 #
 # If the directory exists and it's content is old in the last year, optionally
 # delete it and create an empty directory.
-export def restore-daily-dir [] {
+export def --env restore-daily-dir [
+    --force (-f) : # Recreate the directory even if recent content exists.
+    ] {
     use internal *
 
     let dir_name = date now | format date "%m%d"
     if not ($dir_name | path exists) {
         mkdir $dir_name
+        cd $dir_name
         return
     }
 
     let now_year = date now | format date "%Y" | into int
     for entry in (ls $dir_name) {
         let entry_year = $entry.modified | format date "%Y" | into int
-        if ($entry_year - $now_year >= 0) {
+        if ($entry_year - $now_year >= 0) and (not $force) {
             # Recent content.
             print $"recent content '($entry.name)' exists in directory, exit"
             return
@@ -34,4 +37,5 @@ export def restore-daily-dir [] {
 
     rm -rf $dir_name
     mkdir $dir_name
+    cd $dir_name
 }
