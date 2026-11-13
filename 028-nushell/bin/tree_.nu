@@ -14,7 +14,7 @@ type Config = record<list_all: bool, list_dirs_only: bool, full_path: bool, max_
 type Ctx = record<state: State, config: Config>
 
 module internal {
-    export def list-at-path [ctx: Ctx]: nothing -> record {
+    export def list-at-path [ctx: Ctx]: nothing -> Ctx {
         mut ctx = $ctx
         $ctx.state.layer_level += 1
         let layer_level = $ctx.state.layer_level
@@ -70,6 +70,10 @@ module internal {
                     $ctx.state.paths = $ctx.state.paths | append $entry.name
                     $ctx = list-at-path $ctx
                     $ctx.state.paths = $ctx.state.paths | drop 1
+
+                    $ctx.state.directories_count += 1
+                } else {
+                    $ctx.state.files_count += 1
                 }
             }
         }
@@ -218,5 +222,16 @@ export def tree [
     mut context = {state: $state, config: $config}
 
     print $root
-    let _ = list-at-path $context
+    let final_ctx = list-at-path $context
+    let directory_report = if $final_ctx.state.directories_count == 1 {
+        $"($final_ctx.state.directories_count) directory"
+    } else {
+        $"($final_ctx.state.directories_count) directories"
+    }
+    let files_report = if $final_ctx.state.files_count == 1 {
+        $"($final_ctx.state.files_count) file"
+    } else {
+        $"($final_ctx.state.files_count) files"
+    }
+    print $"\n($directory_report), ($files_report)"
 }
