@@ -39,3 +39,5 @@ export def --env restore-daily-dir [
     mkdir $dir_name
     cd $dir_name
 }
+
+export alias rdd = restore-daily-dir
