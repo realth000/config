@@ -49,31 +49,31 @@ module internal {
         return [
             {
                 target: "nu"
-                detail: "nushell config"
+                detail: "nushell"
                 path: $"($nu.default-config-dir)"
                 use_lsp: true
             }
             {
                 target: "wz"
-                detail: "wezterm config"
+                detail: "wezterm"
                 path: $"($env.WEZTERM_CONFIG_PATH)"
                 use_lsp: false
             }
             {
                 target: "nv"
-                detail: "neovim config"
+                detail: "neovim"
                 path: $"(nvim_config_path)"
                 use_lsp: true
             }
             {
                 target: "zlj"
-                detail: "zellij config"
+                detail: "zellij"
                 path: $"(get-zellij-path)"
                 use_lsp: true
             }
             {
                 target: "alc"
-                detail: "alacritty config"
+                detail: "alacritty"
                 path: $"(get-alacritty-path)"
                 use_lsp: true
             }
@@ -81,12 +81,19 @@ module internal {
     }
 }
 
-# Edit config
+def "nu-complete targets" [] {
+    use internal all_targets
+    let values = all_targets | each { { value: $in.target, description: $in.detail } }
+
+    {completions: $values}
+}
+
+# Edit config.
 #
-# A shortcut to edit config files for different targets
-export def ec [
-    target?: string # Target config name
-    --print-targets(-p) # Print all available targets
+# A shortcut to edit config files for different targets.
+export def edit-config [
+    target?: string@"nu-complete targets" # Target config name.
+    --print-targets(-p) # Print all available targets.
 ] {
     use internal *
 
@@ -112,3 +119,5 @@ export def ec [
         with-env { "NVIM_NO_LSP": 1 } { nvim $target_path }
     }
 }
+
+export alias ec = edit-config

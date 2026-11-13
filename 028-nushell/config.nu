@@ -56,7 +56,7 @@ $env.config.status_line = {
 # Commands
 
 use ./bin/build.nu d
-use ./bin/edit_config.nu ec
+use ./bin/edit_config.nu [edit-config, ec]
 # use ./bin/fp.nu *
 use ./bin/list_command.nu list-command
 use ./bin/vtt_to_lrc.nu vtt2lrc
