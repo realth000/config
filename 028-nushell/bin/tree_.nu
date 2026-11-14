@@ -9,28 +9,32 @@ const PREFIX_RIGHT = "─"
 
 type HistoryItem = record<curr: int, count: int, ignored: int>
 type History = list<HistoryItem>
-type State = record<layer_level: int, files_count: int, directories_count: int, paths: list<string>, ls_args: list<string>, history: History>
-type Config = record<list_all: bool, list_dirs_only: bool, full_path: bool, max_level: oneof<int, nothing>>
+type State = record<layer_level: int, files_count: int, directories_count: int, paths: list<string>, history: History>
+type Config = record<list_all: bool, list_dirs_only: bool, full_path: bool, max_level: oneof<int, nothing>, ls_args: list<string>, output_format: string>
 type Ctx = record<state: State, config: Config>
 
+type Content = record<type: string, name: string>
+type Contents = list<record<Content>>
+
 module internal {
-    export def list-at-path [ctx: Ctx]: nothing -> Ctx {
-        mut ctx = $ctx
+    export def list-at-path [ctx]: nothing -> any {
+        mut ctx: Ctx = $ctx
         $ctx.state.layer_level += 1
         let layer_level = $ctx.state.layer_level
         if $ctx.config.max_level != null and $ctx.config.max_level <= $ctx.state.layer_level {
             $ctx.state.layer_level -= 1
             return $ctx
         }
+        let entry_path = $ctx.state.paths | path join
 
         # Here we intend to pass all ls_args to the ls command but not worked:
         # ls is a built-in command so it does not accept list of args from
         # variables, the only way is construct args in place, that's why we have
         # a function `list-dir`.
-        let targets = list-dir $ctx.state.ls_args ($ctx.state.paths | path join)
+        let targets = list-dir $ctx.config.ls_args $entry_path
         let targets_count = $targets | length
         $ctx.state.history = $ctx.state.history | append {curr: -1, count: $targets_count, ignored: 0}
-        mut layer = $ctx.state.history | get $layer_level
+        mut layer: HistoryItem = $ctx.state.history | get $layer_level
 
         assert (($ctx.state.history | length) == ($layer_level + 1)) $"incorrect count of layers in state history, expected ($layer_level + 1), got ($ctx.state.history | length)"
 
@@ -84,6 +88,67 @@ module internal {
         return $ctx
     }
 
+    export def collect-at-path [config: Config, layer_level: int, entry_path: string]: nothing -> record<directories_count: int, files_count: int, content: record> {
+        mut directories_count = 0
+        mut files_count = 0
+        mut contents: Contents = []
+        if $config.max_level != null and $config.max_level <= $layer_level {
+            return []
+        }
+        let output_format = $config.output_format
+
+        # Sturctured output needs intermediate data.
+        # We should have contents field here because only directories have this field.
+        let entry_name = if $entry_path == "." {
+            "."
+        } else {
+            $entry_path | path basename
+        }
+        mut entry_content_item = if ($entry_path | path type) == "dir" {
+            {
+                type: "directory"
+                name: $entry_name
+                contents: []
+            }
+        } else {
+            {type: "file", name: $entry_name}
+        }
+
+        let targets = list-dir $config.ls_args $entry_path
+
+        for $target in $targets {
+            let should_ignore = (
+                # Not show hidden attribute.
+                ((not $config.list_all) and ($target | get name | str starts-with "."))
+                or
+                # Only show directory.
+                ($config.list_dirs_only and (($target | get type) != "dir"))
+            )
+            if $should_ignore {
+                continue
+            }
+
+            let target_path = [$entry_path, ($target | get name)] | path join
+
+            if ($target_path | path type) == "dir" {
+                $directories_count += 1
+
+                let next_level = collect-at-path $config ($layer_level + 1) $target_path
+                $directories_count += ($next_level | get directories_count)
+                $files_count += ($next_level | get files_count)
+                let target_content_info = ($next_level | get content)
+                $entry_content_item = $entry_content_item | record apply {contents: {$in | append $target_content_info}}
+            } else {
+                $files_count += 1
+
+                let target_content_info = {type: "file", name: ($target | get name | path basename)}
+                $entry_content_item = $entry_content_item | record apply {contents: {$in | append $target_content_info}}
+            }
+        }
+
+        {directories_count: $directories_count, files_count: $files_count, content: $entry_content_item}
+    }
+
     def list-dir [args: list<string>, target: string] {
         ls -s --all=("-a" in $args) --long=("-l" in $args) $target
     }
@@ -104,8 +169,8 @@ module internal {
         return $out
     }
 
-    def make-prefix [layer_level: int, history: History]: nothing -> string {
-        let curr_layer = $history | last
+    def make-prefix [layer_level: int, history]: nothing -> string {
+        let curr_layer = $history | get $layer_level
         let is_last_item_in_current_level = is-at-end-of-layer $curr_layer
         let layers_count = $history | length
 
@@ -128,7 +193,7 @@ module internal {
         $prefix
     }
 
-    def is-at-end-of-layer [item: HistoryItem]: nothing -> bool {
+    def is-at-end-of-layer [item]: nothing -> bool {
         let curr = $item | get curr
         let ignored = $item | get ignored
         let count = $item | get count
@@ -154,6 +219,8 @@ export def tree [
     --dir (-d) # List directories only, files wil be ignored.
     --full (-f) # Print full relative path to current work directory.
     --level (-L) : int # Set the max directory depth when listing.
+    --nuon # Print output in nuon format
+    --json (-J) # Print output in json format
     path?: string # Root path to list, default to current directory.
 ] {
     use internal *
@@ -164,42 +231,18 @@ export def tree [
         $root = $path
     }
 
-    mut state: State = {
-        layer_level: -1
-        files_count: 0
-        directories_count: 0
-        paths: [$root]
-        ls_args: ["-s"]
-        # `history` records all traversing state of all levels of layers.
-        #
-        # Type: list<record<curr: int, count: int>>
-        #
-        # That is, for each depth, we save:
-        #
-        # - The index of current node in current layer.
-        # - The count of node in current depth.
-        #
-        # On each node of each layer, check all upper layers, for
-        # each layer `i`, go upward from current node and find the node `j`
-        # in layer `i`:
-        #
-        # - If node `j` is the last node of layer `i`, only print spaces
-        #   for the positions of `i` layer.
-        # - Otherwise, in layer `i`, we still have nodes after node `j` so
-        #   when we go back to node `j`, that is, print '│' to indicate layer
-        #   `i` is not finished.
-        history: []
-    }
     mut config: Config = {
         list_all: false
         list_dirs_only: false
         full_path: false
         max_level: null
+        output_format: "plain"
+
+        ls_args: ["-s"]
     }
 
     if $all {
         $config.list_all = true
-        $state.ls_args = $state.ls_args | append "-a"
     }
     if $dir { $config.list_dirs_only = true }
     if $full { $config.full_path = true }
@@ -218,20 +261,66 @@ export def tree [
         }
         $config.max_level = $level
     }
+    if $nuon { $config.output_format = "nuon" }
+    if $json { $config.output_format = "json" }
 
-    mut context = {state: $state, config: $config}
+    let output_format = $config.output_format
+    if $output_format == "plain" {
+        mut state: State = {
+            layer_level: -1
+            files_count: 0
+            directories_count: 1
+            paths: [$root]
+            # `history` records all traversing state of all levels of layers.
+            #
+            # Type: list<record<curr: int, count: int>>
+            #
+            # That is, for each depth, we save:
+            #
+            # - The index of current node in current layer.
+            # - The count of node in current depth.
+            #
+            # On each node of each layer, check all upper layers, for
+            # each layer `i`, go upward from current node and find the node `j`
+            # in layer `i`:
+            #
+            # - If node `j` is the last node of layer `i`, only print spaces
+            #   for the positions of `i` layer.
+            # - Otherwise, in layer `i`, we still have nodes after node `j` so
+            #   when we go back to node `j`, that is, print '│' to indicate layer
+            #   `i` is not finished.
+            history: []
+        }
 
-    print $root
-    let final_ctx = list-at-path $context
-    let directory_report = if $final_ctx.state.directories_count == 1 {
-        $"($final_ctx.state.directories_count) directory"
+        if $all {
+            $config.ls_args = $config.ls_args | append "-a"
+        }
+
+        mut context = {state: $state, config: $config}
+
+        print $root
+        let final_ctx: Ctx = list-at-path $context
+        let directory_report = if $final_ctx.state.directories_count == 1 {
+            $"($final_ctx.state.directories_count) directory"
+        } else {
+            $"($final_ctx.state.directories_count) directories"
+        }
+        let files_report = if $final_ctx.state.files_count == 1 {
+            $"($final_ctx.state.files_count) file"
+        } else {
+            $"($final_ctx.state.files_count) files"
+        }
+        print $"\n($directory_report), ($files_report)"
     } else {
-        $"($final_ctx.state.directories_count) directories"
+        let ret = collect-at-path $config -1 $root
+        let directories_count = ($ret | get directories_count) + 1
+        let files_count = $ret | get files_count
+        let content: record = $ret | get content
+        let output = $content | append {type: "report", "directories": $directories_count, "files": $files_count}
+        if $output_format == "json" {
+            $output | to json
+        } else if $output_format == "nuon" {
+            $output
+        }
     }
-    let files_report = if $final_ctx.state.files_count == 1 {
-        $"($final_ctx.state.files_count) file"
-    } else {
-        $"($final_ctx.state.files_count) files"
-    }
-    print $"\n($directory_report), ($files_report)"
 }
