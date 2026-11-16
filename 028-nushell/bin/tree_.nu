@@ -10,8 +10,8 @@ const PREFIX_RIGHT = "─"
 type HistoryItem = record<curr: int, count: int, ignored: int>
 type History = list<HistoryItem>
 type State = record<layer_level: int, files_count: int, directories_count: int, paths: list<string>, history: History>
-type Config = record<list_all: bool, list_dirs_only: bool, full_path: bool, max_level: oneof<int, nothing>, ls_args: list<string>, output_format: string>
-type Ctx = record<state: State, config: Config>
+type Config = record<list_all: bool, list_dirs_only: bool, full_path: bool, max_level: oneof<int, nothing>, ls_args: list<string>, output_format: string, enable_color: bool>
+type Ctx = record<state: State, config: Config, result: list<string>>
 
 type Content = record<type: string, name: string>
 type Contents = list<record<Content>>
@@ -59,16 +59,56 @@ module internal {
                 $ctx.state.history = $ctx.state.history | update $layer_level $layer
                 let prefix = make-prefix $layer_level $ctx.state.history
 
-                let file_info = if $ctx.config.full_path {
-                    [
-                        ...$ctx.state.paths
-                        ($entry | get name)
-                    ] | str join "/"
+                let path_prefix = if $ctx.config.full_path {
+                    [...$ctx.state.paths, ""] | str join "/"
                 } else {
-                    $entry | get name
+                    ""
                 }
 
-                print $"($prefix)($file_info)"
+                # colors:
+                #   symlink ->
+                #       exists? cyan + bold
+                #       not exists? {fg: red} + bold
+                #   dir -> blue + bold
+                let file_info = if $ctx.config.enable_color {
+                    mut part1 = ""
+                    mut part2 = ""
+                    if $entry.type == "symlink" {
+                        let symlink_path = if ($entry.target | str starts-with "/") {
+                            $entry.target
+                        } else {
+                            # Adding path prefix.
+                            $ctx.state.paths | drop 1 | append $entry.target | str join '/'
+                        }
+
+                        if ($symlink_path | path exists) {
+                            $part1 = colorize-file $entry
+                            let symlink_info = (ls -D -l $symlink_path | get -o 0)
+                            if symlink_info != null {
+                                $part2 = $" -> (colorize-file $symlink_info)"
+                            } else {
+                                $part2 = $" -> ($entry.target)"
+                            }
+                        } else {
+                            # Symlink target not exists.
+                            $part1 = $"(ansi {fg: red, attr: bold})($entry.name)(ansi reset)"
+                            $part2 = $" -> ($entry.target)"
+                        }
+                    } else if $entry.type == "dir" {
+                        $part1 = $"(ansi {fg: blue, attr: bold})($entry.name)(ansi reset)"
+                    } else {
+                        $part1 = colorize-file $entry
+                    }
+                    $"($part1)($part2)"
+                } else {
+                    if $entry.type == "symlink" {
+                        $"($entry.name) -> ($entry.target)"
+                    } else {
+                        $entry.name
+                    }
+                }
+
+                $ctx = $ctx | record apply {result: {$in | append $"($prefix)($path_prefix)($file_info)"}}
 
                 if $entry.type == "dir" {
                     $ctx.state.paths = $ctx.state.paths | append $entry.name
@@ -150,7 +190,7 @@ module internal {
     }
 
     def list-dir [args: list<string>, target: string] {
-        ls -s --all=("-a" in $args) --long=("-l" in $args) $target
+        ls -s -l --all=("-a" in $args) $target
     }
 
     def repeat-str [str: string, times: int] {
@@ -200,6 +240,21 @@ module internal {
         assert (($curr + $ignored) < $count) "too many items counted in layer"
         $curr + $ignored == ($count) - 1
     }
+
+    def colorize-file [file_info: record<name: string, type: string, mode: string>]: nothing -> string {
+        match $file_info.type {
+            "symlink" => $"(ansi {fg: cyan, attr: bold})($file_info.name)(ansi reset)"
+            "dir" => $"(ansi {fg: blue, attr: bold})($file_info.name)(ansi reset)"
+            "file" => {
+                if $file_info.mode =~ "..x..x..x" {
+                    $"(ansi {fg: green, attr: bold})($file_info.name)(ansi reset)"
+                } else {
+                    $file_info.name
+                }
+            }
+            _ => $file_info.name
+        }
+    }
 }
 
 # Like the `tree` command in bash but written in nushell.
@@ -219,16 +274,17 @@ export def tree [
     --dir (-d) # List directories only, files wil be ignored.
     --full (-f) # Print full relative path to current work directory.
     --level (-L) : int # Set the max directory depth when listing.
-    --nuon # Print output in nuon format
-    --json (-J) # Print output in json format
+    --nuon # Print output in nuon format.
+    --json (-J) # Print output in json format.
+    --color (-C) # Enable colorization, only works for plain text output.
     path?: string # Root path to list, default to current directory.
-] {
+]: oneof<nothing, string> -> string {
     use internal *
 
-    mut root = "."
-
-    if $path != null {
-        $root = $path
+    let root = if $path != null {
+        $path
+    } else {
+        "."
     }
 
     mut config: Config = {
@@ -236,9 +292,9 @@ export def tree [
         list_dirs_only: false
         full_path: false
         max_level: null
+        ls_args: []
         output_format: "plain"
-
-        ls_args: ["-s"]
+        enable_color: false
     }
 
     if $all {
@@ -263,13 +319,14 @@ export def tree [
     }
     if $nuon { $config.output_format = "nuon" }
     if $json { $config.output_format = "json" }
+    if $color { $config.enable_color = true }
 
     let output_format = $config.output_format
     if $output_format == "plain" {
         mut state: State = {
             layer_level: -1
             files_count: 0
-            directories_count: 1
+            directories_count: 0
             paths: [$root]
             # `history` records all traversing state of all levels of layers.
             #
@@ -296,10 +353,16 @@ export def tree [
             $config.ls_args = $config.ls_args | append "-a"
         }
 
-        mut context = {state: $state, config: $config}
+        mut context = {state: $state, config: $config, result: []}
 
-        print $root
-        let final_ctx: Ctx = list-at-path $context
+        let root_info = if $config.enable_color {
+            $"(ansi {fg: blue, attr: bold})($root)(ansi reset)"
+        } else {
+            $root
+        }
+
+        $context = $context | record apply {result: {$in | append $root_info}}
+        mut final_ctx: Ctx = list-at-path $context
         let directory_report = if $final_ctx.state.directories_count == 1 {
             $"($final_ctx.state.directories_count) directory"
         } else {
@@ -310,10 +373,12 @@ export def tree [
         } else {
             $"($final_ctx.state.files_count) files"
         }
-        print $"\n($directory_report), ($files_report)"
+
+        $final_ctx = $final_ctx | record apply {result: {$in | append ["", $"($directory_report), ($files_report)"]}}
+        $final_ctx | get result | str join "\n"
     } else {
         let ret = collect-at-path $config -1 $root
-        let directories_count = ($ret | get directories_count) + 1
+        let directories_count = $ret | get directories_count
         let files_count = $ret | get files_count
         let content: record = $ret | get content
         let output = $content | append {type: "report", "directories": $directories_count, "files": $files_count}

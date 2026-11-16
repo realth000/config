@@ -78,6 +78,14 @@ local theme = theme_map[colorscheme] or fallback_theme
 ---@field setup function(table)
 local plugin = require('lualine')
 
+local function EolState()
+	if vim.bo.eol then
+		return ''
+	else
+		return 'noeol'
+	end
+end
+
 plugin.setup({
 	options = {
 		icons_enabled = true,
@@ -158,7 +166,7 @@ plugin.setup({
 			},
 			'macro_recording',
 		},
-		lualine_x = { 'selectioncount', 'encoding', 'fileformat', 'filetype' },
+		lualine_x = { 'selectioncount', EolState, 'encoding', 'fileformat', 'filetype' },
 		lualine_y = { 'progress' },
 		lualine_z = { 'location' },
 	},

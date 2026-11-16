@@ -101,6 +101,18 @@ vim.keymap.set('n', '<C-L>', function ()
 	vim.cmd.bnext()
 end)
 
+vim.api.nvim_create_user_command('EOL', function ()
+	if vim.bo.eol then
+		vim.bo.eol = false
+		vim.bo.fixeol = false
+	else
+		vim.bo.eol = true
+		vim.bo.fixeol = true
+	end
+	vim.opt_local.list = true
+end, { desc = 'Trigger end of line state on current buffer' }
+)
+
 -- Cursor style
 
 -- vim.opt.guicursor="n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
