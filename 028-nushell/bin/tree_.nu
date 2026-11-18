@@ -1,5 +1,3 @@
-# This nushell script can be used both in repl and scripts.
-
 use std/assert
 
 const PREFIX_BOTTOM_RIGHT_AND_DOWN = "├"
@@ -19,6 +17,7 @@ type Contents = list<record<Content>>
 module internal {
     export def list-at-path [ctx]: nothing -> any {
         mut ctx: Ctx = $ctx
+
         $ctx.state.layer_level += 1
         let layer_level = $ctx.state.layer_level
         if $ctx.config.max_level != null and $ctx.config.max_level <= $ctx.state.layer_level {
@@ -31,7 +30,7 @@ module internal {
         # ls is a built-in command so it does not accept list of args from
         # variables, the only way is construct args in place, that's why we have
         # a function `list-dir`.
-        let targets = list-dir $ctx.config.ls_args $entry_path
+        let targets = list-dir $ctx.config $entry_path
         let targets_count = $targets | length
         $ctx.state.history = $ctx.state.history | append {curr: -1, count: $targets_count, ignored: 0}
         mut layer: HistoryItem = $ctx.state.history | get $layer_level
@@ -41,18 +40,6 @@ module internal {
         if $targets_count > 0 {
             for idx in 0..($targets_count - 1) {
                 let entry = $targets | get $idx
-
-                let should_ignore = (
-                    # Not show hidden attribute.
-                    ((not $ctx.config.list_all) and ($entry | get name | str starts-with "."))
-                    or
-                    # Only show directory.
-                    ($ctx.config.list_dirs_only and (($entry | get type) != "dir"))
-                )
-                if $should_ignore {
-                    $layer = $layer | update ignored {$in + 1}
-                    continue
-                }
 
                 $layer = $layer | update curr {$in + 1}
 
@@ -83,7 +70,7 @@ module internal {
 
                         if ($symlink_path | path exists) {
                             $part1 = colorize-file $entry
-                            let symlink_info = (ls -D -l $symlink_path | get -o 0)
+                            let symlink_info = ls -D -l $symlink_path | get -o 0
                             if symlink_info != null {
                                 $part2 = $" -> (colorize-file $symlink_info)"
                             } else {
@@ -128,7 +115,9 @@ module internal {
         return $ctx
     }
 
-    export def collect-at-path [config: Config, layer_level: int, entry_path: string]: nothing -> record<directories_count: int, files_count: int, content: record> {
+    export def collect-at-path [config: record, layer_level: int, entry_path: string]: nothing -> record<directories_count: int, files_count: int, content: record> {
+        let config: Config = $config
+
         mut directories_count = 0
         mut files_count = 0
         mut contents: Contents = []
@@ -154,43 +143,59 @@ module internal {
             {type: "file", name: $entry_name}
         }
 
-        let targets = list-dir $config.ls_args $entry_path
+        let targets = list-dir $config $entry_path
 
         for $target in $targets {
-            let should_ignore = (
-                # Not show hidden attribute.
-                ((not $config.list_all) and ($target | get name | str starts-with "."))
-                or
-                # Only show directory.
-                ($config.list_dirs_only and (($target | get type) != "dir"))
-            )
-            if $should_ignore {
-                continue
-            }
-
-            let target_path = [$entry_path, ($target | get name)] | path join
+            let target_path = [
+                $entry_path
+                ($target | get name)
+            ] | path join
 
             if ($target_path | path type) == "dir" {
                 $directories_count += 1
 
-                let next_level = collect-at-path $config ($layer_level + 1) $target_path
+                let next_level = (collect-at-path
+                    $config
+                    ($layer_level + 1)
+                    $target_path
+                )
                 $directories_count += ($next_level | get directories_count)
                 $files_count += ($next_level | get files_count)
-                let target_content_info = ($next_level | get content)
+                let target_content_info = $next_level | get content
                 $entry_content_item = $entry_content_item | record apply {contents: {$in | append $target_content_info}}
             } else {
                 $files_count += 1
 
-                let target_content_info = {type: "file", name: ($target | get name | path basename)}
+                let target_content_info = {
+                    type: "file"
+                    name: ($target | get name | path basename)
+                }
                 $entry_content_item = $entry_content_item | record apply {contents: {$in | append $target_content_info}}
             }
         }
 
-        {directories_count: $directories_count, files_count: $files_count, content: $entry_content_item}
+        {
+            directories_count: $directories_count
+            files_count: $files_count
+            content: $entry_content_item
+        }
     }
 
-    def list-dir [args: list<string>, target: string] {
-        ls -s -l --all=("-a" in $args) $target
+    def list-dir [config: record, target: string] {
+        let config: Config = $config
+
+        let ls_args = $config.ls_args
+        let list_all = $config.list_all
+        let list_dirs_only = $config.list_dirs_only
+        let filter_ignored_ones = {|entry| not (
+            # Not show hidden attribute.
+            ((not $list_all) and ($entry | get name | str starts-with "."))
+            or
+            # Only show directory.
+            ($list_dirs_only and (($entry | get type) != "dir"))
+        )}
+
+        ls -s -l --all=("-a" in $ls_args) $target | where $filter_ignored_ones
     }
 
     def repeat-str [str: string, times: int] {
@@ -243,9 +248,9 @@ module internal {
 
     def colorize-file [file_info: record<name: string, type: string, mode: string>]: nothing -> string {
         match $file_info.type {
-            "symlink" => $"(ansi {fg: cyan, attr: bold})($file_info.name)(ansi reset)"
-            "dir" => $"(ansi {fg: blue, attr: bold})($file_info.name)(ansi reset)"
-            "file" => {
+            symlink => $"(ansi {fg: cyan, attr: bold})($file_info.name)(ansi reset)"
+            dir => $"(ansi {fg: blue, attr: bold})($file_info.name)(ansi reset)"
+            file => {
                 if $file_info.mode =~ "..x..x..x" {
                     $"(ansi {fg: green, attr: bold})($file_info.name)(ansi reset)"
                 } else {
@@ -257,18 +262,25 @@ module internal {
     }
 }
 
-# Like the `tree` command in bash but written in nushell.
+# Like the `tree` command on Linux but written in nushell.
 #
-# This command implements part of the original `tree` command and have some
-# different behavior.
+# This command implements part of the original `tree` command and some kind compatible.
 #
-# Output is plain text, not structured data.
+# By default the output is plain text, not structured data, while nuon and json format are supported with flags `--nuon` and `--json, -J`.
 #
 # Behavior differences:
 #
-# - On all platforms, only "." prefix named ones are considered as hidden files.
+# - On all platforms, only "." prefixed contents are regarded as hidden files.
+# - When output plain text with colors, only files with x perm for all users are regarded as "executable", in green color.
+#   - that is, "--x--x--x" is executable but "--x--x---" is not.
 @category filesystem
-@example "List files and directories in current folder" { tree }
+@example "List contents in current directory." { tree }
+@example "List contents in another directory." { tree path-to-folder }
+@example "Input the directory to list by piping. This will override the one in flags" { "path-to-folder" | tree }
+@example "Output in plain text format." { tree }
+@example "Output in plain text format with color." { tree -C }
+@example "Output in nuon table format." { tree --nuon }
+@example "Output in json format." { tree -J }
 export def tree [
     --all (-a) # List all files, including hidden files.
     --dir (-d) # List directories only, files wil be ignored.
@@ -281,7 +293,11 @@ export def tree [
 ]: oneof<nothing, string> -> string {
     use internal *
 
-    let root = if $path != null {
+    let input = $in
+
+    let root = if $input != null and (($input | describe) == "string") {
+        $input
+    } else if $path != null {
         $path
     } else {
         "."
@@ -353,7 +369,11 @@ export def tree [
             $config.ls_args = $config.ls_args | append "-a"
         }
 
-        mut context = {state: $state, config: $config, result: []}
+        mut context = {
+            state: $state
+            config: $config
+            result: []
+        }
 
         let root_info = if $config.enable_color {
             $"(ansi {fg: blue, attr: bold})($root)(ansi reset)"

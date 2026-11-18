@@ -6,16 +6,16 @@ module internal {
         fatal "ec" $error $help $exit_code
     }
 
-    def required_env [] {
-        return [WEZTERM_CONFIG_PATH]
-    }
-
-    def check_envs [] {
+    export def check-envs [] {
         let env_names = $env | columns
-        let invalid_env = required_env | where {|x| $env_names | all {|y| $y != $x } }
+        let invalid_env = required_env | where {|x| not ($x in $env_names) }
         if ($invalid_env | is-not-empty) {
             fatal $"envs not found: ($invalid_env)"
         }
+    }
+
+    def required_env [] {
+        return [WEZTERM_CONFIG_PATH]
     }
 
     # For platform specific neovim config directory paths.
@@ -96,6 +96,8 @@ export def edit-config [
     --print-targets(-p) # Print all available targets.
 ] {
     use internal *
+
+    check-envs
 
     if $print_targets {
         print "all available targets:"
