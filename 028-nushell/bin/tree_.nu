@@ -8,7 +8,7 @@ const PREFIX_RIGHT = "─"
 type HistoryItem = record<curr: int, count: int, ignored: int>
 type History = list<HistoryItem>
 type State = record<layer_level: int, files_count: int, directories_count: int, paths: list<string>, history: History>
-type Config = record<list_all: bool, list_dirs_only: bool, full_path: bool, max_level: oneof<int, nothing>, ls_args: list<string>, output_format: string, enable_color: bool>
+type Config = record<list_all: bool, list_dirs_only: bool, full_path: bool, max_level: oneof<int, nothing>, ls_args: list<string>, output_format: string, enable_color: bool, pattern: oneof<nothing, glob>>
 type Ctx = record<state: State, config: Config, result: list<string>>
 
 type Content = record<type: string, name: string>
@@ -65,7 +65,7 @@ module internal {
                             $entry.target
                         } else {
                             # Adding path prefix.
-                            $ctx.state.paths | drop 1 | append $entry.target | str join '/'
+                            $ctx.state.paths | append $entry.target | str join '/'
                         }
 
                         if ($symlink_path | path exists) {
@@ -187,13 +187,25 @@ module internal {
         let ls_args = $config.ls_args
         let list_all = $config.list_all
         let list_dirs_only = $config.list_dirs_only
-        let filter_ignored_ones = {|entry| not (
-            # Not show hidden attribute.
-            ((not $list_all) and ($entry | get name | str starts-with "."))
-            or
-            # Only show directory.
-            ($list_dirs_only and (($entry | get type) != "dir"))
-        )}
+        let pattern = $config.pattern
+        let filter_ignored_ones = {|entry|
+            # Return false to exclude $entry.
+            if (not $list_all) and ($entry.name | str starts-with ".") {
+                return false
+            }
+
+            if $list_dirs_only and ($entry.type != "dir") {
+                return false
+            }
+
+            if $pattern != null and ($entry.type != "dir") {
+                let pattern_str = $pattern | into string
+                let re = $pattern_str | str replace "." "\\." | str replace "*" ".*" | str replace "?" ".?"
+                return ($entry.name =~ $re)
+            }
+
+            true
+        }
 
         ls -s -l --all=("-a" in $ls_args) $target | where $filter_ignored_ones
     }
@@ -251,7 +263,8 @@ module internal {
             symlink => $"(ansi {fg: cyan, attr: bold})($file_info.name)(ansi reset)"
             dir => $"(ansi {fg: blue, attr: bold})($file_info.name)(ansi reset)"
             file => {
-                if $file_info.mode =~ "..x..x..x" {
+                let perms = $file_info.mode | split chars
+                if $perms.2 == 'x' or $perms.5 == 'x' or $perms.8 == 'x' {
                     $"(ansi {fg: green, attr: bold})($file_info.name)(ansi reset)"
                 } else {
                     $file_info.name
@@ -262,17 +275,18 @@ module internal {
     }
 }
 
-# Like the `tree` command on Linux but written in nushell.
+# Like the Linux `tree` command but for nushell.
 #
 # This command implements part of the original `tree` command and some kind compatible.
 #
-# By default the output is plain text, not structured data, while nuon and json format are supported with flags `--nuon` and `--json, -J`.
+# By default the output is plain text, while nuon and json format are supported with flags `--nuon` and `--json, -J`.
 #
 # Behavior differences:
 #
 # - On all platforms, only "." prefixed contents are regarded as hidden files.
-# - When output plain text with colors, only files with x perm for all users are regarded as "executable", in green color.
-#   - that is, "--x--x--x" is executable but "--x--x---" is not.
+# - When output plain text with colors, files with x perm for any users are regarded as "executable", rendered in green color.
+#   - that is, files have any 'x' perm in "--x--x--x" is executable.
+# - Use with glob, the glob is applied on file name not full path. Only `?`, `*` and `.` are supported in the glob pattern.
 @category filesystem
 @example "List contents in current directory." { tree }
 @example "List contents in another directory." { tree path-to-folder }
@@ -289,6 +303,7 @@ export def tree [
     --nuon # Print output in nuon format.
     --json (-J) # Print output in json format.
     --color (-C) # Enable colorization, only works for plain text output.
+    --pattern (-P) : glob # Pattern to filter the output. Only items match the pattern will be shown.
     path?: string # Root path to list, default to current directory.
 ]: oneof<nothing, string> -> string {
     use internal *
@@ -303,6 +318,15 @@ export def tree [
         "."
     }
 
+    if $pattern != null {
+        let s = $pattern | into string
+        if ($s | str contains "/") {
+            error make --unspanned {
+                msg: $"`/` is not supported in glob pattern."
+            }
+        }
+    }
+
     mut config: Config = {
         list_all: false
         list_dirs_only: false
@@ -311,6 +335,7 @@ export def tree [
         ls_args: []
         output_format: "plain"
         enable_color: false
+        pattern: $pattern
     }
 
     if $all {
