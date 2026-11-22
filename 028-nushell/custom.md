@@ -38,6 +38,7 @@ export def define_custom_env [] { {
     "EDITOR": "nvim"
     "NVIM_RUNTIME_DIR": "/path/to/nvim/runtime"
     "NVIM_MODULE_DIR": $"(load_nvim_module_dirs)"
+    "GPG_TTY": $"(tty)" # Required by gpg command for prompt input sometimes, in wsl.
 } }
 
 def load_nvim_module_dirs []: nothing -> string {
@@ -45,6 +46,10 @@ def load_nvim_module_dirs []: nothing -> string {
         $"($env.LOCALAPPDATA)/nvim-data/share/nvim/lazy"
     } else {
         $"($env.HOME)/.local/share/nvim/lazy"
+    }
+
+    if not ($NVIM_MODULE_BASE_DIR | path exists) {
+	    return ""
     }
 
     mut dirs = []
@@ -68,6 +73,7 @@ The code above define envs:
 - `NVIM_CUSTOM_SYNC_ALACRITTY_COLORSCHEME`, value is `true` or `false` or not set, sync neovim theme to alacritty config file when neovim theme changed.
 - `NVIM`, value is `nvim` to let zellij use nvim as the editor when `EditScrollback`.
 - `NVIM_RUNTIME_DIR`, value is the path to `runtime` directory in neovim directory. This variable is used for loading neovim symbols when editing neovim config.
+- `GPG_TTY`, run external tty command so that gpg command print prompts in terminal.
 
 ## Custom alias
 
