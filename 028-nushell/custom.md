@@ -17,6 +17,20 @@ use $foo_mod *
 
 > ref: https://github.com/nushell/nushell/discussions/16679#discussioncomment-14391728
 
+
+## Install
+
+```nu
+mkdir ~/.config/nushell
+ln -sf $"($env.PWD)/bin" ~/.config/nushell/bin
+ln -sf $"($env.PWD)/config.nu" ~/.config/nushell/config.nu
+ln -sf $"($env.PWD)/env.nu" ~/.config/nushell/env.nu
+ln -sf $"($env.PWD)/log.nu" ~/.config/nushell/log.nu
+ln -sf $"($env.PWD)/nufmt.nuon" ~/.config/nushell/nufmt.nuon
+ln -sf $"($env.PWD)/custom" ~/.config/nushell/custom
+cp ~/.config/nushell/custom/custom_env.example.nu ~/.config/nushell/custom/custom_env.nu
+```
+
 ## Custom env
 
 Saved in `custom_env.nu`.
@@ -25,43 +39,9 @@ Define custom environment variables in this file.
 
 ### Example
 
-```nu
-export def define_custom_env [] { {
-    "NVIM_CUSTOM_COLORSCHEME": "catppuccin-mocha"
-    "WEZTERM_CONFIG_PATH": $"($env.HOME)/.wezterm.lua"
-    "NVIM_CUSTOM_TRANSPARENT_BACKGROUND": "false"
-    "NVIM_CUSTOM_USE_DARK_MODE": "true"
-    "NVIM_CUSTOM_USE_NUSHELL": "true"
-    "NVIM_CUSTOM_SYNC_WEZTERM_COLORSCHEME": "true"
-    "NVIM_CUSTOM_SYNC_NVIM_COLORSCHEME": "true"
-    "NVIM_CUSTOM_SYNC_ALACRITTY_COLORSCHEME": "true"
-    "EDITOR": "nvim"
-    "NVIM_RUNTIME_DIR": "/path/to/nvim/runtime"
-    "NVIM_MODULE_DIR": $"(load_nvim_module_dirs)"
-    "GPG_TTY": $"(tty)" # Required by gpg command for prompt input sometimes, in wsl.
-} }
+**See [custom_env.nu](./custom/custom_env.nu).**
 
-def load_nvim_module_dirs []: nothing -> string {
-    let NVIM_MODULE_BASE_DIR = if $nu.os-info.name == "windows" {
-        $"($env.LOCALAPPDATA)/nvim-data/share/nvim/lazy"
-    } else {
-        $"($env.HOME)/.local/share/nvim/lazy"
-    }
-
-    if not ($NVIM_MODULE_BASE_DIR | path exists) {
-	    return ""
-    }
-
-    mut dirs = []
-    for path in (ls $NVIM_MODULE_BASE_DIR) {
-        $dirs = $dirs | append $path.name
-    }
-
-    return ($dirs | str join ':')
-}
-```
-
-The code above define envs:
+Used envs:
 
 - `NVIM_CUSTOM_COLORSCHEME`, value is string, colorscheme name, e.g. "catppuccin-mocha".
 - `WEZTERM_CONFIG_PATH`, value is the `.wezterm.lua` file path.

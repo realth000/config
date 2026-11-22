@@ -1,5 +1,5 @@
 /history.txt
-/custom_*.nu
-/custom
+/custom/*
+!/custom/*.example.nu
 /history.*
 /plugin.msgpackz

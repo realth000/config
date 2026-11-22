@@ -6,7 +6,8 @@ Tested on windows and linux, likely works on macos.
 
 ## Requirements
 
-- `nvim >= 0.12`
+- `nvim >= 0.12`.
+- External commands: make, cmake, fzf, rg, tree-sitter-cli.
 - (Optional) [nushell](https://www.nushell.sh/) for universal shell integration.
   - Requires `nushell >= 0.117.0`.
 - (Optional) [emmylua_ls](https://github.com/EmmyLuaLs/emmylua-analyzer-rust) for code completion when editing nvim config.
