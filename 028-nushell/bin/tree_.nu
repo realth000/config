@@ -258,13 +258,29 @@ module internal {
         $curr + $ignored == ($count) - 1
     }
 
-    def colorize-file [file_info: record<name: string, type: string, mode: string>]: nothing -> string {
+    # Colorize a file's name according to its type.
+    #
+    # Files with execute permission are highlighted in green, here is the thing:
+    #
+    # 1. We can not check the 'x' permission with current user because `access(X_OK)` is not available.
+    # 2. The 'x' permission is only available on unix-like OS, so on Windows we only check the file name suffix.
+    def colorize-file [file_info: record<name: string, type: string>]: nothing -> string {
         match $file_info.type {
             symlink => $"(ansi {fg: cyan, attr: bold})($file_info.name)(ansi reset)"
             dir => $"(ansi {fg: blue, attr: bold})($file_info.name)(ansi reset)"
             file => {
-                let perms = $file_info.mode | split chars
-                if $perms.2 == 'x' or $perms.5 == 'x' or $perms.8 == 'x' {
+                let is_executable: bool = if "mode" in $file_info {
+                    let perms = $file_info.mode | split chars
+                    # If any 'x' in "--x--x--x" presents, regard as executable:
+                    #
+                    # We are not checking against `access(..., X_OK)` - not available
+                    # in nushell.
+                    $perms.2 == 'x' or $perms.5 == 'x' or $perms.8 == 'x'
+                } else {
+                    $file_info.name | str ends-with ".exe"
+                }
+
+                if $is_executable {
                     $"(ansi {fg: green, attr: bold})($file_info.name)(ansi reset)"
                 } else {
                     $file_info.name
@@ -302,7 +318,7 @@ export def tree [
     --level (-L) : int # Set the max directory depth when listing.
     --nuon # Print output in nuon format.
     --json (-J) # Print output in json format.
-    --color (-C) # Enable colorization, only works for plain text output.
+    --color (-C) # Enable colorization, only works for plain text output. Needs any 'x' perm on unix-like platform or '.exe' file extension on other platforms.
     --pattern (-P) : glob # Pattern to filter the output. Only items match the pattern will be shown.
     path?: string # Root path to list, default to current directory.
 ]: oneof<nothing, string> -> string {
@@ -321,9 +337,7 @@ export def tree [
     if $pattern != null {
         let s = $pattern | into string
         if ($s | str contains "/") {
-            error make --unspanned {
-                msg: $"`/` is not supported in glob pattern."
-            }
+            error make --unspanned {msg: $"`/` is not supported in glob pattern."}
         }
     }
 
