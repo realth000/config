@@ -17,7 +17,6 @@ use $foo_mod *
 
 > ref: https://github.com/nushell/nushell/discussions/16679#discussioncomment-14391728
 
-
 ## Install
 
 ```nu
@@ -28,20 +27,33 @@ ln -sf $"($env.PWD)/env.nu" ~/.config/nushell/env.nu
 ln -sf $"($env.PWD)/log.nu" ~/.config/nushell/log.nu
 ln -sf $"($env.PWD)/nufmt.nuon" ~/.config/nushell/nufmt.nuon
 ln -sf $"($env.PWD)/custom" ~/.config/nushell/custom
-cp ~/.config/nushell/custom/custom_env.example.nu ~/.config/nushell/custom/custom_env.nu
+
+# (Optional) Use custom scripts.
+cd ~/.config/nushell/
+cp custom_env.example.nu custom_env.nu
+cp custom_path.example.nu custom_path.nu
+cp custom_alias.example.nu custom_alias.nu
 ```
 
-## Custom env
+## Customizing
+
+All custom scripts are saved in the [./custom](./custom) directory.
+
+Now we have custom paths, aliases and environment variables.
+
+It's ok to save your custom scripts in custom directory and load somewhere in the config.
+
+In custom directory, only `*.example.nu` are stored in git repository.
+
+### Custom env
 
 Saved in `custom_env.nu`.
 
-Define custom environment variables in this file.
+Define custom environment variables.
 
-### Example
+**See [custom_env.example.nu](./custom/custom_env.example.nu).**
 
-**See [custom_env.nu](./custom/custom_env.nu).**
-
-Used envs:
+Envs used in example:
 
 - `NVIM_CUSTOM_COLORSCHEME`, value is string, colorscheme name, e.g. "catppuccin-mocha".
 - `WEZTERM_CONFIG_PATH`, value is the `.wezterm.lua` file path.
@@ -55,26 +67,18 @@ Used envs:
 - `NVIM_RUNTIME_DIR`, value is the path to `runtime` directory in neovim directory. This variable is used for loading neovim symbols when editing neovim config.
 - `GPG_TTY`, run external tty command so that gpg command print prompts in terminal.
 
-## Custom alias
+### Custom alias
 
 Saved in `custom_alias.nu`.
 
 Save custom alias in this file.
 
-## Custom path
+**See [custom_alias.example.nu](./custom/custom_alias.example.nu).**
 
-Add custom `$env.PATH` variable values in `custom_path.nu`
+### Custom path
 
-```nu
-export def define_custom_path [] {
-    return [
-        "/path/to/add/to/PATH",
-    ]
-}
-```
+Saved in `custom_path.nu`.
 
-### Example
+Add custom `$env.PATH` values.
 
-```nu
-export alias foo = bar | baz
-```
+**See [custom_path.example.nu](./custom/custom_path.example.nu).**

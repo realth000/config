@@ -49,13 +49,15 @@ export def unlines [
     --crlf # Use `\r\n` to join between lines.
     --lf # Use `\n` to join between lines.
 ]: list<string> -> string {
+    use internal *
+
     # Check conflict flags.
     if $no_eol and $eol {
-        fatal "conflict flags: `--no-eol` and `--eol`".
+        fatal "conflict flags: `--no-eol` and `--eol`"
     }
 
     if $crlf and $lf {
-        fatal "conflict flags: `--crlf` and `--lf`".
+        fatal "conflict flags: `--crlf` and `--lf`"
     }
 
     let $input = $in
