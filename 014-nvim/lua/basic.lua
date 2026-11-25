@@ -9,7 +9,7 @@ vim.opt.ruler = true
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.mouse = 'a'
 vim.opt.autoindent = true
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 -- Ctrl + D/U scroll 10 lines each time
 vim.opt.scroll = 10
 vim.opt.scrolloff = 5

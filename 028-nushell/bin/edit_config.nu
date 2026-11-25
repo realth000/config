@@ -77,6 +77,12 @@ module internal {
                 path: $"(get-alacritty-path)"
                 use_lsp: true
             }
+            {
+                target: "sts"
+                detail: "starship"
+                path: $"("~" | path expand | path join ".config" "starship.toml")"
+                use_lsp: true
+            }
         ]
     }
 }
